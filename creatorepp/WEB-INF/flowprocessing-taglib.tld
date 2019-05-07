@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>OA 流程处理标签库</description>
+	<display-name>flowprocessing-taglib.tld 标签库</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>flowprocessing</short-name>
+	<uri>http://www.chinacreator.com/archive-taglib</uri>
+	
+	<tag>
+		<description>公文初始化业务数据标签</description>
+		<name>flowcommonstart</name>
+		<tag-class>com.chinacreator.xtbg.core.process.flowprocessing.tag.FlowCommonStartTag</tag-class>
+		<body-content>jsp</body-content>
+		<attribute>
+			<name>flowType</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	
+	
+</taglib> 

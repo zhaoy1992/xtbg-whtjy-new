@@ -1,0 +1,1190 @@
+
+<ATTACH EVENT="ondocumentready" HANDLER="fnInit" />
+<PUBLIC:PROPERTY NAME="ConnectString" />
+<PUBLIC:PROPERTY ID="leftID" NAME="left" PUT="fnPutleft" GET="fnGetleft"  />
+<PUBLIC:PROPERTY ID="topID" NAME="top" PUT="fnPuttop" GET="fnGettop"  />
+<PUBLIC:PROPERTY ID="heightID" NAME="height" PUT="fnPutheight" GET="fnGetheight"  />
+<PUBLIC:PROPERTY ID="widthID" NAME="width" PUT="fnPutwidth" GET="fnGetwidth"  />
+<PUBLIC:PROPERTY ID="fontsizeID" NAME="fontsize" PUT="fnPutfontsize" GET="fnGetfontsize"  />
+<PUBLIC:PROPERTY ID="fontfamilyID" NAME="fontfamily" PUT="fnPutfontfamily" GET="fnGetfontfamily"  />
+<PUBLIC:PROPERTY ID="fontstyleID" NAME="fontstyle" PUT="fnPutfontstyle" GET="fnGetfontstyle"  />
+<PUBLIC:PROPERTY ID="backgroundColorID" NAME="backgroundColor" PUT="fnPutbackgroundColor" GET="fnGetbackgroundColor"  />
+<PUBLIC:PROPERTY ID="colorID" NAME="color" PUT="fnPutcolor" GET="fnGetcolor"  />
+<PUBLIC:PROPERTY ID="fontweightID" NAME="fontweight" PUT="fnPutfontweight" GET="fnGetfontweight"  />
+<PUBLIC:PROPERTY ID="UrlID" NAME="Url" PUT="fnPutUrl" GET="fnGetUrl" />
+<PUBLIC:PROPERTY NAME="sqltrans"  />
+<PUBLIC:PROPERTY ID="sql1ID" NAME="sql1" PUT="fnPutsql1" GET="fnGetsql1"  />
+<PUBLIC:PROPERTY ID="sql2ID" NAME="sql2" PUT="fnPutsql2" GET="fnGetsql2"  />
+<PUBLIC:PROPERTY ID="pagesizeID" NAME="pagesize" PUT="fnPutpagesize" GET="fnGetpagesize"  />
+<PUBLIC:PROPERTY ID="formatID" NAME="format" PUT="fnPutformat" GET="fnGetformat"  />
+<PUBLIC:PROPERTY ID="multiselectID" NAME="multiselect" PUT="fnPutmultiselect" GET="fnGetmultiselect"  />
+<PUBLIC:PROPERTY ID="returnxmlID" NAME="returnxml" GET="fnGetreturnxml"  />
+<PUBLIC:PROPERTY ID="valueID" NAME="value" PUT="fnPutvalue" GET="fnGetvalue"  />
+<PUBLIC:PROPERTY ID="textID" NAME="text" PUT="fnPuttext" GET="fnGettext"  />
+<PUBLIC:PROPERTY ID="positionID" NAME="position" PUT="fnPutposition" GET="fnGetposition"  />
+<PUBLIC:PROPERTY ID="alignID" NAME="align" PUT="fnPutalign" GET="fnGetalign"></PUBLIC:PROPERTY>
+<PUBLIC:PROPERTY Name="ParentPos"/>
+<PUBLIC:PROPERTY ID="visibleID" NAME="visible" PUT="fnPutvisible" GET="fnGetvisible"  />
+<PUBLIC:PROPERTY ID="disabledID" NAME="enabled" PUT="fnPutdisabled" GET="fnGetdisabled"  />
+<PUBLIC:PROPERTY ID="addrowID" NAME="addrow" PUT="fnPutaddrow" GET="fnGetaddrow"  />
+<PUBLIC:PROPERTY ID="blninputID" NAME="blninput" PUT="fnPutblninput" GET="fnGetblninput"  />
+<PUBLIC:PROPERTY ID="blncellID" NAME="blncell" PUT="fnPutblncell"   />
+<PUBLIC:PROPERTY ID="blnemptyID" NAME="blnempty" PUT="fnPutblnempty"  GET="fnGetblnempty" />
+<PUBLIC:PROPERTY ID="xmlID" NAME="xml" PUT="fnPutxml"  GET="fnGetxml" />
+<PUBLIC:PROPERTY ID="keycolID" NAME="keycol" PUT="fnPutkeycol"  GET="fnGetkeycol" />
+<PUBLIC:PROPERTY ID="tabID" NAME="tab" GET="fnGettab"  />
+<PUBLIC:PROPERTY ID="txtID" NAME="txt" GET="fnGettxt"  />
+<PUBLIC:PROPERTY ID="selectrowID" NAME="selectrow" GET="fnGetselectrow"  />
+<PUBLIC:PROPERTY ID="firstvalueID" NAME="firstvalue" GET="fnGetfirstvalue" />
+<PUBLIC:ATTACH EVENT="onmousedown" FOR="document" ONEVENT="hidelist()" />
+<PUBLIC:EVENT NAME="onkeydown" ID="onkeyCodeID">
+<PUBLIC:EVENT NAME="onclickopen" ID="onclickopenID">
+<PUBLIC:EVENT NAME="onclickadd" ID="onclickaddID">
+<PUBLIC:EVENT NAME="oninterchange" ID="oninterchangeID">
+<PUBLIC:EVENT NAME="onselchange" ID="onselchangeID">
+<PUBLIC:EVENT NAME="onchange" ID="onchangeID">
+<PUBLIC:EVENT NAME="onblur" ID="onblurID">
+<PUBLIC:METHOD NAME="onfocus"/>
+<PUBLIC:METHOD NAME="LoadXmlData"/>
+<PUBLIC:METHOD NAME="NextPage"/>
+<PUBLIC:METHOD NAME="PrevPage"/>
+<SCRIPT LANGUAGE=javascript>
+var sPubFieldCol = "" ;
+var fc_txtName;
+var fc_cmdCz;
+var fc_divList ;
+var fc_divListPage;
+var upsidepage;
+var currentpage ;
+var nextpage;
+var fc_list ;
+var mposition = "absolute";
+var malign = "left";
+var mfontsize=12,mfontfamily="宋体",mfontstyle="normal", mbackgroundColor="",mcolor="black", mfontweight="bold";
+var mleft=0,mtop=0,mwidth=20,mheight=20 ;
+var mwidthButton=17;
+var mLoadXmlData="" ;
+function LoadXmlData(sXml) {
+var arrAlign=new Array();
+var arrColWidth=new Array();
+if(sFormat!=""){
+var arrFormat=sFormat.split("|");
+for(var i=0;i<arrFormat.length;i++){
+if(arrFormat[i].substring(0,1)==">")
+arrAlign[i]=" align='right' ";
+else if(arrFormat[i].substring(0,1)=="^")
+arrAlign[i]=" align='center' ";
+else
+arrAlign[i]=" align='left' ";
+var charNum=arrFormat[i].length ;
+if(arrFormat[i].substring(0,1)=="^" || arrFormat[i].substring(0,1)==">" || arrFormat[i].substring(0,1)=="<")
+charNum--;
+if(arrFormat[i].substring(arrFormat[i].length-1,arrFormat[i].length)=="!")
+charNum--;
+if(arrFormat[i].substring(arrFormat[i].length-1,arrFormat[i].length)=="")
+oXml.documentElement.childNodes(1).childNodes;
+arrColWidth[i]=" style='width:"+(charNum*10)+"' ";
+}
+}
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (sXml);
+var tabHtml=oXml.documentElement.xml;
+var cols=oXml.documentElement.childNodes(1).childNodes.length ;
+var loadtab="<table id=fc_list cellPadding=0 cellSpacing=0  style='BORDER-COLLAPSE: collapse;font-size:12px;TABLE-LAYOUT: fixed' frame='box'><colgroup>";
+for(var i=0;i<cols;i++){
+loadtab+="<col ";
+if(sFormat!=""){
+loadtab+=arrAlign[i]+arrColWidth[i];
+}
+loadtab+=">";
+}
+loadtab+="</colgroup>";
+mLoadXmlData=loadtab+tabHtml+"</table><BR>";
+fnInit(mLoadXmlData);
+for (var i=1;i<fc_list.rows.length;i=i+2){
+fc_list.rows(i).style.backgroundColor="#dddddd";
+}
+var tmpWid = fc_list.offsetWidth > mwidth ? fc_list.offsetWidth:mwidth;
+fc_divList.style.width=tmpWid;
+fc_divList.style.left =mleft;
+fc_divList.style.top =mtop ;
+}
+function fnGettab(){
+return fc_list;
+}
+function fnGettxt(){
+return fc_txtName;
+}
+var mselectrow=0;
+function fnGetselectrow(){
+return mselectrow;
+}
+function fnPutfontsize(vValue) {
+mfontsize=vValue;
+fontsizeID.fireChange();
+}
+function fnGetfontsize() {
+return mfontsize;
+}
+function fnPutfontstyle(vValue) {
+mfontstyle=vValue;
+fontstyleID.fireChange();
+}
+function fnGetfontstyle() {
+return mfontstyle;
+}
+function fnPutfontfamily(vValue) {
+mfontfamily=vValue;
+fontfamilyID.fireChange();
+}
+function fnGetfontfamily() {
+return mfontfamily;
+}
+function fnPutbackgroundColor(vValue) {
+mbackgroundColor=vValue;
+backgroundColorID.fireChange();
+}
+function fnGetbackgroundColor() {
+return mbackgroundColor;
+}
+function fnPutcolor(vValue) {
+mcolor=vValue;
+colorID.fireChange();
+}
+function fnGetcolor() {
+return mcolor;
+}
+function fnPutfontweight(vValue) {
+mfontweight=vValue;
+fontweightID.fireChange();
+}
+function fnGetfontweight() {
+return mfontweight;
+}
+function fnPutalign(vValue) {
+malign = vValue;
+alignID.fireChange();
+}
+function fnGetalign() {
+return malign;
+}
+function fnPutposition(vValue) {
+mposition = vValue ;
+positionID.fireChange() ;
+}
+function fnGetposition() {
+return mposition ;
+}
+function onfocus() {
+fc_txtName.focus();
+}
+function fnGetleft()
+{
+return mleft;
+}
+function fnPutleft(vValue)
+{
+mleft=vValue;
+leftID.fireChange();
+fnInitstyle();　　
+}
+function fnGettop()
+{
+return mtop;
+}
+function fnPuttop(vValue)
+{
+mtop=vValue;
+topID.fireChange();
+fnInitstyle();
+}
+function fnGetheight()
+{
+return mheight;
+}
+function fnPutheight(vValue)
+{
+mheight=vValue;
+heightID.fireChange();
+fnInitstyle();
+}
+function fnGetwidth()
+{
+return mwidth;
+}
+function fnPutwidth(vValue)
+{
+mwidth=vValue;
+widthID.fireChange();
+fnInitstyle();
+try{
+}catch(e){}
+}
+var mxml="";
+function fnGetxml()
+{
+return mxml;
+}
+function fnPutxml(vValue)
+{
+mxml=vValue;
+xmlID.fireChange();
+}
+function fnGetsql1()
+{
+return sSql1;
+}
+function fnPutsql1(vValue)
+{
+sSql1=vValue;
+sql1ID.fireChange();
+}
+function fnGetsql2()
+{
+return sSql2;
+}
+function fnPutsql2(vValue)
+{
+sSql2=vValue;
+sql2ID.fireChange();
+}
+function fnGetpagesize()
+{
+return perpagerownum;
+}
+function fnPutpagesize(vValue)
+{
+perpagerownum=vValue;
+pagesizeID.fireChange();
+}
+function fnGetformat()
+{
+return sFormat;
+}
+function fnPutformat(vValue)
+{
+sFormat=vValue;
+formatID.fireChange();
+}
+function fnGetmultiselect()
+{
+return showcheckbox;
+}
+function fnPutmultiselect(vValue)
+{
+if (vValue=="是")
+showcheckbox=true;
+else
+showcheckbox=false;
+multiselectID.fireChange();
+}
+function fnGetreturnxml()
+{
+return strXML;
+}
+var mvalue="";
+function fnGetvalue()
+{
+if(mkeycol==0)
+mvalue=fc_txtName.value;
+return mvalue;
+}
+function fnPutvalue(vValue)
+{
+mvalue=vValue;
+if(mkeycol==0){
+try{
+fc_txtName.value=mvalue;
+}catch(e){
+}
+}
+valueID.fireChange();
+}
+function fnGettext()
+{
+return fc_txtName.value;
+}
+function fnPuttext(vValue)
+{
+fc_txtName.value=vValue;
+textID.fireChange();
+}
+var mkeycol=0;
+function fnGetkeycol()
+{
+return mkeycol;
+}
+function fnPutkeycol(vValue)
+{
+mkeycol=vValue;
+keycolID.fireChange();
+}
+var mblncell=false;
+function fnPutblncell(vValue)
+{
+mblncell=vValue;
+blncellID.fireChange();
+}
+var mvisible="是";
+function fnGetvisible()
+{
+return mvisible;
+}
+function fnPutvisible(vValue)
+{
+mvisible=vValue;
+visibleID.fireChange();
+try {
+if (mvisible == "是") {
+fc_txtName.style.display="block";
+fc_cmdCz.style.display="block";
+}
+else {
+fc_txtName.style.display="none";
+fc_cmdCz.style.display="none";
+}
+}catch(e){}
+}
+var mdisabled="否";
+function fnGetdisabled()
+{
+return mdisabled;
+}
+function fnPutdisabled(vValue)
+{
+mdisabled=vValue;
+try{
+if(typeof fc_txtName != "undefined") {
+if(mdisabled=="是"){
+fc_txtName.disabled=true;
+fc_cmdCz.disabled=true;
+}else {
+fc_txtName.removeAttribute("disabled");
+fc_cmdCz.removeAttribute("disabled");
+}
+}
+}catch(e){}
+disabledID.fireChange();
+}
+var mblninput="是";
+function fnGetblninput()
+{
+return mblninput;
+}
+function fnPutblninput(vValue)
+{
+mblninput=vValue;
+blninputID.fireChange();
+}
+var maddrow = "否";
+function fnGetaddrow() {
+return maddrow;
+}
+function fnPutaddrow(vValue) {
+maddrow=vValue;
+addrowID.fireChange();
+}
+var mblnempty="否";
+function fnGetblnempty()
+{
+return mblnempty;
+}
+function fnPutblnempty(vValue)
+{
+mblnempty=vValue;
+blnemptyID.fireChange();
+}
+var mfirstvalue="";
+function fnGetfirstvalue()
+{
+return mfirstvalue;
+}
+function hidelist() {
+var curObj=event.srcElement;
+var objSour = curObj;
+if (curObj.tagName=="TD") {
+curObj=curObj.parentNode;
+curObj=curObj.parentNode;
+curObj=curObj.parentNode;
+}
+if (curObj.tagName=="TR") {
+curObj=curObj.parentNode;
+curObj=curObj.parentNode;
+}
+if (curObj.id=="fc_list" || curObj.id=="fc_divList" || curObj.id=="upsidepage" || curObj.id=="currentpage"  || curObj.id=="nextpage"   ) return;
+if (curObj.tagName=="INPUT") {
+curObj=curObj.parentNode;
+if (curObj.tagName=="TD") {
+curObj=curObj.parentNode;
+curObj=curObj.parentNode;
+curObj=curObj.parentNode;
+if (curObj.id=="fc_list") return;
+}
+}
+if(curObj.id != eval(uniqueID+".id") ) {
+if(objSour.id != "fc_cmdCz"){
+fc_divList.style.display ="none";
+fc_divList.innerHTML="";
+fc_divListPage.style.display ="none";
+}
+}
+event.cancelBubble=false;
+event.returnValue=false;
+}
+var sSql1="";
+var sSql2="select fstrCustomerDesc,fstrPersonDesc from Customer where fstrCustomerDesc like '###'";
+var runtimesql="select userName,userPassword from userinfo ";
+var runtimetext="";
+var findrownum=0;
+var findrowbgcolor="";
+var perpagerownum=50;
+var perpagenum=1;
+var overallpagenum=1;
+var Strsend="";
+var sXml=""	;
+var sFormat="";
+var tabcolnum=1;
+var dblClick=false;
+var oldgroundcolor="";
+var oldcolor="";
+var changcol=0;
+var formerLineleft=0;
+var moveQuantity=0;
+var strXML="<root>";
+var showcheckbox=false;
+function init() {
+var fc_list_width = 0;
+var maxWinHeight = 150 ;
+var ArrFormat=sFormat.split("|");
+tabcolnum=ArrFormat.length;
+var oXML = SetDom(sXml);
+if(oXML.documentElement == null){
+if(IsSpace(sXml) == false) alert(sXml);
+return;
+}
+var lngchildNodeone=oXML.documentElement.childNodes.length;
+if(IsSpace(sSql1)==false) {
+lngchildNodeone--;
+sPubFieldCol = oXML.documentElement.childNodes(lngchildNodeone).text;
+oXML.documentElement.removeChild(oXML.documentElement.childNodes(lngchildNodeone));
+}
+var iTitleLen = tabcolnum;
+var loadtab="<table border=1 id=fc_list borderColor=#B8B7B7 cellPadding=0 cellSpacing=0  style='BORDER-COLLAPSE: collapse;font-size:12;TABLE-LAYOUT: fixed' frame='box'><colgroup>";
+for (var j=0;j<iTitleLen;j++){
+loadtab += "<col>";
+}
+if(showcheckbox) loadtab += "<col>";
+loadtab += "</colgroup>";
+for (var i=0;i<iTitleLen;i++){
+loadtab += "<td></td>";
+}
+if (lngchildNodeone!=2){
+for (var i=0;i<lngchildNodeone-2;i++){
+for (var k=0;k<iTitleLen;k++){
+try{
+if (Trim(oXML.childNodes(0).childNodes(i).childNodes(k).text) == Trim(runtimetext) && Trim(runtimetext) != ""){
+findrownum = i + 1;
+break;
+}
+}catch(e){
+if (Trim(oXML.childNodes(0).childNodes(i).text) == Trim(runtimetext) && Trim(runtimetext) != ""){
+findrownum = i + 1;
+break;
+}
+}
+}
+}
+}
+perpagenum=oXML.documentElement.childNodes(lngchildNodeone-1).text;
+overallpagenum=oXML.documentElement.childNodes(lngchildNodeone-2).text;
+var oChild = oXML.documentElement.childNodes(lngchildNodeone-1);
+oXML.documentElement.removeChild(oChild);
+oChild = oXML.documentElement.childNodes(lngchildNodeone-2);
+oXML.documentElement.removeChild(oChild);
+sXml=RepStr(oXML.xml,"<root>","");
+sXml=RepStr(sXml,"</root>","");
+sXml=unescape(sXml)	;
+var fc_txtNamebak=fc_txtName.value;
+fnInit(loadtab+sXml+"</table>");
+fc_txtName.value=fc_txtNamebak;
+for (var k=0;k<iTitleLen;k++){
+if (ArrFormat[k].indexOf("<")!=-1){
+fc_list.childNodes(0).childNodes(k).align="left";
+ArrFormat[k]=RepStr(ArrFormat[k],"<","");
+}
+if (ArrFormat[k].indexOf("^")!=-1){
+fc_list.childNodes(0).childNodes(k).align="middle";
+ArrFormat[k]=RepStr(ArrFormat[k],"^","");
+}
+if((ArrFormat[k]=="" || ArrFormat[k]=="!") && ( sFormat !="") ){
+fc_list.childNodes(0).childNodes(k).style.Width="0";
+fc_list.childNodes(0).childNodes(k).style.display="none";
+}
+if (ArrFormat[k].indexOf(">")!=-1){
+fc_list.childNodes(0).childNodes(k).align="right";
+ArrFormat[k]=RepStr(ArrFormat[k],">","");
+}
+if(ArrFormat[k].indexOf("!")!=-1){
+ArrFormat[k]=RepStr(ArrFormat[k],"!","");
+}
+try{
+fc_list.rows(0).cells(k).innerText=ArrFormat[k];
+}catch(e) {}
+var itmp = parseInt(ArrFormat[k].length)*15  ;
+fc_list.childNodes(0).childNodes(k).style.width=itmp;
+fc_list_width += itmp;
+}
+if(showcheckbox) {
+fc_list.childNodes(0).childNodes(iTitleLen).style.width=22;
+fc_list_width += 22 ;
+}
+fc_list.rows(0).align="middle";
+for (var i=1;i<fc_list.rows.length;i=i+2){
+fc_list.rows(i).style.backgroundColor="#eeffee";
+}
+if (fc_list.rows.length>findrownum) {
+if(parseInt(findrownum)!=0){
+findrowbgcolor=fc_list.rows(findrownum).style.backgroundColor;
+oldgroundcolor=fc_list.rows(findrownum).style.backgroundColor;
+fc_list.rows(findrownum).style.backgroundColor="blue";
+fc_list.rows(findrownum).style.color="red";
+fc_divList.scrollTop =fc_list.rows(findrownum).offsetTop;
+}else{
+try{
+fc_list.rows(1).style.color="red";
+fc_list.rows(1).style.backgroundColor="blue";
+}catch(e){}
+}
+}
+var sl=fc_list.rows(0).cells.length;
+for(i=0;i<sl;i++){
+fc_list.rows(0).cells(i).style.cssText="border-left:1px solid white; border-top: 2px solid white; border-bottom: 1px solid #818080; border-right:1px solid #B8B7B7;background-color: #D3D3D3;";
+}
+var iTopOffset = 0 ;
+if(format=="") {
+fc_list.rows(0).style.display="none";
+iTopOffset = -2 ;
+}
+fc_divList.style.display ="block";
+var iScrollWidth = 17;
+if(fc_list.offsetHeight < maxWinHeight ) {
+$("fc_ifra").style.height = fc_list.offsetHeight + 2 ;
+fc_divList.style.height=$("fc_ifra").style.height  ;
+iScrollWidth = 0;
+}else{
+$("fc_ifra").style.height=maxWinHeight ;
+fc_divList.style.height=$("fc_ifra").style.height  ;
+}
+var iBorder = 2+iTitleLen ;
+var newWidth1 = fc_txtName.offsetWidth+fc_cmdCz.offsetWidth ;
+var newWidth2 = fc_list_width + iBorder +iScrollWidth ;
+fc_divList.style.width = newWidth1>newWidth2?newWidth1:newWidth2;
+fc_list.style.width = fc_divList.style.pixelWidth-iBorder-iScrollWidth;
+var iToptmp = getAbsTop(fc_txtName)  + fc_txtName.style.pixelHeight ;
+fc_divList.style.left = getAbsLeft(fc_txtName) ;
+var ilen=element.document.body.clientHeight - iToptmp  ;
+if(ilen < fc_divList.offsetHeight){
+if(iToptmp>fc_divList.offsetHeight+fc_txtName.style.pixelHeight){
+fc_divList.style.top = iToptmp-(fc_divList.offsetHeight+fc_txtName.style.pixelHeight);
+}else{
+fc_divList.style.top = 0;
+}
+} else {
+fc_divList.style.top = iToptmp;
+}
+currentpage.value = perpagenum;
+if (overallpagenum>1){
+fc_divListPage.style .display ="block";
+fc_divListPage.style .top = parseInt(fc_divList.style.top)+parseInt(fc_divList.offsetHeight) -parseInt(fc_divListPage.offsetHeight);
+fc_divListPage.style .left = parseInt(fc_divList.style.left)+1;
+PageDisplayStatus();
+}
+else {
+fc_divListPage.style .display ="none";
+fc_divListPage.style .top = parseInt(fc_divList.style.top)+parseInt(fc_divList.offsetHeight) -parseInt(fc_divListPage.offsetHeight);
+fc_divListPage.style .left = parseInt(fc_divList.style.left)+1;
+}
+if (mxml!="") {
+fc_divListPage.style .display ="none";
+}
+}
+function fc_listonmouseover(){
+if (findrownum!=0  ){
+try{
+fc_list.rows(findrownum).style.backgroundColor=findrowbgcolor;
+}catch(e){}
+}else{
+try{
+fc_list.rows(1).style.backgroundColor = "#eeffee";
+fc_list.rows(1).style.color = "black";}catch(e){}
+}
+var oMouseover=window.frames("fc_ifra").event.srcElement;
+if (oMouseover.tagName=="TD") oMouseover=oMouseover.parentNode;
+if (oMouseover.tagName=="TR"){
+if (oMouseover.rowIndex!=0){
+oldgroundcolor=fc_list.rows(oMouseover.rowIndex).style.backgroundColor;
+oldcolor=fc_list.rows(oMouseover.rowIndex).style.color;
+fc_list.rows(oMouseover.rowIndex).style.backgroundColor="blue";
+fc_list.rows(oMouseover.rowIndex).style.color="White";
+}
+}
+}
+function fc_listonmouseout(){
+if (findrownum!=0 ){
+try{
+fc_list.rows(findrownum).style.backgroundColor = findrowbgcolor;
+}catch(e){}
+}else{
+try{
+fc_list.rows(1).style.backgroundColor = "#eeffee";
+fc_list.rows(1).style.color = "black";
+}catch(e){}
+}
+var oMouseout=window.frames("fc_ifra").event.srcElement;
+if (oMouseout.tagName=="TD") oMouseout=oMouseout.parentNode;
+if (oMouseout.tagName=="TR"){
+if (oMouseout.rowIndex!=0){
+fc_list.rows(oMouseout.rowIndex).style.backgroundColor=oldgroundcolor;
+fc_list.rows(oMouseout.rowIndex).style.color=oldcolor;
+}
+}
+}
+function fc_cmdCz_onclick() {
+perpagenum=1;
+var oEvent=createEventObject();
+oEvent.showlist=true ;
+onclickopenID.fire(oEvent);
+if(typeof oEvent.ret != "undefined"){
+fc_txtName.value = oEvent.ret;
+var oEvent1=createEventObject();
+oEvent1.afterchangevalue=fc_txtName.value;
+onchangeID.fire(oEvent1);
+}
+if(oEvent.showlist == false) {
+return ;
+}
+if(fc_txtName.disabled==true) return ;
+strXML="";
+runtimesql=sSql1;
+runtimesql = RepOpenSql(sSql1,fc_txtName.value);
+if (fc_divList.style.display=="none"){
+strX=fc_txtName.value;
+runtimetext=fc_txtName.value;
+Strsend="<percolnum>"+perpagenum+"</percolnum><sql>"+runtimesql+"</sql><strValue>"+strX+"</strValue><perpagerownum>"+perpagerownum+"</perpagerownum><showcheckbox>"+showcheckbox+"</showcheckbox><blnempty>"+mblnempty+"</blnempty><addrow>"+maddrow+"</addrow>";
+currentpage.value =perpagenum;
+if(mxml=="" || mxml==null ) {
+if(runtimesql==""){
+fc_divList.style.display ="block";
+return;
+}else {
+sXml=SendHttp(location.protocol+"//"+location.host+ fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?key=sqltoxml&connectstring="+escape(ConnectString),Strsend);
+}
+}else{
+var s1="<root>";
+if(showcheckbox==true)
+s1=s1+RepStr(mxml,"</tr>","<td><input type='checkbox' style='width:20px;'></input></td></tr>");
+else
+s1=s1+mxml ;
+sXml=s1+"<pagenumber>1</pagenumber><intpage>1</intpage></root>";
+}
+init();
+try{
+fc_list.focus();
+}catch(e){}
+fc_divList.style.display ="block";
+}else{
+fc_divList.style.display ="none";
+fc_divList.innerHTML="";
+fc_divListPage.style .display ="none";
+try{
+fc_txtName.focus();
+}catch(e){}
+}
+}
+function NextPage() {
+if (perpagenum<overallpagenum){
+perpagenum=parseInt(perpagenum)+1;
+currentpage.value =perpagenum;
+runtimesql = RepOpenSql(sSql1,fc_txtName.value);
+Strsend="<percolnum>"+perpagenum+"</percolnum><sql>"+runtimesql+"</sql><strValue>###</strValue><perpagerownum>"+perpagerownum+"</perpagerownum><showcheckbox>"+showcheckbox+"</showcheckbox><blnempty>"+mblnempty+"</blnempty><addrow>"+maddrow+"</addrow>";
+sXml=SendHttp(location.protocol+"//"+location.host+ fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?key=sqltoxml&connectstring="+escape(ConnectString),Strsend);
+init() ;
+fc_list.focus() ;
+}
+PageDisplayStatus();
+}
+function PrevPage() {
+if(perpagenum>1){
+perpagenum=parseInt(perpagenum)-1;
+currentpage.value =perpagenum;
+runtimesql = RepOpenSql(sSql1,fc_txtName.value);
+Strsend="<percolnum>"+perpagenum+"</percolnum><sql>"+runtimesql+"</sql><strValue>###</strValue><perpagerownum>"+perpagerownum+"</perpagerownum><showcheckbox>"+showcheckbox+"</showcheckbox><blnempty>"+mblnempty+"</blnempty><addrow>"+maddrow+"</addrow>";
+sXml=SendHttp(location.protocol+"//"+location.host+ fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?key=sqltoxml&connectstring="+escape(ConnectString),Strsend);
+init() ;
+fc_list.focus() ;
+}
+PageDisplayStatus();
+}
+function PageDisplayStatus() {
+if(currentpage.value <= 1) {
+upsidepage.disabled = true ;
+}else{
+upsidepage.disabled = false ;
+upsidepage.removeAttribute("disabled") ;
+}
+if(currentpage.value == overallpagenum) {
+nextpage.disabled = true ;
+}else{
+nextpage.disabled = false ;
+nextpage.removeAttribute("disabled") ;
+}
+}
+function cmdreturn_onclick(){
+var iEvent=window.frames("fc_ifra").event.srcElement;
+var rowobj;
+if (iEvent.tagName=="TD")
+rowobj=iEvent.parentNode;
+if (iEvent.tagName=="TR")
+rowobj=iEvent;
+if (typeof rowobj=="undefined") return;
+var strXML="<root>";
+var ss=rowobj.rowIndex;
+if(maddrow=="是") {
+ss=1;
+if(rowobj.rowIndex==1){
+var oEvent=createEventObject();
+oEvent.ret="";
+onclickaddID.fire(oEvent);
+if(typeof oEvent.ret == "undefined"){
+}else{
+fc_txtName.value = oEvent.ret;
+}
+fc_divList.style.display ="none";
+fc_divList.innerHTML="";
+fc_divListPage.style.display ="none";
+return;
+}else{}
+}else{
+ss=0;
+}
+if (iEvent.tagName!="INPUT" && rowobj.rowIndex>ss){
+if(sSql1=="" && mxml==""){
+mselectrow=rowobj.rowIndex;
+fc_txtName.value = fc_list.rows(mselectrow).cells(0).innerText;
+mvalue=fc_list.rows(mselectrow).cells(mkeycol).innerText;
+if(sFormat!=""){
+var arrFormat=sFormat.split("|");
+strXML=strXML+"<tr>";
+for (var k=0;k<arrFormat.length;k++){
+if(arrFormat[k].substring(arrFormat[k].length-1,arrFormat[k].length)=="!");
+strXML=strXML+"<td>"+fc_list.rows(mselectrow).cells(k).innerText+"</td>";
+}
+strXML=strXML+"</tr>";
+}
+}else{
+var ArrFormatnew=sFormat.split("|");
+var nodesNumber=fc_list.childNodes(1).childNodes.length	;
+var rowsnum=fc_list.rows.length	;
+if (showcheckbox==true){
+var j=1 ;
+if(addrow=="是" && mblnempty!="是"){
+j=2;
+}
+if(addrow!="是" && mblnempty=="是"){
+j=2;
+}
+if(addrow=="是" && mblnempty=="是"){
+j=3;
+}
+var showxml = "" ;
+for (var i=j;i<nodesNumber;i++){
+if (fc_list.childNodes(1).childNodes(i).childNodes(tabcolnum).childNodes(0).checked==true){
+var Arrlength=ArrFormatnew.length;
+strXML=strXML+"<tr>";
+for (var k=0;k<Arrlength;k++){
+if (ArrFormatnew[k].indexOf("!")!=-1){
+strXML=strXML+"<td>"+fc_list.childNodes(1).childNodes(i).childNodes(k).innerText+"</td>";
+showxml +=	Trim(fc_list.childNodes(1).childNodes(i).childNodes(k).innerText)+",";
+}
+}
+strXML=strXML+"</tr>";
+}
+}
+fc_txtName.value = showxml.substring(0,showxml.length-1);
+}
+else {
+var Arrlength=ArrFormatnew.length;
+strXML=strXML+"<tr>";
+var bfind=false	;
+for (var k=0;k<Arrlength;k++){
+if (ArrFormatnew[k].indexOf("!")!=-1){
+strXML=strXML+"<td>"+fc_list.childNodes(1).childNodes(rowobj.rowIndex).childNodes(k).innerText+"</td>";
+if(bfind==false){
+fc_txtName.value =	Trim(fc_list.childNodes(1).childNodes(rowobj.rowIndex).childNodes(k).innerText);
+CopyFieldsValue(rowobj.rowIndex);
+bfind=true;
+}
+}
+}
+strXML=strXML+"</tr>";
+}
+}
+var slen=format.length ;
+var m=0 ;
+if (showcheckbox==false){
+for(i=0; i<slen; i++) {
+if(format.substring(i,i+1)=="!"){
+m++ ;
+break;
+}
+}
+if(m==0){
+mselectrow=rowobj.rowIndex;
+fc_txtName.value = fc_list.rows(mselectrow).cells(0).innerText;
+mvalue=fc_list.rows(mselectrow).cells(mkeycol).innerText;
+CopyFieldsValue(mselectrow);
+}
+}
+strXML=strXML+"</root>";
+fc_divList.style.display ="none";
+fc_divList.innerHTML="";
+fc_divListPage.style.display ="none";
+fc_txtName.disabled=false;
+oEvent=createEventObject();
+oEvent.afterchangevalue=fc_txtName.value;
+oEvent.returnxml=strXML;
+onchangeID.fire(oEvent);
+onselchangeID.fire(oEvent);
+if (oEvent.position == 88) {
+window.setTimeout("try {fc_czselchange()} catch (e) {} ", 10);
+}
+fc_txtName.focus() ;
+}else {
+}
+}
+function CopyFieldsValue(curRow) {
+if(IsSpace(sPubFieldCol)) return ;
+var o = eval(uniqueID) ;
+var s = o.dataset;
+var oDs;
+var sTag="" ;
+if(IsSpace(s) && o.id != "czFc" ) return ;
+if(IsSpace(s) == false){
+oDs = eval(s);
+}else{
+oDs = eval(o.parentNode.dataset);
+sTag="grid" ;
+}
+var arrField = sPubFieldCol.split(",");
+var l = arrField.length;
+for(var i=0;i<l;i++){
+try{
+oDs.Fields.Field[arrField[i].toLowerCase()].Value = Trim(fc_list.childNodes(1).childNodes(curRow).childNodes(i).innerText);
+}catch(e){}
+}
+if(sTag == ""){
+oDs.fset_cont1();
+}else{
+oDs.fset_cont();
+}
+}
+function focus() {
+fc_txtName.focus();
+}
+function fc_txtName_onblur() {
+onblurID.fire();
+}
+function fc_txtName_onfocus() {
+}
+function fc_txtName_onchange() {
+oEvent=createEventObject();
+oEvent.afterchangevalue=fc_txtName.value;
+onchangeID.fire(oEvent);
+oninterchangeID.fire(oEvent);
+}
+function fc_txtName_keyCode() {
+oEvent=createEventObject();
+oEvent.afterchangevalue=fc_txtName.value;
+onkeyCodeID.fire(oEvent);
+}
+function fc_txtName_onkeydown() {
+fc_txt_onkeydown();
+if (mblninput=="否") event.returnValue=false;
+fc_txtName_onkeyup();
+}
+function fc_txtName_onkeyup() {
+oEvent=createEventObject();
+oEvent.afterchangevalue=fc_txtName.value;
+onchangeID.fire(oEvent);
+}
+function fc_txtName_onkeypress() {
+if (mblninput=="否") event.returnValue=false;
+}
+function fc_txtName_onpaste() {
+if (mblninput=="否") event.returnValue=false;
+fc_txtName_onkeyup();
+}
+function fc_txtName_oncut() {
+fc_txtName_onpaste();
+}
+function fc_txtName_oncontextmenu() {
+if (mblninput=="否") event.returnValue=false;
+}
+function fnInitstyle() {
+var mleftButton=parseInt(mwidth) + parseInt(mleft) - mwidthButton;
+var mwidthText=mwidth-mwidthButton;
+if (mwidthText<=0)mwidthText=40;
+try {
+fc_txtName.style.top = mtop;
+fc_txtName.style.left = mleft;
+fc_txtName.style.width = mwidthText;
+fc_txtName.style.height = mheight;
+mButtonRate = 10;
+fc_cmdCz.style.top = mtop;
+fc_cmdCz.style.left = mleftButton;
+}catch(e) {}
+}
+function fnInit(strHtml) {
+if(sSql1 == "" ){
+if(sqltrans != "" && typeof sqltrans != "undefined"){
+sSql1 = UnSqlPropTrans(sqltrans) ;
+}
+}
+var mleftButton=parseInt(mwidth) + parseInt(mleft) - mwidthButton;
+var mwidthText=mwidth-mwidthButton;
+if(mposition == "static" ) {
+var len = mwidth.length ;
+if(len != "" || typeof len != "undefined") {
+var s2 = mwidth.substring(len-1,len);
+}
+if(s2 == "%") {
+var tmpW = parentNode.offsetWidth;
+var txtWidth = (100 * ((tmpW * parseInt(mwidth) /100) - 17)/tmpW) + "%";
+var mButtonWidth = 17;
+}else{
+txtWidth = parseInt(mwidth)-parseInt(mwidthButton) ;
+txtWidth = (txtWidth)+"px"
+mButtonWidth = "17px";
+}
+}else{
+txtWidth = parseInt(mwidth)-parseInt(mwidthButton) ;
+txtWidth = (txtWidth)+"px"
+mButtonWidth = "17px";
+var mleftButton = parseInt(mwidth) + parseInt(mleft) - mwidthButton	;
+}
+var sdisabled="";
+if(mdisabled == "是" || mdisabled == true || mdisabled == "true"){
+sdisabled =" disabled=true ";
+}
+if (mwidthText<=0)mwidthText=40   ;
+var s1='<INPUT id=fc_txtName  '+ sdisabled +'  style="POSITION: '+mposition+'; TEXT-ALIGN:'+malign+'; border-left-width:1;border-right-width:1;border-top-width:1;border-bottom-width:2;LEFT: '+mleft+'px;  TOP: '+mtop+'px; WIDTH:'+txtWidth+';HEIGHT:'+mheight+'px; font-size:'+mfontsize+'; font-style:'+mfontstyle+'; font-family:'+mfontfamily+'; background-color:'+mbackgroundColor+'; font-weight:'+mfontweight+' ; color:'+mcolor+';';
+if(mvisible=="否")
+s1=s1+'display:none;';
+else
+s1=s1+'display:;';
+s1=s1+'">';
+s1=s1+'<INPUT id=fc_cmdCz type=button  '+ sdisabled +' style="BACKGROUND-IMAGE: url('+fcpubdata.Path+'/fceform/images/ef_run_cz.gif);background-repeat:no-repeat;  BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; HEIGHT: 18px; WIDTH: '+mButtonWidth+';POSITION: '+mposition+' ;LEFT: '+mleftButton+'; TOP: '+mtop+'px;';
+if(mvisible=="否")
+s1=s1+'display:none;';
+else
+s1=s1+'display:;';
+s1=s1+'">';
+element.innerHTML=s1;
+element.children[0].attachEvent("onfocus", fc_txtName_onfocus);
+element.children[0].attachEvent("onblur", fc_txtName_onblur);
+element.children[0].attachEvent("onchange", fc_txtName_onchange);
+element.children[0].attachEvent("onkeydown", fc_txtName_onkeydown);
+element.children[0].attachEvent("onkeypress", fc_txtName_onkeypress);
+element.children[0].attachEvent("onpaste", fc_txtName_onpaste);
+element.children[0].attachEvent("oncut", fc_txtName_oncut);
+element.children[0].attachEvent("oncontextmenu", fc_txtName_oncontextmenu);
+element.children[0].attachEvent("ondblclick",dblclick_cmdCz_onclick);
+element.children[1].attachEvent("onclick", fc_cmdCz_onclick);
+fc_txtName=element.children[0];
+fc_cmdCz=element.children[1];
+createDropWin();
+fc_divList=$("fc_divList");
+fc_divListPage=$("fc_divListPage");
+upsidepage=$("upsidepage");
+currentpage=$("currentpage");
+nextpage=$("nextpage");
+if(mposition == "static" ){
+fc_txtName.attachEvent( "onresize",txt_onresize);
+}
+if (typeof strHtml!="undefined" && typeof strHtml!="object" && strHtml!="") {
+fc_divList.innerHTML='<iframe id=fc_ifra style="WIDTH:100%; height:100%;border-Bottom:1 #818080 solid;border-Left:1 #818080 solid; border-right:1 #818080 solid; z-index:99999;" NORESIZE=NORESIZE SCROLLING=auto MARGINWIDTH=0 MARGINHEIGHT=0 FRAMESPACING=0 FRAMEBORDER=0></iframe>';
+window.frames("fc_ifra").document.open();
+window.frames("fc_ifra").document.write(strHtml);
+window.frames("fc_ifra").document.close();
+fc_list=window.frames("fc_ifra").document.all.fc_list;
+fc_list.attachEvent("onmouseover", fc_listonmouseover);
+fc_list.attachEvent("onmouseout", fc_listonmouseout);
+fc_list.attachEvent("onclick", cmdreturn_onclick);
+fc_list.attachEvent("onkeydown", tab_onkeydown);
+}
+}
+function tab_onkeydown() {
+var iEvent=window.frames("fc_ifra").event.keyCode;
+var ArrFormat=sFormat.split("|");
+for(var i=2; i<fc_list.rows.length;i++) {
+if(iEvent == '38'){
+window.frames("fc_ifra").event.returnValue = false;
+if(fc_list.rows(i).style.color == 'red'){
+fc_list.rows(i-1).style.color = 'red';
+fc_list.rows(i).style.color = 'black';
+fc_list.rows(i-1).style.backgroundColor = "blue";
+if(fc_list.rows(i-2).style.backgroundColor == "#eeffee") {
+fc_list.rows(i).style.backgroundColor = "#eeffee";
+}else{
+fc_list.rows(i).style.backgroundColor = "";
+}
+}
+}
+}
+for(var i=0; i<fc_list.rows.length-1;i++) {
+if(iEvent == '40'){
+window.frames("fc_ifra").event.returnValue = false ;
+if(fc_list.rows(i).style.color == 'red'){
+fc_list.rows(i+1).style.color = 'red';
+fc_list.rows(i).style.color = 'black';
+fc_list.rows(i+1).style.backgroundColor = "blue";
+if(fc_list.rows(i-1).style.backgroundColor == "#eeffee") {
+fc_list.rows(i).style.backgroundColor = "";
+}else{
+fc_list.rows(i).style.backgroundColor = "#eeffee";
+}
+break ;
+}
+}
+}
+for(var j=0; j<fc_list.rows.length; j++) {
+if(iEvent == "13") {
+if(fc_list.rows(j).style.color == "red"){
+for (var k=0;k<ArrFormat.length;k++){
+if (ArrFormat[k].indexOf("!")!=-1){
+fc_txtName.value = fc_list.childNodes(1).childNodes(j).childNodes(k).innerText ;
+}else{
+fc_txtName.value = fc_list.rows(j).cells(0).innerText;
+}
+}
+fc_divList.style.display ="none";
+fc_divList.innerHTML="";
+fc_divListPage.style.display ="none";
+fc_txtName.disabled=false;
+fc_txtName_onkeyup();
+onchangeID.fire(oEvent);
+onselchangeID.fire(oEvent);
+if (oEvent.position == 88) {
+window.setTimeout("try {fc_czselchange()} catch (e) {} ", 10);
+}
+fc_txtName.focus() ;
+}
+}
+}
+if(iEvent == "33") {
+window.frames("fc_ifra").event.returnValue = false ;
+if(currentpage.value == 1) return;
+PrevPage() ;
+fc_list.focus() ;
+}
+if(iEvent == "34") {
+window.frames("fc_ifra").event.returnValue = false ;
+if(currentpage.value == overallpagenum) return ;
+NextPage() ;
+fc_list.focus() ;
+}
+}
+function fc_txt_onkeydown() {
+var scode = event.keyCode;
+var skey = event.altKey;
+if(skey == true){
+switch(scode){
+case 40:{
+event.returnValue = false ;
+fc_cmdCz_onclick();
+try{
+window.frames("fc_ifra").setTimeout("fc_list.focus();",10);
+}catch(e){}
+break;
+}
+}
+}
+}
+function dblclick_cmdCz_onclick() {
+fc_cmdCz_onclick();
+try{
+window.frames("fc_ifra").setTimeout("fc_list.focus();",10);
+}catch(e){}
+}
+function txt_onresize() {
+var len = mwidth.length ;
+if(len != "" || typeof len != "undefined") {
+var s2 = mwidth.substring(len-1,len);
+}
+if(s2 == "%") {
+var tmpW = parentNode.offsetWidth;
+var tmp1 = (tmpW * parseInt(mwidth) /100) - 17 - 2;
+if( fc_txtName.style.pixelWidth != tmp1 ) {
+fc_txtName.style.pixelWidth = tmp1;
+}
+}
+}
+function getContLeft(e){
+var objFirstAbs=null;
+var obj = e;
+var l = 0;
+while(e != null){
+if(e.style.position == "absolute"){
+if(objFirstAbs == null) objFirstAbs=e;
+}else{
+l += e.offsetLeft;
+}
+e=e.offsetParent;
+}
+if(objFirstAbs != null){
+if(obj.style.position == "absolute"){
+l += obj.style.pixelLeft;
+}
+}
+return l;
+}
+function getContTop(e){
+var objFirstAbs=null;
+var obj = e;
+var l = 0;
+while(e != null){
+if(e.style.position == "absolute"){
+if(objFirstAbs == null) objFirstAbs=e;
+}else{
+l += e.offsetTop;
+}
+e=e.offsetParent;
+}
+if(objFirstAbs != null){
+if(obj.style.position == "absolute"){
+l += obj.style.pixelTop;
+}
+}
+return l;
+}
+function createDropWin() {
+var contid=eval(uniqueID+".id");
+if ( $("fc_divList") != null ) {
+$('fc_divListPage').contid = contid;
+return;
+}
+var sEventNext = "eval($('fc_divListPage').contid+'.NextPage()')";
+var sEventPrev = "eval($('fc_divListPage').contid+'.PrevPage()')";
+var s1='<label id=fc_divList style="z-index:9998; DISPLAY: none; LEFT: 0px;  POSITION: absolute; TOP: 40px;" >';
+s1=s1+'</label>';
+s1=s1+'<table border=0 id=fc_divListPage style="z-index:9999;DISPLAY: none; LEFT: 72px; POSITION: absolute; TOP: 157px"  cellPadding=0 cellSpacing=0>';
+s1=s1+'<tr><td><INPUT type="button" value="上" id=upsidepage style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; HEIGHT: 18px; WIDTH: 18px" value="上" onclick="'+sEventPrev+'" ></td>';
+s1=s1+'<td><INPUT id=currentpage style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; HEIGHT: 18px; TEXT-ALIGN: center; WIDTH: 18px" ></td>';
+s1=s1+'<td><INPUT type="button" value="下" id=nextpage style="BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; HEIGHT: 18px; WIDTH: 18px" value="下" onclick="'+sEventNext+'" ></td></tr></table>';
+window.document.body.insertAdjacentHTML("BeforeEnd", s1);
+$('fc_divListPage').contid = contid;
+}
+function fnTest() {
+}
+</SCRIPT>

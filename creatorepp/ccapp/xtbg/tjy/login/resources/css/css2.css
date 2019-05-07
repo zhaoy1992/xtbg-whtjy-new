@@ -1,0 +1,30 @@
+@charset gbk;/*!@author:Helen. @update:2013-01-07*/ 
+/* 基本配置 */
+html{color:#666; overflow-x:hidden; -webkit-text-size-adjust:none;}
+body,h1,h2,h3,h4,h5,h6,hr,p,img,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0; padding:0; border:0;}
+body,button,input,select,textarea,td,tr,th{font:12px/1.5 '\5b8b\4f53',arial,tahoma;}
+/*table{border-collapse:collapse; border-spacing:0;}*/
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%; padding:0px; margin:0px; font-weight:normal;}
+ul,li,ol{list-style:none;}
+.clear{clear: both; font-size:1px; width:1px; height:0; visibility: hidden; }
+img{border:0; vertical-align:middle;}
+
+/* 链接颜色 */
+a:link {text-decoration:none; color:#666;}
+a:visited {text-decoration:none; color:#666;}
+a:active {text-decoration:none; color:#f00;}
+a:hover {text-decoration:none; color:#f00;}
+
+/* 登陆页面 */
+.xin_denglu_k11{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px -48px; line-height:38px; padding-left:13px; }
+.xin_denglu_k12{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px 0px; line-height:38px; padding-left:13px;  }
+.xin_denglu_k13{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px -192px; line-height:38px; font-size:14px; color:#555; padding-left:13px;}
+.xin_denglu_k21{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px -144px; line-height:38px; padding-left:13px; }
+.xin_denglu_k22{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px -96px; line-height:38px; padding-left:13px;  }
+.xin_denglu_k23{ width:224px; height:38px; background:url(../images/pic.png) no-repeat 0px -192px; line-height:38px; font-size:14px; color:#555; padding-left:13px;}
+
+.xin_denglu_k2{background:url(../images/pic.png) no-repeat 0px -240px; width:237px; height:38px; cursor:pointer;}
+.xin_denglu_k3{background:url(../images/pic.png) no-repeat 0px -288px; width:237px; height:38px; cursor:pointer;}
+.worktime{background:url(../images/pic.png) no-repeat 0px -336px; width:113px; height:38px; cursor:pointer;}
+.endtime{background:url(../images/pic.png) no-repeat -123px -336px; width:113px; height:38px; cursor:pointer;}
+.fontfff12{ color:#0a4a00;}

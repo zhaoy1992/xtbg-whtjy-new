@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<address>
+	<!-- parentItem:一个地址模块，
+				domId:地址本的标志id，请注意，下面的sql中也请带上这个字段，到时候展示数据的时候就是按这个字段去匹配的
+				name:地址本title显示的名称
+				sqlParamValue:sql中问号赋值,注意参数数量和sql中的问号数量对应
+				copies：份数
+				number：编号
+				sql: 地址的查询数据sql
+				is_valid:是否有效，1：有效，0：无效。无效的数据将不会在页面展示-->
+	<parentItem config_dom_id="xnsrmzf" name="咸宁市人民政府"  sqlParamValue="" copies="10" number="0" is_valid="1">
+		<sql>
+			<![CDATA[
+				select 'xnsrmzf' config_dom_id,org_id, org_name, org_addr, parent_id, isouter from oa_gwcs_org 
+			]]>
+		</sql>
+	</parentItem>
+	
+</address>

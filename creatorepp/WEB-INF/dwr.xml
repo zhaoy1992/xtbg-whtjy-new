@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.ltd.uk/dwr/dwr20.dtd">
+<dwr>
+	<allow>
+		<create javascript="applyChange" creator="new">
+			<param name="class" value="com.chinacreator.epp.applymanager.ApplyChange"></param>
+		</create>
+		<create javascript="datasourceChange" creator="new">
+			<param name="class"
+				value="com.chinacreator.epp.datasourcemanage.DatasourceChange">
+			</param>
+		</create>
+		<create javascript="menuissueChange" creator="new">
+			<param name="class"
+				value="com.chinacreator.eppissue.menuissue.MenuissueChange">
+			</param>
+		</create>		
+		<create javascript="processConfigManager" creator="new">
+			<param name="class" value="com.chinacreator.workflow.shark.procconfig.ProcessConfigManager">
+			</param>
+		</create>
+	<create creator="new" javascript="orgJobUserExtTree">
+			<param name="class"
+	value="com.chinacreator.workflow.shark.procconfig.OrgJobUserExtTree" />
+		</create>
+		<convert converter="bean"
+			match="com.chinacreator.workflow.shark.procconfig.Folder">
+		</convert>
+		   <create creator="new" javascript="FileManager">
+	        <param name="class" value="com.chinacreator.eform.treetag.FileManager"/>
+	        </create>
+	        <convert converter="bean" match="com.chinacreator.eform.treetag.Folder"></convert>
+				<create javascript="expfilemanager" creator="new">
+			<param name="class"		value="com.chinacreator.eppissue.menuissue.expmenu.menu.ExpFileManager">
+			</param>
+		</create>
+		<create javascript="userCheckOrgDWRManager" creator="new">
+			<param name="class"				value="com.chinacreator.sysmgrcore.purviewmanager.usercheckorg.UserCheckOrgDWRManager">
+			</param>
+</create>
+<create javascript="spProcessConfigManager" creator="new">
+			<param name="class"
+				value="com.chinacreator.workflow.shark.procconfig.item.SPProcessConfigManager">
+			</param>
+		</create>
+		<create javascript="spProcessConfigManager" creator="new">
+		<param name="class"
+	value="com.chinacreator.workflow.shark.procconfig.item.SPProcessConfigManager">
+		</param>
+</create>
+
+
+	</allow>
+</dwr>

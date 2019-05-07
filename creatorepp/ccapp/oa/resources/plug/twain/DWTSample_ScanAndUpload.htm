@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan and upload documents to a web server</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+
+</head>
+<body onload="onPageLoad();">    
+    <div class="DWTPage body_Broad_width">
+        <div class="DWTBody" >
+            <!--This is where Dynamic Web TWAIN control will be rendered.-->
+            <div id="dwtcontrolContainer" style="maxHeight:1px;maxWidth:1px"></div>
+			<input  type="button" value="Scan" onclick="acquireImage();" /> 
+               
+        </div>
+        <div style="clear: both; "></div>
+    </div>
+    <script src="Scripts/dynamsoft.webtwain.initiate.js"></script>
+    <script src="Scripts/DWTSample_ScanAndUpload.js"></script>
+</body>
+</html>

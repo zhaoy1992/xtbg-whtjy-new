@@ -1,0 +1,4 @@
+<iReportPlugin 	name="报表编辑锁定管理" class="it.businesslogic.ireport.plugin.lockmanager.LockManagerPlugin">
+	<IconFile>/it/businesslogic/ireport/plugin/lock.png</IconFile>
+	<Description>template manager</Description>
+</iReportPlugin>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 接口配置 -->
+<config>
+
+	<!-- 
+		============================================================================================= 
+		type:定义读取类型
+		(
+		class:以类方式读取(必须实现接口com.chinacreator.sqltransition.api.interfaces.IDatebaseInfo)
+		string:以字符串方式读取(mysql、db2net、db2app、...)
+		)
+		used：标识是否使用(false:不使用 true:使用 默认为false)
+		class:实现类代码路径或名称
+		=============================================================================================
+	-->
+	<!-- 配置当前数据库类型 -->
+	<dbtype>
+		<provider type="class" used="true"
+			class="com.chinacreator.sqltransition.impl.DateBaseFromSysmanageImpl" />
+	</dbtype>
+	<!-- 配置当前数据源名称 -->
+	<dbname>
+		<provider type="class" used="true"
+			class="com.chinacreator.sqltransition.impl.DateBaseFromSysmanageImpl" />
+	</dbname>
+	<!--
+		============================================================================================= 
+		type：代表数据库类型(mysql、db2net、db2app)
+		used：标识是否使用(false:不使用 true:使用 默认为false)
+		class：实现类代码路径				
+		============================================================================================= 
+	-->
+	<!-- 配置方言实现类 -->
+	<!-- (必须实现接口com.chinacreator.sqltransition.dialect.Dialect) -->
+	<dialect>
+		<provider type="mysql" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.dialect.MySQLDialect" />
+		<provider type="db2net" used="true"
+			class="com.chinacreator.sqltransition.impl.db2.dialect.DB2SQLDialect" />
+		<provider type="db2app" used="true"
+			class="com.chinacreator.sqltransition.impl.db2.dialect.DB2SQLDialect" />
+	</dialect>
+	<!-- 配置迭代查询实现类 -->
+	<!-- (必须实现接口com.chinacreator.sqltransition.api.interfaces.IRecursiveQuery) -->
+	<recursivequery>
+		<provider type="oracle" used="true"
+			class="com.chinacreator.sqltransition.impl.oracle.recursivequery.RecursiveQuery_oracle" />
+		<provider type="mysql" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.recursivequery.RecursiveQuery_mysql" />
+		<provider type="db2net" used="true"
+			class="com.chinacreator.sqltransition.impl.db2.recursivequery.RecursiveQuery_db2" />
+		<provider type="db2app" used="true"
+			class="com.chinacreator.sqltransition.impl.db2.recursivequery.RecursiveQuery_db2" />
+	</recursivequery>
+	<!-- 配置大字段处理实现类 -->
+	<!-- (必须实现接口com.chinacreator.sqltransition.api.interfaces.ILobUtils) -->
+	<lobutil>
+		<provider type="oracle" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.lobutil.LobUtilsImpl" />
+		<provider type="mysql" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.lobutil.LobUtilsImpl" />
+		<provider type="db2net" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.lobutil.LobUtilsImpl" />
+		<provider type="db2app" used="true"
+			class="com.chinacreator.sqltransition.impl.mysql.lobutil.LobUtilsImpl" />
+	</lobutil>
+	<!--
+		============================================================================================= 
+		timeoutsave：转换sql超时保存到缓存（默认:50ms）
+		used：标识是否使用(false:不使用 true:使用 默认为false)
+		issavedisk：是否将缓存持久化到磁盘（false:不保存 true:保存 默认为false）
+		class：实现类代码路径				
+		============================================================================================= 
+	-->
+	<!-- 配置缓存处理实现类 -->
+	<!-- (必须实现接口com.chinacreator.sqltransition.api.interfaces.ICache) -->
+	<cache>
+		<provider timeoutsave="50" used="true" issavedisk="false"
+			class="com.chinacreator.sqltransition.impl.cache.EhCacheManage" />
+	</cache>
+</config>

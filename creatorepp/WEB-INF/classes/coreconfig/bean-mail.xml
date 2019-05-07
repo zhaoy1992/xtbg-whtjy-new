@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">
+	<description>邮件</description>
+	
+	<!-- 邮件相关配置信息 -->
+	<bean id="mailCacheBean" class="com.chinacreator.xtbg.core.common.mail.cache.MailCacheBean">
+		<!-- true 表示为内部邮件没有邮件服务器 . false 表示有外部邮件服务器-->
+		<property name="innerMail" value="true"></property>
+		<property name="mailAddr" value="@chinacreator.com"></property>
+	</bean>
+	
+	<!-- 邮件dao接口注入 -->
+	<bean id="mailDao" class="com.chinacreator.xtbg.core.common.mail.dao.impl.MailDaoImpl"></bean>
+	
+	<!-- 邮件发送线程 -->
+	<bean id="mailThread" class="com.chinacreator.xtbg.core.common.mail.thread.MailThread" init-method="start">
+		<!-- 是否启动邮件线程（邮件总开关）  -->
+		<property name="mailused" value="false"></property>
+		<!-- 线程执行间隔时间 -->
+		<property name="interval" value="30000"></property>
+		<!-- 短信发送注入实现类 -->
+		<property name="mailSendService" ref="mailSendService"></property>
+	</bean>
+	
+	<!-- 邮件发送实现类 -->
+	<bean name="mailSendService" class="com.chinacreator.xtbg.core.common.mail.services.impl.MailSendServiceImpl"></bean>
+	
+</beans>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding='gb2312'?>
+<properties>
+	<!-- shark webService 地址 -->
+    <property name="shark.service.url" value="http://172.16.17.132:8080/creatorepp/services/WorkflowOperationService"/>
+    <!-- shark服务接口调用控制开关，true调用webService接口，false调用本地接口 -->
+    <property name="shark.webService" value="false"/>
+    <!-- 平台默认的流程事项树的实现 -->
+    <property name="ProcessModuleTreeImplClassName.forApp_module" value="com.chinacreator.workflow.shark.procconfig.ProcessModuleTreeImpl"/>
+    
+</properties>

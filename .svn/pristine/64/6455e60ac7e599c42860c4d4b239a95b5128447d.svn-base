@@ -1,0 +1,5 @@
+<database>	
+	<driver type="oracle" name="oracle.jdbc.driver.OracleDriver" urlpat="jdbc:oracle:thin:@[host]:[1521]:[dbName]"/>
+	<!--<driver type="sqlserver" name="com.microsoft.jdbc.sqlserver.SQLServerDriver" urlpat="jdbc:microsoft:sqlserver://[host]:[1433];DatabaseName=[dbName]"/> -->
+	 <driver type="db2" name="COM.ibm.db2.jdbc.net.DB2Driver" urlpat="jdbc:db2://server:port/dbName"/>
+</database>

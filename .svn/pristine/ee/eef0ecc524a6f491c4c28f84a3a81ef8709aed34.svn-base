@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+
+	<!-- 测试action -->
+	<actionmapping name="myaction">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.MyAction</class>
+		<method>sa</method>
+	</actionmapping>
+	
+	<!-- pdf导出 -->
+	<actionmapping name="showpdf">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperPdfAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- xls导出 -->
+	<actionmapping name="showxls">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperXlsAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- doc导出 -->
+	<actionmapping name="showdoc">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperDocAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- image导出 -->
+	<actionmapping name="showimage">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperImageAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- 打印 -->
+	<actionmapping name="doprint">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperPrinterAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- xml导出 -->
+	<actionmapping name="showxml">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.JasperXmlAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!-- 验证报表名称 -->
+	<actionmapping name="validatereportname">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.ValidateReportNameAction</class>
+	</actionmapping>
+	
+	<!-- 润乾专用 -->
+	<actionmapping name="runqian">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.RunQianAction</class>
+		<doservlet>true</doservlet>
+	</actionmapping>
+	
+	<!--发布管理 -->
+	<actionmapping name="publisher">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.PublisherAction</class>
+	</actionmapping>
+	
+	<!-- 删除报表 -->
+	<actionmapping name="deletereport">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.DeleteReportAction</class>
+	</actionmapping>
+	
+	<!-- 添加报表 -->
+	<actionmapping name="addreport">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.AddReportAction</class>
+	</actionmapping>
+
+	<!-- 添加报表 -->
+	<actionmapping name="updatereport">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.UpdateReportAction</class>
+	</actionmapping>
+	
+	<!-- 查询子资源被谁引用 -->
+	<actionmapping name="when_delete_subresource">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.SubResourceAction</class>
+		<method>whenDelete</method>
+	</actionmapping>
+	
+	<!-- 删除子资源 -->
+	<actionmapping name="delete_subresource">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.SubResourceAction</class>
+		<method>delete</method>
+	</actionmapping>
+	
+	<!-- 增加子资源 -->
+	<actionmapping name="add_subresource">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.SubResourceAction</class>
+		<method>add</method>
+	</actionmapping>
+	
+	<!-- ReportTools -->
+	<actionmapping name="reporttools_addfatherandsonreport">
+		<class>com.chinacreator.epp.reportmanage.struts.actions.ReportToolsAction</class>
+		<method>uploadFatherAndSon</method>
+	</actionmapping>
+	
+</actions>

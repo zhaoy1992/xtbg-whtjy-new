@@ -1,0 +1,12 @@
+animation=1
+caption=test_ScrollArea2D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+showValues=0
+showAlternateVGridColor=1
+decimals=0
+
+dataset.filed=filed^filed^filed
+dataset.seriesName=aa^bb^cc^
+dataset.color=AFD8F8^F6BD0F^8BBA00

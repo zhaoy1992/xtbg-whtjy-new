@@ -1,0 +1,13 @@
+<script language=javascript>
+	document.body.bgcolor = "#ffe4e1";
+</script>
+
+<DIV style="FONT-SIZE: 16px; COLOR: royalblue; FONT-FAMILY: 宋体">请选择分页方式：</DIV>
+<br>
+<DIV style="FONT-SIZE: 13px; COLOR: forestgreen; FONT-FAMILY: 宋体">
+<INPUT onclick="pageStyle=0" type=radio CHECKED name=pageStyle>&nbsp;不分页 
+<BR>
+<INPUT onclick="pageStyle=1" type=radio name=pageStyle>&nbsp;分页 
+<P>
+<INPUT onclick=myOk() type=button value=确定 style="border:none; WIDTH: 45px; COLOR: fuchsia; HEIGHT: 20px; BACKGROUND-COLOR: gold"> 
+</DIV>

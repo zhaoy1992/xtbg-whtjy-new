@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>设置图表</TITLE>
+<script src="../js/fcpub.js"></script>
+<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+<!--
+var bClickOk=false
+function cmdOk_onclick() {
+	var arr=new Array()
+	arr[0]=graphtype.children(graphtype.selectedIndex).text
+	arr[1]=graphother.value
+	window.returnValue=arr
+	bClickOk=true
+	self.close()
+}
+
+function window_onbeforeunload() {
+	if(bClickOk==false) {
+		var arr=new Array()
+		arr[0]=""
+		window.returnValue=arr
+	}
+}
+
+function window_onload() {
+    
+    switch (window.dialogArguments[0]) {
+	   case "折线图" :
+	       graphtype.selectedIndex=1
+	       break;
+	   case "圆饼图" :
+	       graphtype.selectedIndex=2
+	       break;
+	   default :
+	       graphtype.selectedIndex=0
+
+    }
+    if(isSpace(window.dialogArguments[1])==false)
+		graphother.value=window.dialogArguments[1]
+	
+}
+function Trans(){
+	for(var i=0;i<lst.options.length;i++){
+		if(lst.options(i).selected){
+			graphother.value+=lst.options(i).value
+		}
+	}
+	if(graphtitle.value!=""){
+		graphother.value+='<param name=chartTitle value="'+graphtitle.value+'">'
+	}
+
+}
+//-->
+</SCRIPT>
+</HEAD>
+<BODY bgProperties=fixed leftMargin=13 bgColor=silver LANGUAGE=javascript 
+onbeforeunload="return window_onbeforeunload()" onload="return window_onload()">
+
+<table>
+<colgroup><col ><col ></colgroup>
+<tr><td colspan=2>
+<INPUT id=cmdOk type=button value="确  定"  onclick="return cmdOk_onclick()">
+</td></tr>
+<tr height=30></tr>
+<tr><td>图形类型:</td><td><select id=graphtype ><option 
+        selected>直方图</option><option>折线图</option><option>圆饼图</option></select></td></tr>
+<tr><td>标题名称</td><td><input id=graphtitle style="WIDTH: 351px; HEIGHT: 22px" 
+      size=45></td></tr>
+
+<tr><td>多项选择其它属性:<br><input type=button value="传送" onclick="Trans()" ></td><td>
+
+<select id=lst size=8  multiple style="WIDTH: 353px; HEIGHT: 134px">
+  <OPTION value="<param name=3DModeOn value=true>">3D显示</OPTION>
+  <OPTION value="<param name=multiColorOn value=true>">多列时每列的颜色不同</OPTION>
+  <OPTION value="  <param name=barLabelsOn value=true>">直方图时显示标签</OPTION>
+  <OPTION value="<param name=sampleLabelsOn value=true>">折线图时显示标签</OPTION>
+
+  <OPTION value="<param name=barAlignment value=horizontal>">直方图水平显示成条形图</OPTION>
+  <OPTION value="<param name=barLabelAngle value=270>">直方图标签垂直显示</OPTION>
+  <OPTION value="<param name=legendOn value=true>">显示图例</OPTION>
+  <OPTION value="<param name=valueLabelsOn value=true>">数值标记显示在每个柱子的上面</OPTION>
+  <OPTION value="<param name=valueLabelsOn value=true><param name=valueLabelStyle value=floating >">当鼠标移动到哪个柱子上时它的数值标记才显示</OPTION>
+
+  <OPTION value="<param name=valueLinesOn value=true>">显示水平网格线</OPTION>
+  <OPTION value="<param name=defaultGridLinesOn value=true>">显示垂直网格线</OPTION>
+  <OPTION value="<param name=barType value=stacked>">显示堆积直方图</OPTION>
+  <OPTION value="<param name=stackedOn value=true>">显示堆积折线图</OPTION>
+
+  <OPTION value="<param name=stackedOn value=true>">显示堆积折线图</OPTION>
+
+
+  
+
+  <OPTION value="<param name=valueLabelsOn value=true><param name=valueLabelStyle value=inside>">在园饼图内显示标签</OPTION>
+  
+
+  
+  
+ 
+  <OPTION 
+        value=""></OPTION>
+
+</select>
+        
+        </td></tr>
+
+<tr><td>其它属性:</td><td><TEXTAREA id=graphother style="WIDTH: 354px; HEIGHT: 207px" rows=1 cols=16 value=""></TEXTAREA> 
+</td></tr></table>
+
+
+</BODY>
+</HTML>
+

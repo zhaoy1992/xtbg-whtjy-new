@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0029)http://www.wgj.suzhou.gov.cn/ -->
+<HTML><HEAD><TITLE>苏州市文化广电新闻出版综合信息网</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="images/main.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript type=text/JavaScript>
+function form3_onsubmit() {
+	if(form3.key.value=="")
+		{alert("请输入查询关键字!");
+		form3.key.focus();
+		return false;
+		}
+}
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+
+function getFlashNews(sPicUrl,sLinks,sTexts){
+var focus_width=258 //图片框的宽度 
+var focus_height=182 //图片框的高度 
+var text_height=21 //文字的高度 
+var swf_height = focus_height+text_height //flash的高度 
+
+var pics=sPicUrl//图片文件的的地址，以“|”为分界 
+var links=sLinks//文字连接的地址，以“|”分界，注意，这个变量是空的时候，就是没有连接哦 
+var texts=sTexts //连接文字 
+
+document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ focus_width +'" height="'+ swf_height +'">'); 
+document.write('<param name="allowscriptAccess" value="sameDomain"><param name="movie" value="image/pixviewer.swf"><param name="quality" value="high"><param name="bgcolor" value="#F0F0F0">'); 
+document.write('<param name="menu" value="false"><param name=wmode value="opaque">'); 
+document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'">'); 
+document.write('<embed src="image/pixviewer.swf" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+focus_width+'&borderheight='+focus_height+'&textheight='+text_height+'" menu="false" bgcolor="#F0F0F0" quality="high" width="'+ focus_width +'" height="'+ focus_height +'" allowscriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); document.write('</object>'); 
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16705" name=GENERATOR></HEAD>
+<BODY bgColor=#cde2b9 leftMargin=0 topMargin=0 onload=init() ;>
+<SCRIPT language=javascript src="images/menu.js"></SCRIPT>
+
+<SCRIPT language=JavaScript type=text/JavaScript> 
+function init() { 
+    if (GDNetMenuDown.isSupported()) { 
+        GDNetMenuDown.initialize(); 
+    } 
+} 
+</SCRIPT>
+<TABLE cellSpacing=0 cellPadding=0 width=1007 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=1 bgColor=#a6a6a6></TD>
+    <TD width=3 bgColor=#f6f9ec></TD>
+    <TD width=999 bgColor=#f6f9ec>
+      <TABLE height=84 cellSpacing=0 cellPadding=0 width=999 align=center 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD bgColor=#f6f9ec height=10></TD></TR>
+        <TR>
+          <TD bgColor=#4e911f height=3></TD></TR>
+        <TR>
+          <TD class=Link03 align=middle height=71><table width="100%" border="0" cellpadding="0" cellspacing="4" bgcolor="#FFFFFF">
+            
+            <tr>
+              <td><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+                  <tr>
+                    <td align="center">
+						<iframe scrolling="no" src="/sitepublish/site1/dbdh/bqxx/content_11635.html" frameborder="0" width="800" height="65"></iframe>
+					</td>
+                  </tr>
+              </table></td>
+            </tr>
+          </table></TD>
+        </TR></TBODY></TABLE></TD>
+    <TD width=3 bgColor=#f6f9ec></TD>
+    <TD width=1 bgColor=#a6a6a6></TD></TR></TBODY></TABLE><MAP name=Map><AREA 
+  shape=RECT coords=475,10,543,33 
+  href="http://www.wgj.suzhou.gov.cn/Info.asp?ParentID=101"></MAP><MAP 
+  name=Map2><AREA shape=RECT coords=475,6,538,37 
+  href="http://www.wgj.suzhou.gov.cn/Info.asp?ParentID=103"></MAP><MAP 
+  name=Map3><AREA shape=RECT coords=464,9,544,34 
+  href="http://www.wgj.suzhou.gov.cn/Info.asp?ParentID=85"></MAP><MAP 
+  name=Map4><AREA shape=RECT coords=472,6,542,31 
+  href="http://www.wgj.suzhou.gov.cn/Info.asp?ParentID=90"></MAP><MAP 
+  name=Map5><AREA shape=RECT target=_blank coords=1,1,97,29 
+  href="http://www.gov.cn/"><AREA shape=RECT target=_blank coords=101,2,197,27 
+  href="http://www.jiangsu.gov.cn/"><AREA shape=RECT target=_blank 
+  coords=2,39,95,65 href="http://www.suzhou.gov.cn/"><AREA shape=RECT 
+  coords=100,38,195,64 href="http://www.wgj.suzhou.gov.cn/#"><AREA shape=RECT 
+  target=_blank coords=2,73,96,100 href="http://www.sz2500.net/"><AREA 
+  shape=RECT target=_blank coords=101,76,197,102 
+href="http://www.sz.js.cn/"></MAP><MAP name=Map6><AREA shape=RECT 
+  coords=27,36,95,55 href="http://www.wgj.suzhou.gov.cn/#"><AREA shape=RECT 
+  coords=104,36,171,57 href="http://www.wgj.suzhou.gov.cn/#"></MAP><MAP 
+  name=Map7><AREA shape=RECT coords=27,35,96,54 
+  href="http://www.wgj.suzhou.gov.cn/#"><AREA shape=RECT coords=103,35,170,54 
+  href="http://www.wgj.suzhou.gov.cn/#"></MAP>
+</BODY></HTML>

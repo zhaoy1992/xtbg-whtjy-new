@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_open() {
+	
+}
+function uf_ok(){
+	
+}
+function rdoType_onclick() {
+	switch (rdoType.value){
+		case "网格式": {
+			div1.style.display="none" ;
+			divGroup.style.display="none" ;
+			break;	
+		}	
+		case "分组式": {
+			div1.style.display="none" ;
+			divGroup.style.display="" ;
+			break;	
+		}	
+		case "交叉式": {
+			div1.style.display="" ;
+			divGroup.style.display="none" ;
+			break;	
+		}	
+	}	
+}
+function uf_add() {
+	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" contxml="<root><label><id>label1</id><id>label3</id><id>label4</id><id>label5</id><id>alabel3</id><id>alabel4</id></label><radio><id>rdoType</id></radio><textarea><id>textarea1</id><id>textarea2</id><id>txtCol</id><id>txtGroup</id><id>txtGroupValue</id></textarea><div><id>div1</id><id>divGroup</id></div><button><id>button1</id><id>button2</id><id>button3</id><id>button4</id><id>button5</id><id>abutton3</id><id>abutton4</id></button></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:5;radio:1;listbox:0;textarea:3;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:2;DsMain_field:0;a:0;button:5;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>button1</taborder><taborder>button2</taborder><taborder>rdoType</taborder><taborder>txtGroup</taborder><taborder>txtGroupValue</taborder><taborder>abutton3</taborder><taborder>abutton4</taborder><taborder>textarea1</taborder><taborder>textarea2</taborder><taborder>txtCol</taborder><taborder>button3</taborder><taborder>button4</taborder><taborder>button5</taborder></root>" idtype="1" OtherSave="否" isfile="否" posheight="360" poswidth="360" postop posleft entertype="修改" window="有模式窗口" keyfield codeheader="BBB" mkbh caption="新建报表向导" type="PR" dj_sn="eb_wizard1" toolbar="不带工具栏" center="居中"><BUTTON id=button1 style="LEFT: 178px; WIDTH: 75px; POSITION: absolute; TOP: 3px; HEIGHT: 25px" onmovestart=moveStart() dropstyle="否" onclick='bill_onclick("uf_ok()")' controltype="button">确 定</BUTTON> 
+<DIV id=label1 style="FONT-WEIGHT: bold; FONT-SIZE: 14pt; LEFT: 9px; WIDTH: 65px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 5px; HEIGHT: 15px; TEXT-DECORATION: underline" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">选择报表样式：</DIV><BUTTON id=button2 style="LEFT: 261px; WIDTH: 75px; POSITION: absolute; TOP: 3px; HEIGHT: 25px" onmovestart=moveStart() dropstyle="否" onclick='bill_onclick("CloseBill()")' controltype="button">取 消</BUTTON> 
+<FIELDSET id=rdoType contentEditable=false style="LEFT: 3px; WIDTH: 340px; COLOR: #000000; POSITION: absolute; TOP: 24px; HEIGHT: 46px" onmovestart=moveStart() onclick='bill_onclick("rdoType_onclick()")' controltype="radio" NotBg="否" value="交叉式" temptext="网格式&#13;&#10;分组式&#13;&#10;交叉式" tempvalue="网格式&#13;&#10;分组式&#13;&#10;交叉式" legend aspect="横向"><LEGEND></LEGEND><INPUT type=radio CHECKED value=网格式 name=RGrdoType text="网格式"><SPAN onclick=RGrdoType[0].checked=true;rdoType.value=RGrdoType[0].value;RGrdoType[0].focus();>网格式</SPAN>&nbsp;<INPUT type=radio value=分组式 name=RGrdoType text="分组式"><SPAN onclick=RGrdoType[1].checked=true;rdoType.value=RGrdoType[1].value;RGrdoType[1].focus();>分组式</SPAN>&nbsp;<INPUT type=radio value=交叉式 name=RGrdoType text="交叉式"><SPAN onclick=RGrdoType[2].checked=true;rdoType.value=RGrdoType[2].value;RGrdoType[2].focus();>交叉式</SPAN>&nbsp;</FIELDSET> 
+<DIV id=div1 style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; DISPLAY: none; LEFT: 5px; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 338px; BORDER-BOTTOM: black 1px solid; POSITION: absolute; TOP: 73px; HEIGHT: 237px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=label3 style="LEFT: 11px; WIDTH: 65px; POSITION: absolute; TOP: 9px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">行定义:</DIV><TEXTAREA id=textarea1 style="LEFT: 8px; WIDTH: 320px; POSITION: absolute; TOP: 26px; HEIGHT: 51px" onmovestart=moveStart() rows=1 cols=59 controltype="textarea" value="textarea1" induce="否"></TEXTAREA><TEXTAREA id=textarea2 style="LEFT: 7px; WIDTH: 320px; POSITION: absolute; TOP: 179px; HEIGHT: 44px" onmovestart=moveStart() rows=1 cols=59 controltype="textarea" value="textarea1" induce="否"></TEXTAREA> 
+<DIV id=label4 style="LEFT: 10px; WIDTH: 65px; POSITION: absolute; TOP: 159px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">值定义:</DIV><BUTTON id=button3 style="LEFT: 93px; WIDTH: 47px; POSITION: absolute; TOP: 4px; HEIGHT: 22px" onmovestart=moveStart() dropstyle="否" onclick='bill_onclick("uf_add()")' controltype="button">增加</BUTTON><BUTTON id=button4 style="LEFT: 97px; WIDTH: 47px; POSITION: absolute; TOP: 152px; HEIGHT: 22px" onmovestart=moveStart() dropstyle="否" controltype="button">增加</BUTTON> 
+<DIV id=label5 style="LEFT: 11px; WIDTH: 65px; POSITION: absolute; TOP: 80px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">列定义:</DIV><BUTTON id=button5 style="LEFT: 93px; WIDTH: 47px; POSITION: absolute; TOP: 75px; HEIGHT: 22px" onmovestart=moveStart() dropstyle="否" onclick='bill_onclick("uf_add()")' controltype="button">增加</BUTTON><TEXTAREA id=txtCol style="LEFT: 8px; WIDTH: 320px; POSITION: absolute; TOP: 97px; HEIGHT: 53px" onmovestart=moveStart() rows=1 cols=59 controltype="textarea" value="textarea1" induce="否"></TEXTAREA></DIV>
+<DIV id=divGroup style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; DISPLAY: none; LEFT: 6px; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 338px; BORDER-BOTTOM: black 1px solid; POSITION: absolute; TOP: 74px; HEIGHT: 237px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=alabel3 style="LEFT: 11px; WIDTH: 65px; POSITION: absolute; TOP: 9px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">组定义:</DIV><TEXTAREA id=txtGroup style="LEFT: 7px; WIDTH: 320px; POSITION: absolute; TOP: 30px; HEIGHT: 64px" onmovestart=moveStart() rows=1 cols=59 controltype="textarea" value="textarea1" induce="否"></TEXTAREA><TEXTAREA id=txtGroupValue style="LEFT: 7px; WIDTH: 320px; POSITION: absolute; TOP: 116px; HEIGHT: 107px" onmovestart=moveStart() rows=1 cols=59 controltype="textarea" value="textarea1" induce="否"></TEXTAREA> 
+<DIV id=alabel4 style="LEFT: 11px; WIDTH: 65px; POSITION: absolute; TOP: 100px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">值定义:</DIV><BUTTON id=abutton3 style="LEFT: 93px; WIDTH: 47px; POSITION: absolute; TOP: 4px; HEIGHT: 22px" onmovestart=moveStart() dropstyle="否" onclick='bill_onclick("uf_add()")' controltype="button">增加</BUTTON><BUTTON id=abutton4 style="LEFT: 95px; WIDTH: 47px; POSITION: absolute; TOP: 93px; HEIGHT: 22px" onmovestart=moveStart() dropstyle="否" controltype="button">增加</BUTTON></DIV></DIV></body></html>

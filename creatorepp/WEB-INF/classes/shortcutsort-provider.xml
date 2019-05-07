@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding='gb2312'?>
+<manager-config>
+	<!-- 
+		应用个性化快捷菜单排序实现类注册配置
+		id：前缀为"shortcutSortList_app_",后面{id}填入应用的id号，例如应用ID为123的应用配置为：id="shortcutSortList_app_123"；
+		class：个性化快捷菜单排序实现类所在路径
+	 -->
+	<!-- 
+		<manager id="shortcutSortList_app_{id}" singlable="true">
+		<provider type="DB" default="true"
+		class="com.chinacreator.epp.shortcutmenu.menu.ShortcutSortListImpl" />
+		</manager>
+	-->
+</manager-config>

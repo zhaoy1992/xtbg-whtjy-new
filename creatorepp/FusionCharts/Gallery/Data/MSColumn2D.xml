@@ -1,0 +1,59 @@
+﻿<!--<graph xaxisname='Continent' yaxisname='Export' hovercapbg='DEDEBE' hovercapborder='889E6D' rotateNames='0' yAxisMaxValue='100' numdivlines='9' divLineColor='CCCCCC' divLineAlpha='80' decimalPrecision='0' showAlternateHGridColor='1' AlternateHGridAlpha='30' AlternateHGridColor='CCCCCC' caption='Global Export' subcaption='In Millions Tonnes per annum pr Hectare' >-->
+<graph  hovercapbg='DEDEBE' hovercapborder='889E6D' rotateNames='0' yAxisMaxValue='120' numdivlines='9' divLineColor='CCCCCC' divLineAlpha='80' decimalPrecision='0' showAlternateHGridColor='1' AlternateHGridAlpha='30' AlternateHGridColor='CCCCCC'  >
+   <categories font='Arial' fontSize='11' fontColor='000000'>
+      <category name='郴州' hoverText='North America'/>
+      <category name='北湖' />
+      <category name='贵阳' />
+      <category name='永兴' />
+      <category name='嘉禾' />
+      <category name='临武' />
+      <category name='市辖' />
+      <category name='汝城' />
+      <category name='桂东' />
+      <category name='安仁' />
+      <category name='资兴' />
+      <category name='苏仙' />
+   </categories>
+   <dataset seriesname='已退回' color='FDC12E'>
+      <set value='30' link='./MSColumn3D.html' />
+      <set value='26' />
+      <set value='29' />
+      <set value='31' />
+      <set value='34' />
+      <set value='30' />
+      <set value='26' />
+      <set value='29' />
+      <set value='31' />
+      <set value='34' />
+      <set value='31' />
+      <set value='34' />
+   </dataset>
+    <dataset seriesname='已受理' color='56B9F9'>
+      <set value='67' />
+      <set value='98' />
+      <set value='79' />
+      <set value='73' />
+      <set value='80' />
+      <set value='67' />
+      <set value='98' />
+      <set value='79' />
+      <set value='73' />
+      <set value='80' />
+      <set value='73' />
+      <set value='80' />
+   </dataset>
+    <dataset seriesname='已办结' color='C9198D'>
+      <set value='27' />
+      <set value='25' />
+      <set value='28' />
+      <set value='26' />
+      <set value='10' />
+      <set value='27' />
+      <set value='25' />
+      <set value='28' />
+      <set value='26' />
+      <set value='10' />
+      <set value='26' />
+      <set value='10' />
+   </dataset>
+</graph>

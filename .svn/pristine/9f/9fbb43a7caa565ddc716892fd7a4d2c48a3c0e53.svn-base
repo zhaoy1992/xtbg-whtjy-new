@@ -1,0 +1,8 @@
+ajax参数加密，解决sql注入问题
+
+Modified: eform\creatorepp\eformsys\fceform\js\fcpub.js  
+Modified: eform\src\com\chinacreator\eform\servlet\DbTools.java  
+Modified: eform\src\com\chinacreator\eform\servlet\EformSessionManager.java  
+Modified: eform\src\com\chinacreator\eform\servlet\PathFile.java  
+Modified: eform\src\com\chinacreator\eform\servlet\WebBill.java  
+Modified: eform\src\com\chinacreator\eform\servlet\WebDesign.java  

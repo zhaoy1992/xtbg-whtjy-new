@@ -1,0 +1,29 @@
+@charset "utf-8";
+body { padding:0; margin:0; font-size:12px; font-family:Arial, Helvetica, sans-serif,宋体
+}
+a,img{ border:none}
+.datekuang{ width:1000px; height:auto; border-left:1px solid #afc6cc;border-right:1px solid #afc6cc;border-top:1px solid #afc6cc}
+.dage_k_top{ height:27px; background:url(../images/d_kuang_top.gif)}
+.dage_k_top_1{ height:27px; border-bottom:1px solid #afc6cc}
+.dage_left{ width:470px; float:left; padding-left:15px; color:#1d5e95; line-height:27px; font-weight:bold}
+.dage_right{ width:200px; float:right; padding-right:10px; }
+.riqi_text{ width:60px; float:left; color:#1d5e95; text-align:right;line-height:27px;}
+.riqi_bg_k{ width:134px; height:20px;  float:right; margin-top:3px; position:relative}
+.riqi_xiangshik{  position:absolute; left:1px; top:0px; }
+.rq_k{ width:120px; height:14px; line-height:14px; text-align:center; color:#6f757a; padding:0; margin:0; border:none;background:url(../images/rili.gif) right 1px no-repeat;}
+.qiqi_pic{ width:16px; position:absolute; top:3px; right:3px;}
+.huiyimingcheng{ width:1000px; border-bottom:1px solid #afc6cc; height:40px;}
+.huiyi_mc_biaoti{ width:94px; float:left; background:url(../images/left_bg.gif); height:40px; text-align:center; line-height:40px;} 
+.shijanduan{ width:900px; float:right; margin:7px 3px; background:#dedede; height:25px;}
+.shijiantiao{ width:49px; padding-left:10px; border-left:1px solid #f7f7f7; float:left; height:25px; line-height:25px; color:black}
+.loushi{ height:50px;border-bottom:1px solid #afc6cc;}
+.loushi_mc_biaoti{width:94px; float:left; background:url(../images/left_bg.gif); height:50px; text-align:center; line-height:50px;}
+.loushi_right{ width:900px; padding:3px; float:left; height:40px; }
+
+.tongzhi_biaoti{ font-size:35px; font-weight:bold; color:#ff2525;}
+.red_borde{ border-bottom:3px solid #ff2525}
+.red_xian02{border-top:3px solid #ff2525}
+.tongzhi_nr{ padding:25px 20px 60px;}
+.wenbiaoti{ text-align:center; font-size:20px; font-weight:bold; height:60px;}
+
+.time_block{ padding:5px 10px 0; text-align:center;  height:39px;float:left}

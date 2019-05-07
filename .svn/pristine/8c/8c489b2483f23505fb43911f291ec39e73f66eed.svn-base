@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">				
+	<!-- 文件管理 -->
+	<bean id="fileDocDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileDocDaoImpl"></bean>
+	<!-- 档案管理，程序界面 -->
+	<bean id="fileProgramPageDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileProgramPageDaoImpl"></bean>
+	<!-- 档案管理，全宗号管理 -->
+	<bean id="fileFondsnoDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileFondsnoDaoImpl"></bean>
+	<!-- 档案管理，存放位置管理 -->
+	<bean id="fileStorageLocationDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileStorageLocationDaoImpl"></bean>
+	<!--档案管理-->
+	<bean id="fileFilesDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileFilesDaoImpl"></bean>
+    
+    <!-- 档案管理.档案分类 begin -->
+	<bean id="FileTypeDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileTypeDaoImpl"></bean>
+	<bean id="FilePurviewDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FilePurviewDaoImpl"></bean>
+	<!-- 档案管理.档案分类 end -->
+	
+	<!-- 档案管理.档案查询 begin -->
+	<bean id="FileFilesQueryDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileFilesQueryDaoImpl"></bean>
+	<!-- 档案管理.档案查询 end -->
+	
+	<!-- 档案管理.档案收藏 begin -->
+	<bean id="FileFavoritesDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileFavoritesDaoImpl"></bean>
+	<!-- 档案管理.档案收藏 end -->
+	<!-- 档案管理.档案销毁 begin -->
+	<bean id="fileDestroyDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileDestroyDaoImpl"></bean>
+	<!-- 档案管理.档案销毁 end -->
+	
+	<!-- 档案管理.档案借阅明细 begin -->
+	<bean id="FileLendingDetailDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileLendingDetailDaoImpl"></bean>
+	<!-- 档案管理.档案借阅明细 end -->
+	<!-- 档案管理.档案移交 begin -->
+	<bean id="FileFilesDevolveDaoImpl" class="com.chinacreator.xtbg.core.file.dao.imploracle.FileFilesDevolveDaoImpl"></bean>
+	<!-- 档案管理.档案移交 end -->
+	
+	<!--档案管理首页数据配置，用于在spring加载bean-oa.xml时往缓存中写数据-->
+	<bean id="FileCache" class="com.chinacreator.xtbg.core.file.cache.FileCache">       
+    </bean>
+	
+</beans>

@@ -1,0 +1,11 @@
+animation=1
+caption=test_Line2D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+showValues=0
+decimals=0
+
+trendLines.startValue=70000
+trendLines.color=009933
+trendLines.displayValue=Target

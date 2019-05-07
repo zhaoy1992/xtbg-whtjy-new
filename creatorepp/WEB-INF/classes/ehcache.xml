@@ -1,0 +1,41 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<!--<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=manual,         
+        rmiUrls=//172.16.25.151:40000/processcache|//172.16.25.151:40000/resourcecache" />
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="hostName=172.16.25.151,port=40000,socketTimeoutMillis=120000" />
+		-->
+	<diskStore path="java.io.tmpdir" />
+	
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            />
+
+	<!-- shark cache config begin -->
+	
+	<cache name="processcache" maxElementsInMemory="10000" eternal="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" memoryStoreEvictionPolicy="LRU">
+		<!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />-->
+	</cache>
+	<cache name="resourcecache" maxElementsInMemory="10000" eternal="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" memoryStoreEvictionPolicy="LRU">
+		<!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />-->
+	</cache>
+	<!-- shark cache config end -->
+
+</ehcache>

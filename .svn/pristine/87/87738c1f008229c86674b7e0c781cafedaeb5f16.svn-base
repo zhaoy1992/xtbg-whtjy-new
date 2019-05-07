@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var obj
+function uf_open(){
+	obj = pubDataSet[1]; //当前单元格
+	var s1 = obj.innerText;
+	if(IsSpace(s1) == false){
+		var ipos1 = s1.indexOf(",list(");
+		var ipos2 = s1.indexOf("),list(");
+		var ipos3 = s1.lastIndexOf("),");
+		if(ipos1>0 && ipos2>ipos1 && ipos3>ipos2){
+			cboName.value = s1.substring(11,ipos1);
+			var s2 = s1.substring(ipos1+6,ipos2);
+			var s3 = s1.substring(ipos2+7,ipos3);
+			if(s2.length >0 ){
+				txt1.value = RepStr(s2.substring(1,s2.length-1),"\",\"","\r\n");
+			}
+			txt2.value = RepStr(s3,",","\r\n");
+			cboType.value = s1.substring(ipos3+2,s1.length-1);
+		}
+	}
+	uf_initcbo();
+	e_PropWinOnload();
+
+}
+
+function uf_ok() {
+	//=subreport(report1,list("arg1"),list(A1),0)
+	if(IsSpace(cboName.value)){
+		alert("子报表名称不能为空");
+		return;	
+	}
+	var arr1 = txt1.value.split("\r\n");
+	var arr2 = txt2.value.split("\r\n");
+	if(arr1.length != arr2.length ){
+		alert("参数与对应表达式的行数应一致!");
+		return;	
+	}
+	var s1="",s2="";
+	if(arr1.length == 1 && IsSpace(Trim(arr1[0])) && IsSpace(Trim(arr2[0])) ){
+	}else{
+
+		for(var i=0;i<arr1.length;i++){
+			if(IsSpace(Trim(arr1[i]))){
+				alert("有的参数为空!")
+				return;
+			}
+			if(IsSpace(Trim(arr2[i]))){
+				alert("有的对应表达式为空!")
+				return;
+			}
+			s1 += '"'+arr1[i]+'"';
+			s2 += arr2[i] ; 
+			if(i< arr1.length-1){
+				s1 += ",";
+				s2 += ",";
+			} 	
+		}
+	}
+	var sRet = '=subreport('+cboName.value+",list("+s1+"),list("+s2+"),"+cboType.value+")";
+	
+	obj.innerText = sRet ;
+	//alert(obj.innerText);
+	obj.e_data_type="5"; //设置当前单元格为子报表
+	obj.style.backgroundImage = "url(../images/eb_design_cell_subrpt.gif)" ;
+	window.returnValue = sRet ;
+	CloseBill();
+}
+function uf_openwin() {
+	var sRet = DjOpen("eb_subrpt",pubDataSet,"展现");
+	if(IsSpace(sRet) == false){
+		uf_initcbo();
+	}
+}
+function uf_initcbo() {
+	var oT = pubDataSet[0];
+	var sxml = oT.e_sub_reportbak;
+	if(IsSpace(sxml))return;
+	var oXml = SetDom(unescape(sxml));
+	var l = oXml.documentElement.childNodes.length -1;
+	var sOption = "";
+	for(var i=0;i<l;i++){
+		var tmp = oXml.documentElement.childNodes(i).childNodes(0).text ;
+		sOption +="<option value=\""+tmp+"\">"+tmp+"</option>";		
+	}
+	cboName.options.length = 0;
+	cboName.outerHTML = SelectAddOption(cboName,sOption);
+	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" BLONopen="uf_open()" center="居中" contxml="<root><label><id>label1</id><id>label2</id><id>label3</id><id>label4</id></label><textarea><id>txt1</id><id>txt2</id></textarea><combobox><id>cboName</id><id>cboType</id></combobox><shape><id>shape1</id></shape><button><id>button1</id><id>cmdOk</id><id>cmdClose</id></button></root>" billtaborder="<root><taborder>txt1</taborder><taborder>txt2</taborder><taborder>cboName</taborder><taborder>cboType</taborder><taborder>button1</taborder><taborder>cmdOk</taborder><taborder>cmdClose</taborder></root>" dj_sn="eb_subrptset" type="PR" caption="设置子报表" mkbh codeheader="BBB" entertype="修改" poswidth="330" posheight="240" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:4;radio:0;listbox:0;textarea:2;combobox:2;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:1;tab:0;div:0;DsMain_field:0;a:0;button:1;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" keyfield window="有模式窗口" posleft postop isfile="否" idtype="1" toolbar="不带工具栏" OtherSave="否"><DIV id=label1 style="LEFT: 7px; WIDTH: 65px; POSITION: absolute; TOP: 6px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">子报表名称:</DIV><SELECT id=cboName style="LEFT: 84px; WIDTH: 125px; POSITION: absolute; TOP: 1px; HEIGHT: 25px" onmovestart=moveStart() controltype="combobox" check="1" tempvalue temptext sql sqltrans></SELECT><BUTTON id=button1 style="LEFT: 212px; WIDTH: 84px; POSITION: absolute; TOP: 1px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_openwin()")'>定义子报表</BUTTON> 
+<DIV id=label2 style="LEFT: 9px; WIDTH: 65px; POSITION: absolute; TOP: 27px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label2" NotBg="否">引入方式:</DIV><SELECT id=cboType style="LEFT: 83px; WIDTH: 126px; POSITION: absolute; TOP: 25px; HEIGHT: 25px" onmovestart=moveStart() controltype="combobox" check="1" tempvalue="1&#13;&#10;0" temptext="主子表格线对齐&#13;&#10;主子表格线不对齐" sql sqltrans><OPTION value=1 selected>主子表格线对齐</OPTION><OPTION value=0>主子表格线不对齐</OPTION></SELECT> 
+<DIV id=label3 style="LEFT: 12px; WIDTH: 65px; POSITION: absolute; TOP: 53px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label3" NotBg="否">参数:</DIV><TEXTAREA id=txt1 style="LEFT: 5px; WIDTH: 117px; POSITION: absolute; TOP: 71px; HEIGHT: 93px" onmovestart=moveStart() controltype="textarea" value="textarea1" induce="否"></TEXTAREA> 
+<DIV id=label4 style="LEFT: 185px; WIDTH: 65px; POSITION: absolute; TOP: 53px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label4" NotBg="否">对应表达式:</DIV><TEXTAREA id=txt2 style="LEFT: 185px; WIDTH: 117px; POSITION: absolute; TOP: 70px; HEIGHT: 93px" onmovestart=moveStart() rows=1 cols=23 controltype="textarea" value="textarea2" induce="否"></TEXTAREA><?xml:namespace prefix = v /><v:line id=shape1 onresize="" style="DISPLAY: block; LEFT: 136px; WIDTH: 36px; POSITION: absolute; TOP: 115px; HEIGHT: 16px" controltype="shape" id1="7" cover="9" from = "0,0" to = "27pt,0" fillcolor = "white" strokecolor = "black" strokeweight = "3pt"><v:stroke endarrow = "classic"></v:stroke></v:line><BUTTON id=cmdOk style="LEFT: 167px; WIDTH: 55px; POSITION: absolute; TOP: 173px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'></BUTTON><BUTTON id=cmdClose style="LEFT: 228px; WIDTH: 55px; POSITION: absolute; TOP: 173px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'></BUTTON></DIV></body></html>

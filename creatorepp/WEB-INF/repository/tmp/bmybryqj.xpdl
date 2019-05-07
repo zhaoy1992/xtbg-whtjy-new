@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="bmybryqj" Name="bmybryqj" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>Together</Vendor>
+        <Created>2014-07-27 23:22:39</Created>
+    </PackageHeader>
+    <Script Type="text/javascript"/>
+    <WorkflowProcesses>
+        <WorkflowProcess Id="bmybryqj_wp1" Name="bmybryqj_wp1">
+            <ProcessHeader>
+                <Created>2014-07-27 23:22:46</Created>
+            </ProcessHeader>
+            <FormalParameters>
+                <FormalParameter Id="MODULE_ID" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，事项ID</Description>
+                </FormalParameter>
+                <FormalParameter Id="DYNAMICPERFORMER" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，动态执行人</Description>
+                </FormalParameter>
+                <FormalParameter Id="NEXT_ACT" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，下一步活动</Description>
+                </FormalParameter>
+                <FormalParameter Id="ANDSPLITUSERS" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，与分支执行人</Description>
+                </FormalParameter>
+            </FormalParameters>
+            <Participants>
+                <Participant Id="bmybryqj_wp1_par1">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="bmybryqj_wp1_par2">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="bmybryqj_wp1_par3">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="bmybryqj_wp1_par4">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="bmybryqj_wp1_act1" Name="起草">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par1</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra1"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra6"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par1"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="192,41"/>
+                        <ExtendedAttribute Name="XOffset" Value="192"/>
+                        <ExtendedAttribute Name="YOffset" Value="41"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act2" Name="人力资源部审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra16"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra2"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="196,27"/>
+                        <ExtendedAttribute Name="XOffset" Value="196"/>
+                        <ExtendedAttribute Name="YOffset" Value="27"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act3" Name="人力资源部复审">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra18"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra3"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="197,125"/>
+                        <ExtendedAttribute Name="XOffset" Value="197"/>
+                        <ExtendedAttribute Name="YOffset" Value="125"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act4" Name="分管领导审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par3</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra5"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra20"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="200,54"/>
+                        <ExtendedAttribute Name="XOffset" Value="200"/>
+                        <ExtendedAttribute Name="YOffset" Value="54"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act5" Name="部门负责人审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra10"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra4"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra19"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="197,220"/>
+                        <ExtendedAttribute Name="XOffset" Value="197"/>
+                        <ExtendedAttribute Name="YOffset" Value="220"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act6" Name="部门负责人审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra11"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra7"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra17"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="359,123"/>
+                        <ExtendedAttribute Name="XOffset" Value="359"/>
+                        <ExtendedAttribute Name="YOffset" Value="123"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act7" Name="分管领导审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par3</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra8"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra21"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra23"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="368,34"/>
+                        <ExtendedAttribute Name="XOffset" Value="368"/>
+                        <ExtendedAttribute Name="YOffset" Value="34"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act8" Name="院长审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par3</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="bmybryqj_wp1_tra9"/>
+                                    <TransitionRef Id="bmybryqj_wp1_tra22"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="369,118"/>
+                        <ExtendedAttribute Name="XOffset" Value="369"/>
+                        <ExtendedAttribute Name="YOffset" Value="118"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act9" Name="销假申请">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par4</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par4"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="371,40"/>
+                        <ExtendedAttribute Name="XOffset" Value="371"/>
+                        <ExtendedAttribute Name="YOffset" Value="40"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act10" Name="人资登记">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par4</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par4"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="373,136"/>
+                        <ExtendedAttribute Name="XOffset" Value="373"/>
+                        <ExtendedAttribute Name="YOffset" Value="136"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act11" Name="销假申请">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par4</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par4"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="543,40"/>
+                        <ExtendedAttribute Name="XOffset" Value="543"/>
+                        <ExtendedAttribute Name="YOffset" Value="40"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act12" Name="部门登记">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>bmybryqj_wp1_par4</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par4"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="545,137"/>
+                        <ExtendedAttribute Name="XOffset" Value="545"/>
+                        <ExtendedAttribute Name="YOffset" Value="137"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="bmybryqj_wp1_act13" Name="自动办结">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="bmybryqj_wp1_par4"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="450,230"/>
+                        <ExtendedAttribute Name="XOffset" Value="450"/>
+                        <ExtendedAttribute Name="YOffset" Value="230"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="bmybryqj_wp1_act1" Id="bmybryqj_wp1_tra1" To="bmybryqj_wp1_act2">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act2"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act2" Id="bmybryqj_wp1_tra2" To="bmybryqj_wp1_act3">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act3"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act3" Id="bmybryqj_wp1_tra3" To="bmybryqj_wp1_act5">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act5"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act5" Id="bmybryqj_wp1_tra4" To="bmybryqj_wp1_act4">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act4"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act4" Id="bmybryqj_wp1_tra5" To="bmybryqj_wp1_act9">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act9"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act1" Id="bmybryqj_wp1_tra6" To="bmybryqj_wp1_act6">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act6"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act6" Id="bmybryqj_wp1_tra7" To="bmybryqj_wp1_act7">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act7"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act7" Id="bmybryqj_wp1_tra8" To="bmybryqj_wp1_act8">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act8"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act8" Id="bmybryqj_wp1_tra9" To="bmybryqj_wp1_act9">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act9"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act5" Id="bmybryqj_wp1_tra10" To="bmybryqj_wp1_act11">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act11"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="559,396"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act6" Id="bmybryqj_wp1_tra11" To="bmybryqj_wp1_act11">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act11"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="597,295"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act9" Id="bmybryqj_wp1_tra12" To="bmybryqj_wp1_act10">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act11" Id="bmybryqj_wp1_tra13" To="bmybryqj_wp1_act12">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act10" Id="bmybryqj_wp1_tra14" To="bmybryqj_wp1_act13">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act12" Id="bmybryqj_wp1_tra15" To="bmybryqj_wp1_act13">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act2" Id="bmybryqj_wp1_tra16" To="bmybryqj_wp1_act1">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act1"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="208,135"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act6" Id="bmybryqj_wp1_tra17" To="bmybryqj_wp1_act1">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act1"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="333,158"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act3" Id="bmybryqj_wp1_tra18" To="bmybryqj_wp1_act2">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act2"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="213,252"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act5" Id="bmybryqj_wp1_tra19" To="bmybryqj_wp1_act3">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act3"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="213,346"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act4" Id="bmybryqj_wp1_tra20" To="bmybryqj_wp1_act5">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act5"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="223,457"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act7" Id="bmybryqj_wp1_tra21" To="bmybryqj_wp1_act6">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act6"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="379,400"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act8" Id="bmybryqj_wp1_tra22" To="bmybryqj_wp1_act7">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act7"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="392,537"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="bmybryqj_wp1_act7" Id="bmybryqj_wp1_tra23" To="bmybryqj_wp1_act9">
+                    <Condition Type="CONDITION">NEXT_ACT=="bmybryqj_wp1_act9"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="491,495-492,668"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=bmybryqj_wp1_par4,CONNECTING_ACTIVITY_ID=bmybryqj_wp1_act13,X_OFFSET=667,Y_OFFSET=238,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=bmybryqj_wp1_par1,CONNECTING_ACTIVITY_ID=bmybryqj_wp1_act1,X_OFFSET=99,Y_OFFSET=59,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="bmybryqj_wp1_par1;bmybryqj_wp1_par2;bmybryqj_wp1_par3;bmybryqj_wp1_par4"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="2.0-12--"/>
+        <ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </ExtendedAttributes>
+</Package>

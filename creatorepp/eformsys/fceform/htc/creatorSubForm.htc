@@ -1,0 +1,56 @@
+<ATTACH EVENT="ondocumentready" HANDLER="fnInit" />
+<PUBLIC:PROPERTY ID="CaptionID" NAME="Caption" PUT="fnPutCaption" GET="fnGetCaption"  />
+<PUBLIC:METHOD NAME="setSrc" />
+<PUBLIC:METHOD NAME="getSrc" />
+<PUBLIC:METHOD NAME="getOtherCaption" />
+<SCRIPT LANGUAGE=javascript >
+	var div1;
+	function fnInit()
+	{
+		element.innerHTML="<iframe></iframe>";
+		div1=element.children[0];
+		div1.id=element.id;
+		div1.style.cssText=element.style.cssText;
+		div1.frameBorder = element.frameBorder;
+		div1.controltype=element.controltype;
+		div1.autoSetSize = element.autoSetSize;
+		div1.autoload=element.autoload;
+		div1.url=element.url;
+		div1.id_load=element.id_load;
+		div1.src="";
+		if(element.autoSetSize =="yes")
+		{
+		   div1.style.height=div1.document.body.scrollHeight+20+'px';
+		   //div1.style.width=div1.document.body.scrollWidth+20+'px';
+		}
+	}
+
+	function setSrc(url)
+	{
+	   div1.src=url;
+	}
+	function getSrc()
+	{
+		//document.parentWindow.frames['creatorSubForm1'].fnGetCaption();
+		return div1.src;
+	}
+	
+	var mCaption="initCaption";
+    function fnGetCaption(){return mCaption;}
+    function fnPutCaption(vValue)
+    {
+        mCaption=vValue;
+        CaptionID.fireChange();
+    }
+    
+    function getCaption(){
+       return mCaption;
+    }
+    
+    function getOtherCaption(iframeName){
+        //return document.parentWindow.frames[iframeName].fnGetCaption();
+        //return document.parentWindow.document.getElementById(iframeName).fnGetCaption();
+        return document.parentWindow.document.getElementById(iframeName).getCaption();
+    }
+
+</SCRIPT>

@@ -1,0 +1,36 @@
+ !^_-!djid = ?;COLUMN_NAME!=?;?=?;a.dicttype_name=?;t.oid=?;level=?;b.ec_id=?;v1.constraint_type=?;djsn=?;a.dicttype_name= ?;t1.dbname=?;t1.fdname!=?;p.id=processid;id in(select max(to_number(id)) from td_fw_mind group by fw_creator,fw_action,cc_form_instanceid);t1.fdname=?;t.djid = ?;b.dicttype_id = a.dicttype_id;ctrl_id = ?;t2.tbname=?;table_name=?;substr(t.table_name,?,?) =?;t.recordid=?;dbname=?;oid = ?;v2.constraint_name=v1.constraint_name;oid=?;prior o.org_id=o.parent_id;t1.tbid=t2.tbid;o.parent_id=?;cc_form_instanceid=?;a.dicttype_name = ?;t.djid=?;djid=?;b.dicttype_id=a.dicttype_id;v1.table_name=?;djid =?;cc_form_instanceid =?
+test4!^_-!t.djid=?
+test1!^_-!t.djid=?;t.recordid=?;t.djid = ?;oid = ?;aa=?;bb=?;?=?
+test2!^_-!t.djid=?;t.recordid=?;t.djid = ?;oid = ?
+test3!^_-!t.djid=?
+test5!^_-!t.djid=?;t.djid = ?;oid = ?
+test442!^_-!t.djid=?
+test110!^_-!t.djid=?
+test9!^_-!t.djid=?
+test11!^_-!t.djid=?;t.djid = ?;oid = ?;bb=?;?=?
+test10!^_-!t.djid=?;t.djid = ?;oid = ?;aa=?;bb=?;?=?
+test12!^_-!t.djid=?;t.djid = ?;oid = ?;?=?
+test13!^_-!t.djid=?;t.djid = ?;oid = ?;?=?
+zhudiao!^_-!t.djid=?
+test15!^_-!t.djid=?;t.djid = ?;oid = ?;aa=?;bb=?;?=?
+test20!^_-!t.djid=?
+GETDB!^_-!t.djid=?
+11111111111!^_-!t.djid=?;t.recordid=?;t.djid = ?;oid = ?
+test17!^_-!t.djid=?
+liucheng1!^_-!t.djid=?;a.cc_form_instanceid=?;t.djid = ?;oid = ?;applycorp_id=?;z.ec_id = ?;b.ec_id=?;?=?;attach_insid=?
+test7!^_-!t.djid=?
+test31!^_-!t.djid=?;t.recordid=?;t.djid = ?;oid = ?
+test32!^_-!t.djid=?;t.djid = ?;oid = ?;aa=?;?=?
+88!^_-!t.djid=?
+fawen123!^_-!cc_form_instanceid=?;t.djid=?;t.djid = ?;oid = ?
+xiangmushenban!^_-!t.djid=?;t.oid=?;?=?
+company_setItem!^_-!t.djid=?;m.oid=?;t.entrust_oid= e.entrust_id;m.task_oid=t.oid;c.oid=?
+test6!^_-!t.djid=?;t.djid = ?;oid = ?;?=?
+test16!^_-!t.djid=?;t.djid = ?;oid = ?;aa=?;bb=?;?=?
+test34!^_-!t.djid=?;t.djid = ?;oid = ?;aa=?;?=?
+testOpenTree!^_-!t.djid=?
+test777!^_-!t.djid=?
+test111!^_-!ud.org_id=ujb.org_id;t.djid=?;ud.change_type=?;ujb.org_id=tso.org_id;ujb.user_id not in(select user_id from td_sm_userchangeorg_data ud where ud.org_id=ujb.org_id and ud.change_type=? and ud.cache_type=?);ud.cache_type=?;t.djid = ?;oid = ?;ujb.user_id=?
+testPart!^_-!t.djid=?;t.djid = ?;oid = ?
+testDuring!^_-!t.djid=?;t.djid = ?;oid = ?
+SXPZTest!^_-!t.djid=?

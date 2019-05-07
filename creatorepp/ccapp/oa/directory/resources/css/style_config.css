@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+html,body {margin:0px;height:100%;}
+img {border:0}
+a{ text-decoration: none; color:#3a3a3a;}
+a:hover{text-decoration:none; color:#000;}
+body{font-family:"宋体";font-size:12px;line-height: 20px; }
+select,input{font-size: 12px;font-family: "宋体"; padding:0; margin:0;}
+ul,li,dl,dt,dd,h1,h2,h3,h4,h5,p,form,em,span{ margin:0; padding:0; list-style:none}
+table{ border:0; padding:0; margin:0;}
+em{ font-style:normal}
+.box_meun_select {background:#F6E18E;width: 100%;height: 20px;cursor:pointer;margin-bottom: 1px;}
+.box_meun {background:none;width: 100%;height: 20px;cursor:pointer;margin-bottom: 1px;}
+.mover_box {
+	float: left;
+	background: url(../images/mb_bg_dd.gif) repeat-y #FFF;
+	width: 280px;
+	padding: 10px;
+	height: 400px;
+	overflow: hidden;
+}
+.mover_box_class {
+	float: left;
+	width: 270px;
+	height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.mobile { width:600px; margin:0 auto; overflow:hidden; margin-top: 10px;}
+.mb_box { float:left; width:300px; overflow:hidden; background:url(../images/mb_bg_bot.jpg) left bottom no-repeat; padding-bottom:7px; height:459px;}
+.mover_herder { float:left; width:280px; height:39px; overflow:hidden; line-height:39px; font-size:14px; font-weight:bold; color:#fff; padding-left:20px; background:url(../images/mb_bg_top.jpg) no-repeat;}
+
+.mb_cet { float:left; width:165px; overflow:hidden; text-align:center; margin-top:250px;}
+.mb_push { float:left; width:135px; overflow:hidden; height:345px; margin-top:121px;}
+.mb_push li { float:left; width:135px; height:49px; margin-top:20px;}
+.mb_push li input { float:left; width:134px; height:49px; border:none; line-height:49px; color:#626262; font-size:16px;font-family:"微软雅黑"; font-weight:bold; padding-left:60px; text-align:left;cursor:pointer;}
+.mb_input01 { background:url(../images/mb_but_01.jpg) no-repeat;}
+.mb_input01_hover { background:url(../images/mb_but_0_hover.jpg) no-repeat;}
+.mb_input02 { background:url(../images/mb_but_02.jpg) no-repeat;}
+.mb_input02_hover { background:url(../images/mb_but_2_hover.jpg) no-repeat;}
+.mb_input03 { background:url(../images/mb_but_03.jpg) no-repeat;}
+.mb_input03_hover { background:url(../images/mb_but_3_hover.jpg) no-repeat;}
+.mb_input04 { background:url(../images/mb_but_04.jpg) no-repeat;}
+.mb_input04_hover { background:url(../images/mb_but_4_hover.jpg) no-repeat;}
+.mb_input05 { background:url(../images/mb_but_05.jpg) no-repeat;}
+.mb_input05_hover { background:url(../images/mb_but_5_hover.jpg) no-repeat;}

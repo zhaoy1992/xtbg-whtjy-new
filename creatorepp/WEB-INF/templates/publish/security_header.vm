@@ -1,0 +1,5 @@
+<%@page import="com.chinacreator.security.AccessControl"%>
+<%
+	AccessControl accesscontroler = AccessControl.getInstance();
+	accesscontroler.checkAccess(request,response);
+%>

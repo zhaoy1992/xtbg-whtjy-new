@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ http://www.sprin gframework.org/schema/context http://www.sprin gframework.org/schema/context/sprin g-context-2.5.xsd
+ http://www.sprin gframework.org/schema/tx http://www.sprin gframework.org/schema/tx/sprin g-tx-2.5.xsd
+ http://www.sprin gframework.org/schema/aop http://www.sprin gframework.org/schema/aop/sprin g-aop-2.5.xsd
+ http://www.sprin gframework.org/schema/jee http://www.sprin gframework.org/schema/jee/sprin g-jee-2.5.xsd
+ ">
+    <!-- 督察督办管理 -->     
+    <bean id="InspectManageDaoImpl" class="com.chinacreator.xtbg.core.inspect.dao.impl.InspectManageDaoImpl"></bean>
+    <!-- 督察督办任务类别 -->     
+    <bean id="inspectTypeDaoImpl" class="com.chinacreator.xtbg.core.inspect.dao.impl.InspectTypeDaoImpl"></bean>
+   
+   
+</beans>
+ 

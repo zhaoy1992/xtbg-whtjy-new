@@ -1,0 +1,570 @@
+
+
+/*notice:请务必读懂每个选择符对应的页面元素的内容，并记住它们的对应关系*/
+
+/*
+ * 系统的背景部分和滚动条效果
+ */
+body {
+    border: none;
+    margin: 0px;
+    scrollbar-face-color: #f6f6f6;
+    scrollbar-highlight-color: #ffffff; 
+    scrollbar-shadow-color: #cccccc; 
+    scrollbar-3dlight-color: #cccccc; 
+    scrollbar-arrow-color: #330000; 
+    scrollbar-track-color: #f6f6f6; 
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-arrow-color:black;
+}
+
+/*
+ *  标准文字大小
+ */
+td {
+	font-size: 12px;
+}
+
+/*
+ *  超级连接效果
+ */
+a:visited {
+	color:#00000;
+	text-decoration: none;
+}
+a:link{color:#00000;
+	text-decoration: none;}
+a:hover{
+	color:#00000;
+	text-decoration: underline;
+}
+
+/*
+ *  左帧lable条非当前项文字风格
+ */
+
+.lable {
+　　color: #ffffff;
+}
+.lable a:link {
+	color:  #ffffff;;
+	text-decoration: none;
+}
+.lable a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+.lable a:hover {
+	color:#C0DFFF;
+	text-decoration: none;
+}
+
+/*
+ *  右帧表格头文字风格
+ */
+
+.tbhead {
+　　font-size: 12px;
+　　font-weight: bold;
+}
+
+
+/*
+ *  右帧表格操作功能块风格
+ */
+
+.tboperate {
+　　font-size: 12px;   
+　　background-color:#E6EAF3;
+　　border:1px solid #BDCCE1;
+    height:25px;
+}
+
+/*客户简明信息文字风格*/
+
+#tb table {
+        background: #EFEFEF;
+        font-size:12px;
+        border-collapse:collapse;
+} 
+#tb td {
+        text-indent:5px;
+} 
+#tb th {
+        BACKGROUND:#d71920;
+　　    color: #ffffff;
+        font-size:12px;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+#tb .linebold {
+	font-weight: bold;
+        BACKGROUND: #AB262C;
+        cursor: hand;
+}
+
+#tb .linebluebold {
+　　    color: #004BCB;
+	font-weight: bold;
+        BACKGROUND: #AB262C;
+        cursor: hand;
+}
+
+#tb .linenor {
+	BACKGROUND: #f1f1f1;
+	CURSOR: hand;
+	line-height: 21px;
+}
+
+#tb .linemov {
+        BACKGROUND: #FFFFFF;
+        cursor: hand;
+        line-height: 21px;
+}
+
+/*合计表格风格*/
+
+.total {
+        background: #D3E1F6;
+　　    color: #004BCB;
+	font-weight: bold;
+        font-size:12px;
+        border-collapse:collapse;
+} 
+.toolbar {
+        background: #E2E2E2;
+	    color: #000000;
+        font-size:12px;
+		height:22; 
+		border: 1px solid #CCCCCC;
+
+} 
+/*图片边框样式风格*/
+.Pic01 {
+        background: #eaeaea;
+		border: 1px solid #d9d9d9;
+
+}
+
+/*详细信息表格风格*/
+
+
+/*文字信息风格*/
+
+.BlueBlod12px {
+	color: #005097;
+	font-family: "宋体";
+	font-weight: bold;
+	font-size: 12px;
+}
+.White12px {
+	color: #ffffff;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 18px;
+}
+.White12px a:link {
+	color:  #ffffff;;
+	text-decoration: none;
+}
+.White12px a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+.White12px a:hover {
+	color:#ffffff;
+	text-decoration: underline;
+}
+
+.Red12px {
+	color: #ff0000;
+	font-family: "宋体";
+	font-size: 12px;
+}
+.WhiteBlod12px {
+	color: #ffffff;
+	font-weight: bold;
+	font-family: "宋体";
+	font-size: 12px;
+}
+.White14px {
+	color: #ffffff;
+	font-family: "宋体";
+	font-size: 14px;
+}
+.WhiteBlod14px {
+	color: #ffffff;
+	font-weight: bold;
+	font-family: "宋体";
+	font-size: 14px;
+}
+.PicTxt01 {
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #474747;
+	line-height: 18px;
+	padding: 5px;
+}
+.PicTxt03 {
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #07519a;
+	line-height: 18px;
+	padding: 5px;
+	text-decoration: underline;
+}
+.navarea {
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #07519a;
+	line-height: 18px;
+	padding:3px;
+	text-decoration: none;
+}
+.navarea a:link {
+	color: #07519a;
+	text-decoration: none;
+}
+.navarea a:visited {
+	color: #07519a;
+	text-decoration: none;
+}
+.navarea a:hover {
+	color: #07519a;
+	text-decoration: underline;
+}
+.inputTxt01 {
+	line-height: 26px;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+}
+.PicTxt02 {
+　　color: #004BCB;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 14px;
+	line-height:24px;
+	color: #565656;
+}
+.NewsTxt14px {
+	color: #005fa2;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 21px;
+}
+.BlackTxt14px {
+	color: #07519a;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 21px;
+}
+.NewsTxt12px {
+	color: #07519a;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 21px;
+}
+.NewsTxt12px a:link {
+	color: #07519a;
+	text-decoration: underline;
+}
+.NewsTxt12px a:visited {
+	color: #07519a;
+	text-decoration: underline;
+}
+.NewsTxt12px a:hover {
+	color: #07519a;
+	text-decoration: underline;
+}
+.Txt12pxBLACK {
+	color: #000000;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 21px;
+}
+.date01 {
+　　color: #07519a;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.NewsTitle21px {
+　　color: #256797;
+	font-weight: normal;
+	font-weight: bold;
+	font-family: "宋体";
+	font-size: 24px;
+}
+.TitleRed12px {
+　　color: #9f0001;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	padding-left:8px;
+}
+
+.numgreen12,.numgreen14, {
+　　color: #008000;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left:2px;
+	padding-right:2px
+}
+.numgreen12 {font-size: 12px;}
+.numgreen14 {font-size: 14px;}
+
+.numred12,.numred14 {
+　　color: #ec0600;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left:2px;
+	padding-right:2px
+}
+.numred12 {font-size: 12px;}
+.numred14 {font-size: 14px;}
+.tablehead {
+	color: #000;
+	font-family: "宋体";
+	font-weight: normal;
+	font-size: 12px;
+	height:24px;
+	padding:0 5px;
+}
+
+.tablehead a:link {
+	color: #000;
+	text-decoration: underline;
+}
+.tablehead a:visited {
+	color: #000;
+	text-decoration: underline;
+}
+.tablehead a:hover {
+	color: #ec0600;
+	text-decoration: underline;
+}
+
+.tablenum {
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height:24px;
+	color: #07519a;
+	padding:0 5px;
+	text-decoration: none;
+}
+.tablenum a:link {
+	color: #07519a;
+	text-decoration: underline;
+}
+.tablenum a:visited {
+	color: #07519a;
+	text-decoration: underline;
+}
+.tablenum a:hover {
+	color: #ec0600;
+	text-decoration: underline;
+}
+
+/*文字信息风格*/
+
+ 
+.Border01 {
+		border-left: 1px solid #CCCCCC;
+		border-right: 1px solid #CCCCCC;
+
+} 
+.Border02 {
+		border: 1px solid #528fc8;
+
+} 
+.Border03 {
+	color: #005fa2;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 21px;
+	border: 1px solid #528fc8;
+	padding:10px;
+}  
+.Border04 {
+	border: 1px solid #cdcbcc;
+	background-color: #FFFFFF;
+}
+.Border05 {
+		border-left: 1px solid #648db9;
+		border-right: 1px solid #648db9;		
+		border-bottom: 1px solid #648db9;
+
+}
+ 
+.content {
+	padding:5px;
+	font:normal 12px/24px Arial, Helvetica, sans-serif;
+	text-indent:24px;
+	color: #000;
+
+}   
+.detailbor {
+	border: 1px solid #d0d0d0;
+	background-color: #f4f4f4;
+	padding:5px;
+	font:normal 12px/21px Arial, Helvetica, sans-serif;
+	text-indent:24px;
+	color: #000;
+
+}  
+.detailnone {
+	border: 1px solid #d0d0d0;
+	background-color: #fff;
+	padding:5px;
+	font:normal 12px/18px Arial, Helvetica, sans-serif;
+	color: #000;
+
+} 
+/*输入框风格*/
+.inputA {
+	color: #555555;
+	font-weight: normal;
+	font-family: "宋体";
+	font-size: 12px;
+	text-indent: 2px;
+	height: 16px;
+	line-height: 18px;
+	border: 1px solid #999999;
+} 
+/*按钮风格*/
+.Button {
+	BORDER: #b7cde5 1px solid;
+	FONT-FAMILY: "宋体";
+	FONT-SIZE: 12px;
+	BACKGROUND-COLOR: #fff;
+        height:21px;
+	line-height:21px;
+	width:50px;
+	color:#0000;
+}
+.Button01 {
+	BORDER: #408dc8 1px solid;
+	FONT-FAMILY: "宋体";
+	FONT-SIZE: 12px;
+	height:20px;
+	width:55px;
+	color:#000000;
+	background-image: url(../images/button01.gif);
+	text-decoration: none;
+}
+
+.Button {
+	FONT: 12px "宋体";
+	height:22px;
+	padding:0px 2px;
+	color:#323431;
+	cursor:hand;
+	text-decoration: none;
+	BORDER: #b6b6b6 1px solid;
+	background: #FFF url(../images/Button_out.gif);
+}
+.Button:hover {
+	color:#930;
+	BORDER: #e7b50d 1px solid;
+	background-image: url(../images/Button_over.gif);
+	text-decoration:underline;
+}
+/*新加的table*/
+.table_on{
+font-size:12px; 
+font-weight:bold;
+padding-left:10px;
+padding-right:10px;
+}
+.table_off{
+background: url(../images/off.gif) repeat-x;
+line-height:24px;
+font-size:12px;
+padding-left:10px;
+padding-right:10px;
+}
+.table_thead{background:url(../images/dh_1.gif) repeat-x;
+font-size:12px;
+padding:0 10 0 10;
+height:24px;
+line-height:24px;
+}
+.right_line{
+border-right:1px solid #CCCCCC;
+padding:10 0;
+}
+.space_10{padding:10px;}
+.table_height td{
+height:24px;
+line-height:24px;
+padding-left:10px;
+}
+.btn_s1{
+background:url(../images/table_btn_s1.gif) repeat-x;
+font-size:12px;
+height:24px;
+line-height:24px;
+padding-left:8px;
+padding-right:8px;
+border:1px solid #BDD2ED;
+}
+.table_right{
+background-color:#F3FAFF;
+border:1px solid #AACCEE;
+font-size:12px;
+color:#FF8040;
+padding:10px;
+}
+.line_s0{
+border-bottom:1px solid #DCDCDC;
+background:#FFA297;
+height:24px;
+line-height:24px;
+padding-left:26px;
+}
+.line_s1{
+border-bottom:1px solid #DCDCDC;
+background:url(../images/ico_s1.gif) center left no-repeat;
+height:24px;
+line-height:24px;
+padding-left:26px;
+}
+.line_s2{
+border-bottom:1px solid #DCDCDC;
+}
+.table_btn_off
+{ background:url(../images/picture_04.gif) center repeat-x;
+font-size:12px;
+color:#000000;
+height:26px;
+line-height:26px;
+text-align:center;
+padding-left:4px;
+padding-right:4px;
+}
+.blue_table{
+border:1px solid #528FC8;
+padding:6px;
+}
+.table_btn_on
+{ background:url(../images/picture_09.gif) center repeat-x;
+font-size:12px;
+color:#ffffff;
+height:26px;
+line-height:26px;
+text-align:center;
+padding-left:4px;
+padding-right:4px;
+}

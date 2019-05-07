@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">
+	
+	<description>word转pdf工具配置类</description>
+	
+	<bean id="WordToPDFConf" class="com.chinacreator.xtbg.core.common.util.WordToPDFConf">
+		<property name="isOpen" value="true"></property><!--是否开启流程处理时word即时转pdf-->
+		<property name="handOpen" value="false"></property><!--是否已经手动启动-->
+		<property name="openOfficeHome" value="C:\PROGRA~1\OpenOf~1\"></property><!--安装openOffice的位置,如果有空格只能使用这种特殊的方式啦-->
+		<property name="openOfficePort" value="8100"></property><!--int openOfficePort-->
+		<property name="wordFileUrl" value="C:\oa_core_tmp_files\"></property><!--流程中存放word文件的位置-->
+		<property name="pdfFileUrl" value="D:\workspace\xtbg-whtjy-new\creatorepp\ccapp\oa_core_pdf_files\"></property><!--流程中存放pdf文件的位置-->
+		<property name="afterDeleteHJCleanResTime" value="4000"></property><!--清理痕迹后,给予jacob释放word资源的时间-->
+	</bean>
+	
+	
+	
+	<!--触发器工厂-->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="Trigger_ReStartOpenOffice"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!--触发器实例:Trigger_ReStartOpenOffice 定时重启openoffice服务-->
+	<bean id="Trigger_ReStartOpenOffice" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+				<property name="targetObject">
+					<ref bean="WordToPDFConf" />
+				</property>
+				<property name="targetMethod">
+					<value>reStartOpenOffice</value>
+				</property>
+			</bean>
+		</property>
+		<property name="cronExpression">
+			<value>0 0 1 1/1 * ? *</value><!--正式:每天早上1点-->
+			<!--<value>0 0/1 * 1/1 * ? *</value>  测试:每分钟-->
+			<!--自定义配置:请访问http://www.cronmaker.com/获取触发间隔表达式-->
+		</property>
+	</bean>
+</beans>

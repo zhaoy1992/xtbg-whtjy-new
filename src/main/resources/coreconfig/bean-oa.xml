@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd				
+				http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+				http://activemq.apache.org/camel/schema/spring http://activemq.apache.org/camel/schema/spring/camel-spring.xsd
+				http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+				">
+	
+	<context:annotation-config />
+	
+	<!-- 系统配置文件 -->
+    <bean class="com.chinacreator.xtbg.core.common.cache.OASystemCache">  
+        <property name="order" value="2" />
+    	<property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">  
+            <list>  
+                 <value>classpath:coreconfig/*.properties</value>
+            </list>  
+        </property>  
+    </bean>  
+	
+	<!-- 工作台配置信息 -->
+	<bean id="workbenchConfCache" class="com.chinacreator.xtbg.core.workbench.cache.WorkbenchConfCache" >
+		<!-- 首页配置文件 -->
+		<property name="frist_config_path" value="/coreconfig/first_config.xml"></property>
+	</bean>
+	<!-- 工作台用户信息缓存 -->
+	<bean id="workbenchUserCache" class="com.chinacreator.xtbg.core.workbench.cache.WorkbenchUserCache">
+		<property name="userLoginInfoDao" ref="userLoginInfoDao"></property>
+		<property name="onlineTopDao" ref="onlineTopDao"></property>
+	</bean>
+	
+	<!-- 用户登录信息dao实现类 -->
+	<bean id="userLoginInfoDao" class="com.chinacreator.xtbg.core.workbench.dao.impl.UserLoginInfoDaoImpl" />
+	<!-- 系统最高在线用户数记录dao实现类 -->
+	<bean id="onlineTopDao" class="com.chinacreator.xtbg.core.workbench.dao.impl.OnlineTopDaoImpl" />
+	
+	<!-- 用户登录信息记录任务处理线程 -->
+	<bean id="userLoginInfoThread" class="com.chinacreator.xtbg.core.workbench.cache.UserLoginInfoThread" init-method="start">
+		<!-- 启动开关，这个开关一般要启动 -->
+		<property name="auto" value="true"></property>
+		<!-- 线程轮询的时间间隔  毫秒 默认为一分钟-->
+		<property name="interval" value="60000"></property>
+		<!-- 数据库入库最大的时间间隔  毫秒 默认为30分钟 1800000-->
+		<property name="operDBInterval" value="1800000"></property>
+		<!-- 数据库入库的最大任务数  毫秒 默认10个-->
+		<property name="maxCount" value="10"></property>
+		<property name="userLoginInfoDao" ref="userLoginInfoDao"></property>
+	</bean>
+	
+
+	
+	<!-- cxf webservices 框架 -->
+	<import resource="bean-cxf.xml" />
+	<!-- 导入dao bean注入文件 -->			
+	<import resource="bean-dao.xml" />
+	<import resource="flowbean-dao.xml" />
+	<import resource="treebean-dao.xml" />	
+	<!-- 导入机构管理 dao注入文件 -->			
+	<import resource="purviewmanager-dao.xml" />	
+	<!-- 导入短信 bean注入文件 -->			
+	<import resource="bean-note.xml" />	
+	<!-- 网上投票 dao注入文件 -->	
+    <import resource="vote-dao.xml" />
+	<!-- 通知公告dao注入文件  -->
+	<import resource="notice-dao.xml" />
+	<!-- 外部子系统信息配置dao注入文件-->
+	<import resource="subsystem-dao.xml" />  
+	<!-- 站内消息注入文件  -->
+	<import resource="bean-msgcenter.xml" />
+	<!-- 数据库表管理注入文件 -->
+	<import resource="dbmanager-dao.xml"/>	
+	<!-- 通讯录 -->
+	<import resource="personwork-dao.xml"/>	
+	<!-- 人员名录管理 -->
+	<import resource="directory-dao.xml"/>
+	<!-- 会议管理 -->
+	<import resource="meetingmanager-dao.xml"/>
+	<!-- 自定义表单 dao注入文件 -->	
+    <import resource="form-dao.xml" />
+    <!-- 档案管理 -->
+    <import resource="file-dao.xml" />
+	
+	<!--任务交办 -->
+	<import resource="task_dao.xml" />
+	<!--系统参数设置 -->
+	<import resource="sysparam_dao.xml" />
+	<!--数据资源 -->
+	<import resource="dataresources-dao.xml" />
+	<!--数据字典 -->
+	<import resource="dict_dao.xml" />
+	<!--与公文无关的流程配置 -->
+	<import resource="pubconfig-dao.xml" />
+	<!--知识库 -->
+	<import resource="kbm-dao.xml" />
+	<!--邮件-->
+	<import resource="bean-mail.xml" />
+	<!--及时消息-->
+	<import resource="bean-im.xml" />
+	<!--个人文件柜-->
+	<import resource="persondata-dao.xml" />
+	<!--公文处理-->
+	<import resource="bean-archive.xml" />
+	<!--政策法规管理-->
+	<import resource="data-dao.xml" />
+	<!--接待管理-->
+	<import resource="guestreception-dao.xml" />
+	<!--新闻信息-->
+	<import resource="news-dao.xml" />
+    <!--日程管理-->
+    <import resource="schedule-dao.xml" />
+    <!--信息报送-->
+    <import resource="paper-dao.xml" />
+    <!--文号维护-->
+    <import resource="wordnum-dao.xml" />
+     <!--节假日-->
+    <import resource="holiday-dao.xml" />
+	<!--督察督办-->
+	<import resource="inspect-dao.xml" />
+	<!--业务类型-->
+	<import resource="formclass-dao.xml" />
+	<!-- 统一待办注入文件  -->
+	<import resource="bean-msgtodo.xml" />
+	<!-- 特检院办公用品 -->
+	<import resource="bean-officesupplies.xml" />
+	<!-- 特检院检测耗材 -->
+	<import resource="bean-detectionsupplies.xml" />
+	<!-- 特检院食堂物品 -->
+	<import resource="bean-canteenitemssupplies.xml" />
+	<!-- 人员持证管理 -->
+	<import resource="bean-personholder.xml" />
+	<!-- 设备台账 -->
+	<import resource="devaccount-dao.xml" />
+	<!-- 图书管理 -->
+	<import resource="ibrarybook-dao.xml" />
+	<!--电子考勤  -->
+	<import resource="bean-leave.xml" />
+	<!--有问必答 -->
+	<import resource="bean-answers.xml" />
+	<!-- wordtopdf工具配置bean -->
+	<import resource="bean-wordtopdf.xml" />
+</beans>

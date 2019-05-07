@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>var arr=new Array();
+function uf_open(){
+	SetButtonImage(FCButton1,"../image/button/color_button4.jpg");
+	SetButtonImage(FCButton2,"../image/button/font.jpg");
+}
+
+function uf_ok(){
+	var arr=pubDataSet[0] ;
+	var obj1=displayfont ;
+	var slen=arr.length;
+	for(var i=0;i<slen;i++){
+		arr[i].style.backgroundColor=obj1.style.backgroundColor;
+		arr[i].style.color=obj1.style.color ;
+		arr[i].style.fontStyle=obj1.style.fontStyle;
+		arr[i].style.textDecoration=obj1.style.textDecoration;
+		arr[i].style.fontFamily=obj1.style.fontFamily;
+		arr[i].style.fontSize=obj1.style.fontSize;
+		arr[i].style.fontWeight=obj1.style.fontWeight;
+		switch(SKDBcombobox1.value){
+			case '左对齐':{
+				arr[i].style.textAlign="left" ;
+				break	
+			} 	
+			case '右对齐':{
+				arr[i].style.textAlign="right" ;
+				break	
+			} 
+			case '居中':{
+				arr[i].style.textAlign="center" ;
+				break	
+			} 
+		}
+		if(SKDBcheckbox1.value=='否'){
+			arr[i].nowrap=true;
+		}else{
+			arr[i].removeAttribute('nowrap');
+		}
+		arr[i].style.lineHeight=FCDBedit1.value;
+		arr[i].style.letterSpacing=FCDBedit2.value;
+		switch(SKDBcombobox4.value){
+			case '0':{
+				//obj.style.filter=uf_filter(0);
+				ClearCssPart(arr[i],"filter");
+				break;
+			}	
+			case '90':{
+				arr[i].style.filter=uf_filter(1);
+				break;
+			}	
+			case '180':{
+				arr[i].style.filter=uf_filter(2);
+				break;
+			}	
+			case '270':{
+				arr[i].style.filter=uf_filter(3);
+				break;
+			}	
+		}
+	}
+	window.close();
+}
+
+function uf_filter(i){
+	var s="progid:DXImageTransform.Microsoft.BasicImage(Rotation="+i+"); height: 1px";
+	return s;	
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><checkbox><id>SKDBcheckbox1</id></checkbox><label><id>Label2</id><id>Label122</id><id>Label120</id><id>Label123</id></label><combobox><id>SKDBcombobox1</id><id>SKDBcombobox4</id></combobox><shape><id>Shape2</id></shape><button><id>FCButton18</id><id>FCButton19</id><id>FCButton1</id><id>FCButton2</id></button><text><id>FCDBedit2</id><id>FCDBedit1</id></text></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>SKDBcheckbox1</taborder><taborder>SKDBcombobox1</taborder><taborder>SKDBcombobox4</taborder><taborder>FCButton18</taborder><taborder>FCButton19</taborder><taborder>FCButton1</taborder><taborder>FCButton2</taborder><taborder>FCDBedit2</taborder><taborder>FCDBedit1</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="210" poswidth="320" postop posleft entertype="修改" window="有模式窗口" keyfield codeheader="BBB" mkbh caption="多选时memo属性" type="PR" dj_sn="ep_memos" BLONopen="uf_open()" center="居中"><BUTTON id=FCButton18 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 165px; WIDTH: 69px; FONT-FAMILY: ; POSITION: absolute; TOP: 149px; HEIGHT: 23px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=FCButton19 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 236px; WIDTH: 69px; FONT-FAMILY: ; POSITION: absolute; TOP: 149px; HEIGHT: 23px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取消</BUTTON><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 266px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 24px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("SelColor()")'></BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 266px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 55px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',displayfont,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><SELECT id=SKDBcombobox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 49px; WIDTH: 123px; FONT-FAMILY: ; POSITION: absolute; TOP: 4px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" controltype="combobox" temptext="左对齐&#13;&#10;右对齐&#13;&#10;居中" tempvalue="左对齐&#13;&#10;右对齐&#13;&#10;居中" sql check="1" china backwidth="123" backheight="25"><OPTION value=左对齐 selected>左对齐</OPTION><OPTION value=右对齐>右对齐</OPTION><OPTION value=居中>居中</OPTION></SELECT><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 6px; WIDTH: 56px; FONT-FAMILY: ; POSITION: absolute; TOP: 6px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2" controltype="label">排&nbsp; 布</SPAN><SPAN id=Label122 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 3px; WIDTH: 49px; FONT-FAMILY: ; POSITION: absolute; TOP: 96px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label12" controltype="label">字符间距</SPAN><INPUT type=text id=FCDBedit2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 56px; WIDTH: 64px; FONT-FAMILY: ; POSITION: absolute; TOP: 91px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china CanSelect="false"></INPUT><SPAN id=Label120 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 125px; WIDTH: 41px; FONT-FAMILY: ; POSITION: absolute; TOP: 96px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label10" controltype="label">行&nbsp; 距</SPAN><INPUT type=text id=FCDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 165px; WIDTH: 64px; FONT-FAMILY: ; POSITION: absolute; TOP: 91px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china CanSelect="false"></INPUT> 
+<DIV id=SKDBcheckbox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 132px; WIDTH: 74px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 116px; HEIGHT: 20px; TEXT-ALIGN: left; backgroundColor1: #ffffff" noWrap value="是" controltype="checkbox" china divtype="checkbox" truevalue="是" falsevalue="否"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>自动折行</SPAN></DIV><SELECT id=SKDBcombobox4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 56px; WIDTH: 66px; FONT-FAMILY: ; POSITION: absolute; TOP: 118px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" controltype="combobox" temptext="0&#13;&#10;90&#13;&#10;180&#13;&#10;270" tempvalue="0&#13;&#10;90&#13;&#10;180&#13;&#10;270" sql check="1" china backwidth="66" backheight="25"><OPTION value=0 selected>0</OPTION><OPTION value=90>90</OPTION><OPTION value=180>180</OPTION><OPTION value=270>270</OPTION></SELECT><SPAN id=Label123 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 4px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 121px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label13" controltype="label">旋转角度</SPAN><?xml:namespace prefix = v /><v:Rect id=Shape2 style="DISPLAY: block; LEFT: 6px; WIDTH: 286px; POSITION: absolute; TOP: 85px; HEIGHT: 0px" controltype="shape" coordsize = "21600,21600" fillcolor = "white" strokecolor = "gray"><v:stroke></v:stroke></v:Rect></DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT>
+
+<table border=1 style="BORDER-LEFT:1PX; BORDER-RIGHT:1PX; BORDER-TOP:1PX; BORDER-BOTTOM:1PX;table-layout:fixed;  POSITION: absolute;  BORDER-COLLAPSE: collapse; LEFT: 8px; TOP: 27px;" bgcolor =#ffffff borderColor=black ><tr><td valign=center align=middle  width="255" height="50" ><span id=displayfont style="FONT-SIZE: 12px; OVERFLOW: hidden; "><div nowrap=false>字体颜色</div></span></td></tr></table></body></html>

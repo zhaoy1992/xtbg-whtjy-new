@@ -1,0 +1,15 @@
+
+
+<!-- message begin -->
+<servlet>
+	<servlet-name>MessageServlet</servlet-name>
+	<servlet-class>
+		com.chinacreator.message.servlet.MessageServlet
+	</servlet-class>
+</servlet>
+<!--
+<servlet-mapping>
+	<servlet-name>MessageServlet</servlet-name>
+	<url-pattern>/servlet/MessageServlet</url-pattern>
+</servlet-mapping>
+ message end -->

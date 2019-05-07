@@ -1,0 +1,55 @@
+body {margin:0px;
+      padding:0px;
+	  background:url(../images/bodybg.jpg);
+      SCROLLBAR-FACE-COLOR: #fff;
+      SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+      SCROLLBAR-SHADOW-COLOR: #333;
+      SCROLLBAR-3DLIGHT-COLOR: #fff;
+      SCROLLBAR-ARROW-COLOR: #B00B0B;
+      SCROLLBAR-TRACK-COLOR: #EFEFEF;
+      SCROLLBAR-DARKSHADOW-COLOR: #fff;
+	  }
+	  
+
+td{font-size:12px;letter-spacing:1px;}
+
+#content{width:1003px; background:#ffffff;}
+
+a:link{color:#000000;TEXT-DECORATION: none;font-size:12px;letter-spacing:1px;}
+a:visited{color:#000000;TEXT-DECORATION: none;font-size:12px;letter-spacing:1px;}
+a:active{color:#FF6600;TEXT-DECORATION: none;font-size:12px;letter-spacing:1px;}
+a:hover{color:#C75204;font-size:12px;letter-spacing:1px;}
+
+
+A.dh:link{COLOR: #fff;font-size:13px;TEXT-DECORATION: none;letter-spacing:1px;font-weight:bold;}
+A.dh:visited {COLOR: #fff; TEXT-DECORATION: none;font-size:13px;letter-spacing:1px;font-weight:bold;}
+A.dh:active {COLOR: #fff; TEXT-DECORATION: none;font-size:13px;letter-spacing:1px;font-weight:bold;}
+A.dh:hover {COLOR: #fff; TEXT-DECORATION: underline;font-size:13px;letter-spacing:1px;font-weight:bold;}
+
+A.menu:link{COLOR: #ee0405;font-size:14px;TEXT-DECORATION: none;letter-spacing:1px;font-weight:bold;}
+A.menu:visited {COLOR: #ee0405; TEXT-DECORATION: none;font-size:14px;letter-spacing:1px;font-weight:bold;}
+A.menu:active {COLOR: #ee0405; TEXT-DECORATION: none;font-size:14px;letter-spacing:1px;font-weight:bold;}
+A.menu:hover {COLOR: #ee0405; TEXT-DECORATION: underline;font-size:14px;letter-spacing:1px;font-weight:bold;}
+
+A.more:link{COLOR: #757575;TEXT-DECORATION: none;font-size:12px; }
+A.more:visited {COLOR: #757575; TEXT-DECORATION: none;font-size:12px;}
+A.more:active {COLOR: #757575; TEXT-DECORATION: none;font-size:12px;}
+A.more:hover {COLOR: #d20500; TEXT-DECORATION: underline;font-size:12px;}
+
+
+.font_center_bt2{ color:#000000;letter-spacing:2px; font-weight:bold; font-size:13px;}
+.font_left_bt{ color:#b50505;letter-spacing:2px; font-weight:bold; font-size:13px;}
+.font_center_bt{ color:#ffffff;letter-spacing:2px; font-weight:bold; font-size:15px;}
+.font_xl_title {color: #000000;font-size:24px; line-height:26px;font-weight:bold;FONT-FAMILY: "ºÚÌå";}
+.td_txt_xl{font-size:12px;line-height:22px; padding:6 15 6 15;text-indent:32px;text-align:left;letter-spacing:1px; color:#838181;}
+.font_h{color:#474646;}
+.font_red{ color:#666666;}
+
+.td_page2title{ background-image: url(../images/page2_title.gif); color:#ff0000 ; font-weight:bold; font-size:28px; font-family:"ºÚÌå"; letter-spacing:5px; }
+.td_menu{ background-image: url(../images/page2_menu_bg.gif); color:#CD0505; font-weight:bold; font-size:16px;  letter-spacing:3px; padding-left:78px; height:48px; }
+.td_txt_xl_a{font-size:12px;line-height:23px; padding:12px;text-indent:32px;text-align:left;letter-spacing:1px; color:#000000;}
+.td_a1{ border-bottom:1px solid #d6d6d6; border-left:1px solid #d6d6d6; border-right:1px solid #d6d6d6; background-color:#FFF;}
+.td_menu_border{ border-bottom:1px solid #f3c8c7; border-left:1px solid #f3c8c7; border-right:1px solid #f3c8c7; background-color:#FFF;}
+.td_rd{ background-color:#fdddde; padding-left:8px; height:30px;}
+
+.td_zlwk{ background-image:url(../images/left_01.gif); padding-left:50px; width:163px; height:31px; letter-spacing:0.9px; color:#777777; line-height:31px;}

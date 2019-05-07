@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<STYLE>
+.userData {
+	behavior: url(#default#userData);
+}
+</STYLE>
+		<script src="../../fceform/js/fcpub.js"></script>
+		<script src="../../fceform/js/fcrundj.js"></script>
+		<script src="../../fceform/js/tabpane.js"></script>
+		<script src="../../fceform/js/ccpub.js" defer></script>
+		<script src="../../fceform/js/ccapp_pub.js" defer></script>
+		<script langage="javascript">
+			//根据应用确定样式的目录
+			var stylePath = "../../../ccapp/<%=appPath%>/";
+			var mylink = document.createElement("link");
+			mylink.setAttribute("type","text/css");
+			mylink.setAttribute("rel","stylesheet");
+			mylink.setAttribute("href",stylePath+"css/<%=cssfolder%>/allStyle.css");
+			var myhead = document.getElementsByTagName("head")[0];
+			myhead.appendChild(mylink);
+			var _my_namespace_js = "<script src='"+stylePath+"js/namespace.js"+"'></"+"script>";
+			window.document.write(_my_namespace_js);
+			fcpubdata.creatorStyle="<%=cssfolder%>";
+		</script>
+	</HEAD>
+	<body background="../../fceform/images/ef_run_background.gif"
+		onload="pub_window_onload()" onkeydown="RunTabindex()"
+		onbeforeunload="pub_window_onbeforeunload()"
+		onkeypress="pub_window_onkeypress()" onResize="pub_window_onresize()">
+		<iframe id="_newframe" name="_newframe" height="0" width="0"></iframe>
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK";
+pub_djhtm();
+		</script>
+		<script>var obj;  //当前控件
+		function selectOn(obj){
+			if(obj.checked){
+				document.getElementById("lm_325").style.display = "block";
+				document.getElementById("lm_324").style.display = "block";
+				document.getElementById("lm_229").style.display = "block";
+				document.getElementById("lm_230").style.display = "block";
+				document.getElementById("lm_235").style.display = "block";
+				document.getElementById("lm_327").style.display = "block";
+			}else{
+				document.getElementById("lm_325").style.display = "none";
+				document.getElementById("lm_324").style.display = "none";
+				document.getElementById("lm_229").style.display = "none";
+				document.getElementById("lm_230").style.display = "none";
+				document.getElementById("lm_235").style.display = "none";
+				document.getElementById("lm_327").style.display = "none";
+			}
+		}
+function uf_open(){
+
+	obj=pubDataSet[0]   //IMG对象
+	SetButtonImage(FCButton8,"../images/ef_run_button_ok.gif");
+	SetButtonImage(FCButton9,"../images/ef_run_button_close.gif");
+	
+	
+	if(IsSpace(obj.id)==false)SetTextValue(obj.id,lm_112);
+	if(IsSpace(obj.title)==false)SetTextValue(obj.title,lm_122);
+	if(IsSpace(obj.uploadisuse)==false)SetTextValue(obj.uploadisuse,lm_132);
+	if(IsSpace(obj.deleteisuse)==false)SetTextValue(obj.deleteisuse,lm_142);
+	if(IsSpace(obj.readable)==false)SetTextValue(obj.readable,lm_152);
+	if(IsSpace(obj.savefiledir)==false)SetTextValue(obj.savefiledir,lm_162);
+	if(IsSpace(obj.savetype)==false)SetTextValue(obj.savetype,savetype);
+	if(IsSpace(obj.filetypes)==false)SetTextValue(obj.filetypes,lm_172);
+	if(IsSpace(obj.uploadfilesize)==false)SetTextValue(obj.uploadfilesize,lm_182);
+	if(IsSpace(obj.locationtype)==false)SetTextValue(obj.locationtype,lm_212);
+	if(IsSpace(obj.style.width)==false)SetTextValue(obj.style.width,lm_228);
+	if(IsSpace(obj.style.height)==false)SetTextValue(obj.style.height,lm_226);
+	if(IsSpace(obj.style.top)==false)SetTextValue(obj.style.top,lm_224);
+	if(IsSpace(obj.style.left)==false)SetTextValue(obj.style.left,lm_222);
+
+	if(IsSpace(obj.showtype)==false)SetTextValue(obj.showtype,lm_232);
+	if(IsSpace(obj.delcallback)==false)SetTextValue(obj.delcallback,lm_312);
+	if(IsSpace(obj.donecallback)==false)SetTextValue(obj.donecallback,lm_322);
+    if(obj._checked=='yes'){
+    	lm_410.checked = true;
+    }else{
+    	lm_410.checked = false;
+    }
+    selectOn(lm_410);
+	if(IsSpace(obj._width)==false)SetTextValue(obj._width,lm_229);
+	if(IsSpace(obj._height)==false)SetTextValue(obj._height,lm_230);
+	if(IsSpace(obj._div)==false)SetTextValue(obj._div,lm_235);
+	lm_212.value = obj.style.position
+	if(obj.style.position == "static"){
+		lm_222.disabled = true;
+		lm_224.disabled = true;
+	}else{
+		lm_222.disabled = false;
+		lm_224.disabled = false;
+	}
+
+}
+function uf_ok() {
+
+	if(Trim(lm_112.value)==''||Trim(lm_122.value)==''||Trim(lm_172.value)==''||Trim(lm_182.value)==''){
+		alert('必填项不能为空！');
+		return ;
+	}
+	
+    var flag = 0;
+	//obj_SKbillsheet = pubDataSet[2];
+	//if(IsSpace(lm_114.value)) alert("数据集名称不能为空!请选择一个数据集名称后再保存表单.") ;
+	obj.id=lm_112.value;
+	
+	//zzy
+	//obj.dataset=lm_114.value;
+
+	obj.title=lm_122.value;
+	obj.uploadisuse=lm_132.value;
+	obj.deleteisuse=lm_142.value;
+	obj.readable=lm_152.value;
+	obj.savefiledir=lm_162.value;
+	obj.savetype=savetype.value;
+	obj.filetypes=lm_172.value;
+	obj.uploadfilesize=lm_182.value;
+	obj.locationtype=lm_212.value;
+	
+	obj.style.width = lm_228.value;
+	obj.style.height = lm_226.value
+	obj.style.top = lm_224.value;
+	obj.style.left = lm_222.value;
+
+	obj.showtype=lm_232.value;
+	obj.delcallback=lm_312.value;
+	obj.donecallback=lm_322.value;
+
+	obj.style.position = lm_212.value;
+    obj._width = lm_229.value;
+    obj._height = lm_230.value;
+	obj._div = lm_235.value;
+    if(lm_410.checked){
+    	obj._checked = 'yes';
+    }else{
+    	obj._checked = 'no';
+    }
+	CloseBill()
+}
+
+function validatethis(){
+
+}
+
+
+
+/**
+将事件内容给到文本框上。
+**/
+function dseventsub(s1,oEdit){
+
+	var i1=s1.indexOf('","')
+	var s2=s1.substring(i1+3,s1.length-2)
+	oEdit.value=s2
+}
+
+/**
+*oP为checkbox对象名,oCont为要给的值
+*如果为空时,checkbox值为是
+**/
+function SetCheckBoxCtrlPutValue(oP,oCont){
+	 if(IsSpace(oP)){
+        SetCheckBoxValue(oCont,"是");
+     }else{
+        SetCheckBoxValue(oCont,oP);
+     }
+}
+
+function uf_changeVal(){
+	if(SKDBcombobox3.value=="static"){
+		txtLeft.value="";
+		txtTop.value="";
+	}
+	if(SKDBcombobox3.value == "static"){
+		txtLeft.disabled = true;
+		txtTop.disabled = true;
+	}else{
+		txtLeft.disabled = false;
+		txtTop.disabled = false;
+	}
+}
+
+
+
+
+function uf_click_SetRowHeight() {
+	txtRowHeight.disabled = chkSetRowHeight.value =="否";
+}</script>
+		<script src='../../fceform/js/fcopendj.js'></script>
+		<script defer src='../../fceform/js/fcsavedj.js'></script>
+		<script src='../../fceform/js/fcselfuse.js'></script>
+		<script src='../../fceform/js/fcbasecont.js'></script>
+		<script defer src='../../fceform/js/fcother.js'></script>
+		<script defer src='../../fceform/js/selectdate.js'></script>
+		<script src='../../fceform/../fceformext/js/userfunc.js'></script>
+		<script src='../../fceform/js/fcdate.js'></script>
+		<link href=../../fceform/css/tabstyle.css type=text/css rel=stylesheet>
+		<script src='../../fceform/js/webfxlayout.js'></script>
+		<link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../../fceform/css/luna/tab.css' />
+		<link type='text/css' rel='stylesheet' href='../../fceform/css/TextStyle.css' />
+		<script>
+
+		</script>
+		<DIV id=SKbillsheet toolbar="不带工具栏"
+			jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js&#13;&#10;fcdate.js"
+			creatorType="4820" type="ZW" dj_sn="20090515114352562439"
+			caption="UpLoad属性页" mkbh creatorStyle="creatorBlue" codeheader="BBB"
+			keyfield BLONopen="uf_open();" BLONclose="UnLoadWebOffice();"
+			window="当前窗口" entertype="修改" creator_remark hasWorkflowButton="否"
+			creator_elementAuthoritySwitch="否" creator_showAlert="是"
+			creator_office_isBindForm="否" islog="否" isprotect="是" posleft postop
+			poswidth posheight isfile="否" OtherSave="否" creator_csslib idtype="1"
+			version="1.0" billtaborder="
+			<root>
+				<taborder>lm_132</taborder>
+				<taborder>lm_142</taborder>
+				<taborder>lm_152</taborder>
+				<taborder>lm_162</taborder>
+				<taborder>lm_114</taborder>
+				<taborder>lm_212</taborder>
+				<taborder>lm_232</taborder>
+				<taborder>lm_122</taborder>
+				<taborder>lm_112</taborder>
+				<taborder>lm_172</taborder>
+				<taborder>lm_182</taborder>
+				<taborder>lm_222</taborder>
+				<taborder>lm_224</taborder>
+				<taborder>lm_226</taborder>
+				<taborder>lm_228</taborder>
+				<taborder>lm_229</taborder>
+				<taborder>lm_230</taborder>
+				<taborder>lm_312</taborder>
+				<taborder>lm_322</taborder>
+				<taborder>lm_410</taborder>
+			</root>
+			" creator_pagination
+			controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0;ebshow:0;creatorSubForm:0;creator_div:0"
+			contxml="
+			<root>
+				<label>
+					<id>lm_111</id>
+					<id>lm_113</id>
+					<id>lm_131</id>
+					<id>lm_141</id>
+					<id>lm_151</id>
+					<id>lm_161</id>
+					<id>lm_121</id>
+					<id>lm_171</id>
+					<id>lm_181</id>
+					<id>lm_211</id>
+					<id>lm_221</id>
+					<id>lm_223</id>
+					<id>lm_225</id>
+					<id>lm_227</id>
+					<id>lm_231</id>
+					<id>lm_311</id>
+					<id>lm_321</id>
+					<id>lm_325</id>
+					<id>lm_324</id>
+					<id>lm_326</id>
+				</label>
+				<checkbox>
+					<id>lm_410</id>
+				</checkbox>
+				<combobox>
+					<id>lm_132</id>
+					<id>lm_142</id>
+					<id>lm_152</id>
+					<id>lm_162</id>
+					<id>lm_114</id>
+					<id>lm_212</id>
+					<id>lm_232</id>
+				</combobox>
+				<tab>
+					<id>tab1</id>
+				</tab>
+				<text>
+					<id>lm_122</id>
+					<id>lm_112</id>
+					<id>lm_172</id>
+					<id>lm_182</id>
+					<id>lm_222</id>
+					<id>lm_224</id>
+					<id>lm_226</id>
+					<id>lm_228</id>
+					<id>lm_229</id>
+					<id>lm_230</id>
+					<id>lm_312</id>
+					<id>lm_322</id>
+					<id>lm_235</id>
+				</text>
+			</root>
+			" creator_allTab="
+			<tabs>
+				<tab>
+					<id>tab1</id>
+					<content>
+						<index>0</index>
+						<gridid></gridid>
+						<iframeid></iframeid>
+						<index>1</index>
+						<gridid></gridid>
+						<iframeid></iframeid>
+						<index>2</index>
+						<gridid></gridid>
+						<iframeid></iframeid>
+					</content>
+				</tab>
+			</tabs>">
+			<DIV class=tab-pane id=tab1
+				style="LEFT: 45px; WIDTH: 402px; POSITION: absolute; TOP: 1px; HEIGHT: 398px"
+				IsHideTitle="undefined" showtype="luna">
+				<DIV class=tab-page style="WIDTH: 402px; HEIGHT: 430px;display:">
+					<H2 class=tab>
+						属性
+					</H2>
+					<DIV id=lm_111
+						style="LEFT: 20px; WIDTH: 58px; POSITION: absolute; TOP: 15px; HEIGHT: 15px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						控件ID：
+					</DIV>
+					<!--
+					<DIV id=lm_113
+						style="LEFT: 193px; WIDTH: 92px; POSITION: absolute; TOP: 5px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						数据集
+					</DIV>-->
+					<INPUT id=lm_122
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 55px; HEIGHT: 19px"
+						onmovestart=moveStart() size=15 controltype="text" value="上传文件">
+					<DIV id=lm_131
+						style="LEFT: 20px; WIDTH: 80px; POSITION: absolute; TOP: 95px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						是否可上传：
+					</DIV>
+					<SELECT id=lm_132
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 95px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="true&#13;&#10;false" temptext="是&#13;&#10;否" sql
+						backwidth="97" backheight="25" sqltrans>
+						<OPTION value=true selected>
+							是
+						</OPTION>
+						<OPTION value=false>
+							否
+						</OPTION>
+					</SELECT>
+					<DIV id=lm_141
+						style="LEFT: 20px; WIDTH: 85px; POSITION: absolute; TOP: 135px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						是否可删除：
+					</DIV>
+					<SELECT id=lm_142
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 135px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="true&#13;&#10;false" temptext="是&#13;&#10;否" sql
+						backwidth="97" backheight="25" sqltrans>
+						<OPTION value=true selected>
+							是
+						</OPTION>
+						<OPTION value=false>
+							否
+						</OPTION>
+					</SELECT>
+					<DIV id=lm_151
+						style="LEFT: 20px; WIDTH: 95px; POSITION: absolute; TOP: 175px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						是否可以浏览：
+					</DIV>
+					<SELECT id=lm_152
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 175px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="true&#13;&#10;false" temptext="是&#13;&#10;否" sql
+						backwidth="97" backheight="25" sqltrans>
+						<OPTION value=true selected>
+							是
+						</OPTION>
+						<OPTION value=false>
+							否
+						</OPTION>
+					</SELECT>
+					<DIV id="savetype_div"
+						style="LEFT: 20px; WIDTH: 98px; POSITION: absolute; TOP: 215px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						文件保存类型：
+					</DIV>
+					<SELECT id="savetype"
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 215px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="true&#13;&#10;false"
+						temptext="保存到文件系统&#13;&#10;不保存到文件系统" sql backwidth="131"
+						backheight="25" sqltrans>
+						<OPTION value="2" selected>
+							入库
+						</OPTION>
+						<OPTION value="1">
+							存文件
+						</OPTION>
+						<OPTION value="0">
+							两者都
+						</OPTION>
+					</SELECT>
+					<!--
+					<SELECT id=lm_114
+						style="LEFT: 282px; WIDTH: 97px; POSITION: absolute; TOP: 6px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1" tempvalue
+						temptext sql backwidth="97" backheight="25" sqltrans></SELECT>
+					-->
+					<INPUT id=lm_112
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 15px; HEIGHT: 19px"
+						onmovestart=moveStart() size=15 controltype="text">
+					<DIV id=lm_121
+						style="LEFT: 20px; WIDTH: 73px; POSITION: absolute; TOP: 55px; HEIGHT: 15px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						控件标题：
+					</DIV>
+					<DIV id=lm_171
+						style="LEFT: 20px; WIDTH: 73px; POSITION: absolute; TOP: 255px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						上传类型：
+					</DIV>
+					<INPUT id=lm_172
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 255px; HEIGHT: 19px"
+						onmovestart=moveStart() size=23 controltype="text" value="*.*">
+					<DIV id=lm_181
+						style="LEFT: 20px; WIDTH: 120px; POSITION: absolute; TOP: 295px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						最大上传大小(KB)：
+					</DIV>
+					<INPUT id=lm_182
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 295px; HEIGHT: 19px"
+						onmovestart=moveStart() size=24 controltype="text" value="16000">
+					<DIV id=lm_161
+						style="LEFT: 20px; WIDTH: 73px; POSITION: absolute; TOP: 335px; HEIGHT: 22px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label1"
+						NotBg="否">
+						保存路径：
+					</DIV>
+					<INPUT id=lm_162
+						style="LEFT: 150px; WIDTH: 131px; POSITION: absolute; TOP: 335px; HEIGHT: 19px"
+						onmovestart=moveStart() size=23 controltype="text" value="">
+
+					<DIV class="STYLE1" style="LEFT: 285px; POSITION: absolute; TOP: 17px; HEIGHT:15px;TEXT-ALIGN: left;color:#FF0000">*</DIV>
+					<DIV class="STYLE1" style="LEFT: 284px; POSITION: absolute; TOP: 57px; HEIGHT:15px;TEXT-ALIGN: left;color:#FF0000">*</DIV>
+					<DIV class="STYLE1" style="LEFT: 284px; POSITION: absolute; TOP: 257px;HEIGHT:15px;TEXT-ALIGN: left;color:#FF0000">*</DIV>
+					<DIV class="STYLE1" style="LEFT: 283px; POSITION: absolute; TOP: 297px;HEIGHT:15px;TEXT-ALIGN: left;color:#FF0000">*</DIV>
+
+				</DIV>
+				<DIV class=tab-page style="WIDTH: 402px; HEIGHT: 430px;display:none">
+					<H2 class=tab>
+						样式
+					</H2>
+					<DIV id=lm_211
+						style="LEFT: 31px; WIDTH: 77px; POSITION: absolute; TOP: 26px; HEIGHT: 21px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						定位类型：
+					</DIV>
+					<SELECT id=lm_212
+						style="LEFT: 97px; WIDTH: 57px; POSITION: absolute; TOP: 24px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="true&#13;&#10;false" temptext="绝对&#13;&#10;静态" sql
+						backwidth="120" backheight="25" sqltrans>
+						<OPTION value=absolute selected>
+							绝对
+						</OPTION>
+						<OPTION value=static>
+							静态
+						</OPTION>
+					</SELECT>
+					<DIV id=lm_326
+						style="LEFT: 31px; WIDTH: 77px; POSITION: absolute; TOP: 78px; HEIGHT: 21px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						按百分比：
+					</DIV>
+					<input id=lm_410 type=checkbox onclick="selectOn(this)" controltype="checkbox" style="LEFT: 97px; WIDTH: 20px; POSITION: absolute; TOP: 76px; HEIGHT: 19px"/>
+					<DIV id=lm_324
+						style="LEFT: 129px; WIDTH: 27px; POSITION: absolute; TOP: 78px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						宽：
+					</DIV>
+					<INPUT id=lm_229
+						style="LEFT: 159px; WIDTH: 35px; POSITION: absolute; TOP: 76px; HEIGHT: 19px;display:none;"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_325
+						style="LEFT: 209px; WIDTH: 27px; POSITION: absolute; TOP: 78px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						高：
+					</DIV>
+					<INPUT id=lm_230
+						style="LEFT: 239px; WIDTH: 35px; POSITION: absolute; TOP: 76px; HEIGHT: 19px;display:none;"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_327
+						style="LEFT: 289px; WIDTH: 27px; POSITION: absolute; TOP: 78px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						所在DIV的ID：
+					</DIV>
+					<INPUT id=lm_235
+						style="LEFT: 360px; WIDTH: 35px; POSITION: absolute; TOP: 76px; HEIGHT: 19px;display:none;"
+						onmovestart=moveStart() size=6 controltype="text">
+						
+					<DIV id=lm_221
+						style="LEFT: 31px; WIDTH: 30px; POSITION: absolute; TOP: 128px; HEIGHT: 20px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						左：
+					</DIV>
+					<INPUT id=lm_222
+						style="LEFT: 57px; WIDTH: 35px; POSITION: absolute; TOP: 126px; HEIGHT: 19px"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_223
+						style="LEFT: 115px; WIDTH: 30px; POSITION: absolute; TOP: 128px; HEIGHT: 20px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						上：
+					</DIV>
+					<INPUT id=lm_224
+						style="LEFT: 140px; WIDTH: 35px; POSITION: absolute; TOP: 126px; HEIGHT: 19px"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_225
+						style="LEFT: 197px; WIDTH: 30px; POSITION: absolute; TOP: 128px; HEIGHT: 20px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						高：
+					</DIV>
+					<INPUT id=lm_226
+						style="LEFT: 222px; WIDTH: 35px; POSITION: absolute; TOP: 126px; HEIGHT: 19px"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_227
+						style="LEFT: 284px; WIDTH: 30px; POSITION: absolute; TOP: 128px; HEIGHT: 20px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						宽：
+					</DIV>
+					<INPUT id=lm_228
+						style="LEFT: 307px; WIDTH: 35px; POSITION: absolute; TOP: 126px; HEIGHT: 19px"
+						onmovestart=moveStart() size=6 controltype="text">
+					<DIV id=lm_231
+						style="LEFT: 210px; WIDTH: 77px; POSITION: absolute; TOP: 26px; HEIGHT: 21px; TEXT-ALIGN: left"
+						onmovestart=moveStart() noWrap controltype="label" value="label13"
+						NotBg="否">
+						展示方式：
+					</DIV>
+					<SELECT id=lm_232
+						style="LEFT: 275px; WIDTH: 81px; POSITION: absolute; TOP: 23px; HEIGHT: 25px"
+						onmovestart=moveStart() controltype="combobox" check="1"
+						tempvalue="false&#13;&#10;true" temptext="弹出窗口&#13;&#10;嵌入窗口" sql
+						backwidth="120" backheight="25" sqltrans>
+						<OPTION value=false>
+							弹出窗口
+						</OPTION>
+						<OPTION value=true selected>
+							嵌入窗口
+						</OPTION>
+					</SELECT>
+				</DIV>
+				<DIV class=tab-page style="WIDTH: 402px; HEIGHT: 430px;display:none">
+					<H2 class=tab>
+						函数
+					</H2>
+					<DIV id=lm_311
+						style="LEFT: 37px; WIDTH: 124px; POSITION: absolute; TOP: 44px; HEIGHT: 15px"
+						onmovestart=moveStart() noWrap controltype="label" value="label19"
+						NotBg="否">
+						删除文件回调函数：
+					</DIV>
+					<INPUT id=lm_312
+						style="LEFT: 181px; WIDTH: 164px; POSITION: absolute; TOP: 42px; HEIGHT: 20px"
+						onmovestart=moveStart() size=29 controltype="text">
+					<DIV id=lm_321
+						style="LEFT: 37px; WIDTH: 145px; POSITION: absolute; TOP: 93px; HEIGHT: 15px"
+						onmovestart=moveStart() noWrap controltype="label" value="label19"
+						NotBg="否">
+						文件上传完毕回调函数：
+					</DIV>
+					<INPUT id=lm_322
+						style="LEFT: 181px; WIDTH: 164px; POSITION: absolute; TOP: 91px; HEIGHT: 20px"
+						onmovestart=moveStart() size=29 controltype="text">
+				</DIV>
+			</DIV>
+			<SCRIPT>var tab1 = new WebFXTabPane( document.getElementById( "tab1" ) );</SCRIPT>
+			<BUTTON id=FCButton8
+				style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 231px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 390px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8"
+				controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON>
+			<BUTTON id=FCButton9
+				style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 323px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 390px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8"
+				controltype="button" onclick='bill_onclick("exitbill")'
+				dropstyle="否"></BUTTON>
+		</DIV>
+	</body>
+</html>

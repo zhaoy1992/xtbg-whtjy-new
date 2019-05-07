@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_open() {
+	var printer=pubDataSet[4];
+	var oDom =printer.oBillXml;
+	if (oDom==null||oDom.documentElement==null)
+		return;
+	for(var i=0;i<oDom.documentElement.childNodes.length;i++){
+		var oOpt=document.createElement("option")
+		oOpt.text=oDom.documentElement.childNodes(i).nodeName;
+		oOpt.value=oDom.documentElement.childNodes(i).nodeName;
+		lstDj.add(oOpt);
+		
+	}
+	
+}	
+function uf_ok() {
+	if(lst.selectedIndex>=0){
+		window.returnValue = lst.value ;
+	}
+	else if (lstDj.selectedIndex>=0){
+		window.returnValue = lstDj.value;
+			
+	}
+	CloseBill() ;
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><label><id>Label1</id></label><listbox><id>lst</id><id>lstDj</id></listbox><button><id>FCButton1</id><id>FCButton2</id></button></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>FCButton1</taborder><taborder>FCButton2</taborder><taborder>lst</taborder><taborder>lstDj</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="260" poswidth="300" postop posleft entertype="修改" window="有模式窗口" keyfield codeheader="BBB" mkbh caption="选择变量" type="PR" dj_sn="ep_selvar" BLONopen="uf_open()" center="居中"><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 222px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 28px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 222px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 60px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON><SELECT id=lst style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 3px; WIDTH: 100px; FONT-FAMILY: ; POSITION: absolute; TOP: 26px; HEIGHT: 175px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("lstDj.selectedIndex = -1;")' size=8 controltype="listbox" temptext="[&#13;&#10;]&#13;&#10;<&#13;&#10;>&#13;&#10;行号&#13;&#10;总行数&#13;&#10;当前日期&#13;&#10;当前年&#13;&#10;当前月&#13;&#10;当前日" tempvalue="#LSB&#13;&#10;#RSB&#13;&#10;#LT&#13;&#10;#GT&#13;&#10;#LINE&#13;&#10;#LINES&#13;&#10;curDate()&#13;&#10;curYear()&#13;&#10;curMonth()&#13;&#10;curDay()" sql check="1" china ondblclick='bill_ondblclick("uf_ok()")' backwidth="100" backheight="180"><OPTION value=#LSB>[</OPTION><OPTION value=#RSB>]</OPTION><OPTION value=#LT>&lt;</OPTION><OPTION value=#GT>&gt;</OPTION><OPTION value=#LINE>行号</OPTION><OPTION value=#LINES>总行数</OPTION><OPTION value=curDate()>当前日期</OPTION><OPTION value=curYear()>当前年</OPTION><OPTION value=curMonth()>当前月</OPTION><OPTION value=curDay()>当前日</OPTION></SELECT><SPAN id=Label1 style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 16px; LEFT: 5px; WIDTH: 78px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 3px; HEIGHT: 20px; TEXT-ALIGN: left; TEXT-DECORATION: underline; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label1" controltype="label">变量</SPAN><SELECT id=lstDj style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 108px; WIDTH: 100px; FONT-FAMILY: ; POSITION: absolute; TOP: 26px; HEIGHT: 175px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() onchange='bill_onclick("lst.selectedIndex = -1;")' size=8 controltype="listbox" temptext tempvalue sql check="1" china ondblclick='bill_ondblclick("uf_ok()")'></SELECT></DIV></body></html>

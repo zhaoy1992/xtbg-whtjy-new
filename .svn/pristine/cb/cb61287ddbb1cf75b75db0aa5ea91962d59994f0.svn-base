@@ -1,0 +1,79 @@
+//////////////////////////////////////////////////
+//判断一个对象是否为数组
+function isVarArray(isObj)
+{
+	if(typeof(isObj.length) != "number")
+	{
+		return false;
+	}
+	
+	//识别出伪造的Array对象
+	//利用Array列不出length属性特征 
+	var bFound = false;
+	for(var prop in isObj)
+	{
+		if(prop == "length")
+		{
+			bFound = true;
+			break;
+		}
+	}
+	
+	return !bFound;
+}
+
+function isObjInList(obj, list)
+{
+	var bRet = false;
+	for(var i = 0; i < list.length; i ++)
+	{
+		if(obj == list[i]) 
+		{
+			bRet = true;
+			break;
+		}
+	}
+	
+	return bRet;
+}
+
+//深度复制一个对象， 外部调用不传递cpdList参数
+//注意：该函数目前还不能处理像window这类系统复杂对象
+/***
+function deepCopyObject(srcObj, cpdList)
+{
+	var strTpName = typeof(srcObj);
+	if((strTpName == "unknown") || (strTpName == "error")) return null;
+	if((strTpName != "object") || (srcObj == null)) return srcObj;
+	
+	if(!cpdList) cpdList = new Array();
+	cpdList[cpdList.length] = srcObj;
+		
+	var dstObj = null;
+	if(isVarArray(srcObj))
+	{
+		dstObj = new Array();
+	}
+	else
+	{
+		dstObj = new Object();
+	}
+		
+	for(var prop in srcObj)
+	{
+		//防止复制已经复制的属性造成死循环
+		if((typeof(srcObj[prop]) != "object")
+			|| isObjInList(srcObj[prop], cpdList))
+		{			
+			dstObj[prop] = srcObj[prop];
+		}
+		else
+		{
+			dstObj[prop] = deepCopyObject(srcObj[prop], cpdList);
+		}
+	}
+	
+	return dstObj;
+}
+***/
+//////////////////////////////////////////////////

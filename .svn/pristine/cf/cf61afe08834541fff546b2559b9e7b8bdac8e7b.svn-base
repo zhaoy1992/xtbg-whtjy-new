@@ -1,0 +1,4 @@
+1.修改流程监控：将活动实例列表的“超期？”改为“是否超期”
+Modified: ProcessInstanceMonitor\src\com\chinacreator\workflow\graph\components\ActivityInstancePanel.as  
+Modified: Shark-Extend\WebRoot\common_workflow\monitor\ProcessInstanceMonitor.swf  
+

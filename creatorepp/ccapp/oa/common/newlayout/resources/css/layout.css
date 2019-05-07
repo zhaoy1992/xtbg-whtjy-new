@@ -1,0 +1,106 @@
+@charset utf-8;/*!@author:刘双双. @update:2013-09-24 网站布局容器的共用的CSS部分：页眉、页脚、搜索共用CSS*/ 
+
+#wrap{ width:100%; margin:0px auto;}
+
+/* 页眉 */
+#header{ background:#3c86db; color:#FFF; width:100%; margin-left:auto; margin-right:auto;}
+.topnav{height:56px; width:98%; margin:0px auto;}
+.topnav .logo{ width:360px; height:56px; line-height:56px; float:left; font-family:"microsoft yahei"; color:#FFF; font-size:27px;}
+.topnav .sidebar{height:33px; width:400px; float:right; display:inline; margin-top:10px;}
+.sidebar ul li{ width:18px; height:23px; margin-top:10px; float:left; margin-left:25px; background:url(../images/btn.png) repeat-x; display:inline;}
+.sidebar .sidebar_an1{ width:18px; height:18px; float:right; background-position:0px -26px; }
+.sidebar .sidebar_an2{ width:18px; height:18px; float:right; background-position:0px -50px;}
+.sidebar .sidebar_an3{ width:18px; height:18px; float:right; background-position:0px -74px;}
+.sidebar .sidebar_an4{ width:18px; height:18px; float:right; background-position:0px -98px;}
+.sidebar .sidebar_an5{ width:18px; height:18px; float:right; background-position:0px -122px;}
+.sidebar .sidebar_an6{ width:18px; height:18px; float:right; background-position:-26px -146px;}
+.sidebar .sidebar_an1 a,.sidebar .sidebar_an2 a,.sidebar .sidebar_an3 a,.sidebar .sidebar_an4 a,.sidebar .sidebar_an5 a,.sidebar .sidebar_an6 a{width:18px;height:18px;float:left;}
+.sidebar .sidebar_an1 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -26px;}
+.sidebar .sidebar_an2 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -50px;}
+.sidebar .sidebar_an3 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -74px;}
+.sidebar .sidebar_an4 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -98px;}
+.sidebar .sidebar_an5 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -122px;}
+.sidebar .sidebar_an6 a:hover{ width:18px; height:18px; float:right; background:url(../images/btn.png) no-repeat -26px -168px;}
+
+/* 主体 */
+#main{ width:100%; float:left;}
+.nav{width:100%; float:left; position:relative; margin-left:auto; margin-right:auto;}
+.mainnav{ height:33px; background:#3c86db; color:#FFF; width:100%; margin-left:auto; margin-right:auto; float:left; border-bottom:solid 1px #0c5fbd;}
+.bottomnav{height:34px; width:98%; margin:0px auto;}
+.mainleft1{height:33px;  float:left; overflow:hidden; zoom:1; width:100%;}
+.mainleft { float:left;}
+
+.funcBar{ width:19px; height:19px; float:left; margin-top:5px;}
+.funcBar a{ width:19px; height:19px; float:left; background:url(../images/nav.png) no-repeat 0px -387px;}
+.funcBar a:hover{ width:19px; height:19px; float:left; background:url(../images/nav.png) no-repeat 0px -416px;}
+.funcBar_box{border:solid 1px #c4c4c4; width:380px; height:350px; float:left; position:absolute; z-index:990; left:5px; top:96px; clear:both; background:#FFF; float:left; overflow-y:scroll; scrollbar-arrow-color:#ffffff; /*三角箭头的颜色*/scrollbar-face-color:#e7e7e7; /*立体滚动条的颜色（包括箭头部分的背景色）*/scrollbar-3dlight-color:#ffffff ;  /*立体滚动条亮边的颜色*/scrollbar-highlight-color:#cbcbcb; /*滚动条的高亮颜色（左阴影？）*/scrollbar-shadow-color:#ffffff; /*立体滚动条阴影的颜色*/scrollbar-darkshadow-color:#cbcbcb; /*立体滚动条外阴影的颜色*/}
+.funcBar_box ul li{width:80px; height:80px; margin-left:30px; margin-top:30px; display:inline; float:left; line-height:30px; text-align:center; overflow:hidden; }
+.funcBar_box .func_an1{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px 0px;}
+.funcBar_box .func_an2{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -60px;}
+.funcBar_box .func_an3{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -120px;}
+.funcBar_box .func_an4{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -180px;}
+.funcBar_box .func_an5{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -240px;}
+.funcBar_box .func_an6{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -300px;}
+.funcBar_box .func_an7{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -360px;}
+.funcBar_box .func_an8{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -420px;}
+.funcBar_box .func_an9{width:80px; height:50px; float:left; background:url(../images/ico_da.png) no-repeat 4px -480px;}
+
+.menu {width:65px; height:33px; float:left; margin-left:10px; display:inline;}
+.menu a{ width:65px; height:33px; float:left; background:url(../images/nav.png) no-repeat 0px 0px;}
+.menu a b{ background:url(../images/btn.png) 0px 0px; float:left; width:16px; height:16px; margin-top:10px; margin-left:25px; display:inline;}
+.menu a:hover{ width:65px; height:33px; float:left; background:url(../images/nav.png) no-repeat 0px -43px;}
+.submenu { width:110px; height:33px; float:left; margin-left:1px; display:inline; line-height:33px; font-family:"microsoft yahei"; color:#FFF; font-size:14px;}
+.submenu_left{ width:87px; background:url(../images/nav.png) 0px -126px; height:33px; float:left; padding-left:8px; text-align:center;}
+.submenu_left a{ color:#FFF;}
+.submenu_right{background:url(../images/nav.png) -95px -126px; width:15px; height:33px; float:left;}
+.submenu_right a{width:11px; height:11px; background:url(../images/pic.png) no-repeat -93px -123px; float:left; margin-left:4px; margin-top:13px; display:inline;}
+.submenu_right a:hover{background:url(../images/pic.png) no-repeat -93px -140px; width:11px; height:11px; float:left; }
+.submenu .colse{position:absolute; z-index:1000; float:right; right:5px; top:13px; clear:both; width:11px; height:11px; background:url(../images/pic.png) no-repeat -93px -123px; }
+.submenu .colse a{width:11px; height:11px; float:left;}
+.submenu .colse a:hover{ background:url(../images/pic.png) no-repeat -93px -140px; width:11px; height:11px; float:left; }
+
+.submenu_guanbi{width:27px; height:28px; margin-top:5px;float:left;background:url(../images/nav.png) no-repeat 0px -349px; margin-left:1px; display:inline;}
+.submenu_guanbi a{width:27px; height:28px; float:left;}
+.submenu_guanbi a:hover{ width:27px; height:28px; float:left; background:url(../images/nav.png) no-repeat 0px -311px; }
+.submenu_guanbi_list{border:solid 1px #c4c4c4; background:#FFF; width:150px; float:left; position:absolute; z-index:999; right:967px; top:90px; clear:both;}
+.submenu_guanbi_list ul li{ text-align:center; float:left; line-height:30px; height:30px; overflow:hidden; background:none; width:150px; }
+.submenu_guanbi_list ul li a:hover{float:left; height:30px; width:150px; background:#2d59b3; color:#FFF; }
+
+/* 横向二级菜单 */
+.subnav{ width:100%; height:35px; line-height:35px; float:left; background:url(../images/bg.png) repeat-x 0px 0px; position:relative;}
+.subnav ul li{ padding-left:20px; padding-right:20px; text-align:center; float:left; background:url(../images/pic.png) no-repeat -98px -70px; font-family:"microsoft yahei"; font-size:14px; color:#666666;}
+.subnav .xinjian{ width:90px; height:26px; line-height:26px; float:left; margin-left:10px; margin-right:20px; display:inline; margin-top:4px;}
+.subnav .xinjian a{ width:58px; padding-left:32px; height:26px; float:left; background:url(../images/nav.png) no-repeat 0px -171px;}
+.subnav .xinjian a:hover { width:58px; padding-left:32px; height:26px; float:left; background:url(../images/nav.png) no-repeat 0px -211px;}
+.subnav_more{ float:left; line-height:33px; height:33px; width:60px; margin-top:1px;}
+.subnav_more a{ color:#999999; height:33px; width:60px; float:left;}
+.subnav_more a p{font-family:"microsoft yahei"; font-size:12px; line-height:33px; height:33px; float:left; padding-left:10px;}
+.subnav_more a b{ background:url(../images/pic.png) no-repeat -94px -157px; float:left; margin-left:10px; width:6px; height:3px; display:inline; margin-top:15px;}
+.subnav_more a:hover{ color:#0177fe; height:33px; width:60px; float:left;}
+/*.subnav_more_zi{ float:left; line-height:33px; height:33px; width:60px; margin-top:1px; position:absolute; z-index:1000; right:563px; top:0px; clear:both;}
+.subnav_more_zi a{ color:#000000; background-color:#ffffff; height:33px; width:60px; float:left; border-left:solid 1px #c4c4c4; border-right:solid 1px #c4c4c4; border-top:solid 1px #c4c4c4;}
+.subnav_more_zi a p{font-family:"microsoft yahei"; font-size:12px; line-height:33px; height:33px; float:left; padding-left:10px;}
+.subnav_more_zi a b{ background:url(../images/pic.png) no-repeat -94px -157px; float:left; margin-left:10px; width:6px; height:3px; display:inline; margin-top:15px;}
+.subnav_more_zi a:hover{ color:#000000; background-color:#ffffff; height:33px; width:60px; float:left; border-left:solid 1px #c4c4c4; border-right:solid 1px #c4c4c4; border-top:solid 1px #c4c4c4;}*/
+.subnav_more_list{ border:solid 1px #c4c4c4; background:#FFF; width:115px; float:left; position:absolute; z-index:999; right:561px; top:34px; clear:both;}
+.subnav_more_list ul li{ padding-left:10px; float:left; line-height:30px; height:30px; overflow:hidden; background:none;}
+
+/* 纵向二级菜单 */
+.main_content{width:100%; margin:0px auto; }
+.content{ width:100%; margin:0px auto; margin-top:20px;}
+.lay_1{ float:left; width:180px; margin-right:20px; display:inline;}
+.lay_1 h3 {float:left; height:31px; width:180px; margin-bottom:10px; }
+.lay_1 h3 b{ width:116px; height:31px; line-height:31px; text-align:center; color:#FFF; font-size:14px; background:url(../images/box_bj.png) no-repeat 0px 0px; margin-left:30px; display:inline; float:left;  }
+.lay_1 h3 b a{ color:#FFF;}
+.lay_1 ul li{float:left; height:30px; line-height:30px; overflow:hidden; width:150px; font-size:14px; padding-left:30px;}
+.lay_1 ul li a{ color:#000;}.content .lay_1 ul li a:hover { color:#3c86db;}
+.lay_1 .lay_a_xuan{color:#3c86db; font-weight:bold; background:url(../images/pic.png) no-repeat -97px -170px; width:150px; height:30px; float:left}
+.lay_1 .lay_a_xuan a{color:#3c86db; }
+
+.lay_2{ overflow:hidden; zoom:1;margin-top:20px;}
+
+/* 页角 */
+#footer{ width:100%; background:#333438; height:120px; text-align:center; line-height:30px; color:#c0c0c0; padding-top:25px; font-family:"microsoft yahei"; float:left; margin-top:20px;}
+#footer a{ color:#c0c0c0;}
+#footer a:visited{ color:#c0c0c0;}
+#footer a:hover{ color:#FFF;}

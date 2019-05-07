@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_open() {
+	e_PropWinOnload();
+	SetButtonImage(cmdTitle,"../images/ef_run_button_font.gif");
+	SetButtonImage(cmdXTitle,"../images/ef_run_button_font.gif");
+	SetButtonImage(cmdYTitle,"../images/ef_run_button_font.gif");
+	SetButtonImage(cmdXLabel,"../images/ef_run_button_font.gif");
+	SetButtonImage(cmdYLabel,"../images/ef_run_button_font.gif");
+	SetButtonImage(cmdLegend,"../images/ef_run_button_font.gif");
+	
+	SetButtonImage(cmdbg,"../images/ef_run_button_color.gif");
+	SetButtonImage(cmdbgArea,"../images/ef_run_button_color.gif");	
+	SetButtonImage(cmdbgLegend,"../images/ef_run_button_color.gif");
+	var handle = function () {ClearBgColor(event.srcElement);}		
+	lblbg.onclick = handle;
+	lblbgArea.onclick = handle;
+	lblbgLegend.onclick = handle;
+	
+	if(typeof pubDataSet.charttype != "undefined")
+		cboType.value = pubDataSet.charttype;
+	if(typeof pubDataSet.maxcols != "undefined")
+		txtMaxCols.value = pubDataSet.maxcols;
+	var sHeight = "35px";
+	var sHtml = "";
+	var arr = ["Column","Line","Pie","Point","Bubble","Spline","StepLine","Bar","StackedBar","StackedBar100","StackedColumn","StackedColumn100","Area","SplineArea","StackedArea","StackedArea100","Doughnut","Stock","CandleStick","Range"];
+	var arrName = ["直方图","折线图","园饼图","点状图","泡泡图","平滑线图","层次线图","条形图","堆积条形图","100%堆积条形图","堆积直方图","100%堆积直方图","区域图","平滑区域图","堆积区域图","100%堆积区域图","园环图","股票图","烛状图","范围图"];
+	for(var i=0;i<arr.length;i++){
+		sHtml += "<tr height='"+sHeight+"'><td style='font-size:16px'><img src='../../fceform/ereport/images/"+arr[i]+".gif'/>"	+ arrName[i]+"</td></tr>";
+	}
+	cboType.xml = sHtml;
+	//设置表格中的下拉列表
+	var sHtml1 = "<code><format></format><sql1></sql1><xml>"
+	var sHtml2 = "</xml><blninput>否</blninput><blnempty>否</blnempty><check>2</check><onclickopen>event.showlist=true</onclickopen></code>"
+	grid1.tab.children[0].children[3].cz  = sHtml1+sHtml+sHtml2 ;
+	
+	var s = pubDataSet.innerText
+	if(s.substring(0,7) != "=chart(") return ;
+	s = s.substring(8,s.length-2) ; //去掉外面的chart(
+	var arr = s.split("&");
+	for(var i=0;i<arr.length;i++){
+		var arr1 = arr[i].split("=");
+		uf_setText(arr1[0],arr1[1]);	
+	}
+	dataset1.OpenXmlData(unescape(pubDataSet.chartseries));
+	
+	function uf_setText(name,value) {
+		switch (name) {
+			case "title" : txtTitle.value = value; break;
+			case "xtitle" : txtxTitle.value = value; break;
+			case "ytitle" : txtyTitle.value = value; break;
+			case "xlabel" : txtxLabel.value = value; break;
+			case "ylabel" : txtyLabel.value = value; break;
+			
+			case "titlefont" : _setFontStyle(lblTitle,value); break;
+			case "titlecolor" : _setColorStyle(lblTitle,value); break;
+			case "xtitlefont" : _setFontStyle(lblXTitle,value); break;
+			case "xtitlecolor" : _setColorStyle(lblXTitle,value); break;
+			case "ytitlefont" : _setFontStyle(lblYTitle,value); break;
+			case "ytitlecolor" : _setColorStyle(lblYTitle,value); break;
+			case "xlabelfont" : _setFontStyle(lblXLabel,value); break;
+			case "xlabelcolor" : _setColorStyle(lblXLabel,value); break;
+			case "ylabelfont" : _setFontStyle(lblYLabel,value); break;
+			case "ylabelcolor" : _setColorStyle(lblYLabel,value); break;
+			case "legendfont" : _setFontStyle(lblLegend,value); break;
+			case "legendcolor" : _setColorStyle(lblLegend,value); break;
+			case "is3d" : SetCheckBoxValue(chkIs3d,value); break;
+			case "islegend" : SetCheckBoxValue(chkLegend,value); break;
+
+			case "bgcolor" : _setBgColorStyle(lblbg,value); break;
+			case "areabgcolor" : _setBgColorStyle(lblbgArea,value); break;
+			case "legendbgcolor" : _setBgColorStyle(lblbgLegend,value); break;
+			case "isxgrid" : SetCheckBoxValue(chkXGrid,value); break;
+			case "isygrid" : SetCheckBoxValue(chkYGrid,value); break;
+			case "isxlabelangle" : SetCheckBoxValue(chkXLabelAngle,value); break;
+
+
+			default: {
+				
+				break;	
+			}
+		}
+		function _setFontStyle(lbl,value){
+			var arr = value.split(',');
+			lbl.style.fontFamily = arr[0];
+			lbl.style.fontSize = arr[1];
+			var i = ToInt(arr[3]);
+			if(i>=4){
+				lbl.style.textDecoration = "underline";
+				i = i - 4 ;
+			}
+			if(i>=2){
+				lbl.style.fontStyle = "italic";
+				i = i -2 ;
+			}
+			if(i>=1){
+				lbl.style.fontWeight = "bold";
+			}
+			
+		}
+		function _setColorStyle(lbl,value){
+			lbl.style.color = value;	
+		}
+		function _setBgColorStyle(lbl,value){
+			lbl.style.backgroundColor = value;	
+		}
+	}
+	
+}
+function uf_ok() {
+	if(DsBeforeSave(dataset1,grid1)) return;
+	var s = "";
+	var sTmp = "";
+	sTmp = Trim(txtTitle.value);
+	if(IsSpace(sTmp)==false) s += "title="+sTmp+"&";
+	sTmp = Trim(txtxTitle.value);
+	if(IsSpace(sTmp)==false) s += "xtitle="+sTmp+"&";
+	sTmp = Trim(txtyTitle.value);
+	if(IsSpace(sTmp)==false) s += "ytitle="+sTmp+"&";
+	sTmp = Trim(txtxLabel.value);
+	if(IsSpace(sTmp)==false) s += "xlabel="+sTmp+"&";
+	sTmp = Trim(txtyLabel.value);
+	if(IsSpace(sTmp)==false) s += "ylabel="+sTmp+"&";
+	
+	var arr = _getStyle(lblTitle);
+	if(IsSpace(arr[0])==false) s += "titlefont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "titlecolor="+arr[1]+"&";
+	arr = _getStyle(lblXTitle);
+	if(IsSpace(arr[0])==false) s += "xtitlefont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "xtitlecolor="+arr[1]+"&";
+	arr = _getStyle(lblYTitle);
+	if(IsSpace(arr[0])==false) s += "ytitlefont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "ytitlecolor="+arr[1]+"&";
+	arr = _getStyle(lblXLabel);
+	if(IsSpace(arr[0])==false) s += "xlabelfont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "xlabelcolor="+arr[1]+"&";
+	arr = _getStyle(lblYLabel);
+	if(IsSpace(arr[0])==false) s += "ylabelfont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "ylabelcolor="+arr[1]+"&";
+	arr = _getStyle(lblLegend);
+	if(IsSpace(arr[0])==false) s += "legendfont="+arr[0]+"&";
+	if(IsSpace(arr[1])==false) s += "legendcolor="+arr[1]+"&";
+
+
+	sTmp = Trim(chkIs3d.value);
+	if(IsSpace(sTmp)==false) s += "is3d="+sTmp+"&";
+	sTmp = Trim(chkLegend.value);
+	if(IsSpace(sTmp)==false) s += "islegend="+sTmp+"&";
+
+	sTmp = lblbg.style.backgroundColor;
+	if(IsSpace(sTmp)==false && sTmp != "transparent" ) s += "bgcolor="+sTmp+"&";
+	sTmp = lblbgArea.style.backgroundColor;
+	if(IsSpace(sTmp)==false && sTmp != "transparent" ) s += "areabgcolor="+sTmp+"&";
+	sTmp = lblbgLegend.style.backgroundColor;
+	if(IsSpace(sTmp)==false && sTmp != "transparent" ) s += "legendbgcolor="+sTmp+"&";
+
+	sTmp = chkXGrid.value;
+	if(sTmp=="0") s += "isxgrid="+sTmp+"&";
+	sTmp = chkYGrid.value;
+	if(sTmp=="0") s += "isygrid="+sTmp+"&";
+	sTmp = chkXLabelAngle.value;
+	if(sTmp=="1") s += "isxlabelangle="+sTmp+"&";
+	sTmp = txtMaxCols.value;
+	if(sTmp!="0") s += "maxcols="+sTmp+"&";
+	
+	if(IsSpace(Trim(cboType.value))) cboType.value = "直方图";
+	var bool = false;
+	var tgrid = grid1.tab;
+	var l = tgrid.rows.length;
+	for(var i=1;i<l;i++){
+		var sName = tgrid.rows(i).cells(1).innerText;
+		if(IsSpace(sName)) continue;
+		var sValue = tgrid.rows(i).cells(2).innerText;
+		if(IsSpace(sValue)) continue;
+		var sType = Trim(tgrid.rows(i).cells(3).innerText) ;
+		if(IsSpace(sType)) sType = Trim(cboType.value);
+		if(IsSpace(sType)) continue;
+		var sIsValueLabel="0";
+		if(dataset1.oDom.documentElement.childNodes(i-1).childNodes(3).text == "是")
+			sIsValueLabel="1";
+		s += "s"+(9+i)+"_name="+sName+"&";
+		s += "s"+(9+i)+"_value="+sValue+"&";
+		s += "s"+(9+i)+"_charttype="+sType+"&";
+		s += "s"+(9+i)+"_isvaluelabel="+sIsValueLabel+"&";
+		var sColor = Trim(tgrid.rows(i).cells(5).innerText);
+		if(IsSpace(sColor) == false)
+			s += "s"+(9+i)+"_color="+sColor+"&";
+		bool=true;
+	}
+	if(bool==false){
+		alert("至少要设置好一行系列!");
+		return;	
+	}
+	
+	if(s!= "") s= s.substring(0,s.length-1);
+	s = "=chart(\"" + s + "\")";
+	window.returnValue = s;
+	
+	pubDataSet.chartseries = escape(dataset1.xml);
+	pubDataSet.charttype=cboType.value;
+	pubDataSet.e_data_type="4"; //强制单元格数据类型为统计图
+	pubDataSet.style.backgroundImage="url(../images/eb_design_cell_chart.gif)";
+	pubDataSet.maxcols=txtMaxCols.value;
+	window.close();
+	
+	function _getStyle(lbl){
+		var sFont = lbl.style.fontFamily + "," +lbl.style.fontSize+",";
+		var istyle = 0;
+		if(lbl.style.fontWeight == "bold") istyle += 1 ;
+		if(lbl.style.fontStyle == "italic") istyle += 2 ;
+		if(lbl.style.textDecoration == "underline") istyle += 4 ;
+		sFont += istyle ;
+		var arr = new Array();
+		arr[0]=Trim(sFont);
+		arr[1]=Trim(lbl.style.color);
+		if(arr[0] == "宋体,10pt,0" || arr[0]==",,0") arr[0]=""; //未改变字体
+		return arr;
+		
+	}
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../js/fcdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule("fc\\:fc_code","behavior: url(../htc/fc_code.htc)",0);</script><script >document.styleSheets[0].addRule("fc\\:webgrid","behavior: url(../htc/webgrid.htc)",0);</script><script src='../js/fcwebgrid.js'></script><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script><script >document.styleSheets[0].addRule(".xpSpin","behavior: url(../htc/NumEdit.htc)",0);</script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;fcdate.js&#13;&#10;~userfunc.js" BLONopen="uf_open()" center="居中" contxml="<root><checkbox><id>chkIs3d</id><id>chkLegend</id><id>chkXGrid</id><id>chkYGrid</id><id>chkXLabelAngle</id></checkbox><label><id>label1</id><id>label5</id><id>label7</id><id>label38</id><id>label40</id><id>label42</id><id>label43</id><id>lblSeriesColor</id><id>label47</id><id>label48</id><id>lblTitle</id><id>lblYTitle</id><id>lblXTitle</id><id>lblXLabel</id><id>lblYLabel</id><id>lblLegend</id><id>lblbg</id><id>lblbgArea</id><id>lblbgLegend</id></label><tab><id>tab1</id></tab><button><id>cmdAdd</id><id>cmdDel</id><id>cmdTitle</id><id>cmdXTitle</id><id>cmdYTitle</id><id>cmdXLabel</id><id>cmdYLabel</id><id>cmdLegend</id><id>cmdbg</id><id>cmdbgArea</id><id>cmdbgLegend</id><id>cmdOk</id><id>cmdClose</id></button><text><id>txtTitle</id><id>txtxTitle</id><id>txtyTitle</id><id>txtxLabel</id><id>txtyLabel</id></text><dropdownlist><id>cboType</id></dropdownlist><grid><id>grid1</id></grid><dataset><id>dataset1</id></dataset><spin><id>txtMaxCols</id></spin></root>" billtaborder="<root><taborder>chkIs3d</taborder><taborder>txtTitle</taborder><taborder>txtxTitle</taborder><taborder>txtyTitle</taborder><taborder>txtxLabel</taborder><taborder>txtyLabel</taborder><taborder>grid1</taborder><taborder>chkLegend</taborder><taborder>cmdAdd</taborder><taborder>cmdDel</taborder><taborder>cmdOk</taborder><taborder>cmdClose</taborder><taborder>cmdTitle</taborder><taborder>cmdXTitle</taborder><taborder>cmdYTitle</taborder><taborder>cmdXLabel</taborder><taborder>cmdYLabel</taborder><taborder>cmdLegend</taborder><taborder>cboType</taborder><taborder>cmdbg</taborder><taborder>cmdbgArea</taborder><taborder>cmdbgLegend</taborder><taborder>chkXGrid</taborder><taborder>chkYGrid</taborder><taborder>chkXLabelAngle</taborder><taborder>txtMaxCols</taborder></root>" dj_sn="eb_chart" type="PR" caption="chart属性" mkbh codeheader="BBB" entertype="修改" poswidth="430" posheight="380" controlno="SKButton:0;SKDBedit:0;checkbox:2;label:48;radio:1;listbox:0;textarea:0;combobox:7;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:2;tab:1;div:0;DsMain_field:0;a:0;button:12;text:19;hr:0;checkboxlist:0;radiolist:0;dropdownlist:1;grid:1;dataset:1;spin:12;excel:0;tree:0" keyfield window="有模式窗口" posleft postop isfile="否" idtype="1" toolbar="不带工具栏" OtherSave="否"><DIV class=tab-pane id=tab1 style="LEFT: 3px; WIDTH: 403px; POSITION: absolute; TOP: 1px; HEIGHT: 311px" IsHideTitle="undefined" showtype="luna">
+<DIV class=tab-page style="WIDTH: 403px; HEIGHT: 293px">
+<H2 class=tab>常规</H2>
+<DIV id=label1 style="FONT-SIZE: 10pt; LEFT: 11px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 16px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">统计图标题:</DIV>
+<DIV id=label5 style="FONT-SIZE: 10pt; LEFT: 28px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 37px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">x轴标题:</DIV>
+<DIV id=label7 style="FONT-SIZE: 10pt; LEFT: 210px; WIDTH: 54px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 36px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label7" NotBg="否">x轴标签值:</DIV>
+<DIV id=chkIs3d style="FONT-SIZE: 10pt; LEFT: 240px; WIDTH: 72px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 81px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="1" NotBg="否" divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>3D立体图</SPAN></DIV><INPUT id=txtTitle style="LEFT: 83px; WIDTH: 110px; POSITION: absolute; TOP: 12px; HEIGHT: 20px" onmovestart=moveStart() size=19 controltype="text"><INPUT id=txtxTitle style="LEFT: 83px; WIDTH: 110px; POSITION: absolute; TOP: 33px; HEIGHT: 20px" onmovestart=moveStart() controltype="text"><INPUT id=txtyTitle style="LEFT: 83px; WIDTH: 110px; POSITION: absolute; TOP: 54px; HEIGHT: 20px" onmovestart=moveStart() controltype="text"><INPUT id=txtxLabel style="LEFT: 278px; WIDTH: 95px; POSITION: absolute; TOP: 33px; HEIGHT: 20px" onmovestart=moveStart() size=15 controltype="text"><INPUT id=txtyLabel style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 278px; WIDTH: 95px; FONT-FAMILY: ; POSITION: absolute; TOP: 54px; HEIGHT: 20px; BACKGROUND-COLOR: white" onmovestart=moveStart() size=15 controltype="text"><?xml:namespace prefix = fc /><fc:webgrid id=grid1 onkeydown='bill_ongridkeydown("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' ondblclick='bill_ongriddblclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' onclick='bill_ongridclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' bodyrows="-1" bodyrowheight="-1" autosize="否" hideHscroll="否" hideVscroll="否" SetRowHeight="是" canselect="是" autoheight="否" autowidth="否" autoappend="否" readonly="否" visible="是" dataset="dataset1" format="<cols><col><fname>name</fname><cname>系列名</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>value</fname><cname>系列值</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>charttype</fname><cname>图形类型</cname><width>10</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>140</columnwidth><align>left</align></col><col><fname>isvaluelabel</fname><cname>值标签</cname><width>10</width><dtype>字符</dtype><readonly>勾</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>50</columnwidth><align>left</align></col><col><fname>color</fname><cname>颜色</cname><width>10</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u662F%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Conclickopen%3ESelColor%28lblSeriesColor%29%3Bevent.ret%3DlblSeriesColor.style.backgroundColor%3Bevent.showlist%3Dfalse%3B%3C/onclickopen%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>60</columnwidth><align>left</align></col></cols>" width="368" height="106" top="142" left="5" ParentPos="相对"> 
+<TABLE id=t style="TABLE-LAYOUT: fixed; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow>
+<TD></TD></TR></TBODY></TABLE></fc:webgrid>
+<DIV id=chkLegend style="FONT-SIZE: 10pt; LEFT: 316px; WIDTH: 72px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 81px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="1" NotBg="否" divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>显示图例</SPAN></DIV><BUTTON id=cmdAdd style="LEFT: 66px; WIDTH: 55px; POSITION: absolute; TOP: 114px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("dataset1.Append()")'></BUTTON><BUTTON id=cmdDel style="LEFT: 125px; WIDTH: 55px; POSITION: absolute; TOP: 114px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("dataset1.Delete()")'></BUTTON> 
+<DIV id=label38 style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 210px; WIDTH: 54px; FONT-FAMILY: ; POSITION: absolute; TOP: 56px; HEIGHT: 15px; BACKGROUND-COLOR: white" onmovestart=moveStart() noWrap controltype="label" value="label7" NotBg="否">y轴标签值:</DIV><fc:fc_code id=cboType visible="是" dataset="undefined" sqltrans="" blninput="否" blnempty="否" addrow="否" multiselect="否" xml="" sql2="" format="" enabled="false" width="148px" height="20" top="82" left="82" ParentPos="相对" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" align="undefined" field="undefined" position="absolute"></fc:fc_code>
+<DIV id=label40 style="LEFT: 11px; WIDTH: 65px; POSITION: absolute; TOP: 127px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label40" NotBg="否">系列：</DIV>
+<DIV id=label42 style="FONT-SIZE: 10pt; LEFT: 27px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 59px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">y轴标题:</DIV>
+<DIV id=label43 style="FONT-SIZE: 10pt; LEFT: 8px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 86px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">统计图类型:</DIV>
+<DIV id=chkXGrid style="LEFT: 240px; WIDTH: 80px; POSITION: absolute; TOP: 102px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="1" NotBg="否" divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>显示x轴网格线</SPAN></DIV>
+<DIV id=chkYGrid style="LEFT: 240px; WIDTH: 80px; POSITION: absolute; TOP: 121px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="1" NotBg="否" divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>显示y轴网格线</SPAN></DIV>
+<DIV id=lblSeriesColor style="DISPLAY: none; LEFT: 10px; WIDTH: 48px; POSITION: absolute; TOP: 102px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label46" NotBg="否">lblSeriesColor</DIV>
+<DIV id=label47 style="LEFT: 212px; WIDTH: 40px; POSITION: absolute; TOP: 12px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label47" NotBg="否">仅用前</DIV>
+<DIV class=xpSpin id=txtMaxCols style="LEFT: 251px; WIDTH: 35px; POSITION: absolute; TOP: 7px; HEIGHT: 22px; align: undefined" align="undefined ParentPos='相对' " dataset="undefined" value="0" enabled="否" NextNum="1" Max="32000" Min="0" width="35px" height="22px" top="7px" left="251px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" field="undefined"></DIV>
+<DIV id=label48 style="LEFT: 290px; WIDTH: 65px; POSITION: absolute; TOP: 12px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label48" NotBg="否">条数据来画图</DIV></DIV>
+<DIV class=tab-page style="WIDTH: 403px; HEIGHT: 293px">
+<H2 class=tab>样式</H2>&nbsp;&nbsp; 
+<DIV id=lblTitle style="FONT-SIZE: 10pt; LEFT: 51px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 18px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">标题</DIV>
+<DIV id=lblYTitle style="LEFT: 51px; WIDTH: 18px; POSITION: absolute; TOP: 105px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label26" NotBg="否">y轴标题</DIV>
+<DIV id=lblXTitle style="FONT-SIZE: 10pt; LEFT: 51px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 62px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">x轴标题</DIV>
+<DIV id=lblXLabel style="FONT-SIZE: 10pt; LEFT: 243px; WIDTH: 24px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 17px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label5" NotBg="否">x轴标签</DIV>
+<DIV id=lblYLabel style="LEFT: 243px; WIDTH: 18px; POSITION: absolute; TOP: 61px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label26" NotBg="否">y轴标签</DIV>
+<DIV id=lblLegend style="LEFT: 243px; WIDTH: 18px; POSITION: absolute; TOP: 104px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label26" NotBg="否">图例</DIV><BUTTON id=cmdTitle style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 16px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 11px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblTitle,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdXTitle style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 16px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 55px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblXTitle,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdYTitle style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 16px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 100px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblYTitle,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdXLabel style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 208px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 13px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblXLabel,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdYLabel style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 208px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 56px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblYLabel,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdLegend style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 208px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 98px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick="bill_onclick(&quot;DjOpen('fontlist',lblLegend,'展现','有模式窗口','直接','字体属性')&quot;)"></BUTTON><BUTTON id=cmdbg style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 17px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("SelColor(lblbg)")'></BUTTON> 
+<DIV id=lblbg style="LEFT: 51px; WIDTH: 44px; POSITION: absolute; TOP: 148px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label44" NotBg="否">背景色</DIV>
+<DIV id=lblbgArea style="LEFT: 142px; WIDTH: 44px; POSITION: absolute; TOP: 148px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label44" NotBg="否">区域背景色</DIV><BUTTON id=cmdbgArea style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 108px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("SelColor(lblbgArea)")'></BUTTON> 
+<DIV id=lblbgLegend style="LEFT: 246px; WIDTH: 44px; POSITION: absolute; TOP: 148px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label44" NotBg="否">图例背景色</DIV><BUTTON id=cmdbgLegend style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 212px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("SelColor(lblbgLegend)")'></BUTTON> 
+<DIV id=chkXLabelAngle style="LEFT: 20px; WIDTH: 80px; POSITION: absolute; TOP: 182px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="0" NotBg="否" divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>x轴标签竖排</SPAN></DIV></DIV></DIV>
+<SCRIPT>var tab1 = new WebFXTabPane( document.getElementById( "tab1" ) );</SCRIPT>
+<fc:dataset id=dataset1 opensortno="1" temptable="TMP_DATASET1" format="<fields><field><fieldname>name</fieldname><datatype>字符</datatype><displaylabel>系列名</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>value</fieldname><datatype>字符</datatype><displaylabel>系列值</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>charttype</fieldname><datatype>字符</datatype><displaylabel>图形类型</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>isvaluelabel</fieldname><datatype>字符</datatype><displaylabel>值标签</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>color</fieldname><datatype>字符</datatype><displaylabel>颜色</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>否</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><name></name><value></value><charttype></charttype><isvaluelabel></isvaluelabel><color></color></dsid>")' onGetText='bill_ondatasetgettext("<dsid><name></name><value></value><charttype></charttype><isvaluelabel></isvaluelabel><color></color></dsid>")' onSetText='bill_ondatasetsettext("<dsid><name></name><value></value><charttype></charttype><isvaluelabel></isvaluelabel><color></color></dsid>")'></fc:dataset><BUTTON id=cmdOk style="LEFT: 257px; WIDTH: 55px; POSITION: absolute; TOP: 321px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'></BUTTON><BUTTON id=cmdClose style="LEFT: 320px; WIDTH: 55px; POSITION: absolute; TOP: 321px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'></BUTTON></DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT>
+</body></html>

@@ -1,0 +1,416 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>//赋值到SKDBcombobox1控件
+//分两个数据库版本的值:oracle, sqlserver
+function uf_evaluate(){
+	var sHtml="";
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		sHtml="<option value='bigint'>bigint</option>"
+			+"<option value='binary'>binary</option>"
+			+"<option value='bit'>bit</option>"
+			+"<option value='char'>char</option>"
+			+"<option value='datetime'>datetime</option>"
+			+"<option value='decimal'>decimal</option>"
+			+"<option value='float'>float</option>"
+			+"<option value='image'>image</option>"
+			+"<option value='int'>int</option>"
+			+"<option value='money'>money</option>"
+			+"<option value='nchar'>nchar</option>"
+			+"<option value='ntext'>ntext</option>"
+			+"<option value='numeric'>numeric</option>"
+			+"<option value='nvarchar'>nvarchar</option>"
+			+"<option value='real'>real</option>"
+			+"<option value='smalldatetime'>smalldatetime</option>"
+			+"<option value='smallint'>smallint</option>"
+			+"<option value='smallmoney'>smallmoney</option>"
+			+"<option value='sql_variant'>sql_variant</option>"
+			+"<option value='text'>text</option>"
+			+"<option value='timestamp'>timestamp</option>"
+			+"<option value='tinyint'>tinyint</option>"
+			+"<option value='uniqueidentifier'>uniqueidentifier</option>"
+			+"<option value='varbinary'>varbinary</option>"
+			+"<option value='varchar'>varchar</option>"	
+	}
+	if(fcpubdata.databaseTypeName=="oracle"){
+		sHtml="<option value='CHAR'>CHAR</option>"
+			 +"<option value='VARCHAR2'>VARCHAR2</option>"
+		     +"<option value='NCHAR'>NCHAR</option>"
+		     +"<option value='NVARCHAR2'>NVARCHAR2</option>"
+		     +"<option value='NUMBER'>NUMBER</option>"
+		     +"<option value='DATE'>DATE</option>"
+		     +"<option value='LONG'>LONG</option>"
+		     +"<option value='RAW'>RAW</option>"
+		     +"<option value='LONG RAW'>LONG RAW</option>"
+		     +"<option value='ROWID'>ROWID</option>"
+		     +"<option value='BLOB'>BLOB</option>"
+		     +"<option value='CLOB'>CLOB</option>"
+		     +"<option value='NCLOB'>NCLOB</option>"
+		     +"<option value='BFILE'>BFILE</option>"
+		     +"<option value='UROWID'>UROWID</option>"
+		     +"<option value='FLOAT'>FLOAT</option>"
+		     +"<option value='XMLTYPE'>XMLTYPE</option>"
+	}
+	var ss=SelectAddOption(SKDBcombobox1,sHtml);
+	SKDBcombobox1.outerHTML=ss;
+}
+function uf_open(){
+	uf_evaluate();
+	if(fcpubdata.databaseTypeName=="oracle"){
+		SKDBcombobox1.value="VARCHAR2";
+		FCDBedit2.value="10"
+	}
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		SKDBcombobox1.value="varchar";
+		FCDBedit2.value="50"	
+	}
+	uf_disabled();	
+	
+}
+function uf_ok(){
+	var TAB= pubdjbh                  //表名
+	var ZD=FCDBedit1.value;			  //字段名
+	var LX=SKDBcombobox1.value;		  //字段类型
+	var WD=FCDBedit2.value;			  //字段宽度
+	var JD=FCDBedit3.value;			  //字段精度
+	var sNull=SKDBcombobox2.value     //允许空
+	var DF=""						  //默认值
+	var sSql="alter  table  "+TAB+" add  "+ZD+" "+LX;	
+	if(fcpubdata.databaseTypeName=="sqlserver"){				    					  
+		if(uf_sDefault()=="0"){
+			alert("验证列的默认值时出错")
+			return;
+		}else{
+		
+			if(SKDBcombobox1.value=="char" || SKDBcombobox1.value=="nchar" || SKDBcombobox1.value=="nvarchar" || SKDBcombobox1.value=="varchar" ){
+				if(IsSpace(FCDBedit5.value)==false){
+					sSql=sSql+"("+WD+") "+sNull+" DEFAULT '"+FCDBedit5.value+"'";
+				}else{
+					sSql=sSql+"("+WD+") "+sNull
+				}
+			}
+			if(SKDBcombobox1.value=="decimal" || SKDBcombobox1.value=="numeric"){
+				if(IsSpace(FCDBedit5.value)==false){
+					sSql=sSql+"("+WD+","+JD+") "+sNull+" DEFAULT "+FCDBedit5.value;
+				}else{
+					sSql=sSql+"("+WD+","+JD+") "+sNull
+				}		
+			}
+			if(SKDBcombobox1.value=="bigint" || SKDBcombobox1.value=="binary" || SKDBcombobox1.value=="bit" || SKDBcombobox1.value=="float" || SKDBcombobox1.value=="int" || SKDBcombobox1.value=="money" || SKDBcombobox1.value=="real" || SKDBcombobox1.value=="smallint" || SKDBcombobox1.value=="smallmoney" || SKDBcombobox1.value=="sql_variant" || SKDBcombobox1.value=="tinyint" || SKDBcombobox1.value=="varbinary" ){
+				if(IsSpace(FCDBedit5.value)==false){
+					sSql=sSql+" "+sNull+" DEFAULT "+FCDBedit5.value;
+				}else{
+					sSql=sSql+" "+sNull
+				}
+			}
+			if(SKDBcombobox1.value=="text" || SKDBcombobox1.value=="ntext"){
+				if(IsSpace(FCDBedit5.value)==false){
+					sSql=sSql+" "+sNull+" DEFAULT '"+FCDBedit5.value+"'";
+				}else{
+					sSql=sSql+" "+sNull
+				}
+			}
+		} 
+		var iCount=SqlToField("select count(*) from syscolumns where id=object_id(N'"+TAB+"') and name='"+ZD+"'")
+	}
+	
+	if(fcpubdata.databaseTypeName=="oracle"){
+		if(SKDBcombobox1.value=="NUMBER"){
+			if(IsSpace(FCDBedit5.value)==false){
+				sSql+="("+WD+","+JD+") default "+FCDBedit5.value	
+			}else{
+				sSql+="("+WD+","+JD+")"
+			}	
+		}
+		if(SKDBcombobox1.value=="FLOAT"){
+			if(IsSpace(FCDBedit5.value)==false){
+				sSql+="("+WD+") DEFAULT "+FCDBedit5.value;	
+			}else{
+				sSql+="("+WD+")"
+			}	
+		}
+		if(SKDBcombobox1.value=="CHAR" || SKDBcombobox1.value=="VARCHAR2" || SKDBcombobox1.value=="NCHAR" || SKDBcombobox1.value=="NVARCHAR2" || SKDBcombobox1.value=="RAW"){
+			if(IsSpace(FCDBedit5.value)==false){
+				sSql+="("+WD+") DEFAULT '"+FCDBedit5.value+"'";
+			}else{
+				sSql+="("+WD+")"
+			}	
+		}
+		if(SKDBcombobox1.value=="LONG RAW" || SKDBcombobox1.value=="BLOB" || SKDBcombobox1.value=="CLOB"){
+			if(IsSpace(FCDBedit5.value)==false){
+				sSql+=" DEFAULT '"+FCDBedit5.value+"'";	
+			}
+		}
+		if(SKDBcombobox1.value=="DATE"){
+			if(IsSpace(FCDBedit5.value)==false){
+				sSql+=" DEFAULT to_date('"+FCDBedit5.value+"','yyyy-mm-dd')"	
+			}	
+		}
+		var iCount=SqlToField("select count(*) from user_tab_columns where table_name='"+TAB+"' and column_name='"+ZD+"'")	
+	}
+	
+ 	if(iCount=="0"){
+ 		var s=InsertSql(sSql);
+ 		if(IsSpace(s)){
+ 			alert("添加成功")
+ 			window.returnValue="ok";
+ 			CloseBill();
+ 		}else{
+ 			alert(s);
+ 		}
+ 	}else{
+ 		alert('要添加的字段已经存在')
+ 	}
+ 	
+}
+
+//判断字段类型
+//触发时间：当改变字段类型时出发
+//参数1：sType 字段类型
+//参数2：sWidth 字段宽度
+//参数3：sPrecision 字段精度
+function changeType(sType,sWidth,sPrecision){
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		sPrecision="";
+		switch(sType){
+			case 'int':{
+				sWidth = "4";
+				FCDBedit2.readOnly=true;
+				break;
+			} 
+			case 'bigint':{
+				sWidth="8";
+				FCDBedit2.readOnly=true;
+				break;
+			} 
+			case 'bit':{
+				sWidth="1";
+				FCDBedit2.readOnly=true;
+				break;
+			} 
+			case 'datetime':{
+				sWidth="8";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'decimal':{
+				sWidth="9";
+				sPrecision="3";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'float':{
+				sWidth="8";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'image':{
+				sWidth="16";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'money':{
+				sWidth="8";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'ntext':{
+				sWidth="16";
+				break;
+			}
+			case 'numeric':{
+				sWidth="9";
+				sPrecision="3"
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'real':{
+				sWidth="4";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'smalldatetime':{
+				sWidth="4";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'smallint':{
+				sWidth="2";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'smallmoney':{
+				sWidth="4";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'sql_variant':{
+				sWidth="";
+				FCDBedit2.readOnly=true
+				break;
+			}
+			case 'text':{
+				sWidth="16";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'timestamp':{
+				sWidth="8";
+				FCDBedit2.readOnly=true
+				break;
+			}
+			case 'tinyint':{
+				sWidth="1";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'unqueidentifier':{
+				sWidth="16";
+				FCDBedit2.readOnly=true
+				break;
+			} 
+			case 'binary':{
+				sWidth="50";
+				break;
+			}
+			case 'varbinary':{
+				sWidth="50";
+				break;
+			} 
+			case 'char':{
+				sWidth="10";
+				break;
+			} 
+			case 'nchar':{
+				sWidth="10";
+				break;
+			} 
+			case 'varchar':{
+				sWidth="50";
+				break;
+			} 
+			case 'nvarchar':{
+				sWidth="50";
+				break;
+			} 
+		}
+	}
+	if(fcpubdata.databaseTypeName=="oracle"){
+		sPrecision="";
+		sWidth="";
+		switch(sType){
+			case 'CHAR':{
+				sWidth = "10";
+				break;
+			}
+			case 'VARCHAR2':{
+				sWidth = "10";
+				break;
+			}
+			case 'NCHAR':{
+				sWidth = "10";
+				break;
+			}
+			case 'NVARCHAR2':{
+				sWidth = "10";
+				break;
+			}
+			case 'NUMBER':{
+				sWidth = "10";
+				sPrecision="0"
+				break;
+			}
+			case 'RAW':{
+				sWidth = "10";
+				break;
+			}
+			case 'FLOAT':{
+				sWidth = "10";
+				break;
+			}
+		}	
+	}	
+	FCDBedit2.value=sWidth;
+	FCDBedit3.value=sPrecision;
+	uf_disabled();
+	
+}
+
+function uf_disabled(){
+	var sType=SKDBcombobox1.value;
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		if(sType!='numeric' && sType!='decimal'){
+			FCDBedit3.disabled=true;
+			FCDBedit3.style.backgroundColor="Menu"	
+		}else{
+			FCDBedit3.removeAttribute("disabled");
+			FCDBedit3.style.backgroundColor="white"
+		}
+	}
+	if(fcpubdata.databaseTypeName=="oracle"){
+		if(sType != 'NUMBER'){
+			FCDBedit3.disabled=true;
+			FCDBedit3.style.backgroundColor="Menu"	
+		}else{
+			FCDBedit3.removeAttribute("disabled");
+			FCDBedit3.style.backgroundColor="white"
+		}
+	}	
+}
+
+function uf_Precision(){
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		if(FCDBedit3.value>38){
+			alert("精度设置值必须位于1至38之间")	;
+			FCDBedit3.value="3";
+			return;
+		}
+	}
+	if(fcpubdata.databaseTypeName=="oracle"){
+		if(FCDBedit3.value>32767 && FCDBedit3.value<-32768){
+			alert("值必须介于 -32768 和 32767 之间")	;
+			FCDBedit3.value="3";
+			return;
+		}	
+	}
+}
+
+function uf_Width(){
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		if(FCDBedit2.value>8000){
+			alert("长度的设置值必须位于1至8000之间");
+			FCDBedit2.value="50";
+			return;
+		}
+	}
+}
+
+function uf_sDefault(){
+	if(fcpubdata.databaseTypeName=="sqlserver"){
+		if(SKDBcombobox1.value=="bigint" || SKDBcombobox1.value=="binary" || SKDBcombobox1.value=="bit" || SKDBcombobox1.value=="decimal" || SKDBcombobox1.value=="float" || SKDBcombobox1.value=="int" || SKDBcombobox1.value=="money" || SKDBcombobox1.value=="numeric" || SKDBcombobox1.value=="real" || SKDBcombobox1.value=="smallint" || SKDBcombobox1.value=="smallmoney" || SKDBcombobox1.value=="sql_variant" || SKDBcombobox1.value=="tinyint" || SKDBcombobox1.value=="varbinary"){
+			if(IsFloat(FCDBedit5.value)==false && IsSpace(FCDBedit5.value)==false){
+				return 0;	
+			}
+		}
+	}
+	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet BLONopen="uf_open()" toolbar="不带工具栏" contxml="<root><label><id>Label1</id><id>Label2</id><id>Label3</id><id>Label4</id><id>Label5</id><id>Label6</id></label><combobox><id>SKDBcombobox1</id><id>SKDBcombobox2</id></combobox><button><id>FCButton1</id><id>FCButton2</id></button><text><id>FCDBedit1</id><id>FCDBedit2</id><id>FCDBedit3</id><id>FCDBedit5</id></text></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" billtaborder="<root><taborder>FCDBedit1</taborder><taborder>SKDBcombobox1</taborder><taborder>FCDBedit2</taborder><taborder>FCDBedit3</taborder><taborder>SKDBcombobox2</taborder><taborder>FCDBedit5</taborder><taborder>FCButton1</taborder><taborder>FCButton2</taborder></root>" dj_sn="add_column" type="ST" caption="添加字段" mkbh codeheader="BBB" entertype="修改" poswidth="500" posheight="100" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" window="有模式窗口" posleft postop center="居中" keyfield isfile="否" OtherSave="否" idtype="1"><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 111px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label1" controltype="label">西文字段名</SPAN><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 120px; WIDTH: 103px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label2" controltype="label">字段类型</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 224px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label3" controltype="label">字段宽度</SPAN><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 290px; WIDTH: 44px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label4" controltype="label">精度</SPAN><SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 335px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label5" controltype="label">允许空</SPAN><SPAN id=Label6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 411px; WIDTH: 78px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label6" controltype="label">缺省值</SPAN><INPUT type=text id=FCDBedit1 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; BORDER-LEFT: dimgray 2px solid; WIDTH: 110px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 19px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onmovestart=moveStart() value controltype="text" CanSelect="false" china></INPUT><SELECT id=SKDBcombobox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 119px; WIDTH: 105px; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 39px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() onchange='bill_onclick("changeType(SKDBcombobox1.value,FCDBedit2.value,FCDBedit3.value)")' controltype="combobox" china check="1" sql temptext tempvalue sqltrans></SELECT><INPUT type=text id=FCDBedit2 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 223px; BORDER-LEFT: dimgray 2px solid; WIDTH: 65px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 19px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onmovestart=moveStart() value controltype="text" CanSelect="false" china onchange='bill_onclick("uf_Width()")'></INPUT><INPUT type=text id=FCDBedit3 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 289px; BORDER-LEFT: dimgray 2px solid; WIDTH: 45px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 19px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onmovestart=moveStart() value controltype="text" CanSelect="false" china onchange='bill_onclick("uf_Precision()")'></INPUT><SELECT id=SKDBcombobox2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 335px; WIDTH: 76px; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 29px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="combobox" china check="1" sql temptext="NULL&#13;&#10;NOT NULL" tempvalue="NULL&#13;&#10;NOT NULL" sqltrans><OPTION value=NULL selected>NULL</OPTION><OPTION value="NOT NULL">NOT NULL</OPTION></SELECT><INPUT type=text id=FCDBedit5 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 410px; BORDER-LEFT: dimgray 2px solid; WIDTH: 79px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 19px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onmovestart=moveStart() value controltype="text" CanSelect="false" china></INPUT><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 352px; WIDTH: 67px; FONT-FAMILY: ; POSITION: absolute; TOP: 47px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 423px; WIDTH: 67px; FONT-FAMILY: ; POSITION: absolute; TOP: 47px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON></DIV></body></html>

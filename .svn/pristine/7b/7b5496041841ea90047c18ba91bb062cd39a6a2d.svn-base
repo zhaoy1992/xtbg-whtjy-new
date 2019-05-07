@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">
+	
+	<!-- 短信发送线程 -->
+	<bean id="noteThread" class="com.chinacreator.xtbg.core.common.note.thread.NoteThread" init-method="start">
+		<!-- 是否启动短信线程（短信总开关）  -->
+		<property name="noteused" value="false"></property>
+		<!-- 是否启动短信获取回执状态 -->
+		<property name="reportused" value="false"></property>
+		<!-- 是否启动短信获取回复内容 -->
+		<property name="replyused" value="false"></property>
+		<!-- 线程执行间隔时间 -->
+		<property name="interval" value="30000"></property>
+		<!-- 短信发送注入实现类 -->
+		<property name="noteService" ref="jingdiNoteSendService"></property>
+	</bean>
+	
+	<!-- 电信ema6.0短信接口 -->
+	<bean id="ema6NoteSendService" class="com.chinacreator.xtbg.core.common.note.services.impl.Ema6NoteSendService">
+		<!-- 最大重发次数 -->
+		<property name="retry_times" value="3"></property>
+		<property name="noteBufferDao" ref="noteBufferDao"></property>
+		<property name="noteDetailDao" ref="noteDetailDao"></property>
+		<property name="noteBufferHisDao" ref="noteBufferHisDao"></property>
+		<property name="noteDetailHisDao" ref="noteDetailHisDao"></property>
+	</bean>
+	
+	<!-- MAS2.0 短信接口 -->
+	<bean id="mas2NoteSendService" class="com.chinacreator.xtbg.core.common.note.services.impl.mas2.services.Mas2NoteSendService">
+		<!-- 最大重发次数 -->
+		<property name="retry_times" value="3"></property>
+		<!-- mysql数据库地址 -->
+		<property name="mysql_url" value="jdbc:mysql://88.9.243.49:3306/dbema?characterEncoding=UTF-8"></property>
+		<!-- mysql数据库用户名 -->
+		<property name="mysql_userName" value="dbema"></property>
+		<!-- mysql数据库密码 -->
+		<property name="mysql_password" value="123456"></property>
+		<!-- 一次可发送的手机号码个数 -->
+		<property name="max_phone_num" value="50"></property>
+		<!-- EC/SI应用的ID -->
+		<property name="applicationid" value="APP051"></property>
+		<property name="noteBufferDao" ref="noteBufferDao"></property>
+		<property name="noteDetailDao" ref="noteDetailDao"></property>
+		<property name="noteBufferHisDao" ref="noteBufferHisDao"></property>
+		<property name="noteDetailHisDao" ref="noteDetailHisDao"></property>
+	</bean>
+	
+	<!-- 金迪短信猫 -->
+	<bean id="jingdiNoteSendService" class="com.chinacreator.xtbg.core.common.note.services.impl.jingdi.service.JingdiNoteSendService">
+		<!-- 最大重发次数 -->
+		<property name="retry_times" value="3"></property>
+		<property name="noteBufferDao" ref="noteBufferDao"></property>
+		<property name="noteDetailDao" ref="noteDetailDao"></property>
+		<property name="noteBufferHisDao" ref="noteBufferHisDao"></property>
+		<property name="noteDetailHisDao" ref="noteDetailHisDao"></property>
+	</bean>
+	<!-- Finance短信接口  add by chaun.lee 2013-12-05 -->
+	<bean id="financeNoteSendService" class="com.chinacreator.xtbg.core.common.note.services.impl.FinanceNoteSendService">
+		<!-- ws地址 -->
+		<property name="endpoint" value="http://10.104.7.2/services/cmcc_mas_wbs"></property>
+		<!-- 应用的ID -->
+		<property name="applicationID" value="HNCZT"></property>
+		<!-- 扩展码 -->
+		<property name="extendCode" value="001"></property>
+		
+		<property name="noteBufferDao" ref="noteBufferDao"></property>
+		<property name="noteDetailDao" ref="noteDetailDao"></property>
+		<property name="noteBufferHisDao" ref="noteBufferHisDao"></property>
+		<property name="noteDetailHisDao" ref="noteDetailHisDao"></property>
+	</bean>
+	<!-- add ended -->
+	
+	<!-- 短信dao接口注入 -->
+	<bean id="noteBufferDao" class="com.chinacreator.xtbg.core.common.note.dao.impl.NoteBufferDaoImpl"></bean>
+	<bean id="noteDetailDao" class="com.chinacreator.xtbg.core.common.note.dao.impl.NoteDetailDaoImpl"></bean>
+	<bean id="noteBufferHisDao" class="com.chinacreator.xtbg.core.common.note.dao.impl.NoteBufferHisDaoImpl"></bean>
+	<bean id="noteDetailHisDao" class="com.chinacreator.xtbg.core.common.note.dao.impl.NoteDetailHisDaoImpl"></bean>
+</beans>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frist-config>
+	<!-- 系统参数配置 -->
+	<system>
+		<sys_name>湖北省特检院办公自动化系统</sys_name>
+		<weather_url></weather_url>
+	</system>
+	<!-- 侍办事项配置 -->
+	<pending functionSql = "select getCountInfo(?) as object from dual">
+		<pending-item id="waitsp" name="等待审批" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=1</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+		<pending-item id="waitread" name="等待阅读" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=2</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+		<pending-item id="waitarchive" name="公文待办" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=3</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+		<pending-item id="waitprocess" name="事务待办" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=4</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+		<pending-item id="meetingnotice" name="会议通知" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=5</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+		<pending-item id="waittask" name="任务待办" >
+			<clickurl>/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp?index=6</clickurl>
+			<iframurl></iframurl>
+		</pending-item>
+	</pending>
+	<!-- 显示信息区域块 -->
+	<item>
+		<show-item id="gwdy" name="待办公文" showColumns="ins_name,accept_time"  columnsWidth="50%,50%" realShowColumns="ins_name,accept_time" dynamicUrlColumns="flow_form"
+		 urlParamColumns="ins_id,busi_id,actInsId,cc_form_instanceid,def_id,procId,actiontype_code,action_defid,busiTypeCode,list_type,operType,subid,template_id,Template">
+			<clickurl>/ccapp/oa/meeting/jsp/meetingnoticetab.jsp?list_type=worklist&amp;operType=daiban&amp;openwindID=sub_main_viewinfos&amp;subid=gwdy</clickurl>
+			<moreUrl>/ccapp/oa/process/flowprocessing/jsp/mainwork.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select ins_id,
+				       busi_id,
+				       actInsId,
+				       cc_form_instanceid,
+				       ins_code,
+				       busitype_code as busiTypeCode,
+				       busitype_name,
+				       ins_name,
+				       accepter,
+				       to_char(accept_time, 'yyyy-mm-dd hh24:mi') as accept_time,
+				       act_name,
+				       def_id,
+				       procId,
+				       action_defid,
+				       actiontype_code,
+				       lastmodifedtime,
+				       flow_form,
+				       template_id,
+				       'word'||template_id Template,
+				       'worklist' as list_type,
+				       'daiban' as operType,
+				       'gwdy' as subid
+				  from VIEW_OA_WORK_LIST t
+				 where t.username =
+				       (select u.user_name from td_sm_user u where u.user_id = ?)
+				 and t.BUSITYPE_CODE in (select TT.BUSITYPE_CODE from OA_FLOW_BUSITYPE tt
+											where tt.BUSITYPE_TYPE_CODE in (select TTT.BUSITYPE_TYPE_CODE from OA_FLOW_BUSITYPE_TYPE TTT WHERE TTT.IS_VALID = '1'))
+				 order by lastmodifedtime desc
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="tzgg" name="通知通告" showColumns="n_title,n_release_time" columnsWidth="70%,30%" realShowColumns="show_n_title,n_release_time" dynamicUrlColumns=""
+			urlParamColumns="n_notice_id,n_receiverid" >
+			<clickurl>/ccapp/oa/news/newnoticeview.jsp?isview=view&amp;subid=tzgg&amp;urls=jsy&amp;</clickurl>
+			<moreUrl>/ccapp/oa/notice/jsp/noticeviewlist.jsp?n_select_type=1</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+	     			select b.n_notice_id,
+					       to_char(b.n_release_time,'yyyy-mm-dd hh24:mi') as n_release_time,
+					       r.n_receiverid,
+					       decode(r.n_isview, '0', '未查看', '1', '已查看', '2', '撤销') as n_state,
+					       b.n_title,
+					       decode(r.n_isview,
+					              '0',
+					              '<strong style="color: red;">' || b.n_title ||
+					              '</strong>',
+					              b.n_title) as show_n_title
+					  from oa_notice_baseinfo b, oa_notice_receiver_user r
+					 where r.n_notice_id = b.n_notice_id
+					   and b.n_state in (1, 2)
+					   and r.n_isdel != '1'
+					   and r.n_receiver_userid = ?
+					   and b.n_select_type  ='1'
+					 order by b.n_release_time desc
+	 			]]>
+			</sql>
+		</show-item>
+		
+		<show-item id="cywj" name="传阅文件" showColumns="title,dates" realShowColumns="title,dates" columnsWidth="70%,30%" dynamicUrlColumns=""
+			urlParamColumns="busi_id,busiTypeCode,circularize_id,template_id,action_form,ins_id" >
+			<clickurl>/ccapp/oa/archive/showWordConext.jsp?list_type=worklis&amp;operType=yiban&amp;actiontype_code=04&amp;Template=word</clickurl>
+			<moreUrl>/ccapp/oa/archive/circularizelist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+			<![CDATA[
+					select f.is_view,
+					   decode(f.is_view,'1',f.circularize_title,'<strong style="color:red;">' || f.circularize_title || '</strong>') as title,
+				       to_char(f.entering_date, 'yyyy-mm-dd hh24:mi') dates,
+				       f.receive_userid,
+				       f.is_circularize,
+				       f.circularize_id,
+				       f.action_form,
+				       f.ins_id,
+				       f.busi_id,
+				       f.send_userid,
+				       u.user_realname,
+				       f.busitype_code as busiTypeCode,
+				       f.template_id
+				  from oa_circularize_flow f, td_sm_user u
+				 where f.receive_userid = ?
+				   and u.user_id = f.send_userid
+				   and (f.is_done is null or f.is_done = '0')
+				 order by entering_date desc
+			]]>
+			</sql>
+		</show-item>
+		<show-item id="zxfw" name="最新发文" showColumns="n_title,n_release_time" columnsWidth="70%,30%" realShowColumns="show_n_title,n_release_time" dynamicUrlColumns=""
+			urlParamColumns="n_notice_id,n_receiverid" >
+			<clickurl>/ccapp/oa/news/newnoticeview.jsp?isview=view&amp;subid=tzgg&amp;urls=jsy&amp;</clickurl>
+			<moreUrl>/ccapp/oa/notice/jsp/noticeviewlist.jsp?n_select_type=2</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+	     			select b.n_notice_id,
+					       to_char(b.n_release_time,'yyyy-mm-dd hh24:mi') as n_release_time,
+					       r.n_receiverid,
+					       decode(r.n_isview, '0', '未查看', '1', '已查看', '2', '撤销') as n_state,
+					       b.n_title,
+					       decode(r.n_isview,
+					              '0',
+					              '<strong style="color: red;">' || b.n_title ||
+					              '</strong>',
+					              b.n_title) as show_n_title
+					  from oa_notice_baseinfo b, oa_notice_receiver_user r
+					 where r.n_notice_id = b.n_notice_id
+					   and b.n_state in (1, 2)
+					   and r.n_isdel != '1'
+					   and r.n_receiver_userid = ?
+					   and  b.n_select_type  ='2'
+					 order by b.n_release_time desc
+	 			]]>
+			</sql>
+		</show-item>
+		<show-item id="shdb" name="事务待办" showColumns="ins_name,accept_time"  columnsWidth="50%,50%" realShowColumns="ins_name,accept_time" dynamicUrlColumns="flow_form"
+		 urlParamColumns="ins_id,busi_id,actInsId,cc_form_instanceid,def_id,procId,actiontype_code,action_defid,busiTypeCode,list_type,operType,subid,template_id,Template">
+			<clickurl>/ccapp/oa/meeting/jsp/meetingnoticetab.jsp?list_type=worklist&amp;operType=daiban&amp;openwindID=sub_main_viewinfos&amp;subid=shdb</clickurl>
+			<moreUrl>/ccapp/xtbg/tjy/processing/mainhandlist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select ins_id,
+				       busi_id,
+				       actInsId,
+				       cc_form_instanceid,
+				       ins_code,
+				       busitype_code as busiTypeCode,
+				       busitype_name,
+				       ins_name,
+				       accepter,
+				       to_char(accept_time, 'yyyy-mm-dd hh24:mi') as accept_time,
+				       act_name,
+				       def_id,
+				       procId,
+				       action_defid,
+				       actiontype_code,
+				       lastmodifedtime,
+				       flow_form,
+				       template_id,
+				       'word'||template_id Template,
+				       'worklist' as list_type,
+				       'daiban' as operType,
+				       'gwdy' as subid
+				  from VIEW_OA_WORK_LIST t
+				 where t.username =
+				       (select u.user_name from td_sm_user u where u.user_id = ?)
+				 and (t.BUSITYPE_CODE in (select TT.BUSITYPE_CODE from OA_FLOW_BUSITYPE tt
+											where tt.BUSITYPE_TYPE_CODE in (select TTT.BUSITYPE_TYPE_CODE from OA_FLOW_BUSITYPE_TYPE TTT WHERE TTT.IS_VALID = '0'))
+					or t.BUSITYPE_CODE in ('clgl-0001','clgl-0002'))
+				 order by lastmodifedtime desc
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="ldjh" name="领导讲话" showColumns="n_title,n_release_time" columnsWidth="70%,30%" realShowColumns="show_n_title,n_release_time" dynamicUrlColumns=""
+			urlParamColumns="n_notice_id,n_receiverid" >
+			<clickurl>/ccapp/oa/news/newnoticeview.jsp?isview=view&amp;subid=tzgg&amp;urls=jsy&amp;</clickurl>
+			<moreUrl>/ccapp/oa/notice/jsp/noticeviewlist.jsp?n_select_type=3</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+	     			select b.n_notice_id,
+		                 to_char(b.n_release_time,'yyyy-mm-dd hh24:mi') as n_release_time,
+		                 r.n_receiverid,
+		                 decode(r.n_isview, '0', '未查看', '1', '已查看', '2', '撤销') as n_state,
+		                 b.n_title,
+		                 decode(r.n_isview,
+		                        '0',
+		                        '<strong style="color: red;">' || b.n_title ||
+		                        '</strong>',
+		                        b.n_title) as show_n_title
+		            from oa_notice_baseinfo b, oa_notice_receiver_user r
+		           where r.n_notice_id = b.n_notice_id
+		             and b.n_state in (1, 2)
+		             and r.n_isdel != '1'
+		             and r.n_receiver_userid = ?
+		             and b.n_select_type  ='3'
+		           order by b.n_release_time desc
+	 			]]>
+			</sql>
+		</show-item>
+			<show-item id="gzdt" name="工作动态" showColumns="n_title,n_time" columnsWidth="70%,30%" realShowColumns="n_title,n_time" dynamicUrlColumns=""
+			urlParamColumns="n_id,is_reply" >
+			<clickurl>/ccapp/oa/news/newsview.jsp?indexReturn=gzdt&amp;operwindowid=sub_newsview</clickurl>
+			<moreUrl>/ccapp/oa/news/newsviewlist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select b.n_id as n_id,b.n_title as n_title,n_org_id,n_org_name,to_char(b.n_date,'yyyy-mm-dd hh24:mi') as n_time,
+				b.n_content,b.is_reply as is_reply from oa_news b where b.n_title <>  ?  order by b.n_date  desc
+	 			]]>
+			</sql>
+		</show-item>
+		<show-item id="glzd" name="管理制度" showColumns="n_title,n_release_time" columnsWidth="70%,30%" realShowColumns="show_n_title,n_release_time" dynamicUrlColumns=""
+			urlParamColumns="n_notice_id,n_receiverid" >
+			<clickurl>/ccapp/oa/news/newnoticeview.jsp?isview=view&amp;subid=tzgg&amp;urls=jsy&amp;</clickurl>
+			<moreUrl>/ccapp/oa/notice/jsp/noticeviewlist.jsp?n_select_type=4</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+	     			select b.n_notice_id,
+		                 to_char(b.n_release_time,'yyyy-mm-dd hh24:mi') as n_release_time,
+		                 r.n_receiverid,
+		                 decode(r.n_isview, '0', '未查看', '1', '已查看', '2', '撤销') as n_state,
+		                 b.n_title,
+		                 decode(r.n_isview,
+		                        '0',
+		                        '<strong style="color: red;">' || b.n_title ||
+		                        '</strong>',
+		                        b.n_title) as show_n_title
+		            from oa_notice_baseinfo b, oa_notice_receiver_user r
+		           where r.n_notice_id = b.n_notice_id
+		             and b.n_state in (1, 2)
+		             and r.n_isdel != '1'
+		             and r.n_receiver_userid = ?
+		             and b.n_select_type  ='4'
+		           order by b.n_release_time desc
+	 			]]>
+			</sql>
+		</show-item>
+
+    </item>
+</frist-config>

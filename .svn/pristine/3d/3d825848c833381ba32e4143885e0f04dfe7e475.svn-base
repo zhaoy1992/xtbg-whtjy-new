@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../../fceform/css/dj.css); 
+	</STYLE>
+		<script src="../../fceform/js/fcpub.js"></script>
+		<script src="../../fceform/js/fcrundj.js"></script>
+		<script src="../../fceform/js/tabpane.js"></script>	
+		<script src="../../fceform/js/ccpub.js"></script>	
+	</HEAD>
+	<body background="../../fceform/images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+<script>
+	var pubdjbh=parent.sOpenDjNo;
+	var pubEdit=false;   			
+	var pubDataSet=null;
+	var pubRequest=parent.oRequest;
+	var pubEformEnterStatus="OK"; 
+	var workflowid = "";
+	pub_djhtm();
+</script>
+<script>
+	function getControlAuthority(authority)
+	{	    
+	    authority = authority - 0;
+	    switch(authority){
+	        case -2:authority = "只读元素";break;
+        	case 0: authority = "可见(默认)";break;
+        	case 1: authority = "disabled";break;
+        	case 2: authority = "不可见";break;
+        	case 3: authority = "只读";break;
+        	case 4: authority = "允许修改，保留痕迹";break;
+        	case 5: authority = "领导手写批注";break;
+        	case 6: authority = "成文员文档核稿";break;
+        	case 7: authority = "允许修改，保留痕迹，可修订";break;
+        	case 8: authority = "允许修改，无痕迹";break;
+        	case 9: authority = "成文员文档核稿(带套红)";break;
+        	case 10:authority = "清稿有痕迹";break;
+        	case 11:authority = "文档核稿（只读）";break;
+        	default: authority = "是否为新的权限？";
+        }
+        return authority;
+	}
+    function style_select()
+	{
+	    var value_set = radio2.value;
+	    if(value_set == 0)
+	    {
+	       label1.disabled = true;
+	       textarea1.disabled = true;
+	    }
+	    else
+	    {
+	       label1.disabled = false;
+	       textarea1.disabled = false;
+	    }
+	}
+	function myInsert()
+	{
+	    var ctrl_id = pubDataSet[0];
+	    var dj_id = pubDataSet[1];
+	    var oid = pubDataSet[2];
+	    var styleName = (document.getElementById('textarea1')).value;
+	    var selectSql = "select perattr_type from TD_FORM_PERATTR where ctrl_id='"+ctrl_id+"' and oid ='"+oid+"'";
+	    var isExist = SelectSql(selectSql,1,5);
+	    if(isExist=="<root></root>")
+	    {
+	        var uuid = creator_getUUID();
+	        var insertSql = "insert into TD_FORM_PERATTR(PERATTR_ID,djid,oid,ctrl_id,perattr_type,readonlystyle) values('"+uuid+"',"+dj_id+",'"+oid+"','"+ctrl_id+"',-2"+",'"+styleName+"')";
+	        var result = creator_insert(insertSql);
+	        if(IsSpace(result))
+	        {
+	            alert("保存成功！");
+	        }
+	        else
+	        {
+	            alert("保存失败！");
+	            alert(result);
+	        }   
+	    }
+	    else
+	    {
+	        var old_authority = isExist.substring(isExist.indexOf("<fc>")+4,isExist.indexOf("</fc>"));               
+	        old_authority = getControlAuthority(old_authority);
+	        var current_authority = getControlAuthority(-2);
+	        if(old_authority != current_authority)
+	        {
+	         	if(!confirm('该元素已经设置为"'+old_authority+'",您确定要重新设置为"'+current_authority+'"？'))
+	         		return;
+	        }
+	       
+	        var updateSql = "update td_form_perattr set perattr_type = -2,readonlystyle = '" + styleName + "' where ctrl_id = '"+ctrl_id+"' and oid='"+oid+"'";
+		    var result = creator_update(updateSql);
+		    if(IsSpace(result))
+		    {
+		          alert("保存成功！");
+		    }
+		    else
+		    {
+		         alert("保存失败！");
+		         alert(result);
+		    }
+		}
+	    CloseBill();  
+	}
+</script>
+<script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" creatorType="6100" type="ZW" center="居中" toolbar="不带工具栏" billtaborder="<root><taborder>textarea1</taborder><taborder>button1</taborder><taborder>button2</taborder><taborder>radio2</taborder></root>" dj_sn="20081023160124718068" caption="设置只读权限" mkbh codeheader="BBB" keyfield BLONopen="setAuthority();" BLONclose="UnLoadWebOffice();" window="当前窗口" entertype="修改" creator_remark hasWorkflowButton="否" creator_elementAuthoritySwitch="否" creator_showAlert="是" creator_office_isBindForm="否" islog="否" isprotect="是" posleft postop poswidth="500" posheight="300" isfile="否" OtherSave="否" creator_csslib idtype="1" version="1.0" creator_pagination controlno="SKButton:0;SKDBedit:0;checkbox:0;label:1;radio:2;listbox:0;textarea:1;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:0;hr:0;checkboxlist:0;radiolist:1;dropdownlist:0;grid:0;dataset:1;spin:0;excel:0;tree:0;ebshow:0;creatorSubForm:0;creator_div:0" contxml="<root><label><id>label1</id></label><radio><id>radio2</id></radio><textarea><id>textarea1</id></textarea><button><id>button1</id><id>button2</id></button></root>"><FIELDSET id=radio2 contentEditable=false style="LEFT: 130px; WIDTH: 277px; COLOR: #000000; POSITION: absolute; TOP: 41px; HEIGHT: 159px" onmovestart=moveStart() temptext="不设置只读样式&#13;&#10;设置只读样式&#13;&#10;" tempvalue="0&#13;&#10;1" legend="样式设置" aspect="横向" onclick='bill_onclick("style_select()")' value="0" controltype="radio" NotBg="否"><LEGEND>样式设置</LEGEND><INPUT type=radio CHECKED value=0 name=RGradio2 text="不设置只读样式"><SPAN onclick=RGradio2[0].checked=true;radio2.value=RGradio2[0].value;RGradio2[0].focus();>不设置只读样式</SPAN>&nbsp;<INPUT type=radio value=1 name=RGradio2 text="设置只读样式"><SPAN onclick=RGradio2[1].checked=true;radio2.value=RGradio2[1].value;RGradio2[1].focus();>设置只读样式</SPAN>&nbsp;</FIELDSET> 
+<DIV id=label1 style="LEFT: 138px; WIDTH: 65px; POSITION: absolute; TOP: 95px; HEIGHT: 15px" disabled onmovestart=moveStart() noWrap value="label1" controltype="label" NotBg="否">样式名称：</DIV><TEXTAREA id=textarea1 style="LEFT: 206px; WIDTH: 182px; POSITION: absolute; TOP: 96px; HEIGHT: 85px" disabled onmovestart=moveStart() cols=36 value="textarea1" controltype="textarea" induce="否"></TEXTAREA><BUTTON id=button1 style="LEFT: 156px; WIDTH: 75px; POSITION: absolute; TOP: 219px; HEIGHT: 25px" onmovestart=moveStart() onclick='bill_onclick("myInsert()")' controltype="button" dropstyle="否">保存</BUTTON><BUTTON id=button2 style="LEFT: 296px; WIDTH: 75px; POSITION: absolute; TOP: 218px; HEIGHT: 25px" onmovestart=moveStart() onclick='bill_onclick("CloseBill()")' controltype="button" dropstyle="否">取消</BUTTON> </DIV></body></html>

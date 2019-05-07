@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var READFILETYPEID="";
+var READFILENAME="";
+$(function(){
+	var call = function(nameLast){
+		$("#readfilebody").html("");
+		if(!nameLast){nameLast="";}
+		$.post(getContextPath()+"/business",{methodName:'initReadType',classID:'readFile',name:nameLast},function(){
+			if(!response.result){return;}
+			var other = new Array();
+			$.each(response.result,function(key,val){
+				if(""==val.parent_name && val.parent != "0"){
+					other.push(val);
+					return;
+				}
+				var item = document.createElement("div");
+				 $(item).append(val.name);
+				if(val.parent == "0"){
+				     $("#readfilebody").append($(item));
+				     var superItem = document.createElement("div");
+				     $("#readfilebody").append($(superItem));
+				     $(item).addClass("readfileTitle");
+				     $(superItem).attr("id","superItem"+val.type);
+				     $(superItem).addClass("readfileTypebox")
+				}else{
+					$("#superItem"+val.parent).append($(item));
+				}
+				$(item).click(function(){
+					getIFrameWindow("_document_body_mian_twomina").reloadGrid(val.type);
+					READFILETYPEID = val.type;
+				});
+				$(item).attr("title",val.name);
+			});
+			if(other.length >0){
+				var item = document.createElement("div");
+				 $(item).append("其它");
+				 $("#readfilebody").append($(item));
+			     var superItem = document.createElement("div");
+			     $("#readfilebody").append($(superItem));
+			     $(item).addClass("readfileTitle");
+			     $(superItem).attr("id","superItemOther");
+			     $(superItem).addClass("readfileTypebox");
+			}
+			$.each(other,function(key,val){
+				var item = document.createElement("div");
+				 $(item).append(val.name);
+				 $(item).attr("title",val.name);
+				 $("#superItemOther").append($(item));
+				 $(item).click(function(){
+					 getIFrameWindow("_document_body_mian_twomina").reloadGrid(val.type);
+					 READFILETYPEID = val.type;
+				});
+			});
+			
+	  },"script");
+	} 
+	call("");
+	try{
+		getIFrameWindow("_document_body_mian_twomina").reloadGrid("-99");
+	}catch(error){}
+	 $("#but").click(function(){
+		 READFILENAME = $("#last").val();
+		 READFILETYPEID = "";
+		 getIFrameWindow("_document_body_mian_twomina").reloadGrid("-99");
+	 });
+});
+</script>
+</head>
+<body>
+<div class="readfilebox">
+   <div>
+      <input class="seachter_input" id="last"><input type="button" value="搜索" class="seachter_input_but"id="but">
+   </div>
+		<div class="readfilebody"  id="readfilebody">
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<dataSource>
+  <ds name="reportsource" dbType="oracle" user="xtbg_whtjy" password="123456" driverClass="oracle.jdbc.driver.OracleDriver" url="jdbc:oracle:thin:@//172.16.17.185:1521/orcl" transCharset="0" dbCharset="GBK" ideCharset="GBK" transSQLCharset="0" CaseSensitive="0" useSchema="1"/>
+</dataSource>

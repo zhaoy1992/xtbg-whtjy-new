@@ -1,0 +1,21 @@
+animation=1
+caption=test_MSStackedColumn2DLineDY
+xAxisName=Month
+PYaxisname=Sales in M$
+SYAxisName=Cost as % of Revenue
+numberPrefix=$
+numberSuffix=M
+snumberPrefix=#
+sNumberSuffix=%
+showValues=0
+useRoundEdges=1
+decimals=0
+
+dataSet.dataset.filedname=filed^filed^filed
+dataSet.dataset.seriesName=aa^bb^cc^
+dataSet.dataset.color=AFD8F8^F6BD0F^8BBA00
+dataSet.dataset.showValues=0^0^0^
+
+lineSet.filedName=filed4
+lineSet.seriesName=dd
+lineSet.showValues=0

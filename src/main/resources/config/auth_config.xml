@@ -1,0 +1,394 @@
+<config-map>
+  <config>
+    <type>23</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '23'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '23'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '23'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config>
+  <config>
+    <type>100</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '100'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '100'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '100'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config>
+  
+  
+   <config>
+    <type>40</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '40'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '40'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '40'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config> 
+  
+   <config>
+    <type>50</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '50'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '50'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '50'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config> 
+  
+  <config>
+    <type>28</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '28'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '28'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '28'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config> 
+  
+  
+  <config>
+    <type>1</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '1'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '1'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '1'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0)
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config> 
+  
+  
+   <config>
+    <type>56</type>
+    <auth>
+      <orgsql><![CDATA[select org_id, org_name, remark4, org_sn, parent_id 
+  from (select *
+          from td_sm_organization org
+         where instr((select ',' || ids || ','
+                       from ta_oa_resources_config
+                      where resources_id = '56'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+            or instr((select ',' || c.tree_jsondata || ','
+                       from ta_oa_resources_config c
+                      where resources_id = '56'
+                        and resources_configtypeid = ?
+                        and rownum = 1),
+                     org.org_id) > 0
+        union all
+        select *
+          from td_sm_organization o
+         start with o.org_id = (select ou.org_id
+                                  from td_sm_orguser ou
+                                 where ou.user_id = ?)
+        connect by prior　 o.parent_id　 = o.org_id)
+
+ group by org_id, org_name, remark4, parent_id, org_sn
+ order by org_sn
+         ]]></orgsql>
+         
+      <usersql><![CDATA[select o.org_id, t.user_id, t.user_name, t.user_realname
+   from (select rownum index_sn, org.org_id, org.org_name
+           from td_sm_organization org
+          start with org.org_id = (select org_id
+                                     from td_sm_organization cd
+                                    where cd.parent_id = '0')
+         connect by prior org.org_id = org.parent_id
+          order siblings by org.org_sn) o
+   left join td_sm_orguser ou on ou.org_id = o.org_id
+   left join td_sm_user t on t.user_id = ou.user_id
+   left join td_sm_userjoborg a on a.user_id = ou.user_id
+                               and ou.org_id = a.org_id
+  where t.user_id is not null and t.user_isvalid != '3' 
+    and (instr((select ',' || ids || ','
+                from ta_oa_resources_config
+               where resources_id = '56'
+                 and resources_configtypeid = ?
+                 and rownum = 1),
+              ',' || t.user_id || ',') > 0
+              or ou.org_id = (select ou.org_id
+                             from td_sm_orguser ou
+                            where ou.user_id = ?))
+  order by to_number(o.index_sn), a.same_job_user_sn, t.user_sn
+      ]]></usersql>
+    </auth>
+  </config> 
+  
+  
+</config-map>

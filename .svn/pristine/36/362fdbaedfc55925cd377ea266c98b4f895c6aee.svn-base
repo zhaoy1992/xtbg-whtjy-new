@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>选择执行类</title>
+
+		<meta http-equiv="content-type" content="text/html; charset=GBK">
+		<link rel="stylesheet" type="text/css" href="../js/Ext/css/ext-all.css" />
+		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+		<script type="text/javascript" charset="utf-8"
+			src="../js/Ext/ext-base.js"></script>
+		<script type="text/javascript" charset="utf-8"
+			src="../js/Ext/ext-all-debug.js"></script>
+		<script type="text/javascript" charset="utf-8"
+			src="../js/Ext/ext-lang-zh_CN.js"></script>
+	</head>
+	<script type="text/javascript">
+		var path = '/'+location.href.replace(/(http:\/\/.*?\/)(.*?\/)(.*)/g,"$2");
+		Ext.BLANK_IMAGE_URL = '../js/Ext/images/default/s.gif';
+		Ext.onReady(function(){
+			var record = new Ext.data.Record.create([{
+		      name: 'codeid',mapping: 0
+		  }, {
+		      name: 'package',mapping: 1
+		  }, {
+		      name: 'classname',mapping: 2
+		  }, {
+		      name: 'importstr',mapping: 3
+		  }, {
+		  	name: 'javacode'
+		  }]);
+		  
+		  var reader = new Ext.data.JsonReader({
+		  	totalProperty: "total",
+		 		root: "rows"
+		  },record);
+		  var s = new Ext.data.GroupingStore({
+		      reader: reader,
+		      sortInfo: {
+		          field: 'classname',
+		          direction: "ASC"
+		      },
+		      groupField: 'package',
+		      proxy: new Ext.data.HttpProxy({
+		          url: path+'/servlet/CreatorPTServlet?key=getJavaList',
+		          method: 'GET'
+		      })
+		  });
+		  
+		  var pagingBar = new Ext.PagingToolbar({
+		      pageSize: 20,
+		      store: s,
+		      displayInfo: true,
+		      displayMsg: '当前显示第 {0} - {1} 条 共{2}条',
+		      emptyMsg: "没有数据"
+		  });
+		  
+		  var grid1 = new Ext.grid.GridPanel({
+		      store: s,
+		      cm: new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(), {
+		          header: "类名",
+		          sortable: true,
+		          dataIndex: 'classname'
+		      }, {
+		          header: "引入类",
+		          sortable: true,
+		          dataIndex: 'importstr'
+		      }, {
+		          header: "包路径",
+		          sortable: true,
+		          dataIndex: 'package'
+		      }]),
+		      view: new Ext.grid.GroupingView({
+		          forceFit: true,
+		          groupTextTpl: '{text}'
+		      }),
+		      sm: new Ext.grid.RowSelectionModel({singleSelect: true}),
+		      loadMask: true,
+		      //collapsible: true,
+		      width      : 525,
+		      height     : 300,
+		      enableDragDrop   : true,
+			  region   : 'west',
+		      ddGroup: 'gridDDGroup',
+		      animCollapse: false,
+		      title: '业务逻辑代码',
+		      iconCls: 'icon-grid',
+		      renderTo : 'grid',
+		      bbar: pagingBar
+		  });
+		  //alert(path);
+		  s.load({params:{start:0, limit:20}});
+		  
+		  grid1.on("rowdblclick", function(a, b, c){
+	    	var r = grid1.getSelectionModel().getSelected();
+			window.returnValue = r.get('package')+'.'+r.get('classname');
+			window.close();
+	    });
+	  });
+  </script>
+	<body>
+		<div id='grid'></div>
+	</body>
+</html>

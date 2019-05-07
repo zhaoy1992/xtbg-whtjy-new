@@ -1,0 +1,11 @@
+1.在外围分配任务管理器中设置活动实例名（外围配置别名，如果没有别名则不设置）
+Modified: Shark-Extend\src\com\chinacreator\commonworkflow\WorkflowOpertionWrapper.java  
+Modified: Shark-Extend\src\com\chinacreator\workflow\shark\assignment\ExtendedAssignmentManager.java  
+
+Modified: Shark-Kernal\src\org\enhydra\shark\WfActivityImpl.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\api\internal\assignment\AssignmentManager.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\assignment\HistoryRelatedAssignmentManager.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\assignment\StandardAssignmentManager.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\assignment\XPDLStraightParticipantMappingAssignmentManager.java  
+--修改v_activities视图，解决查询活动实例名性能瓶颈问题
+--更新历史活动实例名

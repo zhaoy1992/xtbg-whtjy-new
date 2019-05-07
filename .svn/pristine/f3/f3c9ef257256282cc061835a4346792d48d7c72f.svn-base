@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<display-name>Creator OA Web Application</display-name>
+
+	<filter>
+		<filter-name>CharsetEncoding</filter-name>
+		<filter-class>com.frameworkset.common.filter.CharsetEncodingFilter</filter-class>
+		<init-param>
+			<param-name>RequestEncoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ResponseEncoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+		<init-param>
+			<param-name>mode</param-name>
+			<param-value>0</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharsetEncoding</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CharsetEncoding</filter-name>
+		<url-pattern>*.frame</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CharsetEncoding</filter-name>
+		<url-pattern>/report/reportglobalservlet</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CharsetEncoding</filter-name>
+		<url-pattern>/servlet/ProcessTools</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>ThreadSubsystemFilter</filter-name>
+		<filter-class>com.chinacreator.epp.util.ThreadSubsystemFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ThreadSubsystemFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- applet调用servlet -->
+	<filter-mapping>
+		<filter-name>ThreadSubsystemFilter</filter-name>
+		<url-pattern>/jawe/rmiservlet</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ThreadSubsystemFilter</filter-name>
+		<url-pattern>/servlet/ProcessTools</url-pattern>
+	</filter-mapping>
+	
+	<!-- add by 王博 gzip 压缩过滤器 -->
+    <filter>
+    	<filter-name>GZipFilter</filter-name>
+    	<filter-class>com.chinacreator.xtbg.core.common.filter.GZipFilter</filter-class>
+    	<init-param>
+			<param-name>regEx</param-name>
+			<param-value>*.doc|*.docx|*.xls|*.xlsx</param-value>
+		</init-param>
+    </filter>
+    <filter-mapping>
+    	<filter-name>GZipFilter</filter-name>
+   		<url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- add end -->
+	
+	<!-- 在线用户session监听器 start add by 王博 20130626 -->
+	<listener>
+		<listener-class>
+			com.chinacreator.xtbg.core.workbench.session.SessionListener
+		</listener-class>
+	</listener>
+	<!-- 在线用户session监听器 add end -->	
+	
+	<listener>
+		<listener-class>
+			com.frameworkset.filter.BSServletRequestListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			com.chinacreator.security.SessionListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>frameworkset</servlet-name>
+		<servlet-class>
+			com.chinacreator.framework.FrameworkServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>frameworkset</servlet-name>
+		<url-pattern>*.frame</url-pattern>
+	</servlet-mapping>
+	<!-- 启动spring容器 add by 王博2013-4-7 -->
+	<context-param>
+		<description>spring aop</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:coreconfig/bean-oa.xml</param-value>
+	</context-param>
+	
+	<!--<servlet>
+		<servlet-name>context</servlet-name>
+		<servlet-class>org.springframework.web.context.ContextLoaderServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>  -->
+	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>	
+	<servlet>
+		<servlet-name>ApplicationStartServlet</servlet-name>
+		<servlet-class>
+			com.chinacreator.xtbg.core.common.startup.ApplicationStartServlet
+		</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApplicationStartServlet</servlet-name>
+		<url-pattern>/ApplicationStartServlet</url-pattern>
+	</servlet-mapping>
+	<!-- end -->
+
+	<!-- message begin -->
+	<servlet>
+		<servlet-name>MessageServlet</servlet-name>
+		<servlet-class>
+			com.chinacreator.message.servlet.MessageServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MessageServlet</servlet-name>
+		<url-pattern>/servlet/MessageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MessageServlet</servlet-name>
+		<url-pattern>/servlet/RemoteMessage</url-pattern>
+	</servlet-mapping>
+	<!-- message end -->
+
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>
+			org.jfree.chart.servlet.DisplayChart
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/servlet/DisplayChart</url-pattern>
+	</servlet-mapping>
+
+	<!-- dwr begin -->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<!-- dwr end -->
+
+	<!-- 通用查询列表 -->
+	<servlet>
+		<servlet-name>pubcommonListServlet</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.common.commonlist.CommonListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	     <servlet-name>pubcommonListServlet</servlet-name>
+	     <url-pattern>/pubListServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 通用查询列表 -->
+	<servlet>
+	  <servlet-name>tree</servlet-name>
+	   <servlet-class>com.chinacreator.xtbg.core.common.tree.servlet.TreeServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+     <servlet-name>tree</servlet-name>
+     <url-pattern>/pubtree</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	  <servlet-name>commonTreeServlet</servlet-name>
+	   <servlet-class>com.chinacreator.xtbg.core.common.tree.servlet.CommonTreeServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+     <servlet-name>commonTreeServlet</servlet-name>
+     <url-pattern>/commonTreeServlet</url-pattern>
+    </servlet-mapping>
+	<!-- 通用ajaxServlet -->
+    <servlet>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>com.chinacreator.xtbg.core.common.commonlist.AjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>ajaxServlet</servlet-name>
+         <url-pattern>/ajaxServlet</url-pattern>
+    </servlet-mapping>
+	<!-- 工作流的 -->
+	<servlet>
+		<servlet-name>jawe-rmi</servlet-name>
+		<servlet-class>
+			com.chinacreator.jawe.httprmi.RmiServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jawe-rmi</servlet-name>
+		<url-pattern>/jawe/rmiservlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateGraphServlet</servlet-name> 
+	 <servlet-class>com.chinacreator.workflow.CreateGraphServlet</servlet-class> 
+  		<load-on-startup>25</load-on-startup> 
+  	</servlet>
+ 	<servlet-mapping>
+  		<servlet-name>CreateGraphServlet</servlet-name> 
+  		<url-pattern>/CreateGraphServlet</url-pattern> 
+  	</servlet-mapping>
+ 	<servlet>
+ 		<servlet-name>WorkflowOperationServlet</servlet-name>
+ 		<servlet-class>
+ 			com.chinacreator.commonworkflow.servlet.WorkflowOperationServlet
+ 		</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>WorkflowOperationServlet</servlet-name>
+ 		<url-pattern>/servlet/WorkflowOperationServlet</url-pattern>
+ 	</servlet-mapping>
+ 	<servlet>
+ 		<servlet-name>AsynCallbackServiceServlet</servlet-name>
+ 		<servlet-class>
+ 		com.chinacreator.commonworkflow.servlet.AsynCallbackServiceServlet
+ 		</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>AsynCallbackServiceServlet</servlet-name>
+ 		<url-pattern>/SOAP/AsynCallbackServiceServlet</url-pattern>
+ 	</servlet-mapping>
+	<servlet>
+ 		<servlet-name>ProcessTools</servlet-name>
+ 		<servlet-class>
+ 			com.chinacreator.commonworkflow.servlet.ProcessTools
+ 		</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>ProcessTools</servlet-name>
+ 		<url-pattern>/servlet/ProcessTools</url-pattern>
+ 	</servlet-mapping>
+	<servlet>
+		<servlet-name>InitSharkServlet</servlet-name>
+		<servlet-class>com.chinacreator.commonworkflow.servlet.InitSharkServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitSharkServlet</servlet-name>
+		<url-pattern>/servlet/InitSharkServlet</url-pattern>
+	</servlet-mapping>
+	<!-- 工作流 end -->
+	
+	 <!-- pubFileDownload 王博 2013-4-10 -->
+    <servlet>
+		<servlet-name>pubFileDownload</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.common.fancyuoload.servlet.FileDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>pubFileDownload</servlet-name>
+        <url-pattern>/servlet/pubFileDownload</url-pattern>
+    </servlet-mapping>
+    <!-- pubFileDownload end -->
+    
+    <!-- fileupload 王博 2013-4-10-->
+   	<servlet>
+		<servlet-name>pubFileUpload</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.common.fancyuoload.servlet.FileUploadSecondServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>pubFileUpload</servlet-name>
+        <url-pattern>/servlet/pubFileUpload</url-pattern>
+    </servlet-mapping>
+    
+    <!-- fileupload end-->
+    
+    <!-- ntko office 上传    王博 2013-10-11-->
+   	<servlet>
+		<servlet-name>UploadOffice</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.common.ntkooffice.servlet.UploadOfficeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>UploadOffice</servlet-name>
+        <url-pattern>/servlet/UploadOffice</url-pattern>
+    </servlet-mapping>
+    <!-- ntko office end-->
+    
+    <!-- 工作台数据查询servlet 王博 2013-6-27-->
+   	<servlet>
+		<servlet-name>WorkbenchServlet</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.workbench.servlet.WorkbenchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>WorkbenchServlet</servlet-name>
+        <url-pattern>/servlet/workbenchServlet</url-pattern>
+    </servlet-mapping>
+    <!-- 工作台数据查询servlet end-->
+    
+     <!-- 工作台数据查询servlet 王博 2013-6-27-->
+   	<servlet>
+		<servlet-name>KbmServlet</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.kbm.servlet.KbmServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>KbmServlet</servlet-name>
+        <url-pattern>/servlet/kbmServlet</url-pattern>
+    </servlet-mapping>
+    <!-- 工作台数据查询servlet end-->
+    
+    <!-- cxf webservices add by 王博 20130702 -->
+    <servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>12</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+    <!-- add end -->
+
+	<!-- ajax通用调用servlet add by 夏天 20130723 -->
+	<servlet>
+		<servlet-name>xtcommonajax</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.ajax.common.action.BusinessAction</servlet-class>
+		<load-on-startup>15</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xtcommonajax</servlet-name>
+		<url-pattern>/xtcommonajax</url-pattern>
+	</servlet-mapping>
+	<!-- add end -->
+	
+	<!-- 方正公文落地接口servlet add by shuqi.liu 2013-12-30-->
+	<servlet>
+		<servlet-name>receiveFounderArchive</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.core.archive.gwcs.services.impl.ReceiveFounderArchiveServlet</servlet-class>
+		<load-on-startup>15</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>receiveFounderArchive</servlet-name>
+		<url-pattern>/receiveFounderArchive</url-pattern>
+	</servlet-mapping>
+	<!--方正公文落地接口servlet end -->
+	<!--导入配置文件信息 start  -->
+    <servlet>
+	  <servlet-name>business</servlet-name>
+	   <servlet-class>com.chinacreator.business.common.action.BusinessAction</servlet-class>
+	   <load-on-startup>15</load-on-startup>
+     </servlet>
+    <servlet-mapping>
+     <servlet-name>business</servlet-name>
+     <url-pattern>/business</url-pattern>
+    </servlet-mapping>
+   <!--导入配置文件信息 end  -->
+   <servlet>
+	<servlet-name>commonListServlet</servlet-name>
+	<servlet-class>com.chinacreator.xtbg.pub.common.CommonListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	     <servlet-name>commonListServlet</servlet-name>
+	     <url-pattern>/commonListServlet</url-pattern>
+	</servlet-mapping>
+	<!-- cache init servlet add by yiping.huang 20110111 -->
+	<servlet>
+		<servlet-name>CacheInitServlet</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.pub.common.CacheInitServlet</servlet-class>
+		<load-on-startup>101</load-on-startup>
+	</servlet>
+	<!-- cache init servlet add by yiping.huangend -->
+	<!-- tree add 沈联成 -->
+	<servlet>
+	  <servlet-name>subtree</servlet-name>
+	   <servlet-class>com.chinacreator.xtbg.pub.tree.servlet.TreeServlet</servlet-class>
+     </servlet>
+    <servlet-mapping>
+     <servlet-name>subtree</servlet-name>
+     <url-pattern>/tree</url-pattern>
+    </servlet-mapping>
+	<!-- tree end 沈联成 -->
+	<!-- fileupload -->
+    <servlet>
+		<servlet-name>FileUpload</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.pub.jqueryupload.servlet.FileUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+        <servlet-name>FileUpload</servlet-name>
+        <url-pattern>/servlet/FileUpload</url-pattern>
+    </servlet-mapping>
+    
+    <!-- fileupload -->
+    <!-- FileDownload -->
+    <servlet>
+		<servlet-name>FileDownload</servlet-name>
+		<servlet-class>com.chinacreator.xtbg.pub.jqueryupload.servlet.FileDownloadServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+        <servlet-name>FileDownload</servlet-name>
+        <url-pattern>/servlet/FileDownload</url-pattern>
+    </servlet-mapping>
+     <!-- FileDownload -->
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

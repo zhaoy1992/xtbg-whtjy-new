@@ -1,0 +1,899 @@
+body {
+	font-family: Arial, Helvetica, sans-serif; margin:0px; padding:0px; border:0px;
+}
+ul,li{ list-style:none; margin:0px; padding:0px; border:0px;}
+
+td {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.clear{ clear:both;}
+
+/*************************** 文字样式 ***************************/
+
+a:link {color:#333333; text-decoration:none;cursor:pointer;}
+a:visited{color:#333333; text-decoration:none;cursor:pointer;}
+a:hover{color:#CE2C1F; text-decoration:underline;cursor:pointer;}
+a:active{color:#000000; text-decoration:none;cursor:pointer;}
+
+
+.yellow{ color:#826500;	}
+.yellow a {color:#826500; text-decoration:none; }
+.yellow a:visited{color:#826500; text-decoration:none;}
+.yellow a:hover{color:#F10000; text-decoration:none;}
+
+/*红色加粗*/
+.red_b {color:#F10000; font-weight:bold;}
+.red_b a {color:#F10000; text-decoration:none; font-weight:bold;}
+.red_b a:visited{color:#F10000; text-decoration:none; font-weight:bold;}
+.red_b a:hover{color:#F10000;font-weight:boldl; text-decoration:underline;}
+/*红色加下划线*/
+.red_unl {color:#F10000; }
+.red_unl a {color:#F10000; text-decoration:none;  text-decoration:underline;}
+.red_unl a:visited{color:#F10000; text-decoration:none;}
+.red_unl a:hover{color:#F10000; text-decoration:none; }
+
+.red {color:#F10000;}
+.red a {color:#F10000; text-decoration:none; }
+.red a:visited{color:#F10000; text-decoration:none; }
+.red a:hover{color:#F10000; text-decoration:underline;}
+
+.fff a { color:#fff; text-decoration:none; }
+.fff a:hover{color:#F10000; text-decoration:underline;}
+
+
+/*蓝色*/
+.blue_unl{ color:#076FA2;}
+.blue_unl a {color:#076FA2; text-decoration:underline; }
+.blue_unl a:visited{color:#076FA2; text-decoration:none; }
+.blue_unl a:hover{color:#F10000; text-decoration:underline;}
+
+/*more*/
+.more{ float:right;
+   margin-right:5px;
+   font:normal 12px/28px "宋体";
+   color:#FFF;  cursor: pointer;}
+.more a{ float:right;
+   margin-right:5px;
+   font:normal 12px/28px "宋体";
+   color:#FFF;  cursor: pointer;}
+.more a:hover{ 
+   color:#badcff;  cursor: pointer;}
+
+
+
+/*************************** 首页样式 ***************************/
+
+
+/*************************** top样式 ***************************/
+.top{ background:url(top_bg.jpg) repeat-x;
+	   width:100%;
+	   height:53px;
+}
+
+.top_img{ background:url(top_img.jpg) no-repeat;
+	   width:715px;
+	   height:53px;
+	   float:left;
+}
+.top_but_box{
+	width:auto;
+	float:right;
+	margin-right:10px;
+}
+.top_but{
+   loat:left;  
+   margin-top:10px;
+   width:auto;}
+.top_but01{
+      float:left;
+      width:94px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  cursor:pointer;
+	  margin-right:5px;
+	  text-align:center;
+}
+.top_but01 a{
+  background:url(top_but_01.gif) no-repeat;
+   float:left;
+      width:94px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  cursor:pointer;
+	  text-align:center;
+}
+.top_but01 a:hover{
+   background:url(top_but_01-02.gif) no-repeat;
+   float:left;
+      width:94px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  color:#EA0000;
+	  cursor:pointer;
+	  text-align:center;
+}
+.top_but02{
+   
+   float:left;
+   width:57px;
+   height:24px;
+   border:0px;
+   margin-right:5px;
+   font:12px/26px "宋体";
+   color:#EA0000;
+   cursor:pointer;
+   text-align:center;
+   display:inline;
+	overflow:hidden;
+	    
+	  
+	 
+}
+.top_but02 a{
+      background:url(top_but_02.gif) no-repeat;
+	  float:left;
+      width:57px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  cursor:pointer;
+	  padding-left:8px;
+	  overflow:hidden;
+	  
+	  
+	  
+}
+.top_but02 a:hover{
+   background:url(top_but_02-02.gif) no-repeat;
+   float:left;
+   width:57px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  color:#EA0000;
+	  
+}
+.top_but03{
+  
+   float:left;
+      width:57px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  color:#EA0000;
+	  cursor:pointer;
+	  overflow:hidden;
+	  text-align:center;
+}
+.top_but03 a{
+      background:url(top_but_03.gif) no-repeat;
+	  float:left;
+      width:57px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  cursor:pointer;
+	  padding-left:8px;
+	  
+	  
+}
+.top_but03 a:hover{
+   background:url(top_but_03-02.gif) no-repeat;
+   float:left;
+   width:57px;
+	  height:24px;
+	  border:0px;
+	  font:12px/26px "宋体";
+	  color:#EA0000;
+	  
+}
+
+
+.btn_sjx{ background:url(sjx.gif) left 10px no-repeat;
+   float:right;
+   width:7px;
+   height:4px;
+   margin-right:5px;
+   }
+
+
+
+
+
+.main { overflow:hidden;}
+/*************************** 左边导航 ***************************/
+.left_nav{ background:url(left_nav_bg.jpg) repeat-y;
+	   width:209px;
+	   height:auto;
+	   float:left;
+	   border-bottom:1px solid #F2DE7D;
+}
+.left_nav_img{ background:url(left_nav_img.jpg) no-repeat; 
+	   width:209px;
+	   height:600px;
+	   z-index:0;
+	   position: absolute; 
+	   top:30;
+	   left:0;
+}
+
+
+.left_nav_box{ 
+	   width:209px;
+	   height: auto;
+	   z-index:5;
+	   position: absolute; 
+	   top:80px;
+	   left:0px;
+	   border:0px;
+}
+.left_nav_01{ 
+       background:url(nav_left_ks-01.jpg) no-repeat;
+	   width:192px;
+	   height:26px;
+	   float:left;
+	   border:0px;
+	   cursor:pointer;
+	   margin-bottom:5px;
+	   margin:5px 0px 0px 9px;
+	   overflow:hidden;
+	   display:inline;
+	   
+	   
+}
+.left_nav_01 a{
+       width:192px;
+	   height:26px;
+	   float:left;
+	   display:inline;
+	   border:0px;
+	   color:#826500;
+	   cursor:pointer;
+	  padding-left:65px;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+.left_nav_01 a:hover{
+       background:url(nav_left_ks-01_02.jpg) no-repeat;
+	   color:#f10000;
+	   border:0px;
+	   cursor:pointer;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+
+.left_nav_02{ 
+	   background:url(nav_left_ks-02.jpg) no-repeat;
+	   width:192px;
+	   height:26px;
+	   float:left;
+	   border:0px;
+	   cursor:pointer;
+	   margin-bottom:5px;
+	   margin:5px 0px 0px 9px;
+	   overflow:hidden;
+	   display:inline;
+}
+.left_nav_02 a{
+	   width:192px;
+	   height:26px;
+	   float:left;
+	   border:0px;
+	   color:#826500;
+	   cursor:pointer;
+	   padding-left:65px;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+.left_nav_02 a:hover{
+       background:url(nav_left_ks-02_02.jpg) no-repeat;
+	   color:#f10000;
+	   border:0px;
+	   cursor:pointer;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+
+.left_nav_03{ 
+	   background:url(nav_left_ks-03.jpg) no-repeat;
+	   width:192px;
+	   height:26px;
+	   float:left;
+	   border:0px;
+	   cursor:pointer;
+	   margin-bottom:5px;
+	   margin:5px 0px 0px 9px;
+	   overflow:hidden;
+	   display:inline;
+}
+
+.left_nav_03 a{
+	   width:192px;
+	   height:26px;
+	   float:left;
+	   display:inline;
+	   border:0px;
+	   color:#826500;
+	   padding-left:65px;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+.left_nav_03 a:hover{
+       background:url(nav_left_ks-03_02.jpg) no-repeat;
+	   color:#f10000;
+	   border:0px;
+	   cursor:pointer;
+	   padding-top:3px;
+	   font:bold 14px/23px "宋体";
+
+}
+.left_nav_03_img{ 
+	   width: auto;
+	   height:16px;
+	   margin:5px 0px 0px 30px;
+	   padding-left:25px;
+	   font:bold 14px/17px "宋体";
+	   
+}
+.huixingwen{ background:url(huixingwen.gif) left top no-repeat; 
+	   width:208px; 
+	   height:13px;
+	   float:left;
+	   margin:5px 0px;
+	   overflow: hidden;
+	   
+}
+.nav_left_cygn{ background:url(fgx.gif) left bottom no-repeat;
+	   width:191px; 
+	   height:27px; 
+	   text-align:center; 
+	   float:left;
+	   margin-left:9px;
+	   display:inline;
+	   font:bold 14px/27px "宋体";
+	   text-align:center;
+	   
+	  
+}
+.nav_left_cygn a{ background:url(left_nav_img.gif) 30px 50% no-repeat;
+	   width:191px; 
+	   height:27px; 
+	   text-align:center; 
+	   float:left;
+	   display:inline;
+	   font:bold 14px/27px "宋体";
+	   text-align:center;
+	   
+	  
+}
+.nav_left_cygn_li{ 
+	  float:left;
+	  width:191px; 
+	  height:25px; 
+	  margin:3px 9px 0px;
+	  text-align:center;
+	  font: bold 12px/25px "宋体";
+	  color:#8A6C00;
+	  display:inline;
+	  
+}
+.nav_left_cygn_li a{
+float:left;
+      color:#8A6C00;
+	  text-decoration:none;
+	  width:191px; 
+	  height:25px; 
+	  line-height:25px;
+	  background:url(left_nav_ej.gif) 50px 50% no-repeat;
+	  display:inline;
+	  
+	  
+}
+.nav_left_cygn_li a:hover{ 
+	  color:#8A6C00;
+	  float:left;
+	  height:25px;
+	  line-height:25px;
+	  text-decoration:none;
+	  color:#C12200;
+	  background:#F6E093;
+	  background:url(left_nav_ej-on.gif) left 50% no-repeat;
+	  
+}
+.nav_left_cygn_sj{
+      float:left;
+	  width:207px; 
+	  height:25px; 
+	  margin:0px;
+	  
+	  text-align:center;
+	  font: bold 12px/25px "宋体";
+	  color:#8A6C00;
+	  display:inline;
+	  background:#FFFDF5;
+	  }
+.nav_left_cygn_sj a{
+      float:left;
+      color:#8A6C00;
+	  text-decoration:none;
+	  width:191px; 
+	  height:25px;
+	  margin:0px 9px;
+	  display:inline; 
+	  
+	  
+}
+.nav_left_cygn_sj a:hover{ 
+	  color:#8A6C00;
+	  float:left;
+	  height:25px;
+	  line-height:25px;
+	  text-decoration:none;
+	  color:#C12200;
+	  margin:0px 9px;
+	  background:#F6E093;
+	  overflow:hidden;
+	  display:inline;
+	 }
+
+.nav_left_cygn_sj_xz{ 
+      width:196px; 
+	  height:25px; 
+	  color:#8A6C00;
+	  float:left;
+	  height:23px;
+	  line-height:23px;
+	  margin:0px 5px;
+	  text-decoration:none;
+	  color:#C12200;
+	  background:#F6E093;
+	 }
+.nav_left_02{ background:url(nav_left_02.jpg) no-repeat; 
+	  width:191px; 
+	  height:27px;
+	  text-align:center; 
+	  float:left;
+	  margin-left:9px;
+	  display:inline;
+	  font:bold 14px/27px "宋体";
+	  text-align:center;
+	  color:#8A6C00;
+	  margin-top:3px;
+}
+.nav_left_zx{
+	  position: absolute;
+	  top:100%;
+	  bottom:0px;
+ 	  float:left;
+	  left: 6px;
+	  width: 200px;
+	  font:normal 12px/24px "宋体";
+	  color:#F10000;
+}
+
+
+
+/*****************  右侧  ******************/
+.right{ 
+    width:auto;
+	height:auto;
+	z-index:5;
+	margin-left:209px;
+}
+.right_tab_bg{ background:url(tab_bg.jpg) repeat-x; height:32px; float:left; width:100%; }
+.right_tab_bg01{ 
+      
+	  background:url(tab_bg01.jpg) no-repeat;
+	  width:795px;
+	  height:32px; 
+	  z-index:0;
+}
+.close_tab{float:right; margin-right:5px; margin-top:8px; display:inline; width:16px; height:16px; }
+.close_tab_input{background:url(tab-del-out.jpg) no-repeat; border:none;  width:16px; height:16px;}
+.right_tab{
+   width:1000px;
+   z-index:2px;
+   position:absolute;
+   top:53px;
+   left:217px;
+  
+}
+.right_tab_div{ float:left; max-width:130px; min-width:70px; height:32px; margin-right:2px; display:inline;}
+/************* 当前 ****************/
+.right_tab_now-left01{background:url(tab_now.gif) left top no-repeat; width:17px; height:32px; float:left;} 
+.right_tab_now-right01{background:url(tab_now.gif) right top no-repeat; width:17px; height:32px; float:left;} 
+.right_tab_now-mid{
+  float:left;
+  width:96px;
+  height:32px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#826500;
+  background:url(tab_now-mid.gif) left top repeat-x;
+  cursor:pointer;
+  overflow:hidden;
+ 
+  } 
+ 
+.right_tab_now{
+  margin-left:2px;
+  float:left;
+  width:128px;
+  height:32px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#826500;
+  background:url(tab_now.gif) left top no-repeat;
+  cursor:pointer;
+  overflow:hidden;
+ 
+  }
+  
+  
+/************* 普通状态 ****************/  
+.right_tab_on-left01{background:url(tab_on.gif) left top no-repeat; width:8px; height:32px; float:left;} 
+.right_tab_on-right01{background:url(tab_on.gif) right top no-repeat; width:8px; height:32px; float:left;} 
+.right_tab_on-mid{
+  float:left;
+  width:114px;
+  height:32px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+  background:url(tab_on-mid.gif) left top repeat-x;
+  cursor:pointer;
+  overflow:hidden;
+ 
+  } 
+ .right_tab_on-mid a:link{
+  float:left;
+  height:32px;  width:128px;
+  text-decoration:none;
+  background:url(tab_on.gif) left top no-repeat;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on-mid a:visited{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on-mid a:hover{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_in.gif) left top no-repeat;
+  text-align:center;
+  color:#fff;
+  text-decoration:none;
+}
+.right_tab_on-mid a:active{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+}
+
+.right_tab_on{
+  float:left;
+  height:32px;
+  margin-left:2px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_on.gif) left top no-repeat; overflow:hidden;
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:link{
+  float:left;
+  height:32px;  width:128px;
+  text-decoration:none;
+  background:url(tab_on.gif) left top no-repeat;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:visited{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:hover{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_in.gif) left top no-repeat;
+  text-align:center;
+  color:#fff;
+  text-decoration:none;
+}
+.right_tab_on a:active{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+}
+
+
+/************* 鼠标滑动状态 ****************/
+
+.right_tab_in-left01{background:url(tab_in.gif) left top no-repeat; width:8px; height:32px; float:left;} 
+.right_tab_in-right01{background:url(tab_in.gif) right top no-repeat; width:8px; height:32px; float:left;} 
+.right_tab_in-mid{
+  float:left;
+  width:114px;
+  height:32px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+  background:url(tab_in-mid.gif) left top repeat-x;
+  cursor:pointer;
+  overflow:hidden;
+ 
+  } 
+ .right_tab_in-mid a:link{
+  float:left;
+  height:32px;  width:128px;
+  text-decoration:none;
+  background:url(tab_on.gif) left top no-repeat;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_in-mid a:visited{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_in-mid a:hover{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_in.gif) left top no-repeat;
+  text-align:center;
+  color:#fff;
+  text-decoration:none;
+}
+.right_tab_in-mid a:active{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+}
+
+/*
+.right_tab_on{
+  float:left;
+  height:32px;
+  margin-left:2px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_on.gif) left top no-repeat; overflow:hidden;
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:link{
+  float:left;
+  height:32px;  width:128px;
+  text-decoration:none;
+  background:url(tab_on.gif) left top no-repeat;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:visited{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+ 
+  text-align:center;
+  color:#fff;
+}
+.right_tab_on a:hover{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  background:url(tab_in.gif) left top no-repeat;
+  text-align:center;
+  color:#fff;
+  text-decoration:none;
+}
+.right_tab_on a:active{
+  float:left;
+  height:32px;
+  width:128px;
+  font: bold 13px/32px "宋体";
+  text-align:center;
+  color:#fff;
+}
+*/
+
+
+
+/*******************   主要内容  ********************/
+.content{ width:100%;
+   margin-top:10px;
+   float:left;
+}
+.hy_box{
+   float:left;
+   width:100%;
+   height:auto;
+   margin-bottom:10px;
+}
+.content_hy{
+   float:left;
+   width:43%;
+   margin-left:10px;
+   height:auto;
+   font:14px/29px "宋体";
+   display:inline;
+   margin-bottom:8px;
+}
+.content_tq{
+   float:right;
+   width:55%;
+   height:auto;
+   font:12px/21px "宋体";   
+}
+.list_left_box{
+   float:left; 
+   width:45%; 
+   margin:auto;
+   margin-bottom:8px; 
+   text-align:center; 
+}
+.list_left_table{
+   width:97%;
+    border:0px;
+	margin:auto;
+
+}
+.list_right_table{
+   width:99%;
+   float:left;
+   border:0px;
+   
+	
+
+}
+.list_box{
+   float:left;
+   width:48%;
+   margin-left:10px;
+   display:inline;
+   margin-bottom:10px;
+    
+}
+.list_box_02{
+   float:left;
+   width:auto;
+   margin-left:10px;
+   margin-right:10px;
+   display:inline;
+   margin-bottom:10px;
+    
+}
+.list_tit{ 
+   background:url(title_top_bg.gif);
+   width:auto;
+   width:auto;
+   border:1px solid #0f72be;
+
+   height:27px;
+   padding-left:10px;
+   font:bold 14px/27px "宋体";
+   color:#FFF;
+}
+.list_tit_w{ 
+   width:auto;
+   float:left;}
+.list_tit_img{
+  
+   width:76px;
+   float:left;
+   height:27px;
+}
+.list_list_box{
+   width:100%;
+   height:auto;
+   
+}
+.list_list_table{
+   border:1px solid #0f72be;
+   border-top:0; 
+   
+}
+.list_list_table td{
+   background:#F2F2F2;
+   height:28px;
+   font:13px/28px "宋体";
+   margin:auto;
+   color:#333333;
+   text-align:center;
+}
+.list_list{
+   width:97%;
+   text-align:center;
+   margin:auto;
+   height:28px;
+   overflow: hidden;;
+}
+
+/**********  2项内容************/
+.list_list_bt{ 
+   float:left;
+   height:28px;
+   text-align:left;}
+.list_list_date{ 
+   width:150px;
+   float:right;
+   text-align:right;
+   height:28px;}
+   
+/**********  3项内容************/
+.list_list_bt03{ 
+   width:60%;
+   line-height:28px;
+   float:left;
+   height:28px;
+   text-align:left;}
+.list_list_date03{ 
+   width:20%;
+   float:right;
+   text-align:right;
+   height:28px;}
+.list_list_name03{
+   width:20%;
+   float:left;
+   text-align:center;
+   height:28px;}
+   
+   
+   
+   
+   
+.close_tab{float:right; margin-right:5px; margin-top:8px; display:inline; width:16px; height:16px; }
+.close_tab_input{background:url(tab-del-out.gif) no-repeat; border:none;  width:16px; height:16px;}

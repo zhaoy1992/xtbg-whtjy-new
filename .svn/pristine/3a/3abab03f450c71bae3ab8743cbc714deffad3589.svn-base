@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<STYLE>
+  .userData{behavior:url(#default#userData);}
+</STYLE>
+<script type="text/javascript" src="../../../cachloader/pre_load.js"></script>
+
+<script>
+var __dj_win_flag__ = true;
+function optmGetUsdatObj()
+{
+	if((typeof(eppDataWrObj) != "undefined") && eppDataWrObj.isCanUse()) return eppDataWrObj;
+	if((typeof(userDataWrObj) != "undefined") && userDataWrObj.isCanUse()) return userDataWrObj;
+	return null;			
+}
+	
+function window_onload()
+{
+	var bSucced = __pre_loadjsFrame();
+	if(!bSucced) 
+	{
+		document.body.innerHTML = "<font color='#ff0000'>preload js frame failure!</font>";
+		return;
+	}
+	
+	mtJsFileArray("eformsys/fceform/js/csjsrequest.js", true, eppDataWrObj);
+	mtJsFileArray("eformsys/fceform/js/fcpub.js", true, optmGetUsdatObj());
+	
+	bSucced = prePageInit(false, false);
+	if(!bSucced) 
+	{
+		document.body.innerHTML = "<font color='#ff0000'>preload js file failure!</font>";
+		return;
+	}
+	
+	userData=oForm.oInput
+	/*if(typeof parent.curUserID != "undefined" && typeof parent.curUserID != "" ){
+		try{
+		SaveUserData("hr","curuser",parent.curUserID)
+		}catch(e){}
+	}*/
+//动态加载页面,
+	//var sVersion="测试"  //测试/正式
+	var s=parent.sDivHtml
+	if(isSpace(s)==false){
+		//if(s.length> 44 ){  //djsn 40 +.htm 4 最多44
+		if(Request.QueryString("isfile") == "test"){
+			var pubsrc="./djempty.htm";
+			parent.topic.location.assign(pubsrc);
+
+		} else if(Request.QueryString("isfile") == "yes"){
+			var pubsrc = "./djempty.htm?isfile=yes"
+			parent.topic.location.assign(pubsrc)			
+		} else if (parent.topic.location.href=="about:blank" || parent.topic.location.href=="#"){
+
+ 			parent.topic.location.assign("../dj/"+s)	
+ 		}
+ 	}
+	
+}
+</script>
+
+</HEAD>
+<BODY defer onload="window_onload()"  >
+
+<form id="oForm">
+	<input Class="userData" style="DISPLAY: none;  " ID="oInput">
+</form>
+
+</BODY>
+</HTML>

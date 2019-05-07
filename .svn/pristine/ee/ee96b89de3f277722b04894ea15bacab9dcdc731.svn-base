@@ -1,0 +1,11 @@
+#删除活动实例和流程实例锁时加入集群节点条件
+Shark-Kernal/src/org/enhydra/shark/processlocking/DODSLockMaster
+Shark-Kernal/src/org/enhydra/shark/processlocking/data/LockEntryDO
+Shark-Kernal/src/org/enhydra/shark/processlocking/data/LockEntryQuery
+Shark-Kernal/src/org/enhydra/shark/SharkEngineManager
+
+Shark-Extend/src/com/chinacreator/spi/impl/local/WorkflowManagerImpl
+
+#修复流程时限计算时给全部流程实例上锁，只给一个流程实例解锁问题
+Shark-Kernal/src/org/enhydra/shark/Shark
+Shark-Kernal/src/org/enhydra/shark/SharkUtilities

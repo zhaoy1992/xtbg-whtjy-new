@@ -1,0 +1,87 @@
+<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" errorPage="archiveformerrorhandler.jsp"%>
+<%@taglib uri="/WEB-INF/archive-taglib.tld" prefix="oa"%>
+$importClassCode
+<%
+$javaCode
+%>
+
+<!DOCTYPE html>
+<html style="overflow-y:scroll;">
+<head>
+	<oa:init>
+  <title>$form_name</title>
+  <script>$javaScriptCode</script>
+	
+	<style>
+		body{
+			font-family: Helvetica, arial, sans-serif;
+			margin:10px auto;
+			color: #fff;
+			font-size: 12px;
+			width:$form_width;
+			text-align:center;
+		}
+		ul{	
+			background:$form_background;
+			list-style:none;
+			border: solid $tag_margins2 $form_background;
+		}
+		li{	
+			border-collapse:collapse;
+			color: black;
+			margin:-0.5px;
+			text-align: left;
+			line-height: 100%;
+			font: normal;
+		}
+	</style>
+
+</head>
+<body style="width:$form_width">
+<form id="form1" name="form1" action="" method="post">
+<input id="busi_id" name="busi_id" type="hidden"/>
+<input id="opt_type" name="opt_type" type="hidden"/>
+<input id="busiTypeCode" name="busiTypeCode" type="hidden"/>
+<input id="windowsId" name="windowsId" type="hidden" value="<%=windowsId %>"/>
+$hideString
+<div id="tabs1" style="width:100%;border: 0px;">
+		<table width="100%" border="0" cellspacing="1" cellpadding="0" style="display: inline;">
+			<tr style="height:60px">
+				<td style="display: inline;"><oa:flowcommonstart flowType="1" />
+				</td>
+			</tr>
+		</table>
+		<div id="titleids" style="display:none;">
+			<ul>
+				<li><a href="#tabs-1" onclick="changeIndex(1)">基本信息</a></li>
+				#if($is_text)
+				<li><a href="#tabs-3" title="点击加载正文" onclick="changeIndex(3)">正文</a></li>
+				#end
+			</ul>
+		</div>
+		<div id="tabs-1">
+			<article>
+				<section>
+				<div class="gridster">
+					<ul>
+					$htmlstr
+					</ul>
+			    </div>		
+				</section>
+			</article>
+		</div>
+		#if($is_text)
+		<div id="tabs-3">
+			<oa:webtext column="$txt_column_id" table="$txt_table_id" defautValue="$webtext_defautValue"/>
+			<input type='hidden' id='field_drag_in_webtext' value="$txt_table_column_id"/>
+		</div>	
+		#end	
+</div>	    		
+<div style="height:50px">
+</div>
+<IFRAME name=frame1 width=100% height=0> </IFRAME> 
+</form>
+</body>
+</oa:init>
+</html>
+<script>$javaScriptCode2</script>

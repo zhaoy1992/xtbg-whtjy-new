@@ -1,0 +1,20 @@
+
+1.工作流事务缓存改成jbosscache
+	请修改DatabaseManager.defaults.TransactionCaches=true
+
+src/org/enhydra/shark/caching/jboss/JBOSSCacheMgr.java
+src/org/enhydra/shark/eventaudit/DODSEventAuditManager.java
+src/org/enhydra/shark/instancepersistence/DODSPersistentManager.java
+src/org/enhydra/shark/utilities/dods/Buffer.java
+src/Shark.conf
+
+2.顺序会签开关Shark.conf。
+#是否开启顺序会签，自定义开关
+is_order_to_sign=false
+
+/Shark-Extend/src/com/chinacreator/commonworkflow/WorkflowOpertionWrapper.java
+/Shark-Kernal/src/org/enhydra/shark/SharkEngineManager.java
+/Shark-Kernal/src/org/enhydra/shark/WfActivityImpl.java
+
+3.流程返回第一环节
+src/org/enhydra/shark/xpdl/elements/WorkflowProcess.java

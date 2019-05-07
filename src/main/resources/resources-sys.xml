@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding='gb2312'?>
+<resources>
+	<!--
+		操作组定义：
+		定义系统资源的操作组，不同的资源类型涉及不同的操作组，操作组中定义同一类型的操作
+	-->
+	<operations>
+		<!--字典定义全局资源操作组 -->
+		<group id="globaldictoperation" name="字典定义全局资源操作组"></group>
+
+		<group id="groupColumn" name="菜单可见">
+			<operation id="visible" priority="10" name="可点击" />
+		</group>
+
+		<group id="dictoperation" name="字典定义操作组">
+			<operation id="read" priority="10" name="可见" />
+			<operation id="write" priority="20" name="可操作" />
+			<operation id="delete" priority="30" name="删除" />
+			<operation id="edit" priority="30" name="修改" />
+			<operation id="addson" priority="30" name="添加子字典" />
+			<operation id="datamanage" priority="30" name="字典数据采集" />
+		</group>
+
+		<group id="biztypeoperation" name="业务类别资源操作组">
+			<operation id="readbiztype" priority="30" name="可访问业务类别" />
+		</group>
+		<group id="globalbiztype" name="全局业务类别资源操作组">
+			<operation id="newbiztype" priority="30" name="业务类别新增">
+				<description>
+					<![CDATA[
+								新增业务类别
+							]]>
+				</description>
+			</operation>
+			<operation id="biztypeupdate" priority="30" name="业务类别修改">
+				<description>
+					<![CDATA[
+								业务类别修改
+							]]>
+				</description>
+			</operation>
+		</group>
+	</operations>
+
+
+	<resource id="dict" name="字典定义资源" class="resDictTree.jsp"
+		auto="true" system="*">
+		<!--定义非未受保护的特殊资源-->
+
+		<!--
+			定义资源操作组
+			name:指定资源操作组的名称，具体的操作定义在操作组中
+		-->
+		<operationgroup groupid="dictoperation" />
+
+		<!-- 字典资源全局操作组 -->
+		<globaloperationgroup globalresourceid="globaldict"
+			groupid="globaldictoperation" />
+	</resource>
+	<!--cs菜单资源 -->
+	<!-- 
+		<resource id="cs_column" name="cs菜单资源" class="resTempletTree.jsp" auto="true" system="module" > -->
+	<!--定义资源操作组-->
+	<!-- <operationgroup groupid="groupColumn"/> -->
+	<!-- </resource> -->
+
+	<!-- 应用管理添加的资源   开始-->
+	
+	<!-- ==================自定义资源开始================== -->
+	<!--<resource id="biztype" name="业务类别资源" class="resBizTypeTree.jsp"
+		auto="true" system="*" default="false">
+		<operationgroup groupid="biztypeoperation" />
+
+		 业务类别全局操作组 
+		<globaloperationgroup globalresourceid="biztype"
+			groupid="globalbiztype" />
+	</resource>
+	--><!-- ==================自定义资源结束================== -->
+
+	<!-- 应用管理添加的资源   结束-->
+
+</resources>

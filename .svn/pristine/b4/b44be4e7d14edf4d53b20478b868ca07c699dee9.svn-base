@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="ProgId" content="VisualStudio.HTML">
+		<meta name="Originator" content="Microsoft Visual Studio .NET 7.1">
+		<script src="../js/code_format.js"></script>
+	</head>
+	<script language="javascript">
+		var sChk=1;
+		function design_click()
+		{
+			if(sChk!=1)
+			{
+				design_check()
+				sChk=1
+			}
+		}
+		function html_click()
+		{
+			if(sChk!=2)
+			{
+				html_check()
+				sChk=2
+			}
+		}
+		
+		function design_check()
+		{
+			design.src = "../images/ef_design_designmode.gif"
+			html.src = "../images/ef_design_htmlmode1.gif"
+			parent.topic.bigmain.style.display = ""
+			parent.topic.srcHtml.style.display = "none"
+			parent.topic.SKbillsheet.innerHTML = parent.topic.srcHtml.value
+			parent.topic.bigmain.focus();			
+			//Î¬»¤¿Ø¼þID
+			parent.topic.execScript( "if(TooContXml()){ openobjlist(); }" );			
+			parent.topic.blnChange = true;
+			//parent.topic.execScript("window_onresize()")			
+		}
+		
+		function html_check()
+		{
+			design.src = "../images/ef_design_designmode1.gif";
+			html.src = "../images/ef_design_htmlmode.gif";
+			parent.topic.bigmain.style.display = "none";
+			parent.topic.srcHtml.style.display = "";
+			parent.topic.srcHtml.style.textAlign = "left";
+			var strInnerHTML = parent.topic.SKbillsheet.innerHTML;
+			strInnerHTML = formatHtmlText(strInnerHTML);
+			parent.topic.srcHtml.value = strInnerHTML;
+			parent.topic.srcHtml.focus();
+			//parent.topic.execScript("window_onresize()")
+		}
+		
+		if(parent.Request.QueryString("ebuse").toString() == "yes")
+		{
+			var sComm = "parent.topic.execScript('e_savedj();');"
+			document.write('<img src="../images/ef_run_button_ok1.gif" style="position:absolute;top:1;left:300;" onclick="' + sComm + '"><img src="../images/ef_run_button_close1.gif" style="position:absolute;top:1;left:360;" onclick="parent.topic.blnChange=false;parent.close();">');		
+		}		
+	</script>	
+	<body bgcolor="#d4d0c8" marginTop="0">		
+		<img id="design" src="../images/ef_design_designmode.gif" style="position:absolute;top:5;left:10;" onclick="design_click()"> <img id="html" src="../images/ef_design_htmlmode1.gif" style="position:absolute;top:5;left:70;" onclick="html_click()">		
+	</body>
+</html>

@@ -1,0 +1,392 @@
+/* 定义超链接样式 */
+A {
+	FONT-SIZE: 12px; COLOR: #0000FF; TEXT-DECORATION: none
+}
+A:link,A:hover,A:active,A:visited {
+	FONT-SIZE: 12px; COLOR: #0000FF
+}
+
+/* 定义TABLE样式 */
+.formtable {
+	BORDER: #415A76 1px solid; 
+	border-collapse: collapse;
+	table-layout:fix
+}
+.formtable .tdLabel{
+	background-color:#F3F3F3;
+}
+
+/* 定义TD默认样式 */
+.formtable TD {
+	FONT-SIZE: 12px; 
+	PADDING-LEFT: 5px;
+	BORDER: #415A76 1px solid; 
+	HEIGHT:20PX;
+}
+
+/* 定义TABLE样式 */
+.formtable_red {
+	BORDER: red 1px solid; 
+	border-collapse: collapse;
+	table-layout:fix
+}
+.formtable1_red .tdLabel{
+	background-color:#F3F3F3;
+}
+
+/* 定义TD默认样式 */
+.formtable_red TD {
+	TEXT-ALIGN: left; 
+	FONT-SIZE: 12px; 
+	PADDING-LEFT: 5px;
+	BORDER: red 1px solid; 
+	HEIGHT:20PX;
+}
+/* 定义没有边框的样式,用在只读的文本框 */
+.formtable_red .nolinetext {
+	BORDER: 0px; 
+	WIDTH:100%;
+	HEIGHT:100%;
+}
+
+
+/* 定义TABLE样式 */
+.formtable_bold {
+	BORDER: #000 2px solid; 
+	border-collapse: collapse;
+	table-layout:fix
+}
+.formtable1_bold .tdLabel{
+	background-color:#F3F3F3;
+}
+
+/* 定义TD默认样式 */
+.formtable_bold TD {
+	TEXT-ALIGN: left; 
+	FONT-SIZE: 12px; 
+	PADDING-LEFT: 5px;
+	BORDER: #000 1px solid; 
+	HEIGHT:20PX;
+}
+/* 定义没有边框的样式,用在只读的文本框 */
+.formtable_bold .nolinetext {
+	BORDER: 0px; 
+	WIDTH:100%;
+	HEIGHT:100%;
+}
+
+/*
+INPUT {
+	BORDER: #000000 1px solid;
+}
+
+TEXTAREA {
+	BORDER: #000000 1px solid;
+}
+*/
+
+
+
+
+/************  使用下列样式时在标签属性中加入class="样式名"    *************/
+/***********   如class="noborderbutton"    					  *************/
+
+/* 定义带下划线的样式 */
+.underlinetext {
+	BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: #000000 1px solid;
+}
+
+/* 定义四边都带边框样式 */
+.aroundlinetext {
+	BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid;
+}
+
+/* 定义没有边框的样式,用在只读的文本框 */
+.formtable .nolinetext {
+	BORDER: 0px; 
+	WIDTH:100%;
+	HEIGHT:100%;
+}
+
+/* 定义标题样式，在标题所属的td属性里加上class="title" */
+.title {
+	FONT-SIZE: 16pt;
+	FONT-STYLE: normal;
+	FONT-FAMILY: "黑体";
+	TEXT-ALIGN: center;
+	color: #000000;
+}
+.bold_black {
+	font-weight:bold;
+	color:#000000;
+}
+/* 定义蓝色的按钮样式 */
+.button1{ 
+	background-image:url(../../images/button_bg75_24.jpg); 
+	width:75px; 
+	height:20px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+.button2{ 
+	background-image:url(../../images/button_bg65_24.jpg); 
+	width:65px; 
+	height:24px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+.button3{ 
+	background-image:url(../../images/button_bg63_23.jpg); 
+	width:63px; 
+	height:23px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+
+.button_long{ 
+	background-image:url(../../images/button_bg188_29.jpg); 
+	width:188px; 
+	height:29px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+
+.button_long2{ 
+	background-image:url(../../images/button_bg110_23.jpg); 
+	width:110px; 
+	height:23px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+
+.button_short{ 
+	background-image:url(../../images/button_bg40_24.jpg); 
+	width:39px; 
+	height:20px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+.button_short2{ 
+	background-image:url(../../images/button_bg55_23.jpg); 
+	width:55px; 
+	height:23px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+.button_short3{ 
+	background-image:url(../../images/button_bg41_21.jpg); 
+	width:41px; 
+	height:21px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+.button_select{ 
+        background-color:#fffff;
+	background-image:url(../../images/button_select.gif); 
+	width:39px; 
+	height:20px; 
+	BACKGROUND-REPEAT: no-repeat;
+	border:0px
+}
+/*电子监察 审批基本信息表中的环节历史样式  开始*/
+
+div.dzjc_tache_list_row{
+	width:100%;
+	margin-top:-1px;
+	border:1px solid #E7E5E9;
+}
+div.dzjc_tache_list_row button.off_button,button.on_button{
+	width:20px;
+	height:20px;
+	border:0px;
+	}
+div.dzjc_tache_list_row button.off_button{
+	background:url('../../images/off_button.gif') no-repeat;
+	}
+div.dzjc_tache_list_row button.on_button{
+	background:url('../../images/on_button.gif') no-repeat;
+	}
+div.dzjc_tache_detail{
+	 margin:0px;
+	 padding:0px;
+	 padding-bottom:1px;
+	 display:none;
+	 line-height:-1px
+	}
+ul.dzjc_tache_list_header,ul.dzjc_tache_list{
+	width:100%;
+	margin:0px;
+	padding:0px;
+	FONT-SIZE:12px;
+	background-color:#FFFDF5;
+}
+.dzjc_tache_list_header li{
+	background:url('../../images/cd_bj.jpg');
+	list-style-type:none;
+	float:left;
+	height:20px;
+	width:150px;
+	FONT-WEIGHT:bold;
+	margin-right:1px;
+}
+.dzjc_tache_list li{
+	text-align:left;
+	padding-left:2px;
+	padding-top:5px;
+	list-style-type:none;
+	float:left;
+	height:21px;
+	width:150px;
+	margin-right:1px;
+}
+
+ul.dzjc_tache_list_header .sequnce_col{
+	width:20px;
+}
+ul.dzjc_tache_list_header .button_col{
+	width:73px;
+	margin-right:0px;
+}
+ul.dzjc_tache_list .sequnce_col{
+	width:20px;
+}
+ul.dzjc_tache_list .button_col{
+	width:73px;
+	text-align:center;
+	margin-right:0px;
+	padding-top:1px;
+}
+/*电子监察 审批基本信息表中的环节历史样式  结束*/
+/*电子监察 右键菜单  开始*/
+UL.dzjc_context_menu{
+		background:url("../../images/ef_designer_menu_LeftHalf.gif") repeat-y;
+		font-size:12px;
+		margin:0px;
+		background-color: #F7F3EF;
+		padding:1px;
+	}
+UL.dzjc_context_menu li {
+		text-align: left;
+		padding:1px;
+		margin:0px;
+		line-height:22px;
+		list-style:none;
+		padding-left:22px;
+		background-repeat:no-repeat;
+		background-position-y: 1px;
+		cursor:hand;
+	}
+UL.dzjc_context_menu li.add{
+		background-image: url("../../images/ef_design_new.gif"); 
+	}
+UL.dzjc_context_menu li.modify{
+		background-image: url("../../images/ef_design_shuxing.gif"); 
+	}
+UL.dzjc_context_menu li.delete{
+		background-position-x: 3px;
+		background-image: url("../../images/ef_design_delete.gif"); 
+	}
+UL.dzjc_context_menu li.selected{
+		border:1px dotted gray;
+		padding:0px;
+		padding-left:22px;
+		background-color:#FFEFC6; 
+	}
+/*电子监察 右键菜单  结束*/
+
+/**
+*grid控件的样式 
+**/
+.tdfilter { 
+	/*progid:DXImageTransform.Microsoft.BasicImage(invert=1);
+    */
+	filter: Invert;
+	/*background-color:#ffff32 ;*/
+ }  
+.tdfilter1 
+{
+	/*color:#ffffff ;
+	background-color:#0000cd ;*/
+	color:#0B4395;
+ }   
+/* table的外框的样式 */
+#SKbillsheet #fcwebgriddiv  
+{
+	background-color:#ffffff;BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid;BORDER-COLOR:#B8B8B8;
+}
+
+/* table的样式 */
+#SKbillsheet #fcwebgriddiv #t  
+{
+	/*BACKGROUND-COLOR:#FFFFFF;FONT-FAMILY:MS Sans Serif;FONT-SIZE:11px;color:#000000;*/
+	/*sxb 200801015修改，td的overflow*/
+	BACKGROUND-COLOR:#FFFFFF;FONT-FAMILY:MS Sans Serif;FONT-SIZE:11px;color:#000000;
+	text-overflow:ellipsis; overflow:hidden;
+}
+
+/* 表格的首行 */
+#SKbillsheet #fcwebgriddiv #t .fcGridFirstRow 
+{
+	/*BACKGROUND-COLOR:#c0c0c0 ;FONT-SIZE:12px;FONT-WEIGHT:bold;*/
+	BACKGROUND-COLOR:#c0c0c0 ;FONT-SIZE:12px;FONT-WEIGHT:bold;
+        background:url('../../images/th_img_bg.gif') repeat-x left;
+        padding-left:5px;padding-right:5px;
+        padding-top:2px;padding-bottom:2px;
+        color:#ffffff;
+        font-size:14px;font-weight:normal
+}
+/* 表格的首行td */
+#SKbillsheet #fcwebgriddiv #t .fcGridFirstRow td
+{
+	/*BORDER-RIGHT: #a0a0a0 1px solid;*/
+	BORDER-RIGHT: #ffffff 1px solid; 
+}
+
+/* table的td样式 */
+#SKbillsheet #fcwebgriddiv #t td
+{
+	/*text-overflow:ellipsis; overflow:hidden;*/
+	border:1px solid #5780C5;padding-left:5px
+}
+   
+ .mouseover
+ {
+ 	/*sxb 20080912 鼠标移到对象的样式*/
+ 	background-color:#BECAD8 ;
+ }
+ .recStyle1
+ {
+ 	/*sxb 20080912 表格中单号行的样式*/
+ 	background-color:#EBEAE8
+ }
+  .recStyle2
+ {
+ 	/*sxb 20080912 表格中双号行的样式*/
+ 	background-color:#E3E3E3
+ 	
+ }
+ /* 点击后的背景色 
+ */
+ .creatorclickbg{
+    background-color:#BECAD8
+ } 
+
+/* 表格控件内的编辑框 */
+#SKbillsheet #txtMyGrid 
+{
+	BACKGROUND-COLOR: white; BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none;
+}
+/* 垂直滚动条的样式 */
+#SKbillsheet #fchtcDiv1
+{
+	BACKGROUND-COLOR: #EEEDE5; BORDER-RIGHT: gray 0px solid; 
+}
+/* 水平滚动条的样式 */
+#SKbillsheet #fchtcDiv2
+{
+	BACKGROUND-COLOR: #EEEDE5; BORDER-RIGHT: gray 0px solid; 
+}
+/*表格右下角的填补块*/
+#SKbillsheet #divconer {
+	BACKGROUND-COLOR: #EEEDE5; BORDER-BOTTOM: 0px solid; BORDER-RIGHT: 0px solid;font-size:9px;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding='gb2312'?>
+<manager-config>
+	<!-- 
+		消息模块配置文件
+		通过表TD_MSG_DICT的字段DICT_MSG_BEAN_ID 查询ID
+		class：消息发送实现类所在路径
+	-->
+	<!--  发送实现类 -->
+	<manager id="RtxSendImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.RTXMessageSend" />
+	</manager>
+	<manager id="SmsSendImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.SMSMessageSend" />
+	</manager>
+	<manager id="SysSendImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.SYSMessageSend" />
+	</manager>
+	<!-- 保存实现类 -->
+	<manager id="RtxSaveImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.RTXMessageSave" />
+	</manager>
+	<manager id="SmsSaveImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.SMSMessageSave" />
+	</manager>
+	<!-- 重发实现类 -->
+	<manager id="RtxReSendImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.RTXMessageResend" />
+	</manager>
+	<manager id="SmsReSendImpl" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.SMSMessageResend" />
+	</manager>
+
+</manager-config>

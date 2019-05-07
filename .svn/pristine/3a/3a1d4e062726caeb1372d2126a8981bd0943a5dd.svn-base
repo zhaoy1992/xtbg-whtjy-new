@@ -1,0 +1,202 @@
+#\u914d\u7f6e\u6587\u4ef6\u4e2d\u6240\u6709\u7684\u5206\u9694\u7b26\u90fd\u662f\u6307delim\u5b9a\u4e49\u7684\u7b26\u53f7\u5206\u5272 
+#delim\u6d88\u606f\u7cfb\u7edf\u5168\u5c40\u5206\u9694\u7b26 \u63a5\u6536\u4eba\u5458 \u6d88\u606f\u53d1\u9001\u7c7b\u578b \u4ee5\u53ca\u5176\u5b83\u6240\u6709\u7c7b\u578b\u90fd\u5e94\u4f7f\u7528\u8be5\u8bbe\u5b9a\u5206\u5272
+#\u6240\u6709\u53c2\u6570\u540e\u9762\u8bf7\u52ff\u6dfb\u52a0\u7a7a\u767d\u7b26(\u7a7a\u683c\u7b26 \u5236\u8868\u7b26\u7b49)
+delim=,
+
+
+#######################[\u672c\u5730\u670d\u52a1\u5668\u4f7f\u7528]##################
+#\u662f\u5426\u542f\u7528\u91cd\u53d1 1 \u542f\u7528 0 \u5173\u95ed
+RESEND_MESSAGE = 0
+#SMS\u91cd\u53d1\u65f6\u9650 \u8fc7\u671f\u7684\u6d88\u606f\u5c06\u4e0d\u53d1\u9001  \u5355\u4f4d\u5929
+SMS_TIME_LIMIT = 1
+#RTX\u91cd\u53d1\u65f6\u9650 \u8fc7\u671f\u7684\u6d88\u606f\u5c06\u4e0d\u53d1\u9001  \u5355\u4f4d\u5929
+RTX_TIME_LIMIT = 1
+# \u8bbe\u7f6ertx\u6240\u5b89\u88c5\u670d\u52a1\u5668port,\u4e0eRTX ConnServer\u670d\u52a1\u5bf9\u5e94, \u9ed8\u8ba4\u503c8000
+RTX_SERVER_PORT=8000
+
+#######################[\u5b9a\u65f6\u91cd\u53d1\u914d\u7f6e]#####################
+#\u91cd\u53d1\u5b9e\u73b0\u7c7b  td_msg_dict \u8868 dict_msg_no \u5b57\u6bb5\u5185\u9009\u62e9,\u591a\u4e2a\u4ee5 delim \u5206\u5272 
+#\u53d1\u9001\u65f6\u95f4\u95f4\u9694 \u5728config-manager.xml \u8bbe\u5b9a "name" \u4e3a timesendingmessage \u7684cronb_time\u5c5e\u6027
+RESEND_TYPE=rtx,sms
+
+#######################[\u672c\u5730RMI\u670d\u52a1\u5668\u4f7f\u7528]################
+#\u8fdc\u7a0b\u670d\u52a1\u7aef\u53e3
+RMI_PORT=10096
+#\u8fdc\u7a0b\u670d\u52a1IP
+RMI_IP = 172.16.7.147
+#RTX\u662f\u5426\u542f\u7528\u8fdc\u7a0b\u6d88\u606f\u53d1\u9001 1 \u4f7f\u7528 0 \u4e0d\u4f7f\u7528
+RTX_USER_RMISEND = 1
+#RTX\u662f\u5426\u542f\u7528\u8fdc\u7a0b\u6d88\u606f\u53d1\u9001 1 \u4f7f\u7528 0 \u4e0d\u4f7f\u7528
+SMS_USER_RMISEND = 0
+
+
+################################[SMS \u77ed\u4fe1  \u8bbe\u5b9a]###########
+#\u79fb\u52a8\u7684\u53f7\u7801
+SMS_CHINAMOBILE=0
+#\u8054\u901a\u7684\u53f7\u7801
+SMS_UNICOM=1			
+#\u5c0f\u7075\u901a\u53f7\u7801
+SMS_CHINATELECOM=2
+#\u8fd4\u56de\u503c \u53d1\u9001\u6210\u529f
+SMS_SEND_SUCCESS=0
+#\u8fd4\u56de\u503c \u53d1\u9001\u51fa\u73b0\u5f02\u5e38\uff0c\u5931\u8d25
+SMS_SEND_EXCEPTION=1
+#\u8fd4\u56de\u503c \u6e90\u6216\u76ee\u6807\u624b\u673a\u53f7\u4e3a\u7a7a
+SMS_MOBILE_NULL=5
+#\u8fd4\u56de\u503c \u5185\u5bb9\u4e3a\u7a7a
+SMS_CONTENT_NULL=6
+#\u8fd4\u56de\u503c \u5185\u5bb9\u8d85\u8fc7\u9650\u5236
+SMS_CONTENT_TOLONG=7
+# \u77ed\u4fe1\u5185\u5bb9\u957f\u5ea6\u9650\u5236,\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93\u5bf9\u5e94\u5b57\u6bb5\u7684\u5927\u5c0f
+SMS_CONTENT_LIMIT=600
+#\u77ed\u4fe1\u53d1\u9001\u540e\u67e5\u8be2\u8fd4\u56de\u503c,\u5728\u6b64\u5c5e\u6027\u4e2d\u7684\u72b6\u6001\u5c06\u91cd\u53d1,\u591a\u79cd\u72b6\u6001\u4ee5 delim \u5206\u5272
+SMS_RESEND_TYPE=Svc00011,Svc00012,Svc00013
+
+SHORT_MESSAGE_IMPL = com.chinacreator.message.impl.ShortSMSImpl
+
+################################[RTX \u8bbe\u5b9a]###############
+#\u8fd4\u56de\u503c \u53d1\u9001\u6210\u529f
+RTX_SEND_SUCCESS=0
+#\u8fd4\u56de\u503c \u53d1\u9001\u51fa\u73b0\u5f02\u5e38
+RTX_SEND_EXCEPTION=1
+#\u8fd4\u56de\u503c \u6807\u9898\u4e3a\u7a7a
+RTX_TITLE_NULL=5
+#\u8fd4\u56de\u503c \u6807\u9898\u8d85\u8fc7\u9650\u5236				
+RTX_TITLE_TOLONG=6
+#\u8fd4\u56de\u503c \u5185\u5bb9\u4e3a\u7a7a		
+RTX_CONTENT_NULL=7
+#\u8fd4\u56de\u503c \u5185\u5bb9\u8d85\u8fc7\u9650\u5236	
+RTX_CONTENT_TOLONG=8
+#RTX\u6d88\u606f\u91cd\u8981\u6027 1 \u91cd\u8981 0 \u666e\u901a
+RTX_NOTIFY_TYPE=1
+#\u6d88\u606f\u7a97\u53e3\u663e\u793a\u65f6\u95f4\uff0c0 \u7528\u6237\u5173\u95ed\u65f6\u624d\u5173\u95ed    \u5355\u4f4d\u79d2
+RTX_DELAY_TIME=0
+#\u6807\u9898\u5b57\u6570\u9650\u5236
+RTX_TITLE_LIMIT=100
+#\u5185\u5bb9\u5b57\u6570\u9650\u5236
+RTX_CONTENT_LIMIT=800
+################################[SYS \u7ad9\u5185\u90ae\u7bb1  \u8bbe\u5b9a]#########
+
+
+#\u8fd4\u56de\u503c \u6210\u529f
+SYS_SEND_SUCCESS=0
+#\u8fd4\u56de\u503c \u5f02\u5e38
+SYS_SEND_EXCEPTION=1
+#\u8fd4\u56de\u503c \u6807\u9898\u4e3a\u7a7a
+SYS_TITLE_NULL=5
+#\u8fd4\u56de\u503c  \u53d1\u4ef6\u4eba\u4e0d\u5b58\u5728
+SYS_SENDER_NULL =4
+#\u8fd4\u56de\u503c \u6807\u9898\u8d85\u8fc7\u9650\u5236			
+SYS_TITLE_TOLONG=6
+#\u8fd4\u56de\u503c \u5185\u5bb9\u4e3a\u7a7a		
+SYS_CONTENT_NULL=7
+#\u8fd4\u56de\u503c \u5185\u5bb9\u8d85\u8fc7\u9650\u5236			
+SYS_CONTENT_TOLONG=8
+#\u8fd4\u56de\u503c \u6536\u4ef6\u4eba\u8d85\u8fc7\u9650\u5236
+SYS_RECIVER_TOLONG=9
+#\u6807\u9898\u5b57\u6570\u9650\u5236 \u8bbe\u5b9a\u503c\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93
+SYS_TITLE_LIMIT=100
+#\u5185\u5bb9\u5b57\u6570\u9650\u5236 \u8bbe\u5b9a\u503c\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93
+SYS_CONTENT_LIMIT= 40000
+ # \u63a5\u6536\u8005\u5b57\u6570\u9650\u5236 \u8bbe\u5b9a\u503c\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93
+SYS_RECIVER_LIMIT =1000
+
+
+###############################[sqls]######################
+#query sms
+MULTIPLEMSGQUERY=select * from td_msg_sms_interface
+#\u67e5\u8be2\u53d1\u9001\u7c7b\u578b
+SELECT_MSGNO = SELECT DICT_MSG_NO FROM TD_MSG_DICT
+#\u67e5\u8be2\u5e73\u53f0\u6d88\u606f\u914d\u7f6e
+APP_FUNCTIONLIST = select functionlist from tb_application_info where app_id=?
+#\u67e5\u8be2\u6240\u6709\u6d88\u606f\u8d44\u6e90
+SELECT_MESSAGE_RESOURCE =SELECT *  FROM  td_msg_resource t  where t.R_DESC is not null 
+#\u67e5\u8be2\u5b57\u5178\u8868\u7c7b\u578b\u5b57\u6bb5
+SELECT_MSGDICT_NO = SELECT dict_msg_no,dict_msg_name FROM td_msg_dict order by dict_msg_no
+#\u67e5\u8be2MSGLOG\u8868\u8fd8\u672a\u53d1\u9001\u7684\u6d88\u606f
+SELECT_MSGLOG_NOTSEND= select a.msg_main_title,a.msg_main_content,a.msg_main_business_id,B.* from td_message_main A, td_msg_sending B where A.msg_main_id =? and B.msg_log_send_type=? and A.msg_main_id=B.msg_main_id 
+#\u67e5\u8be2beanid
+SELECT_MSGBEANID = SELECT * FROM TD_MSG_DICT WHERE DICT_MSG_NO = ?
+#\u67e5\u8be2\u9700\u91cd\u53d1\u7684\u6d88\u606f
+SELECT_MSGALLRESEND = select * from td_msg_sending A,td_message_main B where  A.Msg_Main_Id = b.msg_main_id and A.msg_log_send_type = ? and A.msg_log_state = ?  and (sysdate - A.msg_log_date) < ?
+#\u6dfb\u52a0\u6d88\u606f\u4e3b\u8868
+INSERT_MSGMAIN =  insert into TD_MESSAGE_MAIN(MSG_MAIN_ID ,MSG_MAIN_TITLE,MSG_MAIN_CONTENT   , MSG_MAIN_SENDER     ,MSG_MAIN_RECEIVES   ,MSG_MAIN_SEND_TYPE  ,MSG_MAIN_SEND_TIME   , MSG_MAIN_BUSINESS_ID) values(?,?,?,?,?,?,?,?)
+#\u6dfb\u52a0\u53d1\u9001\u8868
+INSERT_MSGLOG =  insert into TD_MSG_SENDING( MSG_LOG_ID, MSG_MAIN_ID, MSG_LOG_STATE, MSG_LOG_RECEIVER, MSG_LOG_SEND_TYPE, MSG_LOG_DATE,  MSG_LOG_REMARK_A, MSG_LOG_REMARK_B)values (SEQ_TD_MSG_SENDING.NEXTVAL,?,?,?,?,?,?,?)
+#\u66f4\u65b0\u53d1\u9001\u8868
+UPDATE_MSGLOG = update td_msg_sending set msg_log_state=?,msg_log_send_type=?,msg_log_date=?,msg_log_remark_a=?,msg_log_remark_b=? where msg_log_id = ?
+#\u66f4\u65b0\u53d1\u9001\u8bb0\u5f55
+UPDATE_MSGSTATE = update  td_msg_sending set msg_log_state = ? where msg_log_id= ?
+#\u66f4\u65b0\u5907\u6ce8\u5b57\u6bb5 (\u77ed\u4fe1\u4f7f\u7528)
+UPDATE_MSGREMARK_A = update  td_msg_sending set msg_log_remark_a = ? where msg_log_id= ?
+
+
+
+#######################[ \u91cd\u6784\u524d\u7684\u8bbe\u7f6e\u5c5e\u6027  \u6682\u65f6\u4fdd\u7559]############
+# administrator sender
+# \u4e3a\u4e86\u7cfb\u7edf\u7fa4\u53d1\u8bbe\u7f6e\u7684\u5f00\u5173,\u6bcf\u4e00\u79cd\u6d88\u606f\u7684\u63a5\u53e3\u5df2\u5b9e\u73b0,\u4f46\u7edf\u4e00\u7684\u6d88\u606f\u63a5\u53e3\u6682\u672a\u5b9e\u73b0
+#sysSender=admin
+#smsSender=admin
+#rtxSender=admin
+##emailSender=admin
+# rtx server ip
+# \u8bbe\u7f6ertx\u6240\u5b89\u88c5\u670d\u52a1\u5668ip,\u5982\u679c\u6ca1\u6709\u5728\u914d\u7f6e\u6587\u4ef6\u4e2d\u8bbe\u7f6eserver ip,\u5219\u8c03\u7528sdk\u670d\u52a1\u5668(\u4e0e\u5e94\u7528\u5728\u540c\u4e00\u670d\u52a1\u5668)\u7684ip
+rtxServerIP=172.16.17.19
+
+# rtx limit
+# \u5373\u65f6\u6d88\u606f\u6807\u9898\u957f\u5ea6\u9650\u5236,\u5373\u65f6\u6d88\u606f\u6570\u636e\u4e0d\u4f1a\u5b58\u4e8e\u6570\u636e\u5e93,\u8bbe\u7f6e\u5927\u5c0f\u4e3b\u8981\u662f\u8003\u8651rtx\u6d88\u606f\u5f39\u51fa\u7a97\u53e3\u7684\u663e\u793a
+rtxTitleLimit=100
+# \u5373\u65f6\u6d88\u606f\u5185\u5bb9\u957f\u5ea6\u9650\u5236
+rtxContentLimit=800
+# sys limit
+# \u7ad9\u5185\u90ae\u4ef6\u6807\u9898\u957f\u5ea6\u9650\u5236,\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93\u5bf9\u5e94\u5b57\u6bb5\u7684\u5927\u5c0f
+sysTitleLimit=100
+# \u7ad9\u5185\u90ae\u4ef6\u5185\u5bb9\u957f\u5ea6\u9650\u5236,\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93\u5bf9\u5e94\u5b57\u6bb5\u7684\u5927\u5c0f
+sysContentLimit=40000
+# \u7ad9\u5185\u90ae\u4ef6\u63a5\u6536\u8005\u957f\u5ea6\u9650\u5236,\u4e0d\u80fd\u5927\u4e8e\u6570\u636e\u5e93\u5bf9\u5e94\u5b57\u6bb5\u7684\u5927\u5c0f
+sysReciverLimit=1000
+#\u77ed\u4fe1\u63a5\u53e3\u53c2\u6570\u914d\u7f6e
+#\u79fb\u52a8mas\u53c2\u6570\u914d\u7f6e
+#mas\u673aip\u5730\u5740
+#host=222.243.169.117
+#mysql\u7684\u6570\u636e\u5e93\u540d\u79f0
+#dbName=mas
+#\u7f16\u7801
+apiId=xtbg
+#\u7528\u6237\u540d
+#name=oa
+#\u5bc6\u7801
+#pwd=oas
+#\u8054\u901a\u53f7\u7801\u6bb5
+unicom = 130|131|132|133|153|155|156
+#\u79fb\u52a8\u53f7\u7801\u6bb5
+chinamobile = 134|135|136|137|138|139|150|151|157|158|159
+#\u7535\u4fe1\u53f7\u7801\u6bb5
+chinatelecom = 189|0731
+#\u7535\u4fe1\u77ed\u4fe1\u63a5\u53e3\u53c2\u6570\u914d\u7f6e
+#http\u63a5\u53e3
+#_ifc_note = http://220.168.248.90:8083/httpinterface/ent/sendsms.jsp?
+#\u53d1\u9001\u6d88\u606f\u7684\u4f01\u4e1a\u8d26\u53f7
+#srcmobile = 07317244731
+#\u8d26\u53f7\u5bf9\u5e94\u7684\u767b\u5f55\u5bc6\u7801
+#password = 123456
+#endpoint = http://10.1.8.61/services/cmcc_mas_wbs
+endpoint = http://61.187.16.10:9000/axis/services/GXQSMS
+extendcode=001
+GB_LENGTH=70
+ASCII_LENGTH=160
+#\u7528\u6237\u540d
+STAFF_ID=INT_0001
+#\u5bc6\u7801
+STAFF_PASSWD=INT_0001
+#\u7fa4\u53d1\u7c7b\u578b 0:\u7acb\u5373\u53d1\u9001 1:\u5b9a\u65f6\u53d1\u9001
+QF_TYPE=0
+#\u5b9a\u65f6\u65f6\u95f4,\u5e74.\u6708.\u65e5.\u65f6.\u5206
+#TIMERSTR=2009.03.01.01.01
+
+#\u77ed\u6d88\u606f\u53d1\u9001\u5b9e\u73b0\u7c7b\u5168\u540d,\u5b9e\u73b0com.chinacreator.message.SmsSendInterface
+SMS_SEND_IMPLCLASS=com.chinacreator.message.SMSTestImpl
+
+namespace=http://sms.cshtz.com
+operation=sendSms
+

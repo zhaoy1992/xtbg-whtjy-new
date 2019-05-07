@@ -1,0 +1,12 @@
+animation=1
+caption=test_Bar2D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+showValues=0
+useRoundEdges=1
+decimals=0
+
+trendLines.startValue=70000
+trendLines.color=009933
+trendLines.displayValue=Target

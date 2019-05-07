@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+	<!-- 模块导入导出配置 -->
+<menuissue_config>
+	<!--
+		name：组件名称 （eform:表单 jawe:流程 report:报表 file:文件） 
+		used：标识是否使用(false:不使用 true:使用	默认为false)
+		exp_class：组件导出实现类
+		(必须实现接口com.chinacreator.eppissue.menuissue.interfaces.IComponentsExpManage)
+		imp_class：组件导入实现类
+		(必须实现接口com.chinacreator.eppissue.menuissue.interfaces.IComponentsImpManage)
+	-->
+	<component name="eform" used="true"
+		exp_class="com.chinacreator.eppissue.menuissue.impl.expimpl.EformExpImpl"
+		imp_class="com.chinacreator.eppissue.menuissue.impl.impimpl.EformImpImpl" />
+	<component name="jawe" used="true"
+		exp_class="com.chinacreator.eppissue.menuissue.impl.expimpl.JaweExpImpl"
+		imp_class="com.chinacreator.eppissue.menuissue.impl.impimpl.JaweImpImpl" />
+	<component name="report" used="true"
+		exp_class="com.chinacreator.eppissue.menuissue.impl.expimpl.ReportExpImpl"
+		imp_class="com.chinacreator.eppissue.menuissue.impl.impimpl.ReportImpImpl" />
+	<component name="file" used="true"
+		exp_class="com.chinacreator.eppissue.menuissue.impl.expimpl.FileExpImpl"
+		imp_class="com.chinacreator.eppissue.menuissue.impl.impimpl.FileImpImpl" />
+</menuissue_config>

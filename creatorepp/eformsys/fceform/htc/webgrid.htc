@@ -1,0 +1,3255 @@
+
+<ATTACH EVENT="ondocumentready" HANDLER="Init" />
+<PUBLIC:PROPERTY ID="leftID" NAME="left" PUT="fnPutleft" GET="fnGetleft"  />
+<PUBLIC:PROPERTY ID="topID" NAME="top" PUT="fnPuttop" GET="fnGettop"  />
+<PUBLIC:PROPERTY ID="heightID" NAME="height" PUT="fnPutheight" GET="fnGetheight"  />
+<PUBLIC:PROPERTY ID="widthID" NAME="width" PUT="fnPutwidth" GET="fnGetwidth"  />
+<PUBLIC:PROPERTY ID="visibleID" NAME="visible" PUT="fnPutvisible" GET="fnGetvisible"  />
+<PUBLIC:PROPERTY ID="formatID" NAME="format" PUT="fnPutformat" GET="fnGetformat"  />
+<PUBLIC:PROPERTY ID="autosizeID" NAME="autosize" PUT="fnPutautosize" GET="fnGetautosize"  />
+<PUBLIC:PROPERTY ID="hideVscrollID" NAME="hideVscroll" PUT="fnPuthideVscroll" GET="fnGethideVscroll"  />
+<PUBLIC:PROPERTY ID="hideHscrollID" NAME="hideHscroll" PUT="fnPuthideHscroll" GET="fnGethideHscroll"  />
+<PUBLIC:PROPERTY ID="ScrollBarID" NAME="ScrollBar" PUT="fnPutScrollBar" GET="fnGetScrollBar"  />
+<PUBLIC:PROPERTY ID="canselectID" NAME="canselect" PUT="fnPutcanselect" GET="fnGetcanselect"  />
+<PUBLIC:PROPERTY ID="ReadOnlyID" NAME="ReadOnly" PUT="fnPutReadOnly" GET="fnGetReadOnly"  />
+<PUBLIC:PROPERTY ID="ColShowID" NAME="ColShow" PUT="fnPutColShow" GET="fnGetColShow"  />
+<PUBLIC:PROPERTY ID="AdjustColWidthID" NAME="AdjustColWidth" PUT="fnPutAdjustColWidth" GET="fnGetAdjustColWidth"  />
+<PUBLIC:PROPERTY ID="AdjustRowHeightID" NAME="AdjustRowHeight" PUT="fnPutAdjustRowHeight" GET="fnGetAdjustRowHeight"  />
+<PUBLIC:PROPERTY ID="IsOrderID" NAME="IsOrder" PUT="fnPutIsOrder" GET="fnGetIsOrder"  />
+<PUBLIC:PROPERTY ID="FixRowsID" NAME="FixRows" PUT="fnPutFixRows" GET="fnGetFixRows"  />
+<PUBLIC:PROPERTY ID="FixColsID" NAME="FixCols" PUT="fnPutFixCols" GET="fnGetFixCols"  />
+<PUBLIC:PROPERTY ID="RowsID" NAME="Rows" PUT="fnPutRows" GET="fnGetRows"  />
+<PUBLIC:PROPERTY ID="ColsID" NAME="Cols" PUT="fnPutCols" GET="fnGetCols"  />
+<PUBLIC:PROPERTY ID="RowID" NAME="Row" GET="fnGetRow"  />
+<PUBLIC:PROPERTY ID="ColID" NAME="Col" GET="fnGetCol"  />
+<PUBLIC:PROPERTY ID="curTDID" NAME="curTD" GET="fnGetcurTD"  />
+<PUBLIC:PROPERTY ID="TopRowID" NAME="TopRow" GET="fnGetTopRow"  />
+<PUBLIC:PROPERTY ID="VmaxID" NAME="Vmax" GET="fnGetVmax"  />
+<PUBLIC:PROPERTY ID="tabID" NAME="tab" PUT="fnPuttab" GET="fnGettab"  />
+<PUBLIC:PROPERTY ID="czID" NAME="cz"  GET="fnGetcz"  />
+<PUBLIC:PROPERTY ID="prnID" NAME="prn" GET="fnGetprn"  />
+<PUBLIC:PROPERTY ID="txtID" NAME="txt"  GET="fnGettxt"  />
+<PUBLIC:PROPERTY ID="lostfocustdID" NAME="lostfocustd" PUT="fnPutlostfocustd" GET="fnGetlostfocustd"  />
+<PUBLIC:PROPERTY ID="SetRowHeightID" NAME="SetRowHeight" PUT="fnPutSetRowHeight" GET="fnGetSetRowHeight"  />
+<PUBLIC:PROPERTY ID="overflowID" NAME="overflow" PUT="fnPutoverflow" GET="fnGetoverflow"  />
+<PUBLIC:PROPERTY ID="EndRowStateID" NAME="EndRowState" PUT="fnPutEndRowState" GET="fnGetEndRowState"  />
+<PUBLIC:PROPERTY ID="bIngridID" NAME="bIngrid" GET="fnGetbIngrid"  />
+<PUBLIC:PROPERTY ID="bCellID" NAME="bCell" PUT="fnPutbCell" GET="fnGetbCell"  />
+<PUBLIC:PROPERTY ID="datasetID" NAME="dataset" PUT="fnPutdataset" GET="fnGetdataset"  />
+<PUBLIC:PROPERTY ID="coleditID" NAME="coledit" PUT="fnPutcoledit" GET="fnGetcoledit"  />
+<PUBLIC:PROPERTY NAME="ParentPos"/>
+<PUBLIC:METHOD NAME="Init" >
+<PUBLIC:METHOD NAME="MoveDataSet" >
+<PUBLIC:METHOD NAME="SaveExcel" >
+<PUBLIC:METHOD NAME="AddBackColor" >
+<PUBLIC:METHOD NAME="RemoveBackColor" >
+<PUBLIC:METHOD NAME="Act_onDataChange" >
+<PUBLIC:METHOD NAME="ResizeDiv" >
+<PUBLIC:METHOD NAME="FindFirstTD" >
+<PUBLIC:METHOD NAME="initGrid" >
+<PUBLIC:METHOD NAME="InsertCol" >
+<PUBLIC:METHOD NAME="InsertRow" >
+<PUBLIC:METHOD NAME="DeleteRow" >
+<PUBLIC:METHOD NAME="DeleteCol" >
+<PUBLIC:METHOD NAME="SetFocus" >
+<PUBLIC:METHOD NAME="SetCol" >
+<PUBLIC:METHOD NAME="print" >
+<PUBLIC:METHOD NAME="hide" >
+<PUBLIC:METHOD NAME="Scroll" >
+<PUBLIC:METHOD NAME="VScroll" >
+<PUBLIC:METHOD NAME="HScroll" >
+<PUBLIC:METHOD NAME="VscrollTo" >
+<PUBLIC:METHOD NAME="reload" >
+<PUBLIC:METHOD NAME="moveedit" >
+<PUBLIC:METHOD NAME="RefreshEdit" >
+<PUBLIC:METHOD NAME="tdTotxt" >
+<PUBLIC:METHOD NAME="txtTotd" >
+<PUBLIC:METHOD NAME="actcellchange" >
+<PUBLIC:METHOD NAME="LoadXmlData"/>
+<PUBLIC:METHOD NAME="LoadXml"/>
+<PUBLIC:EVENT NAME="onCellChange" ID="onCellChangeID">
+<PUBLIC:EVENT NAME="onRowChange" ID="onRowChangeID">
+<PUBLIC:EVENT NAME="onBeforeRowChange" ID="onBeforeRowChangeID">
+<PUBLIC:EVENT NAME="onDataChange" ID="onDataChangeID">
+<PUBLIC:EVENT NAME="onAdjustRow" ID="onAdjustRowID">
+<PUBLIC:EVENT NAME="onAdjustCol" ID="onAdjustColID">
+<PUBLIC:EVENT NAME="onRightClick" ID="onRightClickID">
+<PUBLIC:EVENT NAME="onHscroll" ID="onHscrollID">
+<PUBLIC:EVENT NAME="onVscroll" ID="onVscrollID">
+
+<script>
+//验证有没有div样式的正则表达式
+var reg_div = /<div\s*style\s*=\s*\"white-space\s*:\s*nowrap/i;
+var bInited = false;
+var cursorcolresize = "col-resize";
+var cursorrowresize = "row-resize";
+if (getIEVersion() < 6) {
+	cursorcolresize = "move";
+	cursorrowresize = "move";
+}
+var ponclickopen = "";
+var mEndRowState = "edit";
+var pubeval = 0;
+var mdataset;
+var BeforeChangeText = "";
+var mbIngrid = false;
+var div1, tgrid, line, lineH, divconer, fchtcDiv1, fcButton1, fcButton2, fcButton3, fchtcDiv2, fcButton4, fcButton5, fcButton6, txtMyGrid, czFc;
+var arr = new Array(100);
+function VScroll() {
+	Vscrollmax = getVScrollMax();
+	fnPutVscrollmax(Vscrollmax);
+}
+function HScroll() {
+	Hscrollmax = getHScrollMax();
+	fnPutHscrollmax(Hscrollmax);
+}
+function txtMyGrid_onfocusout() {
+	BeforeChangeText = curObj.innerText;
+	txtTotd();
+	if (Act_onDataChange() == false) {
+	}
+}
+function tgrid_onfocusout() {
+	var bln = false;
+	var o = event.toElement;
+	if (o == null)
+		return;
+	var tagname = o.tagName.toUpperCase();
+	var curGridid = eval(uniqueID + ".id");
+	if (tagname == "TD") {
+		if (o.parentNode.parentNode.parentNode.parentNode.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (tagname == "DIV" || tagname == "INPUT") {
+		if (o.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (o.id == "txtMyGrid") {
+		if (o.parentNode.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (bln == false) {
+		LostFocus();
+	} else {
+		RemoveBackColor();
+	}
+}
+function tgrid_onfocusin() {
+	var bln = false;
+	var o = event.fromElement;
+	if (o == null)
+		return;
+	var tagname = o.tagName.toUpperCase();
+	var focusTD = null;
+	var ocur = null;
+	var curGridid = eval(uniqueID + ".id");
+	if (tagname == "TD") {
+		if (o.parentNode.parentNode.parentNode.parentNode.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (tagname == "DIV" || tagname == "INPUT") {
+		if (o.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (o.id == "txtMyGrid") {
+		if (o.parentNode.parentNode.id == curGridid) {
+			bln = true;
+		}
+	}
+	if (bln == false) {
+		ocur = event.srcElement;
+		if (ocur.tagName.toUpperCase() == "A") {
+			if (ocur.parentNode.tagName.toUpperCase() == "TD") {
+				ocur = ocur.parentNode;
+			}
+		}
+		if (ocur.tagName.toUpperCase() == "TD") {
+			if (ocur.parentNode.rowIndex > 0) {
+				SetFocus(ocur, "");
+			} else if (lostfocusTD != null && lostfocusTD.cellIndex >= 0) {
+				SetFocus(lostfocusTD, "");
+			} else {
+				SetFocus(null, "");
+			}
+		} else if (lostfocusTD != null && lostfocusTD.cellIndex >= 0) {
+			SetFocus(lostfocusTD, "");
+		} else {
+			SetFocus(null, "");
+		}
+	}
+}
+function FindFirstTD(irowfocus) {
+	if (tgrid.rows.length > 1) {
+		if (isSpace(irowfocus)) {
+			var td1 = tgrid.rows(lngFixRows).cells(1);
+		} else {
+			var td1 = tgrid.rows(irowfocus).cells(1);
+		}
+	} else {
+		var td1 = tgrid.rows(0).cells(1);
+	}
+	for ( var i = 1; i < tgrid.rows(0).cells.length; i++) {
+		var colwidth1 = tgrid.childNodes(0).childNodes(i).getAttribute(
+				"oldwidth");
+		if (isSpace(colwidth1))
+			colwidth1 = tgrid.rows(0).cells(i).offsetWidth;
+		else
+			colwidth1 = parseInt(colwidth1);
+		if (colwidth1 > 1) {
+			if (tgrid.children[0].children[i].getAttribute("cz") != null) {
+				var temprow = tgrid.rows.length - 1;
+				if (isSpace(irowfocus) == false
+						&& irowfocus < tgrid.rows.length)
+					temprow = irowfocus;
+				td1 = tgrid.rows(temprow).cells(i);
+				break;
+			}
+		}
+	}
+	return td1;
+}
+function SetFocus(td, sTag) {
+	if (mReadOnly == true || mcanselect == "否")
+		return;
+	try {
+		curObj.className = "";
+		RemoveBackColor(td);
+	} catch (e) {
+	}
+	if (sTag != "程序给焦点") {
+		preTD = curObj;
+		SetTDFilter();
+		return;
+	}
+	if (td == null) {
+		if (tgrid.rows.length > 1) {
+			if (txtMyGrid.style.display == "none") {
+				curObj = FindFirstTD();
+				preTD = curObj;
+			}
+		} else {
+			preTD = tgrid.rows(0).cells(0);
+			curObj = preTD;
+		}
+	} else {
+		if (true || lostfocusTD == null || lostfocusTD.cellIndex == -1) {
+			curObj = td;
+		} else {
+			curObj = lostfocusTD;
+		}
+		preTD = curObj;
+	}
+	SetTDFilter();
+	if (curObj.offsetTop < div1.style.pixelHeight) {
+		try {
+			curObj.focus();
+		} catch (E) {
+		}
+	} else {
+		tgrid.focus();
+	}
+}
+function LostFocus() {
+	lostfocusTD = curObj;
+	if (isSpace(mdataset) == false) {
+		var sCommand = mdataset + ".Update('不检查')";
+		if (eval(sCommand) == 1) {
+			if (txtMyGrid.style.display == "block") {
+				txtMyGrid.focus();
+			} else {
+				tgrid.focus();
+			}
+		} else {
+			curObj.className = "";
+			txtMyGrid.style.display = "none";
+		}
+	}
+	// sxb 20080912 失去焦点时，清除背景色
+	RemoveBackColor(lostfocusTD);
+}
+function isblur() {
+}
+function isfocus() {
+}
+function RefreshEdit() {
+	tdTotxt();
+}
+function tgrid_ondblclick() {
+}
+function MoveDataSet() {
+	if (isSpace(mdataset) == false) {
+		var oDs = eval(mdataset);
+		if (oDs.bEdit == false && oDs.bAdd == false) {
+			oDs.SetPos(curObj.parentNode.rowIndex - 1);
+		}
+	}
+}
+function LoadXmlData(sXml) {
+	fnInit(sXml);
+}
+function Scroll(Direct) {
+	switch (Direct) {
+	case 1:
+		fcButton1_onclick();
+		break;
+	case 2:
+		fcButton3_onclick();
+		break;
+	case 3:
+		fcButton4_onclick();
+		break;
+	case 4:
+		fcButton6_onclick();
+		break;
+	}
+}
+function SetCol(col, sXml) {
+	tgrid.children[0].children[col].setAttribute("cz", sXml);
+}
+function fnGetEndRowState() {
+	return mEndRowState;
+}
+function fnPutEndRowState(vValue) {
+	mEndRowState = vValue;
+	EndRowStateID.fireChange();
+}
+function fnGetRows() {
+	return tgrid.rows.length;
+}
+function fnPutRows(vValue) {
+	if (isNaN(parseInt(vValue)))
+		return;
+	if (parseInt(vValue) < lngFixRows || parseInt(vValue) < 1)
+		return;
+	var oldRows = tgrid.rows.length;
+	if (oldRows > vValue) {
+		for ( var i = 0; i < oldRows - vValue; i++) {
+			DeleteRow();
+		}
+	} else if (oldRows < vValue) {
+		for ( var i = 0; i < vValue - oldRows; i++) {
+			InsertRow();
+		}
+	}
+	Vscrollmax = getVScrollMax();
+	fnPutVscrollmax(Vscrollmax);
+	RowsID.fireChange();
+}
+function fnGetCols() {
+	return tgrid.childNodes(0).childNodes.length;
+}
+function fnPutCols(vValue) {
+	if (isNaN(parseInt(vValue)))
+		return;
+	if (parseInt(vValue) < lngFixCols || parseInt(vValue) < 1)
+		return;
+	var oldCols = tgrid.childNodes(0).childNodes.length;
+	if (oldCols > vValue) {
+		for ( var i = 0; i < oldCols - vValue; i++) {
+			DeleteCol();
+		}
+	} else if (oldCols < vValue) {
+		for ( var i = 0; i < vValue - oldCols; i++) {
+			InsertCol();
+		}
+	}
+	Hscrollmax = getHScrollMax();
+	fnPutHscrollmax(Hscrollmax);
+	ColsID.fireChange();
+}
+function InsertCol(index) {
+	var o = element.document.createElement("COL");
+	o.style.width = 70;
+	var iPos = tgrid.childNodes(0).childNodes.length - 1;
+	if (arguments.length == 1 && iPos > index)
+		iPos = index;
+	tgrid.children[0].insertBefore(o, tgrid.children[0].children[iPos]);
+	for ( var i = 0; i < tgrid.rows.length; i++) {
+		tgrid.rows(i).insertCell(iPos);
+	}
+	Hscrollmax = getHScrollMax();
+	fnPutHscrollmax(Hscrollmax);
+}
+function InsertRow(index) {
+	var iPos = tgrid.rows.length;
+	if (arguments.length == 1 && iPos > index)
+		iPos = index;
+	if (mEndRowState == "edit" && iPos == tgrid.rows.length) {
+		mEndRowState = "add";
+	}
+	var oTr = tgrid.insertRow(iPos);
+	var oTd;
+	for (j = 0; j < tgrid.childNodes(0).childNodes.length; j++) {
+		oTd = oTr.insertCell(j);
+		var sxml = tgrid.children[0].children[j].getAttribute("cz");
+		if (sxml != null) {
+			var oXml = SetDom(sxml);
+			var sType = oXml.documentElement.nodeName;
+			if (sType == "checkbox") {
+				oTd.style.backgroundImage = "url(" + fcpubdata.Path
+						+ "/fceform/images/ef_run_grid_uncheck.gif)";
+				oTd.style.backgroundRepeat = "no-repeat";
+			}
+		}
+	}
+	var iFontSize = parseInt(tgrid.style.fontSize);
+	if (isNaN(iFontSize))
+		iFontSize = 13;
+	oTr.style.height = iFontSize + 8;
+	Vscrollmax = getVScrollMax();
+	fnPutVscrollmax(Vscrollmax);
+	return oTr;
+}
+function DeleteRow(index) {
+	var iPos = tgrid.rows.length - 1;
+	if (arguments.length == 1 && iPos > index)
+		iPos = index;
+	if (mEndRowState == "add" && iPos == tgrid.rows.length - 1) {
+		mEndRowState = "edit";
+	}
+	if (tgrid.rows.length <= lngFixRows || index < lngFixRows)
+		return;
+	tgrid.deleteRow(iPos);
+	Vscrollmax = getVScrollMax();
+	fnPutVscrollmax(Vscrollmax);
+	try {
+	} catch (e) {
+	}
+}
+function DeleteCol(index) {
+	var iPos = tgrid.childNodes(0).childNodes.length - 1;
+	if (arguments.length == 1 && iPos > index)
+		iPos = index;
+	tgrid.children[0].removeChild(tgrid.children[0].children[iPos]);
+	if (tgrid.childNodes(0).childNodes.length <= lngFixCols
+			|| index <= lngFixCols)
+		return;
+	for (i = 0; i <= tgrid.rows.length - 1; i++) {
+		tgrid.rows(i).deleteCell(iPos);
+	}
+	Hscrollmax = getHScrollMax();
+	fnPutHscrollmax(Hscrollmax);
+}
+function fnGettxt() {
+	return txtMyGrid;
+}
+function fnPutlostfocustd(vValue) {
+	lostfocusTD = vValue;
+	lostfocustdID.fireChange();
+}
+function fnGetlostfocustd() {
+	return lostfocusTD;
+}
+function fnGettab() {
+	return tgrid;
+}
+function fnGetcz() {
+	return czFc;
+}
+function fnGetprn() {
+	return prnSet;
+}
+function fnGetbIngrid() {
+	return mbIngrid;
+}
+function fnGetRow() {
+	return curObj.parentNode.rowIndex;
+}
+function fnGetCol() {
+	return curObj.cellIndex;
+}
+function fnGetcurTD() {
+	return curObj;
+}
+function fnGetdataset() {
+	return mdataset;
+}
+function fnPutdataset(vValue) {
+	mdataset = vValue;
+	datasetID.fireChange();
+}
+var mcoledit;
+function fnGetcoledit() {
+	return mcoledit;
+}
+function fnPutcoledit(vValue, itype) {
+	try {
+		if (isSpace(vValue) == false) {
+			var oXml = new ActiveXObject("Microsoft.XMLDOM");
+			oXml.async = false;
+			oXml.loadXML(vValue);
+			for ( var i = 0; i < oXml.documentElement.childNodes.length; i++) {
+				if (oXml.documentElement.childNodes(i).tagName.toLowerCase() != "readonly") {
+					SetCol(i, oXml.documentElement.childNodes(i).xml);
+				}
+			}
+		}
+	} catch (e) {
+	}
+	mcoledit = vValue;
+	coleditID.fireChange();
+}
+var moverflow = "hidden";
+function fnGetoverflow() {
+	return moverflow;
+}
+function fnPutoverflow(vValue) {
+	moverflow = vValue;
+	overflowID.fireChange();
+}
+var mbCell = false;
+function fnGetbCell() {
+	return mbCell;
+}
+function fnPutbCell(vValue) {
+	mbCell = vValue;
+	bCellID.fireChange();
+}
+var mColShow = false;
+function fnGetColShow() {
+	return mColShow;
+	function fnPutColShow(vValue) {
+	}
+	mColShow = vValue;
+	actColShow(true);
+	ColShowID.fireChange();
+}
+var mvisible = "是";
+function fnGetvisible() {
+	return mvisible;
+}
+function fnPutvisible(vValue) {
+	mvisible = vValue;
+	try {
+		var s1 = "none";
+		if (IsTrue(mvisible))
+			s1 = "block";
+		for ( var i = 0; i < 13; i++) {
+			if (i != 1 || i != 2)
+				element.children[i].style.display = s1;
+		}
+	} catch (e) {
+	}
+	if (s1 == "block") {
+		try {
+			onResize();
+		} catch (E) {
+		}
+	}
+	visibleID.fireChange();
+}
+var mformat;
+function fnGetformat() {
+	return mformat;
+}
+function fnPutformat(vValue) {
+	mformat = vValue;
+	formatID.fireChange();
+}
+var mcanselect = "是";
+function fnGetcanselect() {
+	return mcanselect;
+}
+function fnPutcanselect(vValue) {
+	mcanselect = vValue;
+	canselectID.fireChange();
+}
+var mReadOnly = false;
+function fnGetReadOnly() {
+	return mReadOnly;
+}
+function fnPutReadOnly(vValue) {
+	if (IsTrue(vValue))
+		mReadOnly = true;
+	else
+		mReadOnly = false;
+	ReadOnlyID.fireChange();
+}
+var mSetRowHeight = true;
+function fnGetSetRowHeight() {
+	return mSetRowHeight;
+}
+function fnPutSetRowHeight(vValue) {
+	mSetRowHeight = vValue;
+	SetRowHeightID.fireChange();
+}
+var mAdjustColWidth = true;
+function fnGetAdjustColWidth() {
+	return mAdjustColWidth;
+}
+function fnPutAdjustColWidth(vValue) {
+	mAdjustColWidth = IsTrue(vValue);
+	AdjustColWidthID.fireChange();
+}
+var mAdjustRowHeight = false;
+function fnGetAdjustRowHeight() {
+	return mAdjustRowHeight;
+}
+function fnPutAdjustRowHeight(vValue) {
+	mAdjustRowHeight = IsTrue(vValue);
+	AdjustRowHeightID.fireChange();
+}
+var mIsOrder = "是";
+function fnGetIsOrder() {
+	return mIsOrder;
+}
+function fnPutIsOrder(vValue) {
+	mIsOrder = vValue;
+	IsOrderID.fireChange();
+}
+var mhideVscroll = false;
+function fnGethideVscroll() {
+	return mhideVscroll;
+}
+function fnPuthideVscroll(vValue) {
+	if (IsSpace(vValue))
+		return;
+	mhideVscroll = IsTrue(vValue);
+	hideVscrollID.fireChange();
+	if (typeof fchtcDiv1 == "undefined")
+		return;
+	onResize();
+}
+var mhideHscroll = false;
+function fnGethideHscroll() {
+	return mhideHscroll;
+}
+function fnPuthideHscroll(vValue) {
+	if (IsSpace(vValue))
+		return;
+	mhideHscroll = IsTrue(vValue);
+	hideHscrollID.fireChange();
+	if (typeof fchtcDiv2 == "undefined")
+		return;
+	onResize();
+}
+var mScrollBar = "yes";
+function fnGetScrollBar() {
+	return mScrollBar;
+}
+function fnPutScrollBar(vValue) {
+	mScrollBar = vValue;
+	ScrollBarID.fireChange();
+	if (IsTrue(mvisible) == false)
+		return;
+	try {
+		if (vValue == "yes" || vValue == "no") {
+			var s1 = "block";
+			if (vValue == "no")
+				s1 = "none";
+			fchtcDiv1.style.display = s1;
+			fcButton1.style.display = s1;
+			fcButton2.style.display = s1;
+			fcButton3.style.display = s1;
+			fchtcDiv2.style.display = s1;
+			fcButton4.style.display = s1;
+			fcButton5.style.display = s1;
+			fcButton6.style.display = s1;
+			divconer.style.display = s1;
+		} else {
+			var s1 = "block";
+			if (Vscrollmax <= 0)
+				s1 = "none";
+			fchtcDiv1.style.display = s1;
+			fcButton1.style.display = s1;
+			fcButton2.style.display = s1;
+			fcButton3.style.display = s1;
+			if (Vscrollmax <= 0 && Hscrollmax <= 0) {
+				divconer.style.display = "none";
+			} else {
+				divconer.style.display = "";
+			}
+			var s1 = "";
+			if (Hscrollmax <= 0)
+				s1 = "none";
+			fchtcDiv2.style.display = s1;
+			fcButton4.style.display = s1;
+			fcButton5.style.display = s1;
+			fcButton6.style.display = s1;
+		}
+	} catch (e) {
+	}
+}
+mautosize = false;
+function fnGetautosize() {
+	return mautosize;
+}
+function fnPutautosize(vValue) {
+	mautosize = IsTrue(vValue);
+	autosizeID.fireChange();
+	if (typeof div1 != "undefined" && typeof tgrid != "undefined") {
+		div1.style.height = tgrid.offsetHeight;
+		div1.style.width = tgrid.offsetWidth;
+	}
+}
+var mleft;
+function fnGetleft() {
+	return mleft;
+}
+function fnPutleft(vValue) {
+	try {
+		div1.style.position = "absolute";
+		div1.style.left = vValue;
+		onResize();
+	} catch (e) {
+	}
+	mleft = vValue;
+	leftID.fireChange();
+}
+var mtop;
+function fnGettop() {
+	return mtop;
+}
+function fnPuttop(vValue) {
+	try {
+		div1.style.position = "absolute";
+		div1.style.top = vValue;
+		onResize();
+	} catch (e) {
+	}
+	mtop = vValue;
+	topID.fireChange();
+}
+var mheight;
+function fnGetheight() {
+	return mheight;
+}
+function fnPutheight(vValue) {
+	if (mautosize)
+		return;
+	try {
+		div1.style.height = vValue;
+		onResize();
+	} catch (e) {
+	}
+	mheight = vValue;
+	heightID.fireChange();
+}
+var mwidth;
+function fnGetwidth() {
+	return mwidth;
+}
+function fnPutwidth(vValue) {
+	if (mautosize)
+		return;
+	try {
+		div1.style.pixelWidth = vValue;
+		
+		onResize();
+	} catch (e) {
+	}
+	mwidth = vValue;
+	widthID.fireChange();
+}
+function fnGetFixRows() {
+	return lngFixRows;
+}
+function fnPutFixRows(vValue) {
+	lngFixRows = vValue;
+	if (lngFixRows > tgrid.rows.length)
+		return;
+	FixRowsID.fireChange();
+}
+function fnGetFixCols() {
+	return lngFixCols;
+}
+function fnPutFixCols(vValue) {
+	lngFixCols = vValue;
+	if (lngFixCols > tgrid.childNodes(0).childNodes.length)
+		return;
+	FixColsID.fireChange();
+}
+function fnGetTopRow() {
+	return Vscrollvalue;
+}
+function fnGetVmax() {
+	return Vscrollmax;
+}
+function VscrollTo(ipos) {
+	fnPutVscrollvalue(Vscrollvalue, ipos);
+}
+var bDrag = false;
+var curY = 0;
+var lngTop = 0;
+var Vscrollmax = 0;
+var Vscrollvalue = 0;
+function fnPutVscrollmax(vVscrollvalue) {
+	var oldValue = Vscrollvalue;
+	var l = parseInt(vVscrollvalue);
+	if (isNaN(l) || l < 0)
+		Vscrollmax = 0;
+	else
+		Vscrollmax = l;
+	if (Vscrollmax == 0) {
+		Vscrollvalue = 0;
+		var sHeight = fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+				- fcButton3.style.pixelHeight;
+		if (sHeight > 0)
+			fcButton2.style.height = sHeight;
+	} else {
+		var sHeight = fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+				- fcButton3.style.pixelHeight - Vscrollmax * 17;
+		if (sHeight < 10)
+			fcButton2.style.height = 10;
+		else
+			fcButton2.style.height = sHeight;
+		if (Vscrollvalue > Vscrollmax)
+			Vscrollvalue = Vscrollmax;
+	}
+	if (mScrollBar == "auto") {
+		var s1 = "";
+		if (Vscrollmax <= 0)
+			s1 = "none";
+		fchtcDiv1.style.display = s1;
+		fcButton1.style.display = s1;
+		fcButton2.style.display = s1;
+		fcButton3.style.display = s1;
+		if (Vscrollmax <= 0 && Hscrollmax <= 0) {
+			divconer.style.display = "none";
+		} else {
+			divconer.style.display = "";
+		}
+	}
+	fnPutVscrollvalue(oldValue, Vscrollvalue);
+}
+function fnPutVscrollvalue(oldValue, newValue) {
+	if (fchtcDiv1.style.display == "none")
+		return;
+	Vscrollvalue = newValue;
+	if (Vscrollmax == 0)
+		return;
+	var avar = (fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+			- fcButton2.style.pixelHeight - fcButton3.style.pixelHeight)
+			/ Vscrollmax;
+	if (newValue > 0 && parseInt(newValue) < parseInt(Vscrollmax)) {
+		fcButton2.style.pixelTop = fcButton1.style.pixelTop
+				+ fcButton1.style.pixelHeight + avar * newValue;
+	}
+	Vscroll_check(oldValue, newValue);
+}
+function fcButton2_onmousedown() {
+	bDrag = true;
+	curY = event.screenY;
+	fcButton2.style.cursor = "hand";
+	fcButton2.setCapture();
+}
+function fcButton2_onmousemove() {
+}
+function fcButton2_onmousemoveold(changeHeight) {
+	if (Vscrollmax == 0)
+		return;
+	var avar = (fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+			- fcButton2.style.pixelHeight - fcButton3.style.pixelHeight)
+			/ Vscrollmax;
+	if (avar == 0)
+		return;
+	if (typeof changeHeight == "undefined")
+		changeHeight = event.screenY - curY;
+	var changeValue = Math.round(changeHeight / avar);
+	if (changeValue != 0) {
+		var oldvalue = Vscrollvalue;
+		Vscrollvalue = Vscrollvalue + changeValue;
+		fcButton2.style.top = Vscrollvalue * avar + fcButton1.style.pixelTop
+				+ fcButton1.style.pixelHeight;
+		Vscroll_check(oldvalue, Vscrollvalue);
+		curY = event.screenY;
+	}
+}
+function fcButton2_onmouseup() {
+	if (bDrag) {
+		fcButton2_onmousemoveold();
+	}
+	bDrag = false;
+	fcButton2.releaseCapture();
+	fcButton2.style.cursor = "default";
+}
+function fcButton1_onclick() {
+	if (Vscrollmax == 0)
+		return;
+	var avar = (fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+			- fcButton2.style.pixelHeight - fcButton3.style.pixelHeight)
+			/ Vscrollmax;
+	if (Vscrollvalue > 0) {
+		Vscrollvalue = Vscrollvalue - 1;
+		fcButton2.style.pixelTop = fcButton1.style.pixelTop
+				+ fcButton1.style.pixelHeight + avar * Vscrollvalue;
+		Vscroll_check(Vscrollvalue + 1, Vscrollvalue);
+	}
+}
+function fcButton3_onclick() {
+	if (Vscrollmax == 0)
+		return;
+	var avar = (fchtcDiv1.style.pixelHeight - fcButton1.style.pixelHeight
+			- fcButton2.style.pixelHeight - fcButton3.style.pixelHeight)
+			/ Vscrollmax;
+	if (Vscrollvalue < Vscrollmax) {
+		Vscrollvalue = Vscrollvalue + 1;
+		fcButton2.style.pixelTop = fcButton1.style.pixelTop
+				+ fcButton1.style.pixelHeight + avar * Vscrollvalue;
+		Vscroll_check(Vscrollvalue - 1, Vscrollvalue);
+	}
+}
+function fchtcDiv1_onclick() {
+	fcButton2_onmousemoveold(event.y - fcButton2.style.pixelTop);
+}
+function Vscroll_check(oldVscrollvalue, newVscrollvalue) {
+	var curVscrollvalue = newVscrollvalue;
+	var lngTop = fcButton2.style.pixelTop;
+	if (lngTop < fcButton1.style.pixelHeight + fcButton1.style.pixelTop
+			|| Vscrollvalue <= 0) {
+		lngTop = fcButton1.style.pixelHeight + fcButton1.style.pixelTop;
+		Vscrollvalue = 0;
+		curVscrollvalue = Vscrollvalue;
+	}
+	if (lngTop > fcButton3.style.pixelTop - fcButton2.style.pixelHeight
+			|| Vscrollvalue >= Vscrollmax) {
+		lngTop = fcButton3.style.pixelTop - fcButton2.style.pixelHeight;
+		Vscrollvalue = Vscrollmax;
+		curVscrollvalue = Vscrollvalue;
+	}
+	fcButton2.style.top = lngTop;
+	Vscroll_onchange(oldVscrollvalue, curVscrollvalue);
+}
+var bHDrag = false;
+var curX = 0;
+var lngLeft = 0;
+var Hscrollmax = 0;
+var Hscrollvalue = 0;
+function fnPutHscrollmax(vHscrollvalue) {
+	var oldValue = Hscrollvalue;
+	var l = parseInt(vHscrollvalue);
+	if (isNaN(l) || l < 0)
+		Hscrollmax = 0;
+	else
+		Hscrollmax = l;
+	if (Hscrollmax == 0) {
+		Hscrollvalue = 0;
+		var sWidth1 = fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+				- fcButton6.style.pixelWidth;
+		if (sWidth1 > 0)
+			fcButton5.style.width = sWidth1 + 1;
+	} else {
+		var sWidth1 = fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+				- fcButton6.style.pixelWidth - Hscrollmax * 17;
+		if (sWidth1 < 10)
+			fcButton5.style.width = 10;
+		else
+			fcButton5.style.width = sWidth1 + 1;
+		if (Hscrollvalue > Hscrollmax)
+			Hscrollvalue = Hscrollmax;
+	}
+	if (mScrollBar == "auto") {
+		var s1 = "";
+		if (Hscrollmax <= 0)
+			s1 = "none";
+		fchtcDiv2.style.display = s1;
+		fcButton4.style.display = s1;
+		fcButton5.style.display = s1;
+		fcButton6.style.display = s1;
+		if (Vscrollmax <= 0 && Hscrollmax <= 0) {
+			divconer.style.display = "none";
+		} else {
+			divconer.style.display = "";
+		}
+	}
+	fnPutHscrollvalue(oldValue, Hscrollvalue);
+}
+function fnPutHscrollvalue(oldValue, newValue) {
+	if (fchtcDiv2.style.display == "none")
+		return;
+	Hscrollvalue = newValue;
+	if (Hscrollmax == 0)
+		return;
+	var avar = (fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+			- fcButton5.style.pixelWidth - fcButton6.style.pixelWidth)
+			/ Hscrollmax;
+	if (newValue > 0 && parseInt(newValue) < parseInt(Hscrollmax)) {
+		fcButton5.style.pixelLeft = fcButton4.style.pixelLeft
+				+ fcButton4.style.pixelWidth + avar * newValue;
+	}
+	Hscroll_check(oldValue, newValue);
+}
+function fcButton5_onmousedown() {
+	fcButton5.style.cursor = "hand";
+	bHDrag = true;
+	curX = event.screenX;
+	fcButton5.setCapture();
+}
+function fcButton5_onmousemove() {
+}
+function fcButton5_onmousemoveold(changeWidth) {
+	if (Hscrollmax == 0)
+		return;
+	var avar = (fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+			- fcButton5.style.pixelWidth - fcButton6.style.pixelWidth)
+			/ Hscrollmax;
+	if (avar == 0)
+		return;
+	if (typeof changeWidth == "undefined")
+		changeWidth = event.screenX - curX;
+	var changeValue = Math.round(changeWidth / avar);
+	if (changeValue != 0) {
+		var oldValue = Hscrollvalue;
+		Hscrollvalue = Hscrollvalue + changeValue;
+		fcButton5.style.left = Hscrollvalue * avar + fcButton4.style.pixelLeft
+				+ fcButton4.style.pixelWidth;
+		Hscroll_check(oldValue, Hscrollvalue);
+	}
+}
+function fcButton5_onmouseup() {
+	if (bHDrag) {
+		fcButton5_onmousemoveold();
+	}
+	bHDrag = false;
+	fcButton5.releaseCapture();
+	fcButton5.style.cursor = "default";
+}
+function fcButton4_onclick() {
+	if (Hscrollmax == 0)
+		return;
+	var avar = (fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+			- fcButton5.style.pixelWidth - fcButton6.style.pixelWidth)
+			/ Hscrollmax;
+	if (Hscrollvalue > 0) {
+		Hscrollvalue = Hscrollvalue - 1;
+		fcButton5.style.pixelLeft = fcButton4.style.pixelLeft
+				+ fcButton4.style.pixelWidth + avar * Hscrollvalue;
+		Hscroll_check(Hscrollvalue + 1, Hscrollvalue);
+	}
+}
+function fcButton6_onclick() {
+	if (Hscrollmax == 0)
+		return;
+	var avar = (fchtcDiv2.style.pixelWidth - fcButton4.style.pixelWidth
+			- fcButton5.style.pixelWidth - fcButton6.style.pixelWidth)
+			/ Hscrollmax;
+	if (Hscrollvalue < Hscrollmax) {
+		Hscrollvalue = Hscrollvalue + 1;
+		fcButton5.style.pixelLeft = fcButton4.style.pixelLeft
+				+ fcButton4.style.pixelWidth + avar * Hscrollvalue;
+		Hscroll_check(Hscrollvalue - 1, Hscrollvalue);
+	}
+}
+function fchtcDiv2_onclick() {
+	fcButton5_onmousemoveold(event.x - fcButton5.style.pixelLeft);
+}
+function Hscroll_check(oldHscrollvalue, newHscrollvalue) {
+	var curHscrollvalue = newHscrollvalue;
+	var lngLeft = fcButton5.style.pixelLeft;
+	if (lngLeft < fcButton4.style.pixelWidth + fcButton4.style.pixelLeft
+			|| Hscrollvalue <= 0) {
+		lngLeft = fcButton4.style.pixelWidth + fcButton4.style.pixelLeft;
+		Hscrollvalue = 0;
+		curHscrollvalue = Hscrollvalue;
+	}
+	if (lngLeft > fcButton6.style.pixelLeft - fcButton5.style.pixelWidth
+			|| Hscrollvalue >= Hscrollmax) {
+		lngLeft = fcButton6.style.pixelLeft - fcButton5.style.pixelWidth;
+		Hscrollvalue = Hscrollmax;
+		curHscrollvalue = Hscrollvalue;
+	}
+	fcButton5.style.left = lngLeft;
+	Hscroll_onchange(oldHscrollvalue, curHscrollvalue);
+}
+function getVScrollMax() {
+	var lngMax = 0;
+	var lngRowH = 0;
+	var height0 = 0;
+	for ( var i = 0; i < lngFixRows; i++) {
+		height0 = height0 + tgrid.rows(i).style.pixelHeight;
+	}
+	for ( var i = tgrid.rows.length - 1; i > 0; i--) {
+		lngRowH = lngRowH + tgrid.rows(i).offsetHeight;
+		if (lngRowH > div1.style.pixelHeight - height0 - 17
+				|| (tgrid.rows(i).offsetHeight == 0 && i > 1)) {
+			lngMax = i - lngFixRows + 1;
+			break;
+		}
+	}
+	return lngMax;
+}
+function getHScrollMax() {
+	var lngMax = 0;
+	var lngRowH = 0;
+	var width0 = 0;
+	for ( var i = 0; i < lngFixCols; i++) {
+		width0 = width0 + tgrid.children[0].children[0].style.pixelWidth;
+	}
+	for ( var i = tgrid.children[0].children.length - 1; i > 0; i--) {
+		if (tgrid.children[0].children[i].style.pixelWidth == 0) {
+			var s1 = tgrid.childNodes(0).childNodes(i).getAttribute("oldwidth");
+			if (isSpace(s1) == false) {
+				lngRowH = lngRowH + parseInt(s1);
+			}
+		} else {
+			lngRowH = lngRowH + tgrid.children[0].children[i].style.pixelWidth;
+		}
+		if (lngRowH - width0 > div1.style.pixelWidth - 17) {
+			lngMax = i - lngFixCols + 1;
+			break;
+		}
+	}
+	return lngMax;
+}
+function Vscroll_onchange(oldValue, newValue) {
+	if (newValue > oldValue) {
+		for ( var i = oldValue + lngFixRows; i < newValue + lngFixRows; i++) {
+			HideRow(i);
+		}
+	}
+	if (newValue < oldValue) {
+		for ( var i = newValue + lngFixRows; i < oldValue + lngFixRows; i++) {
+			ShowRow(i);
+		}
+	}
+	Actmoveedit();
+	txtMyGrid.style.display = "none";
+	onVscrollID.fire();
+}
+function Hscroll_onchange(oldValue, newValue) {
+	if (newValue > oldValue) {
+		for ( var i = oldValue + lngFixCols; i < newValue + lngFixCols; i++) {
+			HideCol(i);
+		}
+	}
+	if (newValue < oldValue) {
+		for ( var i = newValue + lngFixCols; i < oldValue + lngFixCols; i++) {
+			ShowCol(i);
+		}
+	}
+	Actmoveedit();
+	onHscrollID.fire();
+}
+function LeftToCol(lngLeft) {
+	var lngWidth = 0;
+	for ( var i = 0; i < tgrid.childNodes(0).childNodes.length; i++) {
+		lngWidth = lngWidth
+				//+ tgrid.childNodes(0).childNodes(i).style.pixelWidth;
+				+tgrid.children[0].children[i].style.pixelWidth;
+		if (lngWidth >= lngLeft) {
+			break;
+		}
+	}
+	return i;
+}
+var iUpLeft = 0;
+var iUpTop = 0;
+var blnAdjust = false;
+var blnAdjustH = false;
+var AdjustRow = 0, AdjustCol = 0;
+var lngFixRows = 1;
+var lngFixCols = 1;
+var blnFixRowDrap = true;
+function div1_onmousedown() {
+	var bIsNotFristRow=false;
+	if (event.button != 1)
+		return;
+	var curObj = element.document
+			.elementFromPoint(event.clientX, event.clientY);
+	if (curObj == null || curObj.tagName.toUpperCase() == "A")
+		return;
+	try {
+		var curObjParent = curObj.parentNode.tagName;
+	} catch (e) {
+	}
+	if (curObj.tagName == "TD" || curObjParent == "TD") {
+		var curCol = curObj.cellIndex;
+		curObj = curObj.parentNode;
+		var curRow = curObj.rowIndex;
+		if(curRow=="undefined"||curRow!=0){
+			bIsNotFristRow=true;
+		}
+	} else {
+		return;
+	}
+	if(bIsNotFristRow){
+		return;
+	}
+	bIsNotFristRow=false;
+	if (curCol >= tgrid.childNodes(0).childNodes.length)
+		curCol = tgrid.childNodes(0).childNodes.length - 1;
+	if (tgrid.rows(curRow).style.cursor == cursorcolresize) {
+		line.style.display = "block";
+		div1.setCapture();
+		sWidth1 = event.x + element.document.body.scrollLeft;
+		line.style.left = sWidth1;
+		line.style.top = getdiv1top();
+		line.style.height = div1.offsetHeight;
+		blnAdjust = true;
+		if (mbCell)
+			SaveoUndoOneRecord();
+		return;
+	} else {
+		line.style.display = "none";
+		blnAdjust = false;
+	}
+	if (tgrid.childNodes(0).childNodes(curCol).style.cursor == cursorrowresize) {
+		lineH.style.display = "block";
+		div1.setCapture();
+		sWidth1 = event.y + element.document.body.scrollTop;
+		lineH.style.top = sWidth1;
+		lineH.style.left = getdiv1left();
+		lineH.style.width = div1.offsetWidth;
+		blnAdjustH = true;
+		if (mbCell)
+			SaveoUndoOneRecord();
+		return;
+	} else {
+		lineH.style.display = "none";
+		blnAdjustH = false;
+	}
+}
+function div1_onmousemove() {
+	tgrid.childNodes(0).childNodes(0).style.cursor = "default";
+	if (blnAdjust == true) {
+		line.style.left = event.x + element.document.body.scrollLeft;
+	} else if (blnAdjustH == true) {
+		lineH.style.top = event.y + element.document.body.scrollTop;
+	} else {
+		var curObj = element.document.elementFromPoint(event.clientX,
+				event.clientY);
+		if (curObj == null)
+			return;
+		try {
+			var curObjParent = curObj.parentNode.tagName;
+		} catch (e) {
+		}
+		if (curObj.tagName == "TD" || curObjParent == "TD") {
+			var curCol = curObj.cellIndex;
+			curObj = curObj.parentNode;
+			var curRow = curObj.rowIndex;
+		} else {
+			return;
+		}
+		var blnTmp1 = false;
+		if (mbCell && blnRunMode) {
+			if (curRow < lngFixRows)
+				blnTmp1 = true;
+		} else if (mbCell == false) {
+			if (curRow < lngFixRows)
+				blnTmp1 = true;
+		}
+		if (blnTmp1) {
+			tgrid.rows(curRow).style.cursor = "default";
+			if (mAdjustColWidth == false)
+				return;
+
+			for ( var i = 0; i < tgrid.rows(curRow).cells.length; i++) {
+				if (tgrid.childNodes(0).childNodes(i).style.display != "none") {
+					if (event.x + element.document.body.scrollLeft >= parseInt(div1.offsetLeft)
+							+ parseInt(tgrid.rows(curRow).cells(i).offsetLeft)
+							+ parseInt(tgrid.rows(curRow).cells(i).offsetWidth)
+							- 4
+							&& event.x + element.document.body.scrollLeft <= parseInt(div1.offsetLeft)
+									+ parseInt(tgrid.rows(curRow).cells(i).offsetLeft)
+									+ parseInt(tgrid.rows(curRow).cells(i).offsetWidth)
+									+ 4) {
+						var iTmpLeft = 0;
+						if (tgrid.style.borderLeftStyle == "none") {
+							 iTmpLeft = parseInt(tgrid.rows(curRow).cells(i).offsetLeft) + 1;
+						} else {
+							 iTmpLeft = parseInt(tgrid.rows(curRow).cells(i).offsetLeft);
+						}
+						var iJustCol =(function (){
+								var leftlen = 0;
+								var k =i;
+								for(k;k>=0;k--){
+									leftlen += parseInt(tgrid.childNodes(0).childNodes(k).style.pixelWidth);
+								}
+								return leftlen;
+							})();
+						var offsetCol =LeftToCol(iTmpLeft);
+						if (event.x + element.document.body.scrollLeft >= parseInt(div1.offsetLeft)+ iTmpLeft
+								+ parseInt(tgrid.rows(curRow).cells(i).offsetWidth)) {//右边进入
+							var bFind = false;
+							for ( var j = offsetCol + 1; j < tgrid.rows(curRow).cells.length; j++) {
+								if (tgrid.childNodes(0).childNodes(j).style.pixelWidth > 1) {
+									break;
+								}
+								bFind = true;
+							}
+							if (bFind) {
+								AdjustCol = j - 1;
+							} else {
+								//AdjustCol = offsetCol;
+								 AdjustCol =LeftToCol(iJustCol);
+							}
+							//alert(AdjustCol);
+						} else {//左边进入
+						//	AdjustCol = offsetCol;
+							 AdjustCol =LeftToCol(iJustCol);
+							//alert(AdjustCol);
+						}
+						
+						tgrid.rows(curRow).style.cursor = cursorcolresize;
+						break;
+					}
+				}
+			}
+			return;
+		}
+		var blnTmp1 = false;
+		if (mbCell && blnRunMode) {
+			if (curCol < lngFixCols)
+				blnTmp1 = true;
+		} else if (mbCell == false) {
+			if (curCol < lngFixCols)
+				blnTmp1 = true;
+		}
+		if (blnTmp1) {
+			tgrid.childNodes(0).childNodes(curCol).style.cursor = "default";
+			if (mAdjustRowHeight == false)
+				return;
+			for ( var i = 0; i < tgrid.rows.length; i++) {
+				if (tgrid.rows(i).style.display != "none") {
+					if (event.y + element.document.body.scrollTop >= parseInt(div1.offsetTop)
+							+ parseInt(tgrid.rows(i).cells(0).offsetTop)
+							+ parseInt(tgrid.rows(i).cells(0).offsetHeight) - 2
+							&& event.y + element.document.body.scrollTop <= parseInt(div1.offsetTop)
+									+ parseInt(tgrid.rows(i).cells(0).offsetTop)
+									+ parseInt(tgrid.rows(i).cells(0).offsetHeight)
+									+ 2) {
+						if (event.y + element.document.body.scrollTop >= parseInt(div1.offsetTop)
+								+ parseInt(tgrid.rows(i).cells(0).offsetTop)
+								+ parseInt(tgrid.rows(i).cells(0).offsetHeight)) {
+							var bFind = false;
+							for ( var j = i + 1; j < tgrid.rows.length; j++) {
+								if (tgrid.rows(j).style.display != "none") {
+									break;
+								}
+								bFind = true;
+							}
+							if (bFind) {
+								AdjustRow = j - 1;
+							} else {
+								AdjustRow = i;
+							}
+						} else {
+							AdjustRow = i;
+						}
+						tgrid.childNodes(0).childNodes(curCol).style.cursor = cursorrowresize;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+function div1_onmouseup() {
+	if (typeof sWidth1 == "undefined")
+		return;
+	if (line.style.display == "block") {
+		var lngRange = parseInt(line.style.left)- parseInt(sWidth1);
+
+		var afterWidth = tgrid.children[0].children[AdjustCol].style.pixelWidth
+				+ lngRange;
+			try{
+				var lineLeftCell = tgrid.children[0].children[AdjustCol];
+				var lineRightCell = tgrid.children[0].children[AdjustCol+1];
+				
+				//向左移动Line 不能超过左边的宽度 保留20像素的宽度
+				lngRange =lngRange<0&&Math.abs(lngRange)>lineLeftCell.style.pixelWidth?lineLeftCell.style.pixelWidth*-1+20:lngRange;
+				//向右移动Line 不能超过右边的宽度
+				lngRange =lngRange>0&&lngRange>lineRightCell.style.pixelWidth?lineRightCell.style.pixelWidth-20:lngRange;
+				
+				lineLeftCell.style.width = lineLeftCell.style.pixelWidth+ lngRange;
+				lineRightCell.style.width = lineRightCell.style.pixelWidth- lngRange;
+				
+				//检查 是否小于20像素 
+				if(lngRange<0&&lineLeftCell.style.pixelWidth<=20){
+					lineLeftCell.style.width=20;
+					tgrid.style.cursor = "default";
+					line.style.display = "none";
+				}
+				if(lngRange>0&&lineRightCell.style.pixelWidth<=20){
+					lineRightCell.style.width=20;
+					tgrid.style.cursor = "default";
+					line.style.display = "none";
+				}
+			}catch(e){}
+
+		/*if (mautosize) {
+			div1.style.width = tgrid.offsetWidth;
+			div1.style.height = tgrid.offsetHeight;
+		}*/
+		blnChange = true;
+		AdjustCol = 0;
+		sWidth1 = 0;
+		tgrid.style.cursor = "default";
+		line.style.display = "none";
+		div1.releaseCapture();
+		blnAdjust = false;
+		Hscrollmax = getHScrollMax();
+		fnPutHscrollmax(Hscrollmax);
+		hide();
+		onAdjustColID.fire();
+		if (mbCell) {
+			SaveoRedoOneRecord();
+			blnChange = true;
+		}
+		return;
+	}
+	if (lineH.style.display == "block" && sWidth1 != 0) {
+		if (mbCell)
+			DelAllGraphTag();
+		var lngRange = parseInt(lineH.style.top) - parseInt(sWidth1);
+		var afterWidth = tgrid.rows(AdjustRow).style.pixelHeight + lngRange;
+		if (afterWidth <= 0) {
+			tgrid.rows(AdjustRow).style.height = 0;
+		} else {
+			if (tgrid.rows(AdjustRow).style.display == "none") {
+				tgrid.rows(AdjustRow).style.display = "block";
+			}
+			tgrid.rows(AdjustRow).style.height = afterWidth;
+		}
+
+		/*if (mautosize)
+			div1.style.height = tgrid.offsetHeight;*/
+
+		blnChange = true;
+		AdjustRow = 0;
+		sWidth1 = 0;
+		tgrid.style.cursor = "default";
+		lineH.style.display = "none";
+		div1.releaseCapture();
+		blnAdjustH = false;
+		Vscrollmax = getVScrollMax();
+		fnPutVscrollmax(Vscrollmax);
+		hide();
+		onAdjustRowID.fire();
+		if (mbCell) {
+			LoadGraph();
+			SaveoRedoOneRecord();
+			blnChange = true;
+		}
+		return;
+	}
+}
+function line_onmousemove() {
+	line.style.left = parseInt(line.style.left) + 2;
+}
+function lineH_onmousemove() {
+	lineH.style.top = parseInt(lineH.style.top) + 2;
+}
+function getdiv1top() {
+	var div1top = getAbsTop(div1);
+	if (ParentPos == "相对") {
+		div1top = div1.style.pixelTop;
+	}
+	return div1top;
+}
+function getdiv1left() {
+	var div1left = getAbsLeft(div1);
+	if (ParentPos == "相对") {
+		div1left = div1.style.pixelLeft;
+	}
+	return div1left;
+}
+function setBottomPosition() {
+	var div1left = getdiv1left();
+	var div1top = getdiv1top();
+	var div1width = div1.style.pixelWidth;
+	var div1height = div1.style.pixelHeight;
+	fchtcDiv1.style.pixelLeft = div1left + div1width - 1;
+	fcButton1.style.pixelLeft = fchtcDiv1.style.pixelLeft;
+	fcButton2.style.pixelLeft = fchtcDiv1.style.pixelLeft;
+	fcButton3.style.pixelLeft = fchtcDiv1.style.pixelLeft;
+	fchtcDiv1.style.pixelTop = div1top;
+	fcButton1.style.pixelTop = fchtcDiv1.style.pixelTop;
+	fcButton2.style.pixelTop = fchtcDiv1.style.pixelTop + 17;
+	if (divconer.style.display == "none")
+		fchtcDiv1.style.pixelHeight = div1height + 16;
+	else
+		fchtcDiv1.style.pixelHeight = div1height - 1;
+	fcButton3.style.pixelTop = fchtcDiv1.style.pixelTop
+			+ fchtcDiv1.style.pixelHeight - 17;
+	var lngSW = (div1width - 4 * 17) / 2;
+	fchtcDiv2.style.pixelTop = div1top + div1height - 1;
+	fcButton4.style.pixelTop = fchtcDiv2.style.pixelTop;
+	fcButton5.style.pixelTop = fchtcDiv2.style.pixelTop;
+	fcButton6.style.pixelTop = fchtcDiv2.style.pixelTop;
+	fchtcDiv2.style.pixelLeft = div1left;
+	fcButton4.style.pixelLeft = fchtcDiv2.style.pixelLeft;
+	fcButton5.style.pixelLeft = fchtcDiv2.style.pixelLeft + 17;
+	if (divconer.style.display == "none")
+		// lxq修改 2009-6-19 修改横向滚动条的宽度
+		fchtcDiv2.style.pixelWidth = div1.style.pixelWidth - 1;
+	else
+		fchtcDiv2.style.pixelWidth = div1.style.pixelWidth - 1;
+	fcButton6.style.pixelLeft = fchtcDiv2.style.pixelLeft
+			+ fchtcDiv2.style.pixelWidth - 16;
+	divconer.style.left = fchtcDiv1.style.left;
+	divconer.style.top = fchtcDiv2.style.top;
+	divconer.style.width = 17;
+	divconer.style.height = 17;
+}
+function actColShow(bInit) {
+	if (mColShow == false)
+		return;
+	for ( var i = 0; i < tgrid.rows.length; i++) {
+		for ( var j = 0; j < tgrid.rows(i).cells.length; j++) {
+			try {
+				var curTd = tgrid.rows(i).cells(j);
+				if (curTd.rowSpan > 1) {
+					if (bInit) {
+						curTd.setAttribute("oldtitlevalue", curTd.innerText);
+						curTd.innerText = "";
+					}
+					if (curTd.offsetWidth < 20) {
+						curTd.innerText = "";
+					} else {
+						curTd.innerText = curTd.getAttribute("oldtitlevalue");
+					}
+				}
+			} catch (e) {
+			}
+		}
+	}
+}
+function HideCol(lngCol) {
+	tgrid.childNodes.item(0).childNodes.item(lngCol).setAttribute("oldwidth",
+			tgrid.childNodes.item(0).childNodes.item(lngCol).style.pixelWidth);
+	tgrid.childNodes.item(0).childNodes.item(lngCol).style.width = 0;
+}
+function ShowCol(lngCol) {
+	tgrid.childNodes.item(0).childNodes.item(lngCol).style.width = tgrid.childNodes
+			.item(0).childNodes.item(lngCol).getAttribute("oldwidth");
+}
+var lngHideRows = 0;
+function HideRow(lngRow) {
+	var blnCanHide = true;
+	if (blnCanHide) {
+		tgrid.rows(lngRow).style.display = "none";
+		tgrid.rows(lngRow).setAttribute("oldheight",
+				tgrid.rows(lngRow).style.height);
+		tgrid.rows(lngRow).style.height = 2;
+	} else {
+		tgrid.rows(lngRow).setAttribute("oldheight",
+				tgrid.rows(lngRow).style.height);
+		tgrid.rows(lngRow).style.height = 0;
+	}
+}
+function ShowRow(lngRow) {
+	if (tgrid.rows(lngRow).style.pixelHeight > 0) {
+		tgrid.rows(lngRow).style.display = "block";
+		tgrid.rows(lngRow).style.height = tgrid.rows(lngRow).getAttribute(
+				"oldheight");
+	} else {
+		tgrid.rows(lngRow).style.height = tgrid.rows(lngRow).getAttribute(
+				"oldheight");
+	}
+}
+function SetTDFilter() {
+	preTD.className = "";
+	RemoveBackColor(preTD);
+	if (curObj.cellIndex == -1) {
+		return;
+	}
+	AddBackColor();
+	if (curObj.parentNode.rowIndex > 0) {
+		var rh = tgrid.rows(curObj.parentNode.rowIndex).style.pixelHeight
+		if (typeof rh != "undefined" && rh > ToInt(tgrid.style.fontSize) + 8) {
+			curObj.className = "tdfilter1";
+		} else {
+			curObj.className = "tdfilter";
+		}
+	} else {
+		curObj.className = "";
+	}
+	// sxb 20080911 设置表格的背景色
+	// setGridBackgroundColor();
+}
+function ShowHighLight(sTag) {
+	if (sTag == "空") {
+		curObj.className = "";
+		var i = curObj.parentNode.rowIndex;
+		tgrid.rows(i).cells(0).innerText = " ";
+		tgrid.rows(i).style.backgroundColor = tgrid.rows(i).getAttribute(
+				"oldcolor");
+	} else {
+		SetTDFilter();
+		var i = preTD.parentNode.rowIndex;
+		tgrid.rows(i).cells(0).innerText = " ";
+		tgrid.rows(i).style.backgroundColor = tgrid.rows(i).getAttribute(
+				"oldcolor");
+		var selColor = "e6e6fa";
+		var oldColor = "";
+		i = curObj.parentNode.rowIndex;
+		tgrid.rows(i).cells(0).innerText = ">";
+		if (tgrid.rows(i).style.backgroundColor != selColor)
+			tgrid.rows(i).setAttribute("oldcolor",
+					tgrid.rows(i).style.backgroundColor);
+		tgrid.rows(i).style.backgroundColor = selColor;
+	}
+}
+var curObj;
+var preTD = null;
+var lostfocusTD = null;
+var mcurRow, mcurCol;
+function movecz(lngKey) {
+	mbIngrid = true;
+	czFc.left = curObj.offsetLeft + tgrid.offsetLeft + div1.offsetLeft + 1;
+	czFc.top = curObj.offsetTop + tgrid.offsetTop + div1.offsetTop + 1;
+	czFc.height = curObj.offsetHeight - 2;
+	czFc.width = curObj.offsetWidth - 2;
+	czFc.style.display = "block";
+	czFc.sql1 = curObj.getAttribute("sql1");
+	czFc.sql2 = curObj.getAttribute("sql2");
+	if (isNaN(parseInt(curObj.getAttribute("pagesize"))) == false)
+		czFc.pagesize = parseInt(curObj.getAttribute("pagesize"));
+	czFc.format = curObj.getAttribute("format");
+	czFc.multiselect = curObj.getAttribute("multiselect");
+	czFc.returnxml = curObj.getAttribute("returnxml");
+	czFc.xml = curObj.getAttribute("xml");
+	czFc.blninput = curObj.getAttribute("blninput");
+	czFc.blnempty = curObj.getAttribute("blnempty");
+	if (lngKey == 0) {
+		curKeyCode = event.keyCode;
+		window.setTimeout(
+				"czFc.value=curObj.innerText+String.fromCharCode(curKeyCode);",
+				20);
+	} else
+		czFc.value = curObj.innerText;
+	window.setTimeout("czFc.focus();", 10);
+}
+function moveedit(setTD) {
+	if (arguments.length > 0) {
+		curObj = setTD;
+	}
+	// sxb 当单元格里有button 或 图片 时，不能编辑 20080916
+	if (curObj.innerHTML.indexOf("button") != -1
+			|| curObj.innerHTML.indexOf("IMG") != -1) {
+		return;
+	}
+
+	// ///
+	if (mbCell) {
+		if (curObj.parentNode.rowIndex < 1 || curObj.cellIndex < 1)
+			return;
+		if (mReadOnly) {
+			var s1 = curObj.getAttribute("pressenter");
+			if (s1 == null)
+				return;
+		} else {
+			if (blnRunMode) {
+				var s1 = curObj.getAttribute("cellreadonly");
+				if (s1) {
+					hide();
+					return;
+				}
+			}
+		}
+	}
+	if (curObj.parentNode.rowIndex == 0 || curObj.cellIndex <= 0)
+		return;
+	var sReadOnly = tgrid.children[0].children[curObj.cellIndex]
+			.getAttribute("cz");
+	if (sReadOnly == null || sReadOnly == "") {
+		return;
+	}
+	var oXml = SetDom(sReadOnly);
+	var sType = oXml.documentElement.nodeName;
+	if (sType == "code") {
+		if (ParentPos == "相对") {
+			czFc.left = curObj.offsetLeft + tgrid.offsetLeft + div1.offsetLeft
+					+ 1;
+			czFc.top = curObj.offsetTop + tgrid.offsetTop + div1.offsetTop + 1;
+		} else {
+			czFc.left = getAbsLeft(curObj) + 3;
+			czFc.top = getAbsTop(curObj) + 3;
+		}
+		czFc.height = curObj.offsetHeight;
+		czFc.width = curObj.offsetWidth;
+		czFc.sql1 = "";
+		czFc.sql2 = "";
+		czFc.xml = "";
+		ponclickopen = "";
+		ponselchange = "";
+		poninterchange = "";
+		ponchange = "";
+		ponkeydown = "";
+		ponclick = "";
+		for ( var i = 0; i < oXml.documentElement.childNodes.length; i++) {
+			switch (oXml.documentElement.childNodes(i).tagName) {
+			case "sql1":
+				czFc.sql1 = UnRepXml(oXml.documentElement.childNodes(i).text);
+				break;
+			case "sql2":
+				czFc.sql2 = UnRepXml(oXml.documentElement.childNodes(i).text);
+				break;
+			case "xml":
+				var s = oXml.documentElement.childNodes(i).xml;
+				s = s.substring(5, s.length - 6);
+				czFc.xml = s;
+				break;
+			case "format":
+				czFc.format = UnRepXml(oXml.documentElement.childNodes(i).text);
+				break;
+			case "blninput":
+				czFc.blninput = oXml.documentElement.childNodes(i).text;
+				break;
+			case "blnempty":
+				czFc.blnempty = oXml.documentElement.childNodes(i).text;
+				break;
+			case "keycol":
+				czFc.keycol = parseInt(oXml.documentElement.childNodes(i).text);
+				break;
+			case "onclickopen":
+				czFc.detachEvent("onclickopen", onclickopenEvent);
+				ponclickopen = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("onclickopen", onclickopenEvent);
+				break;
+			case "onselchange":
+				czFc.detachEvent("onselchange", onselchangeEvent);
+				ponselchange = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("onselchange", onselchangeEvent);
+				break;
+			case "oninterchange":
+				czFc.detachEvent("oninterchange", oninterchangeEvent);
+				poninterchange = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("oninterchange", oninterchangeEvent);
+				break;
+			case "onchange":
+				czFc.detachEvent("onchange", onchangeEvent);
+				ponchange = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("onchange", onchangeEvent);
+				break;
+			case "onkeydown":
+				czFc.detachEvent("onkeydown", onkeydownEvent);
+				ponkeydown = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("onkeydown", onkeydownEvent);
+				break;
+			case "onclick":
+				czFc.detachEvent("onclick", onclickEvent);
+				ponclick = oXml.documentElement.childNodes(i).text;
+				czFc.attachEvent("onclick", onclickEvent);
+				break;
+			}
+		}
+		czFc.style.display = "block";
+		czFc.value = curObj.innerText;
+		return;
+	} else if (sType == "checkbox") {
+		return;
+	}
+	mbIngrid = true;
+	txtMyGrid.style.zIndex = 10;
+	txtMyGrid.style.display = "block";
+	try {
+		if (mbCell) {
+			txtMyGrid.style.left = curObj.offsetLeft + tgrid.offsetLeft + 2;
+			txtMyGrid.style.top = curObj.offsetTop + tgrid.offsetTop + 2;
+			txtMyGrid.style.height = curObj.offsetHeight - 3;
+			txtMyGrid.style.width = curObj.offsetWidth - 3;
+		} else {
+			txtMyGrid.style.left = curObj.offsetLeft + tgrid.offsetLeft;
+			txtMyGrid.style.top = curObj.offsetTop + tgrid.offsetTop;
+			txtMyGrid.style.height = tgrid.rows(curObj.parentNode.rowIndex).offsetHeight;
+			txtMyGrid.style.width = tgrid.childNodes(0).childNodes(
+					curObj.cellIndex).style.pixelWidth;
+		}
+	} catch (e) {
+	}
+	if (isSpace(curObj.style.fontSize)) {
+		var iFontSize = parseInt(tgrid.style.fontSize);
+		if (isNaN(iFontSize) == false)
+			txtMyGrid.style.fontSize = iFontSize + 1;
+		txtMyGrid.style.fontWeight = tgrid.style.fontWeight;
+		txtMyGrid.style.fontStyle = tgrid.style.fontStyle;
+		txtMyGrid.style.textDecorationUnderline = tgrid.style.textDecorationUnderline;
+		txtMyGrid.style.fontFamily = tgrid.style.fontFamily;
+	} else {
+		txtMyGrid.style.fontFamily = curObj.style.fontFamily;
+		txtMyGrid.style.fontSize = curObj.style.fontSize;
+		txtMyGrid.style.fontWeight = curObj.style.fontWeight;
+		txtMyGrid.style.fontStyle = curObj.style.fontStyle;
+		txtMyGrid.style.textDecorationUnderline = curObj.style.textDecorationUnderline;
+	}
+	if (isSpace(curObj.align)) {
+		txtMyGrid.style.textAlign = tgrid.childNodes(0).childNodes(
+				curObj.cellIndex).align;
+	} else {
+		txtMyGrid.style.textAlign = curObj.align;
+	}
+	txtMyGrid.style.backgroundColor = curObj.bgColor;
+	txtMyGrid.style.color = curObj.style.color;
+	tdTotxt();
+	window.setTimeout("try {" + uniqueID
+			+ ".children[0].children[2].focus()} catch (e){};", 10);
+}
+function onclickopenEvent() {
+	if (isSpace(ponclickopen) == false)
+		eval(ponclickopen);
+}
+function onselchangeEvent() {
+	if (isSpace(ponselchange) == false)
+		eval(ponselchange);
+}
+function oninterchangeEvent() {
+	if (isSpace(poninterchange) == false)
+		eval(poninterchange);
+}
+function onchangeEvent() {
+	if (isSpace(ponchange) == false)
+		eval(ponchange);
+}
+function onkeydownEvent() {
+	if (isSpace(ponkeydown) == false)
+		eval(ponkeydown);
+}
+function onclickEvent() {
+	if (isSpace(ponclick) == false)
+		eval(ponclick);
+}
+function tgrid_onclick(curObj1, sUp) {
+	var d = new Date();
+	var t = d.getTime();
+	var ooEvent = event.srcElement;
+	var tmpB = false;
+	if (mbCell || mReadOnly || mcanselect == "否")
+		return;
+	// alert(ooEvent.parentNode.outerHTML);
+	if (ooEvent.tagName.toUpperCase() == "A") {
+		if (ooEvent.parentNode.tagName == "TD") {
+			ooEvent = ooEvent.parentNode;
+		}
+	}
+	// sxb 20081015 在td中加了DIV后要用到
+	if (ooEvent.tagName.toUpperCase() == "DIV") {
+		if (ooEvent.parentNode.tagName == "TD") {
+			ooEvent = ooEvent.parentNode;
+		}
+	}
+	// //////////////
+	var ctrlType = ooEvent.type;
+	if (!IsSpace(ctrlType)) {
+		if (ctrlType == "button") {
+			for ( var i = 1; i < tgrid.rows.length; i++) {
+				tgrid.rows(i).cells(0).innerText = " ";
+				tgrid.rows(i).style.backgroundColor = "";
+			}
+			var rowId = ooEvent.parentNode.parentNode.rowIndex;
+			// tgrid.rows(rowId).cells(0).innerText=">";
+			tgrid.rows(rowId).className = "creatorclickbg";
+		}
+	}
+	if (arguments.length == 0 || typeof curObj1.tagName == "undefined") {
+		if (ooEvent.tagName != 'TD')
+			return;
+		if (ooEvent.parentNode.rowIndex < lngFixRows)
+			ClickHeader(ooEvent.cellIndex);
+		if (ooEvent.parentNode.rowIndex < lngFixRows
+				|| ooEvent.cellIndex < lngFixCols)
+			return;
+		// 如果是图片
+		if (tgrid.childNodes(0).childNodes(ooEvent.cellIndex)
+				.getAttribute("cz") == "<img></img>") {
+
+		}
+		if (tgrid.childNodes(0).childNodes(ooEvent.cellIndex)
+				.getAttribute("cz") == "<checkbox></checkbox>") {
+			if (ooEvent.style.backgroundImage == "url(" + fcpubdata.Path
+					+ "/fceform/images/ef_run_grid_checked.gif)") {
+				ooEvent.style.backgroundImage = "url(" + fcpubdata.Path
+						+ "/fceform/images/ef_run_grid_uncheck.gif)";
+				checkbox_update_ds(ooEvent.cellIndex,
+						ooEvent.parentNode.rowIndex - lngFixRows, "否");
+				for ( var i = 1; i < tgrid.rows.length; i++) {
+					tgrid.rows(i).cells(0).innerText = " ";
+					tgrid.rows(i).style.backgroundColor = "";
+				}
+				var rowId = ooEvent.parentNode.rowIndex;
+				// tgrid.rows(rowId).cells(0).innerText=">";
+				tgrid.rows(rowId).className = "creatorclickbg";
+				return;
+			} else if (ooEvent.style.backgroundImage == "url(" + fcpubdata.Path
+					+ "/fceform/images/ef_run_grid_uncheck.gif)") {
+				ooEvent.style.backgroundImage = "url(" + fcpubdata.Path
+						+ "/fceform/images/ef_run_grid_checked.gif)";
+				checkbox_update_ds(ooEvent.cellIndex,
+						ooEvent.parentNode.rowIndex - lngFixRows, "是");
+				for ( var i = 1; i < tgrid.rows.length; i++) {
+					tgrid.rows(i).cells(0).innerText = " ";
+					tgrid.rows(i).style.backgroundColor = "";
+				}
+				var rowId = ooEvent.parentNode.rowIndex;
+				// tgrid.rows(rowId).cells(0).innerText=">";
+				tgrid.rows(rowId).className = "creatorclickbg";
+				return;
+			}
+		}
+		if (curObj == ooEvent) {
+			moveedit();
+			return;
+		} else {
+			if (actcellchange(ooEvent) == false) {
+				return;
+			}
+			preTD = curObj;
+			curObj = ooEvent;
+		}
+	} else {
+		if (curObj1.tagName != 'TD')
+			return;
+		if (curObj1.parentNode.rowIndex < lngFixRows
+				|| curObj1.cellIndex < lngFixCols)
+			return;
+		preTD = curObj;
+		curObj = curObj1;
+		tmpB = true;
+	}
+	if (mautosize == false) {
+		if (fchtcDiv1.style.display != "none") {
+			if (Vscrollmax > 0) {
+				var d = new Date();
+				var t = d.getTime();
+				var num1 = tgrid.rows(curObj.parentNode.rowIndex).style.pixelHeight;
+				var n3 = tgrid.rows.length - Vscrollmax + Vscrollvalue;
+				var n4 = curObj.parentNode.rowIndex;
+				if (n4 > n3) {
+					fnPutVscrollvalue(Vscrollvalue, Vscrollvalue + 1);
+				} else {
+					if (num1 == 0) {
+						div1.scrollTop = 0;
+						fnPutVscrollvalue(Vscrollvalue, 0);
+					}
+				}
+				if (tmpB) {
+					var d = new Date();
+					var t1 = d.getTime();
+				}
+			}
+		}
+		if (fchtcDiv2.style.display != "none" && sUp != "上下移动") {
+			if (Hscrollmax > 0) {
+				var num1 = tgrid.childNodes(0).childNodes(curObj.cellIndex).style.pixelWidth;
+				var oRect = curObj.getClientRects();
+				var oRect1 = div1.getClientRects();
+				var n1 = oRect[0].right;
+				var n2 = oRect1[0].right;
+				if (n1 > n2) {
+					var scrollcols = 0;
+					var sumWidth = curObj.offsetLeft + num1
+							- (div1.offsetWidth);
+					var tmpWidth = 0;
+					var i = Hscrollvalue + 1;
+					while (tmpWidth < sumWidth
+							&& i < tgrid.childNodes(0).childNodes.length) {
+						tmpWidth += tgrid.childNodes(0).childNodes(i).offsetWidth;
+						i++;
+					}
+					if (i > Hscrollmax)
+						i = Hscrollmax;
+					fnPutHscrollvalue(Hscrollvalue, i);
+				} else {
+					div1.scrollLeft = 0;
+					if (num1 == 0) {
+						fnPutHscrollvalue(Hscrollvalue, 0);
+					}
+				}
+			}
+		}
+	}
+	txtMyGrid.style.display = "none";
+	czFc.style.display = "none";
+	SetTDFilter();
+	var d = new Date();
+	var t1 = d.getTime();
+	return;
+	function checkbox_update_ds(colNo, rowNo, svalue) {
+		if (isSpace(mdataset) == false) {
+			var oDs = eval("window." + mdataset);
+			var cur = tgrid.childNodes(0).childNodes(colNo).getAttribute(
+					"dsfield");
+			cur = parseInt(cur);
+			if (isNaN(cur))
+				cur = 0;
+			oDs.oDom.documentElement.childNodes(rowNo).childNodes(cur).text = svalue;
+			// added by zhou.luo 2008-11-18
+			// 勾选checkbox的时候在dataset的那一行添加一个属性creator_multisel，为"是"表示当前行勾选。
+			oDs.oDom.documentElement.childNodes(rowNo).setAttribute(
+					"creator_multisel", svalue);
+			if (oDs.oDom.documentElement.childNodes(rowNo).getAttribute(
+					"rowstate") == "new")
+				oDs.oDom.documentElement.childNodes(rowNo).setAttribute(
+						"rowstate", "add");
+			;
+			if (oDs.oDom.documentElement.childNodes(rowNo).getAttribute(
+					"rowstate") != "add")
+				oDs.oDom.documentElement.childNodes(rowNo).setAttribute(
+						"rowstate", "edit");
+			;
+		}
+		return true;
+	}
+	function gridcol_dsfieldname(colNo) {
+		var oXml = SetDom(mformat);
+		if (colNo > 0)
+			colNo--;
+		var curFieldName = oXml.documentElement.childNodes(colNo).childNodes(0).text;
+		return curFieldName;
+	}
+}
+function txtTotd() {
+	if (mbCell) {
+		var sHref = curObj.getAttribute("sethref");
+		if (sHref != null) {
+			curObj.innerHTML = "<a href=" + sHref + ">" + txtMyGrid.value
+					+ "</a>";
+		} else {
+			CellPoint(curObj, txtMyGrid.value);
+		}
+	} else {
+		curObj.innerText = txtMyGrid.value;
+	}
+
+	// sxb20081021 在TD中加DIV
+	var _value = curObj.innerText;
+	if (!reg_div.test(_value)) {
+		curObj.innerHTML = '<div style="white-space:nowrap;">' + _value + '</div>';
+	}
+	// //////
+}
+function tdTotxt() {
+	var TransValue = curObj.innerText;
+	var _s = '<div style="white-space:nowrap;">';
+	if (TransValue.toLowerCase().indexOf(_s) == 0) {
+		// sxb20081015为了样式，在td中加了DIV，使用在取值的时候要去掉
+		TransValue = TransValue.substring(_s.length, TransValue.length - 6);
+	}
+	BeforeChangeText = TransValue;
+	var s1 = curObj.getAttribute("formula");
+	if (s1 != null) {
+		TransValue = "=" + s1;
+		txtMyGrid.value = TransValue;
+		txtTotd();
+	} else
+		txtMyGrid.value = TransValue;
+}
+function ClickHeader(curcol) {
+	// SetFocus(null,"程序给焦点");
+	// //sxb 20081002 如果是checkbox,添加全选或者全不选
+	if (tgrid.rows.length > 1) { // 如果是图片，不排序
+		if (tgrid.childNodes(0).childNodes(curcol).getAttribute("cz") == "<img></img>")
+			return;
+		if (tgrid.childNodes(0).childNodes(curcol).getAttribute("cz") == "<checkbox></checkbox>") {
+			var msgText = tgrid.rows(0).cells(curcol).innerText;
+			if (msgText == "取消") {
+				tgrid.rows(0).cells(curcol).innerText = "全选";
+				tgrid.rows(0).cells(curcol).title = tgrid.rows(0).cells(curcol).innerText;
+				for ( var i = 1; i < tgrid.rows.length; i++) {
+					tgrid.rows(i).cells(curcol).style.backgroundImage = "url("
+							+ fcpubdata.Path
+							+ "/fceform/images/ef_run_grid_uncheck.gif)";
+					if (isSpace(mdataset) == false) {
+						var oDs = eval("window." + mdataset);
+						var cur = tgrid.childNodes(0).childNodes(curcol)
+								.getAttribute("dsfield");
+						cur = parseInt(cur);
+						if (isNaN(cur))
+							cur = 0;
+						oDs.oDom.documentElement.childNodes(i - 1).childNodes(
+								cur).text = "否";
+						// added by zhou.luo 2008-11-18
+						// 勾选checkbox的时候在dataset的那一行添加一个属性creator_multisel，为"是"表示当前行勾选。
+						oDs.oDom.documentElement.childNodes(i - 1)
+								.setAttribute("creator_multisel", '否');
+						if (oDs.oDom.documentElement.childNodes(i - 1)
+								.getAttribute("rowstate") == "new")
+							oDs.oDom.documentElement.childNodes(i - 1)
+									.setAttribute("rowstate", "add");
+						;
+						if (oDs.oDom.documentElement.childNodes(i - 1)
+								.getAttribute("rowstate") != "add")
+							oDs.oDom.documentElement.childNodes(i - 1)
+									.setAttribute("rowstate", "edit");
+						;
+					}
+				}
+				return;
+			} else {
+				tgrid.rows(0).cells(curcol).innerText = "取消";
+				tgrid.rows(0).cells(curcol).title = tgrid.rows(0).cells(curcol).innerText;
+				for ( var i = 1; i < tgrid.rows.length; i++) {
+					tgrid.rows(i).cells(curcol).style.backgroundImage = "url("
+							+ fcpubdata.Path
+							+ "/fceform/images/ef_run_grid_checked.gif)";
+					if (isSpace(mdataset) == false) {
+						var oDs = eval("window." + mdataset);
+						var cur = tgrid.childNodes(0).childNodes(curcol)
+								.getAttribute("dsfield");
+						cur = parseInt(cur);
+						if (isNaN(cur))
+							cur = 0;
+						oDs.oDom.documentElement.childNodes(i - 1).childNodes(
+								cur).text = "是";
+						// added by zhou.luo 2008-11-18
+						// 勾选checkbox的时候在dataset的那一行添加一个属性creator_multisel，为"是"表示当前行勾选。
+						oDs.oDom.documentElement.childNodes(i - 1)
+								.setAttribute("creator_multisel", '是');
+						if (oDs.oDom.documentElement.childNodes(i - 1)
+								.getAttribute("rowstate") == "new")
+							oDs.oDom.documentElement.childNodes(i - 1)
+									.setAttribute("rowstate", "add");
+						;
+						if (oDs.oDom.documentElement.childNodes(i - 1)
+								.getAttribute("rowstate") != "add")
+							oDs.oDom.documentElement.childNodes(i - 1)
+									.setAttribute("rowstate", "edit");
+						;
+					}
+				}
+				return;
+			}
+		}
+	}
+	// //////////
+
+	if (mIsOrder != "是")
+		return;
+	if (curcol <= 0)
+		return;
+
+	if (tgrid.childNodes(0).childNodes(curcol).style.width == 0)
+		return;
+	if (lngFixRows > 1)
+		return;
+	var orderstr = "↑";
+	var orderstr1 = "↓";
+	var asc = "升序";
+	for ( var i = 1; i < tgrid.childNodes(0).childNodes.length; i++) {
+		if (i != curcol) {
+			var s4 = tgrid.rows(0).cells(i).innerHTML;
+			var s5 = s4.substring(0, 1);
+			if (s5 == orderstr || s5 == orderstr1) {
+				tgrid.rows(0).cells(i).innerHTML = s4.substring(1, s4.length);
+			}
+		}
+	}
+	var s2 = tgrid.rows(0).cells(curcol).innerHTML;
+	var s3 = s2.substring(0, 1);
+	if (s3 != orderstr && s3 != orderstr1) {
+		tgrid.rows(0).cells(curcol).innerHTML = orderstr + s2;
+	} else if (s3 == orderstr) {
+		tgrid.rows(0).cells(curcol).innerHTML = orderstr1
+				+ s2.substring(1, s2.length);
+		asc = "降序";
+	} else {
+		tgrid.rows(0).cells(curcol).innerHTML = orderstr
+				+ s2.substring(1, s2.length);
+	}
+
+	if (isSpace(mdataset) == false) {
+		var sformat = eval(uniqueID + ".format");
+		var oXml = new ActiveXObject("Microsoft.XMLDOM");
+		oXml.async = false;
+		oXml.loadXML(sformat);
+		var s1 = "";
+		s1 = oXml.documentElement.childNodes(curcol - 1).childNodes(0).text;
+		s1 = trim(s1);
+
+		var ods = eval(mdataset);
+		if (ods.Update() == 1)
+			return;
+		var sortcol = ods.FieldNameToNo(s1);
+
+		ods.Sort(sortcol, asc);
+	}
+
+	// sxb20081015排序的时候要设置title和样式
+	for ( var i = 0; i < tgrid.rows.length; i++) {
+		var row_ = tgrid.rows(i);
+		for ( var j = 0; j < row_.cells.length; j++) {
+			row_.cells(j).title = row_.cells(j).innerText;
+		}
+	}
+	setGridBackgroundColor();
+
+}
+function getIEVersion() {
+	var sVer = navigator.appVersion;
+	var l = sVer.indexOf("MSIE");
+	sVer = sVer.substring(l + 5, l + 8);
+	var dbl = parseFloat(sVer);
+	if (isNaN(dbl))
+		return 0;
+	else
+		return dbl;
+}
+function onResize() {
+	if (IsTrue(mhideVscroll)) {
+		fchtcDiv1.style.display = "none";
+		fcButton1.style.display = "none";
+		fcButton2.style.display = "none";
+		fcButton3.style.display = "none";
+		divconer.style.display = "none";
+	} else {
+		fchtcDiv1.style.display = "";
+		fcButton1.style.display = "";
+		fcButton2.style.display = "";
+		fcButton3.style.display = "";
+		if (fchtcDiv2.style.display == "" && fchtcDiv1.style.display == "") {
+			divconer.style.display = "";
+		} else {
+			divconer.style.display = "none";
+		}
+	}
+	if (IsTrue(mhideHscroll)) {
+		fchtcDiv2.style.display = "none";
+		fcButton4.style.display = "none";
+		fcButton5.style.display = "none";
+		fcButton6.style.display = "none";
+		divconer.style.display = "none";
+	} else {
+		fchtcDiv2.style.display = "";
+		fcButton4.style.display = "";
+		fcButton5.style.display = "";
+		fcButton6.style.display = "";
+		if (fchtcDiv2.style.display == "" && fchtcDiv1.style.display == "") {
+			divconer.style.display = "";
+		} else {
+			divconer.style.display = "none";
+		}
+	}
+	if (IsTrue(mhideVscroll) == false || IsTrue(mhideHscroll) == false)
+		setBottomPosition();
+	if (IsTrue(mhideVscroll) == false) {
+		Vscrollmax = getVScrollMax();
+		fnPutVscrollmax(Vscrollmax);
+	}
+	if (IsTrue(mhideHscroll) == false) {
+		Hscrollmax = getHScrollMax();
+		fnPutHscrollmax(Hscrollmax);
+	}
+	if (mautosize) {
+		div1.style.height = tgrid.offsetHeight;
+		div1.style.width = tgrid.offsetWidth;
+	}
+
+	setGridBackgroundColor();
+}
+
+function setGridBackgroundColor() {
+	// sxb 20080911 设置表格的背景色
+	// alert("设置表格背景色");
+	tgrid.style.textOverflow = "ellipsis";
+	for ( var i = 1; i < tgrid.rows.length; i++) {
+		if (i % 2 == 0) {
+			tgrid.rows(i).className = "recStyle1";
+		} else {
+			tgrid.rows(i).className = "recStyle2";
+		}
+
+	}
+}
+
+/* 恢复选中行的默认样式 */
+function removeRowBackgroundColor(i) {
+	if (i % 2 == 0) {
+		tgrid.rows(i).className = "recStyle1";
+	} else {
+		tgrid.rows(i).className = "recStyle2";
+	}
+}
+
+// sxb 20080912 为表格添加鼠标事件
+function gridAddMouseEvent() {
+	for ( var i = 1; i < tgrid.rows.length; i++) {
+		tgrid.rows(i).attachEvent("onmouseover", mouseoverStyle);
+		tgrid.rows(i).attachEvent("onmouseout", mouseoutStyle);
+	}
+}
+// sxb 20080912 设置鼠标移入的效果
+var mouse_tmp_style = "";
+function mouseoverStyle() {
+	alert();
+	var tagname = event.srcElement.tagName.toUpperCase();
+	if (tagname == "DIV") {
+		mouse_tmp_style = event.srcElement.parentNode.parentNode.className;
+		event.srcElement.parentNode.parentNode.className = "mouseover";
+	} else {
+		mouse_tmp_style = event.srcElement.parentNode.className;
+		event.srcElement.parentNode.className = "mouseover";
+	}
+}
+// sxb 20080912 设置鼠标移出的效果
+function mouseoutStyle() {
+	var rowid = event.srcElement.parentNode.rowIndex;
+	var tagname = event.srcElement.tagName.toUpperCase();
+	if (tagname == "DIV") {
+		if (curObj.parentNode.rowIndex != rowid) {
+			event.srcElement.parentNode.parentNode.className = mouse_tmp_style;
+		}
+	} else {
+		if (curObj.parentNode.rowIndex != rowid) {
+			event.srcElement.parentNode.className = mouse_tmp_style;
+		}
+	}
+}
+
+function ResizeDiv() {
+	if (mautosize) {
+		div1.style.height = tgrid.offsetHeight;
+		div1.style.width = tgrid.offsetWidth + 4;
+	}
+}
+function initGrid() {
+	onResize();
+}
+function hide() {
+	txtMyGrid.style.display = "none";
+	czFc.style.display = "none";
+}
+function RemoveBackColor(td) {
+	if (typeof td == "undefined")
+		td = curObj;
+	if (td.cellIndex >= 0) {
+		var tmpcurRow = td.parentNode.rowIndex;
+		if (tmpcurRow > 0) {
+			tgrid.rows(tmpcurRow).cells(0).innerText = " ";
+			tgrid.rows(tmpcurRow).style.backgroundColor = "";
+			removeRowBackgroundColor(tmpcurRow);
+		}
+	} else {
+		for ( var i = 1; i < tgrid.rows.length; i++) {
+			tgrid.rows(i).cells(0).innerText = " ";
+			tgrid.rows(i).style.backgroundColor = "";
+		}
+	}
+}
+function AddBackColor() {
+	// sxb
+	// alert("AddBackColor:"+curObj.innerHTML);
+	var tmprow = curObj.parentNode.rowIndex;
+	if (tmprow > 0) {
+		// tgrid.rows(tmprow).cells(0).innerText=">";
+		tgrid.rows(tmprow).className = "creatorclickbg";
+		// tgrid.rows(tmprow).style.backgroundColor="#A0B0D5";
+	}
+}
+function Actmoveedit() {
+	hide();
+	return;
+	if (typeof curObj != "undefined") {
+		if (curObj.offsetWidth > 0 && curObj.offsetLeft > 0) {
+			moveedit();
+			div1.scrollLeft = 0;
+		} else {
+			txtMyGrid.style.top = -1000;
+		}
+	}
+	czFc.style.display = "none";
+	bIngrid = false;
+}
+function Act_onDataChange(sTag, oldvalue, newvalue) {
+	if (((curObj.innerText != BeforeChangeText && txtMyGrid.style.display == "block") || sTag == "强行发生数据改变事件")
+			&& curObj.parentNode.rowIndex > 0) {
+		oEvent1 = createEventObject();
+		oEvent1.curTD = curObj;
+		oEvent1.BeforeChangeText = BeforeChangeText;
+		oEvent1.AfterChangeText = curObj.innerText;
+		if (isSpace(mdataset) == false) {
+			var sCommand = "if(" + mdataset + ".bAdd==false) " + mdataset
+					+ ".bEdit=true;";
+			eval(sCommand);
+		}
+		if (mEndRowState == "add"
+				&& curObj.parentNode.rowIndex == tgrid.rows.length - 1) {
+			mEndRowState = "edit";
+		}
+		onDataChangeID.fire(oEvent1);
+	}
+	return true;
+}
+function actcellchange(newTD) {
+	if (curObj != null && curObj.cellIndex >= 0) {
+	} else if (lostfocusTD != null && lostfocusTD.cellIndex >= 0) {
+		curObj = lostfocusTD;
+	} else {
+		curObj = tgrid.rows(0).cells(0);
+	}
+	if (Act_onDataChange() == false)
+		return false;
+	oEvent = createEventObject();
+	oEvent.oldTD = curObj;
+	oEvent.newTD = newTD;
+	oEvent.BeforeChangeText = BeforeChangeText;
+	onCellChangeID.fire(oEvent);
+	if (curObj.parentNode.rowIndex != newTD.parentNode.rowIndex) {
+		oEvent = createEventObject();
+		oEvent.Cancel = false;
+		onBeforeRowChangeID.fire();
+		if (oEvent.Cancel)
+			return false;
+		oEvent = createEventObject();
+		oEvent.oldRow = curObj.parentNode.rowIndex;
+		oEvent.newRow = newTD.parentNode.rowIndex;
+		oEvent.Cancel = false;
+		if (isSpace(mdataset) == false) {
+			var oDs = eval("window." + mdataset);
+			var blnChangeData = false;
+			if (oDs.bEdit || oDs.bAdd)
+				blnChangeData = true;
+			if (oDs.Update() == 1) {
+				return false;
+			} else {
+				if (oEvent.oldRow - lngFixRows > 0 && blnChangeData) {
+					oDs.fset_cont(oEvent.oldRow - lngFixRows);
+				}
+				oDs.SetPos(oEvent.newRow - lngFixRows);
+			}
+		}
+		onRowChangeID.fire(oEvent);
+		if (oEvent.Cancel)
+			return false;
+	}
+	try {
+	} catch (e) {
+	}
+	return true;
+}
+function onkeypress() {
+	if (mbCell) {
+		if (tc.style.display == "none" || txtMyGrid.style.display == "block")
+			return;
+		var arr = PhyToLog(sRow, sCol);
+		curObj = tgrid.rows(arr[0]).cells(arr[1]);
+		if (curObj.parentNode.rowIndex > 0 && curObj.cellIndex > 0) {
+			moveedit();
+		}
+		return;
+	}
+}
+function txtMyGrid_onkeyup() {
+}
+function txtMyGrid_onkeydown() {
+	KeyMove(1);
+}
+function txtMyGrid_onkeypress() {
+	if (txtMyGrid.style.display == "block" && event.keyCode == 13) {
+		var s2 = eval(uniqueID + ".ondblclick");
+		var s1 = s2 + "";
+		s1 = s1.substring(22, s1.length - 1);
+		if (isSpace(s1) == false) {
+			try {
+				eval(s1);
+			} catch (E) {
+				eval(s2);
+			}
+		}
+		curObj.focus();
+		txtMyGrid.style.display = "none";
+		event.returnValue = false;
+	}
+}
+function tgrid_onkeydown() {
+	var iKeyCode = event.keyCode;
+	// alert(iKeyCode);
+	KeyMove(2);
+	if (iKeyCode == 13) {
+		if (txtMyGrid.style.display == "none") {
+			moveedit();
+		}
+	}
+}
+function tgrid_onkeypress() {
+	var iKeyCode = event.keyCode;
+	if (txtMyGrid.style.display == "none") {
+		moveedit();
+		if (txtMyGrid.style.display == "block") {
+			txtMyGrid.value = "";
+			MoveIns(0);
+			txtTotd();
+		}
+	}
+}
+function KeyMove(iEdit) {
+	if (curObj.cellIndex == -1)
+		return;
+	if ((mReadOnly && mautosize) || mcanselect == "否")
+		return;
+	var mcurRow = curObj.parentNode.rowIndex;
+	var mcurCol = curObj.cellIndex;
+	if (event.shiftKey == true || event.ctrlKey == true)
+		return;
+	var iKeyCode = event.keyCode;
+	if (iKeyCode < 33 || iKeyCode > 40)
+		return;
+	if (iEdit == 1) {
+		if (iKeyCode == 37 || iKeyCode == 39 || iKeyCode == 36
+				|| iKeyCode == 35) {
+			return;
+		} else {
+			curObj.focus();
+		}
+	}
+	switch (iKeyCode) {
+	case 33:
+		if (mcurRow == tgrid.rows.length - 1) {
+			if (isSpace(mdataset) == false && mEndRowState == "add") {
+				var ods = eval("window." + mdataset);
+				ods.Delete();
+				return;
+			}
+		}
+		if (mcurRow > lngFixRows) {
+			var nextRow = 0;
+			if (mcurRow - 20 < lngFixRows) {
+				nextRow = 1;
+				fnPutVscrollvalue(Vscrollvalue, 0);
+			} else {
+				nextRow = mcurRow - 20;
+				if (Vscrollvalue - 20 > 0) {
+					fnPutVscrollvalue(Vscrollvalue, Vscrollvalue - 20);
+				} else {
+					fnPutVscrollvalue(Vscrollvalue, 0);
+				}
+			}
+			if (actcellchange(tgrid.rows(nextRow).cells(mcurCol)) == false)
+				return;
+			tgrid_onclick(tgrid.rows(nextRow).cells(mcurCol));
+		}
+		break;
+	case 34:
+		if (mcurRow < tgrid.rows.length - 1) {
+			var nextRow = 0;
+			if (mcurRow + 20 > tgrid.rows.length - 1) {
+				nextRow = tgrid.rows.length - 1;
+				fnPutVscrollvalue(Vscrollvalue, Vscrollmax);
+			} else {
+				nextRow = mcurRow + 20;
+				if (Vscrollvalue + 20 < Vscrollmax) {
+					fnPutVscrollvalue(Vscrollvalue, Vscrollvalue + 20);
+				} else {
+					fnPutVscrollvalue(Vscrollvalue, Vscrollmax);
+				}
+			}
+			if (actcellchange(tgrid.rows(nextRow).cells(mcurCol)) == false)
+				return;
+			tgrid_onclick(tgrid.rows(nextRow).cells(mcurCol));
+		} else {
+		}
+		break;
+	case 35:
+		if (mcurCol < tgrid.childNodes(0).childNodes.length - 1) {
+			fnPutHscrollvalue(Hscrollvalue, Hscrollmax);
+			var nextCol = tgrid.childNodes(0).childNodes.length - 1;
+			while (tgrid.childNodes(0).childNodes(nextCol).style.pixelWidth == 0
+					|| tgrid.childNodes(0).childNodes(nextCol).offsetWidth == 0) {
+				if (nextCol > lngFixCols) {
+					nextCol--;
+				} else {
+					nextCol = mcurCol;
+				}
+			}
+			actcellchange(tgrid.rows(mcurRow).cells(nextCol));
+			tgrid_onclick(tgrid.rows(mcurRow).cells(nextCol));
+		}
+		break;
+	case 36:
+		if (mcurCol > lngFixCols) {
+			fnPutHscrollvalue(Hscrollvalue, 0);
+			var nextCol = lngFixCols;
+			while (tgrid.childNodes(0).childNodes(nextCol).style.pixelWidth == 0
+					|| tgrid.childNodes(0).childNodes(nextCol).offsetWidth == 0) {
+				if (nextCol < tgrid.childNodes(0).childNodes.length - 1) {
+					nextCol++;
+				} else {
+					nextCol = mcurCol;
+				}
+			}
+			actcellchange(tgrid.rows(mcurRow).cells(nextCol));
+			tgrid_onclick(tgrid.rows(mcurRow).cells(nextCol));
+		}
+		break;
+	case 37:
+		if (mcurCol > lngFixCols) {
+			if (mcurCol <= lngFixCols + Hscrollvalue) {
+				fnPutHscrollvalue(Hscrollvalue, Hscrollvalue - 1);
+			}
+			var nextCol = mcurCol - 1;
+			while (tgrid.childNodes(0).childNodes(nextCol).style.pixelWidth == 0
+					|| tgrid.childNodes(0).childNodes(nextCol).offsetWidth == 0) {
+				if (nextCol > lngFixCols) {
+					nextCol--;
+				} else {
+					nextCol = mcurCol;
+				}
+			}
+			actcellchange(tgrid.rows(mcurRow).cells(nextCol));
+			tgrid_onclick(tgrid.rows(mcurRow).cells(nextCol));
+		}
+		break;
+	case 39:
+		if (mcurCol < tgrid.childNodes(0).childNodes.length - 1) {
+			var nextCol = mcurCol + 1;
+			while (tgrid.childNodes(0).childNodes(nextCol).style.pixelWidth == 0
+					|| tgrid.childNodes(0).childNodes(nextCol).offsetWidth == 0) {
+				if (nextCol < tgrid.childNodes(0).childNodes.length - 1) {
+					nextCol++;
+				} else {
+					nextCol = mcurCol;
+				}
+			}
+			actcellchange(tgrid.rows(mcurRow).cells(nextCol));
+			tgrid_onclick(tgrid.rows(mcurRow).cells(nextCol));
+		}
+		break;
+	case 38:
+		if (mcurRow == tgrid.rows.length - 1) {
+			if (isSpace(mdataset) == false && mEndRowState == "add") {
+				var ods = eval("window." + mdataset);
+				ods.Delete();
+				return;
+			}
+		}
+		if (mcurRow > lngFixRows) {
+			var nextRow = mcurRow - 1;
+			if (nextRow < lngFixRows + Vscrollvalue) {
+				fnPutVscrollvalue(Vscrollvalue, Vscrollvalue - 1);
+			}
+			if (actcellchange(tgrid.rows(nextRow).cells(mcurCol)) == false)
+				return;
+			tgrid_onclick(tgrid.rows(nextRow).cells(mcurCol), "上下移动");
+		}
+		break;
+	case 40:
+		if (mcurRow < tgrid.rows.length - 1) {
+			var nextRow = mcurRow + 1;
+			if (actcellchange(tgrid.rows(nextRow).cells(mcurCol)) == false)
+				return;
+			tgrid_onclick(tgrid.rows(nextRow).cells(mcurCol), "上下移动");
+		} else if (eval(uniqueID + ".autoappend") == "是") {
+			if (isSpace(mdataset) == false && mEndRowState == "edit"
+					&& AllColReadOnly() == false) {
+				var ods = eval("window." + mdataset);
+				ods.Append();
+			}
+		}
+		break;
+	}
+}
+function MoveIns(iPos) {
+	var r = txtMyGrid.createTextRange();
+	r.moveStart('character', iPos);
+	r.collapse(true);
+	r.select();
+}
+function AllColReadOnly() {
+	var bRead = true;
+	for ( var i = 1; i < tgrid.rows(0).cells.length; i++) {
+		if (tgrid.children[0].children[i].style.pixelWidth > 0) {
+			if (tgrid.children[0].children[i].getAttribute("cz") != null) {
+				bRead = false;
+				break;
+			}
+		}
+	}
+	return bRead;
+}
+function getCurPageRows() {
+	var lngFixRowHeight = 0;
+	var lngRowH = 0;
+	for ( var i = 0; i < lngFixRows; i++) {
+		lngFixRowHeight += tgrid.rows(i).style.pixelHeight;
+	}
+	for ( var i = Vscrollvalue + lngFixRows; i < tgrid.rows.length; i++) {
+		lngRowH = lngRowH + tgrid.rows(i).style.pixelHeight;
+		if (lngRowH >= parseInt(div1.offsetHeight)) {
+			break;
+		}
+	}
+	return i - Vscrollvalue - lngFixRows;
+}
+function reload(sTable) {
+	if (arguments.length == 1) {
+		element.children[0].children[0].outerHTML = sTable;
+		tgrid = element.children[0].children[0];
+		curObj = tgrid.rows(0).cells(0);
+		var sTmp = tgrid.getAttribute("fixrows");
+		if (sTmp != null)
+			lngFixRows = parseInt(sTmp);
+		else
+			lngFixRows = 1;
+		sTmp = tgrid.getAttribute("fixcols");
+		if (sTmp != null)
+			lngFixCols = parseInt(sTmp);
+		else
+			lngFixCols = 1;
+	}
+	prnSet = new prnSet1();
+	prnSet.ReportName = "report";
+	prnSet.SetColWidth = "<col colKey='第1列' colWidth='60' colSelect='block'/>"
+			+ "<col colKey='第2列' colWidth='100' colSelect='block'/>"
+			+ "<col colKey='第3列' colWidth='60' colSelect='block'/>"
+			+ "<col colKey='第4列' colWidth='60' colSelect='block'/>"
+			+ "<col colKey='第5列' colWidth='100' colSelect='none'/>"
+			+ "<col colKey='第6列' colWidth='60' colSelect='block'/>"
+			+ "<col colKey='第7列' colWidth='100' colSelect='block'/>"
+			+ "<col colKey='第8列' colWidth='100' colSelect='block'/>"
+			+ "<col colKey='第9列' colWidth='100' colSelect='none'/>"
+			+ "<col colKey='第10列' colWidth='100' colSelect='block'/>";
+	prnSet.title1 = "";
+	prnSet.title2 = "";
+	prnSet.top11 = "";
+	prnSet.top12 = "";
+	prnSet.top13 = "";
+	prnSet.top21 = "";
+	prnSet.top22 = "";
+	prnSet.top23 = "";
+	prnSet.top31 = "";
+	prnSet.top32 = "";
+	prnSet.top33 = "";
+	prnSet.bottom11 = "";
+	prnSet.bottom12 = "";
+	prnSet.bottom13 = "";
+	prnSet.bottom21 = "";
+	prnSet.bottom22 = "";
+	prnSet.bottom23 = "";
+	prnSet.bottom31 = "";
+	prnSet.bottom32 = "";
+	prnSet.bottom33 = "";
+	prnSet.fontTop = 25;
+	prnSet.fontBottom = 12;
+	prnSet.offsetAdjust = 0;
+	prnSet.repWidth = 210;
+	prnSet.repHeight = 297;
+	prnSet.portrait = true;
+	prnSet.level = false;
+	prnSet.tabTop = 50;
+	prnSet.tabBottom = 50;
+	prnSet.tabLeft = 15;
+	prnSet.tabRight = 15;
+	prnSet.tabHead = 1;
+	prnSet.tabCauda = 0;
+	prnSet.topOffset = 0;
+	prnSet.leftOffset = 0;
+	prnSet.coverPrint = false;
+	prnSet.AutoturnRow = true;
+	prnSet.imgsrc = "";
+	prnSet.imgshow = true;
+	prnSet.imgLeft = 0;
+	prnSet.imgTop = 0;
+	prnSet.changeUserDate = true;
+	prnSet.inPrint = 0;
+	prnSet.compressWidth = 0;
+	prnSet.compressHeight = 0;
+	prnSet.compressFont = 0;
+	prnSet.compressPrint = 0;
+	prnSet.rightOffset = 0;
+	prnSet.bottomOffset = 0;
+}
+function closeright() {
+	onRightClickID.fire();
+	event.returnValue = false;
+}
+function txtMyGrid_onclick() {
+	onClickID.fire();
+}
+function txtMyGrid_ondblclick() {
+	onDblClickID.fire();
+}
+var prnSet = new prnSet1();
+reload();
+function prnSet1(alltable, ReportName, SetColWidth, title1, title2, top11,
+		top12, top13, top21, top22, top23, top31, top32, top33, bottom11,
+		bottom12, bottom13, bottom21, bottom22, bottom23, bottom31, bottom32,
+		bottom33, fontTop, fontBottom, repWidth, repHeight, portrait, level,
+		tabTop, tabBottom, tabLeft, tabRight, tabHead, tabCauda, topOffset,
+		leftOffset, coverPrint, AutoturnRow, imgsrc, imgshow, imgLeft, imgTop,
+		changeUserDate, inPrint, compressWidth, compressHeight, compressFont,
+		compressPrint, rightOffset, bottomOffset, offsetAdjust, titleheight,
+		topFooter, noMerge) {
+	this.alltable = alltable;
+	this.ReportName = ReportName;
+	this.SetColWidth = SetColWidth;
+	this.title1 = title1;
+	this.title2 = title2;
+	this.top11 = top11;
+	this.top12 = top12;
+	this.top13 = top13;
+	this.top21 = top21;
+	this.top22 = top22;
+	this.top23 = top23;
+	this.top31 = top31;
+	this.top32 = top32;
+	this.top33 = top33;
+	this.bottom11 = bottom11;
+	this.bottom12 = bottom12;
+	this.bottom13 = bottom13;
+	this.bottom21 = bottom21;
+	this.bottom22 = bottom22;
+	this.bottom23 = bottom23;
+	this.bottom31 = bottom31;
+	this.bottom32 = bottom32;
+	this.bottom33 = bottom33;
+	this.fontTop = fontTop;
+	this.fontBottom = fontBottom;
+	this.repWidth = repWidth;
+	this.repHeight = repHeight;
+	this.portrait = portrait;
+	this.level = level;
+	this.tabTop = tabTop;
+	this.tabBottom = tabBottom;
+	this.tabLeft = tabLeft;
+	this.tabRight = tabRight;
+	this.tabHead = tabHead;
+	this.tabCauda = tabCauda;
+	this.topOffset = topOffset;
+	this.leftOffset = leftOffset;
+	this.coverPrint = coverPrint;
+	this.AutoturnRow = AutoturnRow;
+	this.imgsrc = imgsrc;
+	this.imgshow = imgshow;
+	this.imgLeft = imgLeft;
+	this.imgTop = imgTop;
+	this.changeUserDate = changeUserDate;
+	this.inPrint = inPrint;
+	this.compressWidth = compressWidth;
+	this.compressHeight = compressHeight;
+	this.compressFont = compressFont;
+	this.compressPrint = compressPrint;
+	this.offsetAdjust = offsetAdjust;
+	this.titleheight = titleheight;
+	this.topFooter = topFooter;
+	this.noMerge = noMerge;
+}
+function trueTotrue(sTrue) {
+	return IsTrue(sTrue);
+}
+function print() {
+	var s1 = "";
+	fnPutVscrollvalue(Vscrollvalue, 0);
+	fnPutHscrollvalue(Hscrollvalue, 0);
+	if (mbCell) {
+		if (blnRunMode == false) {
+			var old1 = tgrid.childNodes(0).childNodes(i).style.pixelWidth;
+			tgrid.rows(0).style.display = "none";
+			tgrid.childNodes(0).childNodes(0).style.pixelWidth = 0;
+			tgrid.border = 0;
+			tgrid.style.borderLeft = "";
+			tgrid.style.borderRight = "";
+			tgrid.style.borderTop = "";
+			tgrid.style.borderBottom = "";
+		}
+		var sPrn = tgrid.getAttribute("prnset");
+		if (sPrn != null) {
+			sPrn = unescape(sPrn);
+			var oPrn = new ActiveXObject("Microsoft.XMLDOM");
+			oPrn.async = "false";
+			oPrn.loadXML(sPrn);
+			prnSet.title1 = oPrn.documentElement.childNodes(0).text;
+			prnSet.title2 = oPrn.documentElement.childNodes(1).text;
+			prnSet.top11 = oPrn.documentElement.childNodes(2).text;
+			prnSet.top12 = oPrn.documentElement.childNodes(3).text;
+			prnSet.top13 = oPrn.documentElement.childNodes(4).text;
+			prnSet.top21 = oPrn.documentElement.childNodes(5).text;
+			prnSet.top22 = oPrn.documentElement.childNodes(6).text;
+			prnSet.top23 = oPrn.documentElement.childNodes(7).text;
+			prnSet.top31 = oPrn.documentElement.childNodes(8).text;
+			prnSet.top32 = oPrn.documentElement.childNodes(9).text;
+			prnSet.top33 = oPrn.documentElement.childNodes(10).text;
+			prnSet.bottom11 = oPrn.documentElement.childNodes(11).text;
+			prnSet.bottom12 = oPrn.documentElement.childNodes(12).text;
+			prnSet.bottom13 = oPrn.documentElement.childNodes(13).text;
+			prnSet.bottom21 = oPrn.documentElement.childNodes(14).text;
+			prnSet.bottom22 = oPrn.documentElement.childNodes(15).text;
+			prnSet.bottom23 = oPrn.documentElement.childNodes(16).text;
+			prnSet.bottom31 = oPrn.documentElement.childNodes(17).text;
+			prnSet.bottom32 = oPrn.documentElement.childNodes(18).text;
+			prnSet.bottom33 = oPrn.documentElement.childNodes(19).text;
+			prnSet.fontTop = parseInt(oPrn.documentElement.childNodes(20).text);
+			prnSet.fontBottom = parseInt(oPrn.documentElement.childNodes(21).text);
+			prnSet.repWidth = parseInt(oPrn.documentElement.childNodes(22).text);
+			prnSet.repHeight = parseInt(oPrn.documentElement.childNodes(23).text);
+			prnSet.portrait = trueTotrue(oPrn.documentElement.childNodes(24).text);
+			prnSet.level = trueTotrue(oPrn.documentElement.childNodes(25).text);
+			prnSet.tabTop = parseInt(oPrn.documentElement.childNodes(26).text);
+			prnSet.tabBottom = parseInt(oPrn.documentElement.childNodes(27).text);
+			prnSet.tabLeft = parseInt(oPrn.documentElement.childNodes(28).text);
+			prnSet.tabRight = parseInt(oPrn.documentElement.childNodes(29).text);
+			prnSet.tabHead = parseInt(oPrn.documentElement.childNodes(30).text);
+			prnSet.tabCauda = parseInt(oPrn.documentElement.childNodes(31).text);
+			prnSet.topOffset = parseInt(oPrn.documentElement.childNodes(32).text);
+			prnSet.leftOffset = parseInt(oPrn.documentElement.childNodes(33).text);
+			prnSet.coverPrint = trueTotrue(oPrn.documentElement.childNodes(34).text);
+			prnSet.AutoturnRow = trueTotrue(oPrn.documentElement.childNodes(35).text);
+			prnSet.imgsrc = oPrn.documentElement.childNodes(36).text;
+			prnSet.imgshow = trueTotrue(oPrn.documentElement.childNodes(37).text);
+			prnSet.imgLeft = parseInt(oPrn.documentElement.childNodes(38).text);
+			prnSet.imgTop = parseInt(oPrn.documentElement.childNodes(39).text);
+			prnSet.compressWidth = parseInt(oPrn.documentElement.childNodes(40).text);
+			prnSet.compressHeight = parseInt(oPrn.documentElement
+					.childNodes(41).text);
+			prnSet.compressFont = parseInt(oPrn.documentElement.childNodes(42).text);
+			prnSet.compressPrint = parseInt(oPrn.documentElement.childNodes(43).text);
+			prnSet.offsetAdjust = parseFloat(oPrn.documentElement
+					.childNodes(44).text);
+			try {
+				prnSet.titleheight = parseInt(oPrn.documentElement
+						.childNodes(45).text);
+				prnSet.topFooter = parseInt(oPrn.documentElement.childNodes(46).text);
+				prnSet.noMerge = trueTotrue(oPrn.documentElement.childNodes(47).text);
+				prnSet.printFixCols = parseInt(oPrn.documentElement
+						.childNodes(48).text);
+			} catch (e) {
+			}
+		}
+	}
+	for ( var i = 0; i < tgrid.childNodes(0).childNodes.length; i++) {
+		if (tgrid.childNodes(0).childNodes(i).style.pixelWidth == 0) {
+			s1 = s1 + "<col colKey='第" + (i + 1) + "列' colWidth='"
+					+ tgrid.childNodes(0).childNodes(i).style.width
+					+ "' colSelect='none'/>";
+		} else {
+			s1 = s1 + "<col colKey='第" + (i + 1) + "列' colWidth='"
+					+ tgrid.childNodes(0).childNodes(i).style.width
+					+ "' colSelect='block'/>";
+		}
+	}
+	prnSet.SetColWidth = s1;
+	tgrid.style.filter = "";
+	prnSet.alltable = tgrid.outerHTML;
+	if (prnSet.inPrint == 0) {
+		var screenHeight = window.screen.height;
+		var screenWidth = window.screen.width;
+		var dialogStyle = "dialogHeight:" + screenHeight + "px;dialogWidth:"
+				+ screenWidth
+				+ "px;dialogTop:0px;dialogLeft:0px;status:no;scroll:no";
+	} else {
+		var dialogStyle = "dialogHeight:10px;dialogWidth:300px;dialogTop:1160px;dialogLeft:1100px;status:no;scroll:no";
+	}
+	if (prnSet.tabHead >= tgrid.rows.length) {
+		alert("要打印的表格的行数应大于标题行数!");
+		return;
+	}
+	var sRet = window.showModalDialog(fcpubdata.Path
+			+ "/fceform/common/webprint/dsnprint.htm", prnSet, dialogStyle);
+	if (mbCell && blnRunMode == false) {
+		tgrid.rows(0).style.display = "block";
+		tgrid.childNodes(0).childNodes(0).style.pixelWidth = old1;
+		tgrid.border = 1;
+		tgrid.style.borderLeft = "1px solid";
+		tgrid.style.borderRight = "1px solid";
+		tgrid.style.borderTop = "1px solid";
+		tgrid.style.borderBottom = "1px solid";
+	}
+	if (typeof sRet == "undefined" || sRet == null)
+		return;
+	if (mbCell) {
+		var sPrn = "<root>";
+		sPrn += "<a>" + sRet.title1 + "</a>";
+		sPrn += "<a>" + sRet.title2 + "</a>";
+		sPrn += "<a>" + sRet.top11 + "</a>";
+		sPrn += "<a>" + sRet.top12 + "</a>";
+		sPrn += "<a>" + sRet.top13 + "</a>";
+		sPrn += "<a>" + sRet.top21 + "</a>";
+		sPrn += "<a>" + sRet.top22 + "</a>";
+		sPrn += "<a>" + sRet.top23 + "</a>";
+		sPrn += "<a>" + sRet.top31 + "</a>";
+		sPrn += "<a>" + sRet.top32 + "</a>";
+		sPrn += "<a>" + sRet.top33 + "</a>";
+		sPrn += "<a>" + sRet.bottom11 + "</a>";
+		sPrn += "<a>" + sRet.bottom12 + "</a>";
+		sPrn += "<a>" + sRet.bottom13 + "</a>";
+		sPrn += "<a>" + sRet.bottom21 + "</a>";
+		sPrn += "<a>" + sRet.bottom22 + "</a>";
+		sPrn += "<a>" + sRet.bottom23 + "</a>";
+		sPrn += "<a>" + sRet.bottom31 + "</a>";
+		sPrn += "<a>" + sRet.bottom32 + "</a>";
+		sPrn += "<a>" + sRet.bottom33 + "</a>";
+		sPrn += "<a>" + sRet.fontTop + "</a>";
+		sPrn += "<a>" + sRet.fontBottom + "</a>";
+		sPrn += "<a>" + sRet.repWidth + "</a>";
+		sPrn += "<a>" + sRet.repHeight + "</a>";
+		sPrn += "<a>" + sRet.portrait + "</a>";
+		sPrn += "<a>" + sRet.level + "</a>";
+		sPrn += "<a>" + sRet.tabTop + "</a>";
+		sPrn += "<a>" + sRet.tabBottom + "</a>";
+		sPrn += "<a>" + sRet.tabLeft + "</a>";
+		sPrn += "<a>" + sRet.tabRight + "</a>";
+		sPrn += "<a>" + sRet.tabHead + "</a>";
+		sPrn += "<a>" + sRet.tabCauda + "</a>";
+		sPrn += "<a>" + sRet.topOffset + "</a>";
+		sPrn += "<a>" + sRet.leftOffset + "</a>";
+		sPrn += "<a>" + sRet.coverPrint + "</a>";
+		sPrn += "<a>" + sRet.AutoturnRow + "</a>";
+		sPrn += "<a>" + sRet.imgsrc + "</a>";
+		sPrn += "<a>" + sRet.imgshow + "</a>";
+		sPrn += "<a>" + sRet.imgLeft + "</a>";
+		sPrn += "<a>" + sRet.imgTop + "</a>";
+		sPrn += "<a>" + sRet.compressWidth + "</a>";
+		sPrn += "<a>" + sRet.compressHeight + "</a>";
+		sPrn += "<a>" + sRet.compressFont + "</a>";
+		sPrn += "<a>" + sRet.compressPrint + "</a>";
+		sPrn += "<a>" + sRet.offsetAdjust + "</a>";
+		try {
+			sPrn += "<a>" + sRet.titleheight + "</a>";
+			sPrn += "<a>" + sRet.topFooter + "</a>";
+			sPrn += "<a>" + sRet.noMerge + "</a>";
+			sPrn += "<a>" + sRet.printFixCols + "</a>";
+		} catch (e) {
+		}
+		sPrn += "</root>";
+		sPrn = escape(sPrn);
+		tgrid.setAttribute("prnset", sPrn);
+	}
+}
+function scrollbar_ondblclick() {
+	window.event.cancelBubble = true;
+	window.event.returnValue = false;
+}
+function LoadXml(sHTML) {
+	Vscrollvalue = 0;
+	Hscrollvalue = 0;
+	Vscrollmax = 0;
+	Hscrollmax = 0;
+	var d = new Date();
+	var t = d.getTime();
+	tgrid.outerHTML = sHTML;
+	var d = new Date();
+	var t1 = d.getTime();
+	tgrid = element.children[0].children[0];
+	curObj = tgrid.rows(0).cells(0);
+	tgrid.attachEvent("onclick", tgrid_onclick);
+	tgrid.attachEvent("onkeydown", tgrid_onkeydown);
+	tgrid.attachEvent("onkeypress", tgrid_onkeypress);
+	onResize();
+}
+function Init() {
+	return fnInit();
+}
+function fnInit(sHTML) {
+	if (typeof sHTML == "undefined" && bInited == true)
+		return;
+	var d = new Date();
+	var t = d.getTime();
+	if (mleft == null)
+		mleft = 0;
+	if (mtop == null)
+		mtop = 0;
+	if (mwidth == null)
+		mwidth = 550;
+	if (mheight == null)
+		mheight = 400;
+	var sPosition = "";
+	if (mleft != 0 || mtop != 0) {
+		sPosition = "position:absolute;";
+	} else if (IsSpace(sHTML)) {
+		window.attachEvent("onresize", onResize);
+	}
+	var s1 = "";
+	s1 = s1 + '<div id=fcwebgriddiv style="width:' + mwidth + ';height:'
+			+ mheight + ';left:' + mleft + ';top:' + mtop + ';' + sPosition
+			+ 'OVERFLOW: ' + moverflow + '; " >';
+	var sTab;
+	if (arguments.length == 1) {
+		sTab = sHTML;
+	} else {
+		sTab = element.innerHTML;
+	}
+	if (sTab.indexOf(" id=fcwebgriddiv ") >= 0)
+		return;
+	var sFlat = "BORDER-LEFT: gray 0px solid;BORDER-RIGHT: gray 0px solid;BORDER-TOP: gray 0px solid;BORDER-BOTTOM: gray 0px solid;";
+	s1 = s1 + sTab;
+	s1 = s1 + '<TABLE border=2 borderColor=blue cellSpacing=0 id=tc style="DISPLAY: none; LEFT: 4px; POSITION: absolute; TOP: 50px"><TR><TD></TD></TR></TABLE>';
+	s1 = s1 + '<INPUT id=txtMyGrid style="DISPLAY: none; LEFT: 50px; POSITION: absolute; TOP: 50px" tabIndex=1 >';
+	s1 = s1 + '</div>';
+	s1 = s1 + '<TABLE bgColor=black border=0 cellPadding=0 cellSpacing=0 id=line style="DISPLAY: none; HEIGHT: 28px; LEFT: -270px; POSITION: absolute; TOP: 50px; WIDTH: 1px"><TR><TD></TD></TR></TABLE>';
+	s1 = s1 + '<TABLE bgColor=black border=0 cellPadding=0 cellSpacing=0 id=lineH style="DISPLAY: none; HEIGHT: 1px; LEFT: -270px; POSITION: absolute; TOP: 50px; WIDTH: 35px"><TR><TD></TD></TR></TABLE>';
+
+	//lxq修改 2009-6-19 增加divconer、fchtcDiv1和fchtcDiv2的background-color属性。  滚动条的背景颜色
+	s1 = s1 + '<div id=divconer style="POSITION: absolute;background-color:#fbfbf9"></div>';
+	s1 = s1 + '<div id=fchtcDiv1 style="HEIGHT: 100px; LEFT: 0px; POSITION: absolute; TOP: 0px; WIDTH: 16px;background-color:#fbfbf9" ></div>';
+	s1 = s1
+			+ '<input id=fcButton1 style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrollshang.gif);  BACKGROUND-REPEAT: no-repeat;HEIGHT: 17px; LEFT: 0px; POSITION: absolute; TOP: 0px; WIDTH: 17px" type=button >';
+	s1 = s1
+			+ '<input style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrolltop.gif);HEIGHT: 17px; LEFT: 0px; POSITION: absolute; TOP: 0px; WIDTH: 17px" id=fcButton2 type=button>';
+	s1 = s1
+			+ '<input style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrollxia.gif);  BACKGROUND-REPEAT: no-repeat;HEIGHT: 17px; LEFT:0px; POSITION: absolute; TOP: 0px; WIDTH: 17px" id=fcButton3 type=button >';
+	s1 = s1 + '<div id=fchtcDiv2 style="WIDTH: 100px; TOP: 0px; POSITION: absolute; LEFT: 0px; HEIGHT: 16px;background-color:#fbfbf9"></div>';
+	s1 = s1
+			+ '<INPUT  id=fcButton4 style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrollleft.gif);  BACKGROUND-REPEAT: no-repeat;HEIGHT: 17px; LEFT:0px; POSITION: absolute; TOP: 0px; WIDTH: 17px" type=button >';
+	s1 = s1
+			+ '<INPUT style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrolldown.gif);  HEIGHT: 17px; TOP: 0px; POSITION: absolute; LEFT: 0px; WIDTH: 17px" type=button id=fcButton5>';
+	s1 = s1
+			+ '<INPUT style="'
+			+ sFlat
+			+ 'BACKGROUND-IMAGE: url('
+			+ fcpubdata.Path
+			+ '/fceform/images/ef_run_grid_scrollright.gif); BACKGROUND-REPEAT: no-repeat;HEIGHT: 17px; TOP: 0px; POSITION: absolute; LEFT: 0px; WIDTH: 17px" type=button id=fcButton6 >';
+	s1 = s1 + '<fc:fc_code id="czFc"  onchange="window.event.srcElement.parentNode.curTD.innerText=window.event.afterchangevalue;window.event.position=88;window.event.srcElement.parentNode.Act_onDataChange(\'强行发生数据改变事件\')" ></fc:fc_code>';
+	element.innerHTML = s1;
+	div1 = element.children[0];
+	tgrid = element.children[0].children[0];
+	txtMyGrid = element.children[0].children[2];
+	var tmp1 = sTab.toUpperCase().indexOf("COLGROUP");
+	if (tmp1 <= 0) {
+		var cols = 0;
+		for ( var i = 0; i < tgrid.rows(0).cells.length; i++) {
+			cols += tgrid.rows(0).cells(i).colSpan;
+		}
+		var sColgroup = "<colgroup>";
+		for ( var i = 0; i < cols; i++) {
+			sColgroup += "<col>";
+		}
+		sColgroup += "</colgroup>";
+		var sTabNew = "";
+		var iPos = sTab.indexOf(">");
+		if (iPos > 0) {
+			sTabNew += sTab.substring(0, iPos + 1) + sColgroup
+					+ sTab.substring(iPos + 1, sTab.length);
+		}
+		tgrid.outerHTML = sTabNew;
+		tgrid = element.children[0].children[0];
+		if (tgrid.style.display == "none")
+			tgrid.style.display = "block";
+		tgrid.style.tableLayout = "auto";
+		for ( var i = 0; i < cols; i++) {
+			tgrid.childNodes(0).childNodes(i).style.width = tgrid.childNodes(0)
+					.childNodes(i).offsetWidth + 1;
+		}
+	}
+	if (tgrid.style.display == "none")
+		tgrid.style.display = "block";
+	if (IsTrue(mSetRowHeight)) {
+		for ( var i = 0; i < tgrid.rows.length; i++) {
+			tgrid.rows(i).style.height = tgrid.rows(i).offsetHeight;
+		}
+	}
+	if (mautosize) {
+		div1.style.height = tgrid.offsetHeight;
+		div1.style.width = tgrid.offsetWidth;
+	} else {
+	}
+	tgrid.style.tableLayout = "fixed";
+	tgrid.cellPadding = 4;
+	line = element.children[1];
+	lineH = element.children[2];
+	divconer = element.children[3];
+	fchtcDiv1 = element.children[4];
+	fcButton1 = element.children[5];
+	fcButton2 = element.children[6];
+	fcButton3 = element.children[7];
+	fchtcDiv2 = element.children[8];
+	fcButton4 = element.children[9];
+	fcButton5 = element.children[10];
+	fcButton6 = element.children[11];
+	czFc = element.children[12];
+	czFc.ParentPos = ParentPos;
+	divconer.attachEvent("ondblclick", scrollbar_ondblclick);
+	fchtcDiv1.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton1.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton2.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton3.attachEvent("ondblclick", scrollbar_ondblclick);
+	fchtcDiv2.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton4.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton5.attachEvent("ondblclick", scrollbar_ondblclick);
+	fcButton6.attachEvent("ondblclick", scrollbar_ondblclick);
+	line.attachEvent("onmousemove", line_onmousemove);
+	lineH.attachEvent("onmousemove", lineH_onmousemove);
+	fchtcDiv1.attachEvent("onclick", fchtcDiv1_onclick);
+	fchtcDiv2.attachEvent("onclick", fchtcDiv2_onclick);
+	fcButton1.attachEvent("onclick", fcButton1_onclick);
+	fcButton3.attachEvent("onclick", fcButton3_onclick);
+	fcButton4.attachEvent("onclick", fcButton4_onclick);
+	fcButton6.attachEvent("onclick", fcButton6_onclick);
+	fcButton2.attachEvent("onmousedown", fcButton2_onmousedown);
+	fcButton2.attachEvent("onmousemove", fcButton2_onmousemove);
+	fcButton2.attachEvent("onmouseup", fcButton2_onmouseup);
+	fcButton5.attachEvent("onmousedown", fcButton5_onmousedown);
+	fcButton5.attachEvent("onmousemove", fcButton5_onmousemove);
+	fcButton5.attachEvent("onmouseup", fcButton5_onmouseup);
+	div1.attachEvent("onmousedown", div1_onmousedown);
+	// 如果禁用grid的鼠标拖动事件 需要注释下面的事件
+	div1.attachEvent("onmousemove", div1_onmousemove);
+	div1.attachEvent("onmouseup", div1_onmouseup);
+	div1.attachEvent("oncontextmenu", closeright);
+	tgrid.attachEvent("onclick", tgrid_onclick);
+	tgrid.attachEvent("ondblclick", tgrid_ondblclick);
+	//lxq修改 2009-6-19 如果隐藏了纵向滚动条，则不给div1绑定鼠标滚轮事件
+	if (!IsTrue(mhideVscroll)) {
+		div1.attachEvent("onmousewheel", div1_onmousewheel);
+	}
+	txtMyGrid.attachEvent("onkeyup", txtMyGrid_onkeyup);
+	txtMyGrid.attachEvent("onkeydown", txtMyGrid_onkeydown);
+	txtMyGrid.attachEvent("onkeypress", txtMyGrid_onkeypress);
+	txtMyGrid.attachEvent("onfocusout", txtMyGrid_onfocusout);
+	tgrid.attachEvent("onkeydown", tgrid_onkeydown);
+	tgrid.attachEvent("onkeypress", tgrid_onkeypress);
+
+	var icont = 1;
+	icont = 13;
+	for ( var i = 0; i < icont; i++) {
+		element.children[i].attachEvent("onfocusout", tgrid_onfocusout);
+		element.children[i].attachEvent("onfocusin", tgrid_onfocusin);
+	}
+	curObj = tgrid.rows(0).cells(0);
+	tgrid.id = "t";
+	fnPutvisible(mvisible);
+	fnPutScrollBar(mScrollBar);
+	var d = new Date();
+	var t1 = d.getTime();
+	if (typeof sHTML == "undefined" && bInited == false)
+		bInited = true;
+}
+function div1_onmousewheel() {
+	if (IsTrue(mautosize))
+		return;
+	if (event.wheelDelta >= 120)
+		fcButton1_onclick();
+	else if (event.wheelDelta <= -120)
+		fcButton3_onclick();
+}
+function SaveExcel(sFile, sHtml) {
+	try {
+		var fso = new ActiveXObject("Scripting.FileSystemObject");
+	} catch (e) {
+		alert("因当前IE禁止运行ActiveX控件,请调低IE的安全属性后再运行此功能!");
+		return;
+	}
+	var char1 = unescape("%5C");
+	var sFile1 = repStr(sFile, char1, char1 + char1);
+	try {
+		var a = fso.CreateTextFile(sFile1, false);
+	} catch (e) {
+		alert("文件" + sFile + "已存在.");
+		return;
+	}
+	var s1 = "";
+	if (typeof sHtml == "undefined") {
+		s1 = t.outerHTML;
+	} else {
+		s1 = sHtml;
+	}
+	a.WriteLine(s1);
+	a.Close();
+	alert("文件成功保存到: " + sFile);
+}
+
+</SCRIPT>

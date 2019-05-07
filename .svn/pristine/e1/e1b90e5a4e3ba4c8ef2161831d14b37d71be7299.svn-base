@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">
+
+	<bean id="flowInfoList" class="com.chinacreator.xtbg.core.process.processconfig.list.FlowInfoList" ></bean>
+	<bean id="flowInfoDaoImpl" class="com.chinacreator.xtbg.core.process.processconfig.dao.impl.FlowInfoDaoImpl" ></bean>
+	<bean id="flowDefInfoList" class="com.chinacreator.xtbg.core.process.processconfig.list.FlowDefInfoList" ></bean>
+	<bean id="flowWfactionInfoList" class="com.chinacreator.xtbg.core.process.processconfig.list.FlowWfactionInfoList" ></bean>
+	<bean id="flowActUserList" class="com.chinacreator.xtbg.core.process.processconfig.list.FlowActUserList" ></bean>
+	<bean id="flowBusiSearchDaoImpl" class="com.chinacreator.xtbg.core.process.flowprocessing.dao.impl.FlowBusiSearchDaoImpl" ></bean>
+	<bean id="doWorkList" class="com.chinacreator.xtbg.core.process.flowprocessing.list.DoWorkList" ></bean>
+	<bean id="toBeWorkList" class="com.chinacreator.xtbg.core.process.flowprocessing.list.ToBeWorkList" ></bean>
+	<bean id="doneWorkList" class="com.chinacreator.xtbg.core.process.flowprocessing.list.DoneWorkList" ></bean>
+	<bean id="wordTemplateDaoImpl" class="com.chinacreator.xtbg.core.common.iweboffice.dao.impl.WordTemplateDaoImpl" ></bean>
+	<bean id="workCountDaoImpl" class="com.chinacreator.xtbg.core.archive.dao.impl.WorkCountDaoImpl" ></bean>
+	
+	<!-- 手机端配置文件 -->
+	<bean id="flowInstanceServiceImpl" class="com.chinacreator.xtbg.core.process.flowprocessing.service.impl.FlowInstanceServiceImpl" ></bean>
+	<bean id="workFlowServiceImpl" class="com.chinacreator.xtbg.core.process.flowprocessing.service.impl.WorkFlowServiceImpl" ></bean>
+	<bean id="initFlowServiceImpl" class="com.chinacreator.xtbg.core.process.flowprocessing.service.impl.InitFlowServiceImpl" ></bean>
+	
+	<bean id="pCWorkFlowBack" class="com.chinacreator.xtbg.core.process.workflowphone.service.impl.PCWorkFlowBack" >
+		<property name="flowInstanceServiceIfc" ref="flowInstanceServiceImpl"></property>
+		<property name="workFlowServiceIfc" ref="workFlowServiceImpl"></property>
+		<property name="dsCRUDDao" ref="dsCRUDDaoImpl"></property>
+	</bean>
+	<bean id="pCWorkFlowComplete" class="com.chinacreator.xtbg.core.process.workflowphone.service.impl.PCWorkFlowComplete" >
+		<property name="flowInstanceServiceIfc" ref="flowInstanceServiceImpl"></property>
+		<property name="workFlowServiceIfc" ref="workFlowServiceImpl"></property>
+		<property name="dsCRUDDao" ref="dsCRUDDaoImpl"></property>
+	</bean>
+	<bean id="pCWorkFlowInit" class="com.chinacreator.xtbg.core.process.workflowphone.service.impl.PCWorkFlowInit" >
+		<property name="initFlowServiceIfc" ref="initFlowServiceImpl"></property>
+		<property name="dsCRUDDao" ref="dsCRUDDaoImpl"></property>
+	</bean>
+	<bean id="pCWorkFlowFlowFinish" class="com.chinacreator.xtbg.core.process.workflowphone.service.impl.PCWorkFlowFlowFinish" >
+		<property name="flowInstanceServiceIfc" ref="flowInstanceServiceImpl"></property>
+		<property name="workFlowServiceIfc" ref="workFlowServiceImpl"></property>
+		<property name="dsCRUDDao" ref="dsCRUDDaoImpl"></property>
+	</bean>
+</beans>

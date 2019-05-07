@@ -1,0 +1,11 @@
+1.添加接口通过活动实例id和当前处理用户（兼职借调带$机构id）获取委托人用户名(兼职借调带$机构id)。
+Modified: Shark-Extend\WebRoot\common_workflow\test\workflowManagerApiDemo1.jsp  
+Modified: Shark-Extend\src\com\chinacreator\spi\api\WorkflowManager.java  
+Modified: hark-Extend\src\com\chinacreator\spi\impl\local\WorkflowManagerImpl.java  
+2.提供任务执行人更改jsp路径，并优化jsp性能，将原来的系统管理机构用户树换成ext树。
+Modified: Shark-Extend\WebRoot\common_workflow\monitor\changeActExcutors.jsp  
+3.修复挂起活动、恢复活动接口
+Modified: Shark-Extend\WebRoot\common_workflow\test\workflowManagerApiDemo.jsp  
+Modified: Shark-Kernal\src\org\enhydra\shark\WfActivityImpl.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\WfActivityWrapper.java  
+

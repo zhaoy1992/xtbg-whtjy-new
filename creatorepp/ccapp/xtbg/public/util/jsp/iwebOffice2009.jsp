@@ -1,0 +1,1358 @@
+<%@ page contentType="text/html; charset=gb2312" %>
+<%@ page import="java.io.*,
+				 java.text.*,
+				 java.util.*,
+				 java.sql.*,
+				 java.text.SimpleDateFormat,
+				 java.text.DateFormat,
+				 java.util.Date,
+				 javax.servlet.*,
+				 javax.servlet.http.*,
+				 com.chinacreator.iWebOffice2006.iDBManager2000,
+				 com.chinacreator.security.AccessControl"%>
+<%@page import="com.chinacreator.xtbg.pub.util.StringUtil"%>
+<%@page import="com.chinacreator.business.common.tools.CacheCommonManage"%>
+<%@page import="org.apache.log4j.Logger;"%>
+
+<%
+  String userArea = CacheCommonManage.getInstance().getSystemParam("CURSYSTEMCODE");//查询系统区域码
+  AccessControl control = AccessControl.getInstance();
+  control.checkAccess(request,response);
+  String currentSystemID = control.getCurrentSystemID();
+  String user_id = control.getUserID();
+  String appUserName = "";
+  if(currentSystemID.equalsIgnoreCase("module")){
+  	 appUserName = "";
+  }else{
+  	 //appUserName = "APP_"+currentSystemID+".";
+  }
+
+%>
+<%!
+	public static final Logger logger = Logger.getLogger("iwebOffice2006.jsp文件:");
+
+  /**
+   * 功能或作用：格式化日期时间
+   * @param DateValue 输入日期或时间
+   * @param DateType 格式化 EEEE是星期, yyyy是年, MM是月, dd是日, HH是小时, mm是分钟,  ss是秒
+   * @return 输出字符串
+   */
+  public String FormatDate(String DateValue,String DateType)
+  {
+    String Result;
+    SimpleDateFormat formatter = new SimpleDateFormat(DateType);
+    try{
+      Date mDateTime = formatter.parse(DateValue);
+      Result = formatter.format(mDateTime);
+    }catch(Exception ex){
+      Result = ex.getMessage();
+    }
+    if (Result.equalsIgnoreCase("1900-01-01")){
+      Result = "";
+    }
+    return Result;
+  }
+%>
+<%
+  ResultSet result=null;
+  String mSubject=null;
+  String mStatus=null;
+  String mAuthor=null;
+  String mFileName=null;
+  String mFileDate=null;
+  String mHTMLPath="";
+
+  String mDisabled="";
+  String mDisabledSave="";
+  String mWord="";
+  String mExcel="";
+
+
+  
+  
+  //自动获取OfficeServer和OCX文件完整URL路径
+  String mHttpUrlName=request.getRequestURI();
+  String mScriptName=request.getServletPath();
+  String mServerName="OfficeServer.jsp";
+
+  String mServerUrl="http://"+request.getServerName()+":"+request.getServerPort()+mHttpUrlName.substring(0,mHttpUrlName.lastIndexOf(mScriptName))+"/ccapp/xtbg/resources/plug/iWebOffice2009/"+mServerName;//取得OfficeServer文件的完整URL
+  String mHttpUrl="http://"+request.getServerName()+":"+request.getServerPort()+mHttpUrlName.substring(0,mHttpUrlName.lastIndexOf(mScriptName))+"/ccapp/xtbg/resources/plug/iWebOffice2009/";
+  
+  String mRecordID=request.getParameter("RecordID");
+  String mTemplate=request.getParameter("Template");
+  String mFileType=request.getParameter("FileType");
+  String mEditType=request.getParameter("EditType");
+  String mShowType=request.getParameter("ShowType");
+  String FullSize=request.getParameter("FullSize");
+  String _DBType=request.getParameter("DBType");
+  String sxPDFControl=request.getParameter("sxPDFControl");
+  String mUserName = control.getUserName();//request.getParameter("UserName");
+  String submit_flag = request.getParameter("submit_flag");
+  String ShowToolBar = request.getParameter("ShowToolBar");
+  String showWordTempTaohong =request.getParameter("showWordTempTaohong");//是否套红
+  String saveDocumentFlag = request.getParameter("saveDocumentFlag");//怀化信息上报正文的处理
+  if(StringUtil.nullOrBlank(ShowToolBar)){
+	  ShowToolBar = "1";
+  }
+
+  
+  //取得编号
+  if (mRecordID==null)
+  {
+     mRecordID="";	//编号为空
+  }
+  //取得模式
+  if (mEditType==null)
+  {
+    mEditType="1,1";	//文档编辑类型  第一位可以为0,1,2,3 其中:0不可编辑;1可以编辑,无痕迹;2可以编辑,有痕迹,不能修订;3可以编辑,有痕迹,能修订；
+                        //第二位可以为0,1 其中:0不可批注,1可以批注。可以参考iWebOffice2006的EditType属性，详细参考技术白皮书
+  }
+  //取得显示模式
+  if (mShowType==null)
+  {
+    mShowType="1";	//文档显示方式  1:表示文字批注  2:表示手写批注  0:表示文档核稿
+  }
+  //取得类型
+  if (mFileType==null)
+  {
+    mFileType=".doc";	// 默认为.doc文档
+  }
+  //取得用户名
+  if (mUserName==null)
+  {
+    mUserName="用户名为空";
+  }
+
+  //取得模板
+  if (mTemplate==null)
+  {
+    mTemplate="";	// 默认没有模板
+  }
+  //取得模版套红
+  if( showWordTempTaohong==null){
+	  showWordTempTaohong="";
+  }
+
+  //打开数据库
+  iDBManager2000 DbaObj=new iDBManager2000();
+  if (DbaObj.OpenConnection())
+  {
+    String mSql="Select * From "+appUserName+"oa_document_File Where RecordID='"+ mRecordID + "'";
+    try
+    {
+      result=DbaObj.ExecuteQuery(mSql);
+      if (result.next())
+      {
+        mRecordID=result.getString("RecordID");
+        mTemplate="";
+        mSubject="";
+        mAuthor="";
+        mFileDate=result.getString("FILEDATE");
+        mStatus="READ";
+        mFileType=result.getString("FileType");
+        mHTMLPath=result.getString("FILEPATH");
+      }
+      else
+      {
+	//取得唯一值(mRecordID)
+       /* java.util.Date dt=new java.util.Date();
+        long lg=dt.getTime();
+        Long ld=new Long(lg);*/
+	//初始化值
+       // mRecordID=ld.toString();//保存的是文档的编号，通过该编号，可以在里找到所有属于这条纪录的文档
+        mTemplate=mTemplate;
+        mSubject="请输入主题";
+        mAuthor=mUserName;
+        mFileDate=DbaObj.GetDateTime();
+        mStatus="DERF";
+        mFileType=mFileType;
+        mHTMLPath="";
+      }
+      result.close();
+    }
+    catch(SQLException e)
+    {
+		logger.info(e.getMessage());
+    }
+    DbaObj.CloseConnection() ;
+  }
+
+  if (mEditType.compareTo("0,0")==0)
+  {
+     mDisabled="disabled";
+     mDisabledSave="disabled";
+  }
+  else
+  {
+     mDisabled="";
+  }
+
+  mFileName=mRecordID + mFileType;  //取得完整的文档名称
+  if (mFileType.equalsIgnoreCase(".doc") || mFileType.equalsIgnoreCase(".wps")){
+     mWord="";
+     mExcel="disabled";
+  }
+  else if (mFileType.compareTo(".xls")==0)
+  {
+     mWord="disabled";
+     mExcel="";
+  }
+  else{
+    mDisabled="disabled";
+  }
+  
+  if(!StringUtil.isBlank(submit_flag))
+  {
+  int mDocumentId=0;
+  if (DbaObj.OpenConnection())
+  {
+    String mysql="SELECT DocumentID,RecordID from "+appUserName+"TD_OCTL_Document Where RecordID='" + mRecordID + "'";
+    try
+    {
+      ResultSet result11=DbaObj.ExecuteQuery(mysql) ;
+      if (result11.next())
+      {
+        mysql="update "+appUserName+"TD_OCTL_Document set DocumentID=?,RecordID=?,Template=?,Subject=?,Author=?,FileDate=?,FileType=?,HtmlPath=?,Status=? where RecordID='"+mRecordID+"'";
+        mDocumentId=result11.getInt("DocumentID");
+      }
+      else
+      {
+        mysql="insert into "+appUserName+"TD_OCTL_Document (DocumentID,RecordID,Template,Subject,Author,FileDate,FileType,HtmlPath,Status) values (?,?,?,?,?,?,?,?,?)";
+        mDocumentId=DbaObj.GetMaxID(appUserName+"TD_OCTL_Document","DocumentID");
+      }
+      result.close();
+    }
+    catch(Exception e)
+    {
+    	e.printStackTrace();
+		logger.info(e.getMessage());
+    }
+    java.sql.PreparedStatement prestmt=null;
+    try
+    {
+        prestmt=DbaObj.Conn.prepareStatement(mysql);
+        prestmt.setInt(1,mDocumentId);
+        prestmt.setString(2,mRecordID);
+        prestmt.setString(3,mTemplate);
+        prestmt.setString(4,mSubject);
+        prestmt.setString(5,mAuthor);
+        prestmt.setDate(6,DbaObj.GetDate());
+        prestmt.setString(7,mFileType);
+        prestmt.setString(8,mHTMLPath);
+        prestmt.setString(9,"READ");
+
+        DbaObj.Conn.setAutoCommit(true) ;
+        prestmt.executeUpdate();
+        DbaObj.Conn.commit();
+
+    }
+    catch(Exception e)
+    {
+    	e.printStackTrace();
+		logger.info(e.getMessage());
+    }
+    finally
+    {
+        prestmt.close();
+    }
+    DbaObj.CloseConnection() ;
+    out.clear();
+    out = pageContext.pushBody();
+
+  }
+  else
+  {
+		logger.info("打开联接有错误!");
+  }
+  	logger.info("文档recordid为"+mRecordID+"的文档保存成功!");
+  }
+%>
+<html>
+<head>
+<title>金格科技-iWebOffice2006全文批注实例</title>
+<link rel='stylesheet' type='text/css' href='test.css'>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript" src="../../../resources/plug/jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" >jQuery.noConflict();</script>
+
+<script src="../../../resources/plug/jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js" type="text/javascript"></script>
+
+<script src="../../../resources/js/util/public.js" type="text/javascript"></script>
+<script src="../../../resources/plug/jquery.jqGrid-4.3.1/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+<!-- 引入formvValidatetion -->
+<link rel="stylesheet" href="../../../resources/plug/formvalidation/css/validationEngine.jquery.css" type="text/css" />
+<script src="../../../resources/plug/formvalidation/jquery.validationEngine-cn.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../resources/plug/formvalidation/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+
+<link rel='stylesheet' type='text/css' href='test.css'>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript" src="../../../resources/js/util/jsonutil.js" ></script>
+<script type="text/javascript" src="../../../resources/plug/ifrom/js/ifrom-tools.1.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../../resources/plug/ifrom/js/ifrom-min.1.1.js"></script>
+<script type="text/javascript" src="../../../resources/plug/ifrom/js/ifrom-ui-alert.1.1.js"></script>
+<script language="javascript" for=WebOffice event="OnMenuClick(vIndex,vCaption)">
+
+   if (vIndex==1){  //打开本地文件
+      WebOpenLocal();
+   }
+   if (vIndex==2){  //保存本地文件
+      WebSaveLocal();
+   }
+   if (vIndex==3){  //保存到服务器上
+      SaveDocument();    //保存正文
+   }
+   if (vIndex==5){  //签名印章
+      WebOpenSignature();
+   }
+   if (vIndex==6){  //验证签章
+      WebShowSignature();
+   }
+   if (vIndex==8){  //保存版本
+      WebSaveVersion();
+   }
+   if (vIndex==9){  //打开版本
+      WebOpenVersion();
+   }
+   if (vIndex==11){  //测试菜单一
+     alert('菜单编号:'+vIndex+'\n\r'+'菜单条目:'+vCaption+'\n\r'+'请根据这些信息编写菜单具体功能');
+   }
+   if (vIndex==12){  //测试菜单二
+     alert('菜单编号:'+vIndex+'\n\r'+'菜单条目:'+vCaption+'\n\r'+'请根据这些信息编写菜单具体功能');
+   }
+   if (vIndex==14){  //保存并退出
+     SaveDocument();    //保存正文
+     webform.submit();
+   }
+   if (vIndex==16){  //打印文档
+      WebOpenPrint();
+   }
+   if (vIndex==2){  //打印文档
+	   WebSaveLocal();
+	}
+   if (vIndex==17){  //隐藏手写批注
+      webform.WebOffice.VisibleTools('手写批注',false);   //隐藏或显示iWebOffice工具栏 true显示  false隐藏
+   }
+   if (vIndex==18){  //显示手写批注
+      webform.WebOffice.VisibleTools('手写批注',true);   //隐藏或显示iWebOffice工具栏 true显示  false隐藏
+   }
+   if (vIndex==19){  //显示痕迹
+	   //webform.WebOffice.WebSetRevision(true,true,true,false);  
+   }
+   if (vIndex==20){  //隐藏痕迹
+	   webform.WebOffice.WebSetRevision(false,false,false,false);     //隐藏或显示iWebOffice工具栏 true显示  false隐藏
+   }
+   if (vIndex==23){   //套红
+	   wordTemplateTaohong();   //隐藏或显示iWebOffice工具栏 true显示  false隐藏
+   }
+   //保存文件
+   if(typeof(window.parent.docheckofficeaEvent) == "function"){
+		window.parent.docheckofficeaEvent(webform.WebOffice,vIndex);
+	}
+  
+</script>
+
+<SCRIPT language=javascript for=WebOffice event=OnToolsClick(vIndex,vCaption)>
+    //响应工具栏事件
+    //if (vIndex==11){alert('编号:'+vIndex+'\n\r'+'标题:'+vCaption+'\n\r'+'请根据这些信息编写具体功能'+'\n\r\n\r'+'窗口状态:'+webform.WebOffice.WindowStatus);}
+    if (vIndex==11){
+    	//AddOfficialSeal();
+    	//同时在盖章时将正文另存一份
+    	webOfficeCopy();
+    	//印章列表
+    	WebOpenSignature();
+    	//保存印章正文
+    	webOfficeSaveSinature();
+    };
+    if (vIndex==12){
+          webform.WebOffice.Alert('自定义工具栏测试');
+        }
+    if (vIndex==21){  //隐藏痕迹
+    	 webform.WebOffice.WebSetRevision(false,false,false,false);    
+    }
+    if (vIndex==22){  //显示痕迹
+    	   webform.WebOffice.WebSetRevision(true,true,true,false);  
+     }
+    if (vIndex==16){  //打印文档
+        WebOpenPrint();
+     }
+    if (vIndex==13){  //保存
+    	  SaveDocument();  
+	     //WebSave(true);
+  	}
+    if (vIndex==23){   //套红
+ 	   wordTemplateTaohong();   //隐藏或显示iWebOffice工具栏 true显示  false隐藏
+    }
+	if (vIndex==24){
+	    if(typeof(window.parent.docheckofficeaEvent) == "function"){
+	    	if(<%=userArea%> == "431003"){
+	        	//解除保护
+	    		WebProtect(false);
+	    		//清楚痕迹
+	    		WebAcceptAllRevisions();
+	    		//保护文档
+	    		WebProtect(true);
+	    	}
+	 	}
+	}
+    //保存文件
+    if(typeof(window.parent.docheckofficeaEvent) == "function"){
+    		window.parent.docheckofficeaEvent(webform.WebOffice,vIndex);
+ 	}
+    if(vIndex==55){
+    	WebSaveAsHtml();
+    	//WebSave(true);
+    }
+    //if (vIndex==-1){webform.WebOffice.Alert(vCaption);}             //在完成相应操作后响应iWebOffice标准工具栏操作铵钮事件，如"手写批注",vCaption="手写批注"
+</SCRIPT>
+
+<script language=javascript>
+/*
+form表单名称:webform
+iWebOffice名称:WebOffice
+WebObject文档对象接口，相当于：
+如果是Word  文件，WebObject 是Word  VBA的ActiveDocument对象
+如果是Excel 文件，WebObject 是Excel VBA的ActiveSheet对象
+
+如：webform.WebOffice.WebObject
+*/
+
+
+//作用：显示操作状态
+function StatusMsg(mString){
+  //StatusBar.innerText=mString;
+}
+
+//作用：载入iWebOffice
+function Load(){
+  try{
+    //以下属性必须设置，实始化iWebOffice
+    webform.WebOffice.WebUrl="<%=mServerUrl%>";			//WebUrl:系统服务器路径，与服务器文件交互操作，如保存、打开文档，重要文件
+
+    webform.WebOffice.RecordID="<%=mRecordID%>";		//RecordID:本文档记录编号
+    webform.WebOffice.Template="<%=mTemplate%>";		//Template:模板编号
+    webform.WebOffice.FileName="<%=mFileName%>";		//FileName:文档名称
+    webform.WebOffice.FileType="<%=mFileType%>";		//FileType:文档类型  .doc  .xls  .wps
+    webform.WebOffice.UserName="<%=mUserName%>";		//UserName:操作用户名，痕迹保留需要
+    webform.WebOffice.EditType="<%=mEditType%>";		//EditType:编辑类型  方式一、方式二  <参考技术文档>  
+														//第一位可以为0,1,2,3 其中:0不可编辑;1可以编辑,无痕迹;2可以编辑,有痕迹,不能修订;3可以编辑,有痕迹,能修订；
+														//第二位可以为0,1 其中:0不可批注,1可以批注。可以参考iWebOffice2006的EditType属性，详细参考技术白皮书
+    webform.WebOffice.MaxFileSize = 64 * 1024;			//最大的文档大小控制，默认是64M，现在设置成16M。
+
+    webform.WebOffice.ExtParam="{_DBType:\"<%=_DBType%>\"}";       //夏天新增：
+    													//【DBType：数据库类型，暂时只支持保存文档和读取文档方法的底层切换】
+    													//可选项，document_file(默认值),fc_attach,fileupload_kbm(知识库的附件读取)
+
+    //Start  iWebOffice2006属性  以下属性可以不要
+    webform.WebOffice.Language="CH";					//Language:多语言支持显示选择   CH 简体 TW繁体 EN英文
+    webform.WebOffice.PenColor="#FF0000";				//PenColor:默认批注颜色
+    webform.WebOffice.PenWidth="1";						//PenWidth:默认批注笔宽
+    webform.WebOffice.Print="1";						//Print:默认是否可以打印:1可以打印批注,0不可以打印批注
+    webform.WebOffice.ShowToolBar="<%=ShowToolBar%>";					//ShowToolBar:是否显示工具栏:1显示,0不显示
+    if(<%=FullSize%>){
+    	window.setTimeout('webform.WebOffice.FullSize();',300);  //全屏幕。	
+    }
+    
+
+    //参数一:Index按钮编号,参数二:Caption按钮显示内容,参数三:Icon图标名称
+   // webform.WebOffice.AppendTools("11","工具栏11",11);	//在OnToolsClick中的 vIndex=11 ,vCaption="工具栏11";
+    //webform.WebOffice.AppendTools("12","工具栏12",12);	//在OnToolsClick中的 vIndex=12 ,vCaption="工具栏12";
+      webform.WebOffice.AppendTools("13","保存",3);
+
+    webform.WebOffice.ShowMenu="0";
+    webform.WebOffice.AppendMenu("1","打开本地文件(&L)");
+    webform.WebOffice.AppendMenu("2","保存本地文件(&S)");
+    webform.WebOffice.AppendMenu("3","保存远程文件(&U)");
+    webform.WebOffice.AppendMenu("4","-");
+    webform.WebOffice.AppendMenu("5","签名印章(&Q)");
+    webform.WebOffice.AppendMenu("6","验证签章(&Y)");
+    
+    //webform.WebOffice.AppendMenu("8","隐藏痕迹(&A)");
+    /* webform.WebOffice.AppendMenu("7","-");
+    webform.WebOffice.AppendMenu("8","保存版本(&B)");
+    webform.WebOffice.AppendMenu("9","打开版本(&D)");
+    webform.WebOffice.AppendMenu("10","-");
+    webform.WebOffice.AppendMenu("11","测试菜单一(&X)");
+    webform.WebOffice.AppendMenu("12","测试菜单二(&Z)");
+    webform.WebOffice.AppendMenu("13","-");
+    webform.WebOffice.AppendMenu("14","保存并退出(&E)");
+    webform.WebOffice.AppendMenu("15","-");
+    webform.WebOffice.AppendMenu("16","打印文档(&P)"); */
+    webform.WebOffice.AppendMenu("主菜单","-");
+    webform.WebOffice.AppendMenu("17","清稿(&C)");
+    webform.WebOffice.AppendMenu("18","套红(&O)");
+    webform.WebOffice.DisableMenu("宏(&M);选项(&O)...");	//禁止菜单
+    //加入功能项lcy-add
+    //webform.WebOffice.AppendTools("18","套红",18);
+    //webform.WebOffice.AppendTools("11","盖章",24);
+    webform.WebOffice.AppendTools("16","打  印",7);
+ 	//业务实现层用于环节控制lcy-add
+ 	if(typeof(window.parent.docheckoffice) == "function"){
+ 		window.parent.docheckoffice(webform.WebOffice);
+ 	}
+    //End
+	
+    if(typeof(window.parent.webPrint)=="function"){
+    	window.parent.webPrint(webform.WebOffice);
+    }
+    
+    webform.WebOffice.WebOpen();							//打开该文档    交互OfficeServer  调出文档OPTION="LOADFILE"    调出模板OPTION="LOADTEMPLATE"     <参考技术文档>
+    webform.WebOffice.ShowType=<%=mShowType%>;				//文档显示方式  1:表示文字批注  2:表示手写批注  0:表示文档核稿
+    if(<%=userArea%> == "421000" || <%=userArea%> == "431003"){
+   	 	webform.WebOffice.VisibleTools("保存文件",false);
+   	 	//webform.WebOffice.VisibleTools("手写批注",false);
+   	 	webform.WebOffice.AppendTools("13","保存",3);
+    	webform.WebOffice.AppendTools("24","保存文件",2);//保存文件
+    }
+    if("<%=_DBType%>" == "fileupload_kbm"){                    //发改委的个性化  只需要查看文档内容不用其他的操作
+    	webform.WebOffice.VisibleTools("保存文件",false);
+    	webform.WebOffice.VisibleTools("手写批注",false);
+    	webform.WebOffice.VisibleTools("文字批注",false);
+    	webform.WebOffice.VisibleTools("新建文件",false);
+    	webform.WebOffice.VisibleTools("打开文件",false);
+    	webform.WebOffice.VisibleTools("文档清稿",false);
+    	webform.WebOffice.VisibleTools("重新批注",false);
+    	webform.WebOffice.VisibleTools("全屏",false);
+    	//webform.WebOffice.AppendTools("13","保存",3);
+    	//webform.WebOffice.AppendTools("24","保存文件",2);//保存文件
+    }
+    //模版套红
+    if("<%=showWordTempTaohong%>"=="1"){
+    	webform.WebOffice.AppendTools("23","套红",23);
+    }
+    
+    //是否显示保存文件功能
+    if("<%=StringUtil.deNull(saveDocumentFlag)%>"=="true"){
+    	webform.WebOffice.AppendTools("13","保存远程文件",3);
+    }
+    
+    StatusMsg(webform.WebOffice.Status);					//状态信息
+    if(typeof(window.parent.docheckofficeafter) == "function"){
+ 		window.parent.docheckofficeafter(webform.WebOffice);
+ 	}
+	if(window.parent.docheckafter && typeof(window.parent.docheckafter) == "function"){
+	 		window.parent.docheckafter(webform.WebOffice);
+	 }
+	if(<%=userArea%> == "421000"){
+		setInterval('SaveDocument()',30000);
+	}
+	//删除加载层
+	if(<%=userArea%> == "410001"){
+		RemovLoadDiv();
+	}
+  }catch(e){
+    alert(e.description);									//显示出错误信息
+  }
+}
+
+function showGaiZhang(){
+	webform.WebOffice.AppendTools("11","盖章",24);
+}
+	
+//作用：退出iWebOffice
+function UnLoad(){
+  try{
+  if (!webform.WebOffice.WebClose()){
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg("关闭文档...");
+  }
+  }catch(e){alert(e.description);}
+}
+
+//作用：打开文档
+function LoadDocument(){
+  StatusMsg("正在打开文档...");
+  if (!webform.WebOffice.WebOpen()){  	//打开该文档    交互OfficeServer的OPTION="LOADFILE"
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg(webform.WebOffice.Status);
+  }
+}
+
+
+//保存文件
+function saveFile(type){
+	if(type=="sign"){
+		webform.WebOffice1.WebSave();
+		webform.WebOffice1.Alert("保存面签成功！");
+	}
+	if(type=="text"){
+		webform.WebOffice.WebSave();
+		//webform.WebOffice.Alert("保存正文成功！");
+	}
+}
+
+//作用：保存文档
+function SaveDocument(){//webform.WebOffice.WebSaveAsHtml()
+	if("false" == "<%=sxPDFControl%>" ){
+		//webform.WebOffice.WebSetMsgByName("MyDefine1","自定义变量值1");  //设置变量MyDefine1="自定义变量值1"，变量可以设置多个  在WebSave()时，一起提交到OfficeServer中
+		  if(webform.WebOffice.WebSave()&& webform.WebOffice.WebSaveImage()){
+			  StatusMsg(webform.WebOffice.Status);
+			     return true;
+		  }else{
+			  StatusMsg(webform.WebOffice.Status);
+			     return false;
+		  }
+	}else{
+		
+		//webform.WebOffice.WebSetMsgByName("MyDefine1","自定义变量值1");  //设置变量MyDefine1="自定义变量值1"，变量可以设置多个  在WebSave()时，一起提交到OfficeServer中
+		  if(webform.WebOffice.WebSave(true) && webform.WebOffice.WebSaveImage()){
+			  StatusMsg(webform.WebOffice.Status);
+			     return true;
+		  }else{
+			  StatusMsg(webform.WebOffice.Status);
+			     return false;
+		  }
+		}
+	
+}
+
+
+//作用：显示或隐藏痕迹[隐藏痕迹时修改文档没有痕迹保留]  true表示隐藏痕迹  false表示显示痕迹
+function ShowRevision(mValue){
+  if (mValue){
+     webform.WebOffice.WebShow(true);
+     StatusMsg("显示痕迹...");
+  }else{
+     webform.WebOffice.WebShow(false);
+     StatusMsg("隐藏痕迹...");
+  }
+}
+
+
+//作用：显示或隐藏痕迹[隐藏痕迹时修改文档有痕迹保留]  true表示隐藏痕迹  false表示显示痕迹
+function ShowRevision2(mValue){
+  if (mValue){
+     webform.WebOffice.WebObject.ShowRevisions=true;   //显示痕迹
+  }else{
+     webform.WebOffice.WebObject.ShowRevisions=false;  //隐藏痕迹
+  }
+}
+
+//作用：盖公章
+function AddOfficialSeal(){
+	
+	var validatePasswordSql = "select t.stamp_password from jyksy_user_stamp  t where t.user_id='"+<%=user_id%>+"'";
+	var sealPasswordurl = "setusersealpassword.jsp"
+		var sealpassword =  window.showModalDialog(sealPasswordurl,"","dialogWidth=326px;dialogHeight=110px;center:yes");
+		if(_pub.ajax.SelectSqlAjax(validatePasswordSql) != sealpassword){
+			alert("盖章密码不正确!");
+			return false;
+		}
+	var imageName = "jyksy_gz5.gif";
+	if(IsSpace(imageName)){
+		alert("请选择公章!");
+		return false;
+	}
+	try{
+	    webform.WebOffice.WebInsertImage('Image',imageName,true,4);   //交互OfficeServer的OPTION="INSERTIMAGE"  参数1表示标签名称  参数2表示图片文件名  参数3为true透明  false表示不透明  参数4为4表示浮于文字上方  5表示衬于文字下方
+	    StatusMsg(webform.WebOffice.Status);
+	  }catch(e){alert(e.description);}
+
+}
+
+
+//作用：获取痕迹
+function WebGetRevisions(){
+  var Rev = webform.WebOffice.WebObject.Revisions;		//获取痕迹对象
+  var Text="";
+
+  for (i = 1;i <= Rev.Count;i++){
+    Text=Text +"“"+ Rev.Item(i).Author+"”";
+    if (Rev.Item(i).Type=="1"){
+      Text=Text + '进行插入：'+Rev.Item(i).Range.Text+"\r\n";
+    }else if (Rev.Item(i).Type=="2"){
+      Text=Text + '进行删除：'+Rev.Item(i).Range.Text+"\r\n";
+    }
+	else {
+      Text=Text + '进行其他操作，操作内容：“'+Rev.Item(i).Range.Text+ '”；操作：“'+Rev.Item(i).FormatDescription+"”。\r\n";
+    }
+  }
+  alert("痕迹内容：\r\n\r\n"+Text);
+}
+
+//作用：刷新文档
+function WebReFresh(){
+  webform.WebOffice.WebReFresh();
+  StatusMsg("文档已刷新...");
+}
+
+
+//作用：打开版本
+function WebOpenVersion(){
+  webform.WebOffice.WebOpenVersion();  	//交互OfficeServer  列出版本OPTION="LISTVERSION"     调出版本OPTION="LOADVERSION"   <参考技术文档>
+  StatusMsg(webform.WebOffice.Status);
+}
+
+//作用：保存版本
+function WebSaveVersion(){
+  webform.WebOffice.WebSaveVersion();  	//交互OfficeServer的OPTION="SAVEVERSION"
+  StatusMsg(webform.WebOffice.Status);
+
+}
+
+//作用：保存当前版本
+function WebSaveVersionByFileID(){
+  var mText=window.prompt("请输入版本说明:","版本号:V");
+  if (mText==null){
+     mText="已修改版本.";
+  }
+  webform.WebOffice.WebSaveVersionByFileID(mText);  	//交互OfficeServer的OPTION="SAVEVERSION"  同时带FileID值   <参考技术文档>
+  StatusMsg(webform.WebOffice.Status);
+}
+
+
+//作用：填充模板
+function LoadBookmarks(){
+  StatusMsg("正在填充模扳...");
+  if (!webform.WebOffice.WebLoadBookmarks()){  	//交互OfficeServer的OPTION="LOADBOOKMARKS"
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg(webform.WebOffice.Status);
+  }
+}
+
+//作用：标签管理
+function WebOpenBookMarks(){
+  try{
+    webform.WebOffice.WebOpenBookmarks();  	//交互OfficeServer的OPTION="LISTBOOKMARKS"
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：设置书签值  vbmName:标签名称，vbmValue:标签值   标签名称注意大小写
+function SetBookmarks(vbmName,vbmValue){
+  if (!webform.WebOffice.WebSetBookmarks(vbmName,vbmValue)){
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg(webform.WebOffice.Status);
+  }
+}
+
+//作用：根据标签名称获取标签值  vbmName:标签名称
+function GetBookmarks(vbmName){
+  var vbmValue;
+  vbmValue=webform.WebOffice.WebGetBookmarks(vbmName);
+  return vbmValue;
+}
+//-------------------add套红-----------
+/**
+**套红模版返回
+**/
+function backTo2(returnObj){
+
+	 //设置金格控制可用
+	 if(typeof(window.parent.editOffice)=="function"){
+	    	window.parent.editOffice(webform.WebOffice);
+	 }
+	if(null != returnObj){//如果选择了套红模板
+		var iWebOffice = document.getElementsByName("WebOffice")[0];
+		iWebOffice.Template =  returnObj;                           //获取模板编号
+
+		if(iWebOffice.WebLoadTemplate()){                                //加载模板
+			try{
+				iWebOffice.WebObject.Bookmarks.Item("ti_content").Select();
+			}catch(e){}
+			if(iWebOffice.WebInsertFile()){                              //插入正文到Content标签
+				try{
+			    	var webObject = iWebOffice.WebObject;
+			    	if(typeof creator_operWebObject == "function"){			    		
+			    		creator_operWebObject(webObject);
+			    	}
+			    	
+			    }catch(e){}
+				StatusMsg(iWebOffice.Status);
+				//fcpubdata.webOfficeHadTaohong = "1";                     //成功套红。
+			}else{
+				StatusMsg(iWebOffice.Status);
+			}
+
+			if (iWebOffice.WebObject.Bookmarks.Exists("ti_fawen_hao")) {
+				window.parent.docheckoffice(iWebOffice);
+			}
+			
+		}else{
+			StatusMsg(iWebOffice.Status);
+		}	
+	} 	
+}
+
+
+function wordTemplateTaohong(){
+	
+	if(confirm("您确定要套红吗？注意,多次套红不会保存修改的内容!")){
+		//modified by zhou.luo in 2008-10-14 套红前不保存文档就可以在第二次套红的时候去掉第一次套的红。
+		//modified by zhou.luo 2008-12-09 套红前先设置红头书签为空，再删掉红头。先注释掉                              
+		openAlertWindows('windowId','../../../resources/plug/wordtemplate/hhWordtemplateviewlist.jsp?windowsId=windowId','选择套红模版',800,340,'25%','25%',closeAlertWindow);
+		//隐藏金格控件
+		jQuery("#webofficDiv").hide();
+	}
+}
+//显示金格控件
+function closeAlertWindow(){
+	jQuery("#webofficDiv").show();
+}
+//-------------------end套红-----------
+//作用：打印文档
+function WebOpenPrint(){
+  try{
+    webform.WebOffice.WebOpenPrint();
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：页面设置
+function WebOpenPageSetup(){
+   try{
+	if (webform.WebOffice.FileType==".doc"){
+	  webform.WebOffice.WebObject.Application.Dialogs(178).Show();
+	}
+	if(webform.WebOffice.FileType==".xls"){
+	  webform.WebOffice.WebObject.Application.Dialogs(7).Show();
+	}
+   }catch(e){alert(e.description);}
+}
+
+//作用：插入图片
+function WebOpenPicture(){
+  try{
+    webform.WebOffice.WebOpenPicture();
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：签名印章
+function WebOpenSignature(){
+  //alert("如果你要更安全签章,建议采用金格iSignature电子签章软件进行签章:\r\n下载地址http://www.goldgrid.cn/iSignature/Download.asp\r\n\r\n该软件是支持文档完整性保护、CA证书和数字签名技术的,\r\n是通过了<国家公安部和国家保密局>双重认证的安全电子签章产品!");
+  try{
+     webform.WebOffice.WebOpenSignature();  	//交互OfficeServer的 A签章列表OPTION="LOADMARKLIST"    B签章调出OPTION="LOADMARKIMAGE"    C确定签章OPTION="SAVESIGNATURE"    <参考技术文档>
+     StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+//作用：保存印章正文
+function webOfficeSaveSinature(){
+	try{
+	     webform.WebOffice.RecordID ="<%=mRecordID%>";
+		 webform.WebOffice.FileName ="<%=mRecordID%><%=mFileType%>";
+		 webform.WebOffice.WebSave(true);
+	  }catch(e){alert(e.description);}
+}
+//作用:同时在盖章时将正文另存一份
+function webOfficeCopy(){
+	//同时在盖章时将正文另存一份，点击公文传输按钮传过去的是无章的公文
+	  try{
+		webform.WebOffice.RecordID = "<%=mRecordID%>_ding";
+		webform.WebOffice.FileName = "<%=mRecordID%>_ding<%=mFileType%>" ;
+		webform.WebOffice.WebSave(true);
+	  }catch(e){alert(e.description);}
+}
+
+
+//作用：验证印章A
+function WebShowSignature(){
+  try{
+    webform.WebOffice.WebShowSignature();  	//交互OfficeServer的OPTION="LOADSIGNATURE"
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：验证印章B
+function WebCheckSignature(){
+  try{
+    var i=webform.WebOffice.WebCheckSignature();  	//交互OfficeServer的OPTION="LOADSIGNATURE"
+    alert("检测结果："+i+"\r\n 注释: (=-1 有非法印章) (=0 没有任何印章) (>=1 有多个合法印章)");
+    StatusMsg(i);
+  }catch(e){alert(e.description);}
+}
+
+//作用：存为本地文件
+function WebSaveLocal(){
+  try{
+    webform.WebOffice.WebSaveLocal();
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：打开本地文件
+function WebOpenLocal(){  
+  try{
+    webform.WebOffice.WebOpenLocal();
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：保存为HTML文档
+function WebSaveAsHtml(){
+  try{
+    if (webform.WebOffice.WebSaveAsHtml())  	//交互OfficeServer的OPTION="SAVEASHTML"
+    {
+      webform.HTMLPath.value="HTML/<%=mRecordID%>.htm";
+      window.open("<%=mHttpUrl%>"+ webform.HTMLPath.value);
+    }
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：保存为文档图片
+function WebSaveAsPage(){
+  try{
+    if (webform.WebOffice.WebSaveImage())  	//交互OfficeServer的OPTION="SAVEIMAGE"
+    {
+      webform.HTMLPath.value="HTMLIMAGE/<%=mRecordID%>.htm";
+      //window.open("<%=mHttpUrl%>"+ webform.HTMLPath.value);
+    }
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：关闭或显示工具 参数1表示工具条名称  参数2为false时，表示关闭  （名称均可查找VBA帮助）
+//参数2为true时，表示显示
+function WebToolsVisible(ToolName,Visible){
+  try{
+    webform.WebOffice.WebToolsVisible(ToolName,Visible);
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：禁止或启用工具 参数1表示工具条名称  参数2表示工具条铵钮的编号  （名称和编号均可查找VBA帮助）
+//参数3为false时，表示禁止  参数3为true时，表示启用
+function WebToolsEnable(ToolName,ToolIndex,Enable){
+  try{
+    webform.WebOffice.WebToolsEnable(ToolName,ToolIndex,Enable);
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+//作用：保护与解除  参数1为true表示保护文档  false表示解除保护
+function WebProtect(value){
+  try{
+    webform.WebOffice.WebSetProtect(value,"");  //""表示密码为空
+  }catch(e){alert(e.description);}
+}
+
+//作用：允许与禁止拷贝功能  参数1为true表示允许拷贝  false表示禁止拷贝
+function WebEnableCopy(value){
+  try{
+    webform.WebOffice.CopyType=value;
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：插入远程服务器图片
+function WebInsertImage(){
+  try{
+    webform.WebOffice.WebInsertImage('Image','GoldgridLogo.jpg',true,4);   //交互OfficeServer的OPTION="INSERTIMAGE"  参数1表示标签名称  参数2表示图片文件名  参数3为true透明  false表示不透明  参数4为4表示浮于文字上方  5表示衬于文字下方
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+}
+
+
+//作用：下载服务器文件到本地
+function WebGetFile(){
+  if (webform.WebOffice.WebGetFile("c:\\WebGetFile.doc","DownLoad.doc")){   //交互OfficeServer的OPTION="GETFILE"  参数1表示本地路径  参数2表示服务器文件名称
+    StatusMsg(webform.WebOffice.Status);
+  }else{
+    StatusMsg(webform.WebOffice.Status);
+  }
+  alert(webform.WebOffice.Status+"\r\n"+"文件放在c:\\WebGetFile.doc");
+}
+
+
+//作用：上传本地文件到服务器
+function WebPutFile(){
+  var mLocalFile=webform.WebOffice.WebOpenLocalDialog();
+  if (mLocalFile!=""){
+    alert(mLocalFile);
+    if (webform.WebOffice.WebPutFile(mLocalFile,"Test.doc")){   //交互OfficeServer的OPTION="PUTFILE"  参数1表示本地路径，可以任何格式文件  参数2表示服务器文件名称
+      StatusMsg(webform.WebOffice.Status);
+    }else{
+      StatusMsg(webform.WebOffice.Status);
+    }
+    alert(webform.WebOffice.Status);
+  }
+}
+
+
+//作用：打开远程文件
+function WebDownLoadFile(){
+  mResult=webform.WebOffice.WebDownLoadFile("http://www.goldgrid.com/Images/abc.doc","c:\\abc.doc");
+  if (mResult){
+    webform.WebOffice.WebOpenLocalFile("c:\\abc.doc");
+    alert("成功");
+  }else{
+    alert("失败");
+  }
+}
+
+//作用：取得服务器端时间，设置本地时间  [V6.0.1.5以上支持]
+function WebDateTime(){
+  mResult=webform.WebOffice.WebDateTime(true);   //交互OfficeServer的OPTION="DATETIME"   true表示返回并设置本地时间为服务器时间；false表示仅返回服务器时间
+  alert("提示：已经设置本地时间为 "+mResult);    //该功能主要用于在痕迹保留时读取服务器时间
+}
+
+
+//作用：表格生成及填充
+function WebSetWordTable(){
+  var mText="",mName="",iColumns,iCells,iTable;
+  //设置COMMAND为WORDTABLE
+  webform.WebOffice.WebSetMsgByName("COMMAND","WORDTABLE");   //设置变量COMMAND="WORDTABLE"，在WebSendMessage()时，一起提交到OfficeServer中
+  //发送到服务器上
+  //如果没有错误
+  if (webform.WebOffice.WebSendMessage()){                //交互OfficeServer的OPTION="SENDMESSAGE"
+	iColumns = webform.WebOffice.WebGetMsgByName("COLUMNS");  //取得列
+	iCells = webform.WebOffice.WebGetMsgByName("CELLS");      //取得行
+	iTable=webform.WebOffice.WebObject.Tables.Add(webform.WebOffice.WebObject.Application.Selection.Range,iCells,iColumns);   //生成表格
+	for (var i=1; i<=iColumns; i++)
+	{
+   	  for (var j=1; j<=iCells; j++)
+	  {
+		mName=i.toString()+j.toString();
+		mText=webform.WebOffice.WebGetMsgByName(mName);	 //取得OfficeServer中的表格内容
+		iTable.Columns(i).Cells(j).Range.Text=mText;   	//填充单元值
+	   }
+	}
+   }
+   StatusMsg(webform.WebOffice.Status);
+}
+
+
+//作用：获取文档Txt正文
+function WebGetWordContent(){
+  try{
+    alert(webform.WebOffice.WebObject.Content.Text);
+  }catch(e){alert(e.description);}
+}
+
+//作用：写Word内容
+function WebSetWordContent(){
+  var mText=window.prompt("请输入内容:","测试内容");
+  if (mText==null){
+     return (false);
+  }
+  else
+  {
+     //下面为显示选中的文本
+     //alert(webform.WebOffice.WebObject.Application.Selection.Range.Text);
+     //下面为在当前光标出插入文本
+     webform.WebOffice.WebObject.Application.Selection.Range.Text= mText+"\n";
+     //下面为在第一段后插入文本
+     //webform.WebOffice.WebObject.Application.ActiveDocument.Range(1).Text=(mText);
+  }
+}
+
+
+//作用：打印黑白文档
+function WebWordPrintBlackAndWhile(){
+   var i,n;
+
+   //图片变黑白
+   i=0;
+   n=webform.WebOffice.WebObject.Shapes.Count;
+   for (var i=1; i<=n; i++)
+   {
+      webform.WebOffice.WebObject.Shapes.Item(i).PictureFormat.ColorType=3;
+   }
+   i=0;
+   n=webform.WebOffice.WebObject.InlineShapes.Count;
+   for (var i=1; i<=n; i++)
+   {
+      webform.WebOffice.WebObject.InlineShapes.Item(i).PictureFormat.ColorType=3;
+   }
+
+   //文字变黑白
+   webform.WebOffice.WebObject.Application.Selection.WholeStory();
+   webform.WebOffice.WebObject.Application.Selection.Range.Font.Color = 0;
+}
+
+//作用：用Excel求和
+function WebGetExcelContent(){
+    webform.WebOffice.WebObject.Application.Sheets(1).Select;
+    webform.WebOffice.WebObject.Application.Range("C5").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "126";
+    webform.WebOffice.WebObject.Application.Range("C6").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "446";
+    webform.WebOffice.WebObject.Application.Range("C7").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "556";
+    webform.WebOffice.WebObject.Application.Range("C5:C8").Select;
+    webform.WebOffice.WebObject.Application.Range("C8").Activate;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "=SUM(R[-3]C:R[-1]C)";
+    webform.WebOffice.WebObject.Application.Range("D8").Select;
+    alert(webform.WebOffice.WebObject.Application.Range("C8").Text);
+}
+
+
+//作用：保护工作表单元
+function WebSheetsLock(){
+    webform.WebOffice.WebObject.Application.Sheets(1).Select;
+
+    webform.WebOffice.WebObject.Application.Range("A1").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "产品";
+    webform.WebOffice.WebObject.Application.Range("B1").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "价格";
+    webform.WebOffice.WebObject.Application.Range("C1").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "详细说明";
+    webform.WebOffice.WebObject.Application.Range("D1").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "库存";
+    webform.WebOffice.WebObject.Application.Range("A2").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "书签";
+    webform.WebOffice.WebObject.Application.Range("A3").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "毛笔";
+    webform.WebOffice.WebObject.Application.Range("A4").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "钢笔";
+    webform.WebOffice.WebObject.Application.Range("A5").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "尺子";
+
+    webform.WebOffice.WebObject.Application.Range("B2").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "0.5";
+    webform.WebOffice.WebObject.Application.Range("C2").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "樱花";
+    webform.WebOffice.WebObject.Application.Range("D2").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "300";
+
+    webform.WebOffice.WebObject.Application.Range("B3").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "2";
+    webform.WebOffice.WebObject.Application.Range("C3").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "狼毫";
+    webform.WebOffice.WebObject.Application.Range("D3").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "50";
+
+    webform.WebOffice.WebObject.Application.Range("B4").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "3";
+    webform.WebOffice.WebObject.Application.Range("C4").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "蓝色";
+    webform.WebOffice.WebObject.Application.Range("D4").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "90";
+
+    webform.WebOffice.WebObject.Application.Range("B5").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "1";
+    webform.WebOffice.WebObject.Application.Range("C5").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "20cm";
+    webform.WebOffice.WebObject.Application.Range("D5").Select;
+    webform.WebOffice.WebObject.Application.ActiveCell.FormulaR1C1 = "40";
+
+    //保护工作表
+    webform.WebOffice.WebObject.Application.Range("B2:D5").Select;
+    webform.WebOffice.WebObject.Application.Selection.Locked = false;
+    webform.WebOffice.WebObject.Application.Selection.FormulaHidden = false;
+    webform.WebOffice.WebObject.Application.ActiveSheet.Protect(true,true,true);
+
+    alert("已经保护工作表，只有B2-D5单元格可以修改。");
+}
+
+//作用：VBA套红
+function WebInsertVBA(){
+
+	//画线
+	var object=webform.WebOffice.WebObject;
+	var myl=object.Shapes.AddLine(100,60,305,60)
+	myl.Line.ForeColor=255;
+	myl.Line.Weight=2;
+	var myl1=object.Shapes.AddLine(326,60,520,60)
+	myl1.Line.ForeColor=255;
+	myl1.Line.Weight=2;
+
+	//object.Shapes.AddLine(200,200,450,200).Line.ForeColor=6;
+   	var myRange=webform.WebOffice.WebObject.Range(0,0);
+	myRange.Select();
+
+	var mtext="★";
+	webform.WebOffice.WebObject.Application.Selection.Range.InsertAfter (mtext+"\n");
+   	var myRange=webform.WebOffice.WebObject.Paragraphs(1).Range;
+   	myRange.ParagraphFormat.LineSpacingRule =1.5;
+   	myRange.font.ColorIndex=6;
+   	myRange.ParagraphFormat.Alignment=1;
+   	myRange=webform.WebOffice.WebObject.Range(0,0);
+	myRange.Select();
+	mtext="金格发[２００３]１５４号";
+	webform.WebOffice.WebObject.Application.Selection.Range.InsertAfter (mtext+"\n");
+	myRange=webform.WebOffice.WebObject.Paragraphs(1).Range;
+	myRange.ParagraphFormat.LineSpacingRule =1.5;
+	myRange.ParagraphFormat.Alignment=1;
+	myRange.font.ColorIndex=1;
+
+	mtext="金格电子政务文件";
+	webform.WebOffice.WebObject.Application.Selection.Range.InsertAfter (mtext+"\n");
+	myRange=webform.WebOffice.WebObject.Paragraphs(1).Range;
+	myRange.ParagraphFormat.LineSpacingRule =1.5;
+
+	//myRange.Select();
+	myRange.Font.ColorIndex=6;
+	myRange.Font.Name="仿宋_GB2312";
+	myRange.font.Bold=true;
+	myRange.Font.Size=50;
+	myRange.ParagraphFormat.Alignment=1;
+
+	//myRange=myRange=webform.WebOffice.WebObject.Paragraphs(1).Range;
+	webform.WebOffice.WebObject.PageSetup.LeftMargin=70;
+	webform.WebOffice.WebObject.PageSetup.RightMargin=70;
+	webform.WebOffice.WebObject.PageSetup.TopMargin=70;
+	webform.WebOffice.WebObject.PageSetup.BottomMargin=70;
+}
+
+//作用：套用模版定稿
+function WebInsertFile(){
+  var mDialogUrl = "Template/TemplateForm.jsp";
+  var mObject = new Object();
+      mObject.Template = "";
+      window.showModalDialog(mDialogUrl, mObject, "dialogHeight:200px; dialogWidth:360px;center:yes;scroll:no;status:no;");
+
+  //判断用户是否选择模板
+  if (mObject.Template==""){
+    StatusMsg("取消套用模");
+    return false;
+  }else{
+    SaveDocument();    //保存当前编辑的文档
+    webform.WebOffice.WebSetMsgByName("COMMAND","INSERTFILE");   //设置变量COMMAND="INSERTFILE"，在WebLoadTemplate()时，一起提交到OfficeServer中     <参考技术文档>
+    webform.WebOffice.Template=mObject.Template;                 //全局变量Template赋值，此示例读取服务器目录中模板，如读取数据库中模板，Template值为数据库中的模板编号，则上句代码不需要，如Template="1050560363767"，模板名称为“Word公文模板”，注：模板中有要标签Content，区分大小写，可以自行修改
+    if (webform.WebOffice.WebLoadTemplate()){                    //交互OfficeServer的OPTION="LOADTEMPLATE"
+       //SetBookmarks("Title","关于中间件研发工作会议通知");     //填充模板其它基本信息，如标题，主题词，文号，主送机关等
+       if (webform.WebOffice.WebInsertFile()){                   //填充公文正文   交互OfficeServer的OPTION="INSERTFILE"
+         StatusMsg(webform.WebOffice.Status);
+       }else{
+         StatusMsg(webform.WebOffice.Status);
+       }
+    }else{
+       StatusMsg(webform.WebOffice.Status);
+    }
+  }
+}
+
+//作用：保存定稿文件
+function WebUpdateFile(){
+  if (webform.WebOffice.WebUpdateFile()){                //交互OfficeServer的OPTION="UPDATEFILE"，类似WebSave()或WebSaveVersion()方法
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg(webform.WebOffice.Status);
+  }
+}
+
+
+
+//打印份数控制
+function WebCopysCtrlPrint(){
+	try{
+	  var mCopies,objPrint;
+	  objPrint = webform.WebOffice.WebObject.Application.Dialogs(88);     //打印设置对话框
+	  if (objPrint.Display==-1){
+	    mCopies=objPrint.NumCopies;    //取得需要打印份数
+	    webform.WebOffice.WebSetMsgByName("COMMAND","COPIES");
+	    webform.WebOffice.WebSetMsgByName("OFFICEPRINTS",mCopies.toString());   //设置变量OFFICEPRINTS的值，在WebSendMessage()时，一起提交到OfficeServer中
+	    webform.WebOffice.WebSendMessage();                               //交互OfficeServer的OPTION="SENDMESSAGE"
+	    if (webform.WebOffice.Status=="1") {
+	      alert("可以允许打印，注：该实例设置总文档打印份数2份");
+	      objPrint.Execute;
+	    }else{
+	      alert("已超出允许的打印份数");
+	      return false;
+	    }
+	  }
+	}catch(e){alert(e.description);}
+}
+
+
+//作用：导入Text
+function WebInportText(){
+    var mText;
+    webform.WebOffice.WebSetMsgByName("COMMAND","INPORTTEXT");  //设置变量COMMAND="INPORTTEXT"，在WebSendMessage()时，一起提交到OfficeServer中
+    if (webform.WebOffice.WebSendMessage()){                    //交互OfficeServer的OPTION="SENDMESSAGE"
+      mText=webform.WebOffice.WebGetMsgByName("CONTENT");       //取得OfficeServer传递的变量CONTENT值
+      webform.WebOffice.WebObject.Application.Selection.Range.Text=mText;
+      alert("导入文本成功");
+    }
+    StatusMsg(webform.WebOffice.Status);
+}
+
+
+//作用：导出Text
+function WebExportText(){
+    var mText=webform.WebOffice.WebObject.Content.Text;
+    webform.WebOffice.WebSetMsgByName("COMMAND","EXPORTTEXT");  //设置变量COMMAND="EXPORTTEXT"，在WebSendMessage()时，一起提交到OfficeServer中
+    webform.WebOffice.WebSetMsgByName("CONTENT",mText);         //设置变量CONTENT="mText"，在WebSendMessage()时，一起提交到OfficeServer中，可用于实现全文检索功能，对WORD的TEXT内容进行检索
+    if (webform.WebOffice.WebSendMessage()){                    //交互OfficeServer的OPTION="SENDMESSAGE"
+      alert("导出文本成功");
+    }
+    StatusMsg(webform.WebOffice.Status);
+}
+
+
+//作用：获取文档页数
+function WebDocumentPageCount(){
+    if (webform.WebOffice.FileType==".doc"){
+	var intPageTotal = webform.WebOffice.WebObject.Application.ActiveDocument.BuiltInDocumentProperties(14);
+	alert("文档页总数："+intPageTotal);
+    }
+    if (webform.WebOffice.FileType==".wps"){
+	var intPageTotal = webform.WebOffice.WebObject.PagesCount();
+	alert("文档页总数："+intPageTotal);
+    }
+}
+//作用：保存定稿文件
+function WebUpdateFile(){
+  if (webform.WebOffice.WebUpdateFile()){                //交互OfficeServer的OPTION="UPDATEFILE"，类似WebSave()或WebSaveVersion()方法
+     StatusMsg(webform.WebOffice.Status);
+  }else{
+     StatusMsg(webform.WebOffice.Status);
+  }
+}
+
+//接受文档中全部痕迹
+function WebAcceptAllRevisions(){
+  webform.WebOffice.WebObject.Application.ActiveDocument.AcceptAllRevisions();
+  //var mCount = webform.WebOffice.WebObject.Application.ActiveDocument.Revisions.Count;
+ // if(mCount>0){
+ //   return false;
+ // }else{
+ //   return true;
+ // }
+}
+
+//作用：签章锁定文件功能
+function WebSignatureAtReadonly(){
+  webform.WebOffice.WebSetProtect(false,"");                  //解除文档保护
+  webform.WebOffice.WebSetRevision(false,false,false,false);  //设置文档痕迹保留的状态  参数1:不显示痕迹  参数2:不保留痕迹  参数3:不打印时有痕迹  参数4:不显痕迹处理工具
+  try{
+    webform.WebOffice.WebOpenSignature();                     //交互OfficeServer的 A签章列表OPTION="LOADMARKLIST"    B签章调出OPTION="LOADMARKIMAGE"    C确定签章OPTION="SAVESIGNATURE"    <参考技术文档>    文档中要定义标签Manager，可以自行修改标签名称
+    StatusMsg(webform.WebOffice.Status);
+  }catch(e){alert(e.description);}
+  webform.WebOffice.WebSetProtect(true,"");                   //锁定文档
+}
+
+//作用：客户端和服务器端信息信息交互
+function WebSendInformation(){
+  var info = window.prompt("请输入要传到服务器处理页面上的内容:","参数内容");
+  if (info==null){return false}
+
+  webform.WebOffice.WebSetMsgByName("COMMAND","SELFINFO");		//设置变量COMMAND="SELFINFO"，用来在服务器端做判断，以进入处理自定义参数传递的代码。
+  webform.WebOffice.WebSetMsgByName("TESTINFO",info);			//自定义的一个参数"TESTINFO"，将info变量的信息设置到信息包中，以便传到后台。
+  if (webform.WebOffice.WebSendMessage()){						//向后台发信息包。交互OfficeServer的OPTION="SENDMESSAGE"。
+    info = webform.WebOffice.WebGetMsgByName("RETURNINFO");		//如果交互成功，接受服务器端返回的信息。
+	alert(info);
+  }
+  else{
+    StatusMsg(webform.WebOffice.Status);
+  }
+}
+</script>
+</head>
+<body bgcolor="#ffffff" onload="Load()" onunload="UnLoad()">  <!--引导和退出iWebOffice ../../../../iWebOffice2006/DocumentSave.jsp-->
+  <form name="webform" id="webform" method="post" action="iwebOffice2009.jsp?submit_flag=1" onsubmit="return SaveDocument();">  <!--保存iWebOffice后提交表单信息-->
+    <input type="hidden" name="RecordID" value="<%=mRecordID%>">
+    <input type="hidden" name="Template" value="<%=mTemplate%>">
+    <input type="hidden" name="FileType" value="<%=mFileType%>">
+    <input type="hidden" name="EditType" value="<%=mEditType%>">
+    <input type="hidden" name="HTMLPath" value="<%=mHTMLPath%>">
+ 	<div id="webofficDiv" style="z-index: 10">
+ 	<OBJECT id="WebOffice" height="100%" width="100%" classid="clsid:8B23EA28-2009-402F-92C4-59BE0E063499" codebase="../../../resources/plug/iWebOffice2009/iWebOffice2009.cab#version=10,7,0,0"></OBJECT>
+	</div>
+	<div id="seal_area" style="display: none">
+	<input id="insertimage" name="insertimage" type="button" class="cButton_4text" value="插入公章" onclick="AddOfficialSeal();"/>
+	</div>
+	</form>
+             
+            
+</body> 
+</html>

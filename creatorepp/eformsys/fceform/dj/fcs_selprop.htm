@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_exec(sCommand,buserface,vValue) {
+	pubDataSet.document.execCommand(sCommand,buserface,vValue) ;
+}
+function uf_open() {
+	SKDBListBox1.value = "宋体";
+	SKDBListBox2.value = "3";
+	SetButtonImage(FCButton6,"../images/ef_run_button_color.gif");
+}
+function fontColor() {
+	var obj ;
+	obj=pubDataSet;
+	var sColor;
+	var sInitColor=obj.color;
+	if (isSpace(sInitColor ))    	sInitColor="white"
+	if(typeof sInitColor=="object"){
+		var s=sInitColor.value;
+	}else{
+		var s=sInitColor;
+	}
+	sColor = dlgHelper.ChooseColorDlg(s);
+	sColor = sColor.toString(16);
+	if (sColor.length < 6) {
+		var sTempString = "000000".substring(0,6-sColor.length);
+		sColor = sTempString.concat(sColor);
+	}
+	obj.color="#"+sColor ;
+//	FCButton6.style.color = obj.color ;
+	//alert(FCButton6.style.color)
+	uf_exec('ForeColor','false',obj.color)
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" idtype="1" isfile="否" postop posleft window="无模式窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight="195" poswidth="300" entertype="修改" codeheader="BBB" mkbh caption="选中文本的属性框" type="LR" dj_sn="fcs_selprop" billtaborder="<root><taborder>SKDBListBox1</taborder><taborder>SKDBListBox2</taborder><taborder>cmdB</taborder><taborder>FCButton3</taborder><taborder>FCButton4</taborder><taborder>FCButton5</taborder><taborder>FCButton6</taborder></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" contxml="<root><label><id>Label1</id><id>Label2</id><id>Label3</id></label><listbox><id>SKDBListBox1</id><id>SKDBListBox2</id></listbox><button><id>cmdB</id><id>FCButton4</id><id>FCButton3</id><id>FCButton6</id><id>FCButton5</id></button></root>" BLONopen="uf_open()" center="居中"><BUTTON id=cmdB onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 12px; LEFT: 216px; WIDTH: 22px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 25px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick="bill_onclick(&quot;uf_exec('Bold')&quot;)">B</BUTTON><BUTTON id=FCButton4 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 12px; LEFT: 260px; WIDTH: 22px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 25px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8; TEXT-DECORATION: underline" onmovestart=moveStart() controltype="button" dropstyle="否" onclick="bill_onclick(&quot;uf_exec('Underline')&quot;)">U</BUTTON><BUTTON id=FCButton3 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 220px; WIDTH: 62px; FONT-FAMILY: ; POSITION: absolute; TOP: 131px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>关闭</BUTTON><SELECT id=SKDBListBox1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="FONT-SIZE: 12px; LEFT: 8px; WIDTH: 100px; POSITION: absolute; TOP: 25px; HEIGHT: 132px" onmovestart=moveStart() onchange="bill_onclick(&quot;uf_exec('FontName','false',SKDBListBox1.value)&quot;)" size=8 controltype="listbox"><OPTION value=Arial>Arial</OPTION><OPTION value="Arial Black">Arial Black</OPTION><OPTION value="Arial Narrow">Arial Narrow</OPTION><OPTION value=Basemic>Basemic</OPTION><OPTION value="Basemic Symbol">Basemic Symbol</OPTION><OPTION value="Basemic Times">Basemic Times</OPTION><OPTION value="Book Antiaua">Book Antiaua</OPTION><OPTION value="Bookman Old Style">Bookman Old Style</OPTION><OPTION value="Cemtury Bothic">Cemtury Bothic</OPTION><OPTION value="Comic sams MS">Comic sams MS</OPTION><OPTION value="Copperplate ">Copperplate</OPTION><OPTION value=Gothic>Gothic</OPTION><OPTION value="Copperplate ">Copperplate</OPTION><OPTION value=Gothic>Gothic</OPTION><OPTION value=Courier>Courier</OPTION><OPTION value="Courier New">Courier New</OPTION><OPTION value=FixedSyS>FixedSyS</OPTION><OPTION value=Garamond>Garamond</OPTION><OPTION value=Ceorgia>Ceorgia</OPTION><OPTION value=HarettemSchweiler>HarettemSchweiler</OPTION><OPTION value=Impact>Impact</OPTION><OPTION value="Kingsoft Phonetic">Kingsoft Phonetic</OPTION><OPTION value="Lucida console">Lucida console</OPTION><OPTION value="Lucida Sans ">Lucida Sans</OPTION><OPTION value=Unicod>Unicod</OPTION><OPTION value=Marlett>Marlett</OPTION><OPTION value="Microsoft sans ">Microsoft sans</OPTION><OPTION value=ser>ser</OPTION><OPTION value=MingLiU>MingLiU</OPTION><OPTION value=Modern>Modern</OPTION><OPTION value="Monotype corsive">Monotype corsive</OPTION><OPTION value="MS Sans serif">MS Sans serif</OPTION><OPTION value="Ms Serif">Ms Serif</OPTION><OPTION value="palatino Linotype">palatino Linotype</OPTION><OPTION value=PMingLiU>PMingLiU</OPTION><OPTION value=Roman>Roman</OPTION><OPTION value=Script>Script</OPTION><OPTION value="Small Fonts">Small Fonts</OPTION><OPTION value=Symbol>Symbol</OPTION><OPTION value=SyStem>SyStem</OPTION><OPTION value=Tahoma>Tahoma</OPTION><OPTION value=Terminal>Terminal</OPTION><OPTION value="Times New Roman">Times New Roman</OPTION><OPTION value="Trebucher MS">Trebucher MS</OPTION><OPTION value=Verdana>Verdana</OPTION><OPTION value=Webdings>Webdings</OPTION><OPTION value=Wingdings>Wingdings</OPTION><OPTION value="Wingdings 2">Wingdings 2</OPTION><OPTION value="Wingdings 3">Wingdings 3</OPTION><OPTION value=方正舒体>方正舒体</OPTION><OPTION value=方正姚体>方正姚体</OPTION><OPTION value=仿宋_GB2312>仿宋_GB2312</OPTION><OPTION value=黑体>黑体</OPTION><OPTION value=华文彩云>华文彩云</OPTION><OPTION value=华文细黑>华文细黑</OPTION><OPTION value=华文新魏>华文新魏</OPTION><OPTION value=华文行楷>华文行楷</OPTION><OPTION value=华文中宋>华文中宋</OPTION><OPTION value=楷体_GB2312>楷体_GB2312</OPTION><OPTION value=隶书>隶书</OPTION><OPTION value=宋体>宋体</OPTION><OPTION value=新宋体>新宋体</OPTION><OPTION value=幼体>幼体</OPTION></SELECT> 
+<DIV id=Label1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label1">字体</DIV>
+<DIV id=Label2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 119px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 7px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label1">大小</DIV><SELECT id=SKDBListBox2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 113px; WIDTH: 100px; FONT-FAMILY: ; POSITION: absolute; TOP: 24px; HEIGHT: 132px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() size=8 controltype="listbox" sql china temptext="默认&#13;&#10;1(8pt)&#13;&#10;2(10pt)&#13;&#10;3(12pt)&#13;&#10;4(14pt)&#13;&#10;5(18pt)&#13;&#10;6(24pt)&#13;&#10;7(36pt)" tempvalue="3&#13;&#10;1&#13;&#10;2&#13;&#10;3&#13;&#10;4&#13;&#10;5&#13;&#10;6&#13;&#10;7" check="1" onclick="bill_onclick(&quot;uf_exec('FontSize','true',SKDBListBox2.value)&quot;)"><OPTION value=3>默认</OPTION><OPTION value=1>1(8pt)</OPTION><OPTION value=2>2(10pt)</OPTION><OPTION value=3>3(12pt)</OPTION><OPTION value=4>4(14pt)</OPTION><OPTION value=5>5(18pt)</OPTION><OPTION value=6>6(24pt)</OPTION><OPTION value=7>7(36pt)</OPTION></SELECT><BUTTON id=FCButton6 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 14px; LEFT: 258px; WIDTH: 24px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 75px; HEIGHT: 26px; BACKGROUND-COLOR: #d4d0c8; TEXT-DECORATION: underline" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("fontColor()")'></BUTTON> 
+<DIV id=Label3 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 218px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 60px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label3">字体颜色</DIV><BUTTON id=FCButton5 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 12px; LEFT: 238px; WIDTH: 22px; FONT-STYLE: italic; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 25px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick="bill_onclick(&quot;uf_exec('Italic')&quot;)">I</BUTTON></DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT></body></html>

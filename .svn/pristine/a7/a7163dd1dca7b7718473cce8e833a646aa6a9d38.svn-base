@@ -1,0 +1,91 @@
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<script type="text/javascript" src="dialog.js"></script>
+		<script type="text/javascript" src="../template/template.js"></script>
+		<script type="text/javascript">document.write("<link href='../skin/"+config.Skin+"/dialog.css' type='text/css' rel='stylesheet'>");document.write("<title>"+lang["DlgTemplate"]+"</title>");function ok(){var gF=iframe_preview.document.body.getElementsByTagName("IMG");var l=gF.length;for(var i=0;i<l;i++){var s=gF[i].getAttribute("src",2);if((s.substring(0,1)!="/")&&(s.indexOf("://")== -1)){if(s.substring(0,3)=="../"){s=s.substr(3);}else{s="template/"+s;}s=cG(s);}gF[i].setAttribute("eWebEditor_Temp_Img_Url",s);}var html=iframe_preview.document.body.innerHTML;if(hK=="replace"){dialogArguments.setHTML(html,true);}else{dialogArguments.insertHTML(html);}if(l>0){var dR=dialogArguments.eWebEditor.document.getElementsByTagName("IMG");for(var i=0;i<dR.length;i++){var url=dR[i].getAttribute("eWebEditor_Temp_Img_Url",2);if(url){dR[i].src=url;dR[i].removeAttribute("eWebEditor_Temp_Img_Url");}}}window.returnValue=null;window.close();};function I(){lang.as(document);nA();kp(0);at();};function nA(){var html="";for(var i=0;i<config.Template.length;i++){html+="<div id='item_"+i+"' class='item' onclick='kp("+i+")'>"+config.Template[i][2]+"</div>";}divOption.innerHTML=html;};var gc= -1;function kp(n){if(gc==n){return;}var el;if(gc!= -1){el=document.getElementById("item_"+gc);el.className="item";}el=document.getElementById("item_"+n);el.className="itemselected";var oy=document.getElementById("iframe_preview");iframe_preview.location.replace("../template/"+config.Template[n][1]);gc=n;};function lY(){try{iframe_preview.document.body.runtimeStyle.zoom="50%";}catch(e){}};var hK="insert";function iV(aJ){if(hK==aJ){return;}if(aJ=="insert"){d_pos_insert.checked=true;d_pos_replace.checked=false;}else{d_pos_insert.checked=false;d_pos_replace.checked=true;}hK=aJ;}</script>
+		<style>
+.item {
+	padding: 0px 0px 0px 5px;
+	margin: 0px;
+	WHITE-SPACE: nowrap;
+	color: #000000;
+	background-color: #ffffff
+}
+
+.itemselected {
+	padding: 0px 0px 0px 5px;
+	margin: 0px;
+	WHITE-SPACE: nowrap;
+	color: #ffffff;
+	background-color: #0A246A
+}
+</style>
+	</HEAD>
+	<BODY onload="I()">
+		<table border=0 cellpadding=0 cellspacing=5 id=tabDialogSize>
+			<tr>
+				<td>
+					<table border=0 cellpadding=0 cellspacing=0 width="100%"
+						align=center>
+						<tr>
+							<td>
+								<table border=0 cellpadding=0 cellspacing=0 align=center>
+									<tr>
+										<td>
+											<span lang="DlgTemplateOption"></span>:
+										</td>
+										<td></td>
+										<td>
+											<span lang="DlgTemplatePreview"></span>:
+										</td>
+									</tr>
+									<tr>
+										<td vAlign=top noWrap>
+											<DIV id=divOption
+												style="BORDER-RIGHT: 1.5pt inset; PADDING-RIGHT: 0px; BORDER-TOP: 1.5pt inset; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; OVERFLOW: auto; BORDER-LEFT: 1.5pt inset; WIDTH: 150px; PADDING-TOP: 0px; BORDER-BOTTOM: 1.5pt inset; HEIGHT: 310px; BACKGROUND-COLOR: white">
+											</DIV>
+										</td>
+										<td width=10>
+											&nbsp;
+										</td>
+										<td vAlign=top>
+											<DIV id=divPreview
+												style="BORDER: 1.5pt inset; PADDING: 0px; VERTICAL-ALIGN: top; OVERFLOW: hidden; WIDTH: 410px; HEIGHT: 310px; BACKGROUND-COLOR: white">
+												<iframe id=iframe_preview src="blank.htm" width="100%"
+													height="100%" onload="lY()" frameborder=0 scrolling="auto"></iframe>
+											</DIV>
+										</td>
+									</tr>
+									<tr>
+										<td colspan=3>
+											<input type=radio checked id=d_pos_insert
+												onclick="iV('insert')">
+											<label for=d_pos_insert>
+												<span lang=DlgComInsertCursor></span>
+											</label>
+											&nbsp;
+											<input type=radio id=d_pos_replace onclick="iV('replace')">
+											<label for=d_pos_replace>
+												<span lang=DlgComInsertReplace></span>
+											</label>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td height=5></td>
+						</tr>
+						<tr>
+							<td noWrap align=right>
+								<input type=submit class="dlgBtnCommon" value='' id=Ok
+									onclick="ok()" lang=DlgBtnOK>
+								&nbsp;&nbsp;
+								<input type=button class="dlgBtnCommon" value=''
+									onclick="window.close();" lang=DlgBtnCancel>
+							</td>
+						</tr>
+					</table>
+	</BODY>
+</HTML>

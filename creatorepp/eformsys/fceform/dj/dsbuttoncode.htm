@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_open() {
+	
+	var obj=pubDataSet ;
+	
+	SetTextValue(obj.buttonname,FCDBedit2);
+	//SetTextValue(obj.fc_onclick,FCDBedit8);
+	BillEventHeadOpen(obj.fc_onclick,FCDBedit8);
+	/*
+	SetTextValue(obj.tempvalue,SKDBMemo5)
+	SetTextValue(obj.temptext,SKDBMemo1)
+	SetTextValue(obj.sql1,SKDBMemo6)
+	SetTextValue(obj.onclickopen,FCDBedit11)
+	BillEventHeadOpen(obj.onselchange,FCDBedit4) ;
+	BillEventHeadOpen(obj.onchange,FCDBedit5) ;
+	BillEventHeadOpen(obj.oninterchange,FCDBedit6)
+	BillEventHeadOpen(obj.onkeydown,FCDBedit7)
+	BillEventHeadOpen(obj.onclick,FCDBedit8)
+	
+	
+	SetCheckBoxPutValue(obj.blninput,SKDBcheckbox3)
+	SetCheckBoxPutValue(obj.blnempty,SKDBcheckbox4)
+	SetCheckBoxPutValue(obj.multiselect,SKDBcheckbox8)
+	SetCheckBoxPutValue(obj.href,SKDBcheckbox9)
+	if(IsSpace(obj.check)){
+		SetRadioValue(SKDBRadioGroup1,"1") ;
+	}else{
+		SetRadioValue(SKDBRadioGroup1,obj.check);
+	}
+
+	uf_hide() ; 
+	*/
+	
+	SetButtonImage(FCButton7,"../images/ef_run_button_ok.gif");
+	SetButtonImage(FCButton8,"../images/ef_run_button_close.gif");
+}
+
+function uf_ok() {
+	var obj=pubDataSet ;
+
+	
+	var slen=FCDBedit2.value.length;
+	//if(RepDqMarks(FCDBedit7) == false || RepDqMarks(FCDBedit8) == false || RepDqMarks(FCDBedit4) == false || RepDqMarks(FCDBedit6) == false || RepDqMarks(FCDBedit5) == false || RepDqMarks(FCDBedit11) == false) 
+	if(RepDqMarks(FCDBedit8) == false)
+	{
+		alert("不支持双引号!")
+		return;
+	}
+
+	var s=Trim(FCDBedit8.value);
+	if(s==""){
+		obj.fc_onclick="" ;
+	}else{
+		obj.fc_onclick="bill_onclick(\""+s+"\")";
+		//obj.fc_onclick="\""+s+"\"";
+	}
+	
+	/*
+	var s=Trim(FCDBedit4.value)
+	if(s==""){
+		obj.onselchange="" ;
+	}else{
+		obj.onselchange="bill_onclick(\""+s+"\")";
+	}
+	var s=Trim(FCDBedit6.value)
+	if(s==''){
+		obj.oninterchange=""
+	}else{
+		obj.oninterchange="bill_onclick(\""+s+"\")";
+	}
+	var s=Trim(FCDBedit5.value)
+	if(s==''){
+		obj.onchange="";
+	}else{
+		obj.onchange="bill_onclick(\""+s+"\")" ;
+	}
+	var s=Trim(FCDBedit7.value)
+	if(s==''){
+		obj.onkeydown="" ;
+	}else{
+		obj.onkeydown="bill_onclick(\""+s+"\")" ;
+	}
+	
+	var s=Trim(FCDBedit11.value)
+	obj.onclickopen=s
+	*/
+
+	if(IsSpace(FCDBedit2.value)){
+		obj.buttonname=""
+	}else{
+		obj.buttonname=FCDBedit2.value ;
+	}
+
+	window.returnValue = obj ;
+	window.close() ;
+}	
+
+</script>
+<script src='../js/fcopendj.js'></script>
+<script defer src='../js/fcsavedj.js'></script>
+<script src='../js/fcstring.js'></script>
+<script src='../js/fcnumdate.js'></script>
+<script src='../js/fcselfuse.js'></script>
+<script src='../js/fcbasecont.js'></script>
+<script defer src='../js/fcother.js'></script>
+<script defer src='../js/selectdate.js'></script>
+<link href=../css/tabstyle.css type=text/css rel=stylesheet>
+<script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script>
+<script language='vbscript' src='../js/fcmask.vbs'></script>
+<link type='text/css' rel='stylesheet' href='../css/shape.css'  />
+<script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  />
+<link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;" BLONopen="uf_open()" blmode="其他" center="居中" toolbar="不带工具栏" dj_sn="dsfccode" type="LR" caption="dsfccode" mkbh codeheader keyfield window="当前窗口" entertype="修改" posleft postop poswidth="386" posheight="330" isfile="否" idtype="1" billtaborder="<root></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:1;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" contxml="<root><checkbox><id>SKDBcheckbox3</id><id>SKDBcheckbox4</id><id>SKDBcheckbox8</id><id>SKDBcheckbox9</id></checkbox><label><id>Label6</id><id>Label7</id><id>Label5</id><id>Label8</id><id>Label9</id><id>Label11</id><id>Label12</id><id>Label15</id><id>Label16</id></label><textarea><id>SKDBMemo5</id><id>SKDBMemo6</id></textarea><shape><id>Shape2</id></shape><tab><id>PageControl1</id></tab><button><id>FCButton9</id><id>FCButton10</id><id>FCButton11</id><id>FCButton12</id><id>FCButton13</id><id>FCButton14</id></button><text><id>FCDBedit4</id><id>FCDBedit5</id><id>FCDBedit6</id><id>FCDBedit7</id><id>FCDBedit8</id><id>FCDBedit11</id></text></root>"><DIV class=tab-pane id=PageControl1 style="LEFT: 1px; WIDTH: 200px; POSITION: absolute; TOP: 1px; HEIGHT: 266px" IsHideTitle="undefined" showtype="luna">
+<DIV class=tab-page style="WIDTH: 374px; HEIGHT: 248px">
+<H2 class=tab>属性</H2><?xml:namespace prefix = v />
+
+<SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 7px; WIDTH: 41px; FONT-FAMILY: ; POSITION: absolute; TOP: 33px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label4">标&nbsp; 题</SPAN>
+<INPUT type=text id=FCDBedit2 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; FONT-SIZE: 12px; LEFT: 46px; BORDER-LEFT: dimgray 2px solid; WIDTH: 309px; BORDER-BOTTOM: silver 1px solid; POSITION: absolute; TOP: 28px; HEIGHT: 20px" CanSelect="false"></INPUT> 
+
+</DIV>
+<DIV class=tab-page style="WIDTH: 374px; HEIGHT: 248px">
+<H2 class=tab>事件</H2>
+<!--
+<SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 98px; FONT-FAMILY: ; POSITION: absolute; TOP: 92px; HEIGHT: 14px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">选择改变：</SPAN>
+<INPUT type=text id=FCDBedit4 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 259px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 86px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT>
+<SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 91px; FONT-FAMILY: ; POSITION: absolute; TOP: 115px; HEIGHT: 12px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label8" controltype="label">填写改变：</SPAN>
+<SPAN id=Label9 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 91px; FONT-FAMILY: ; POSITION: absolute; TOP: 139px; HEIGHT: 11px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label9" controltype="label">同时改变：</SPAN>
+<INPUT type=text id=FCDBedit5 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 259px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 134px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT>
+<INPUT type=text id=FCDBedit6 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 259px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 110px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT>
+<SPAN id=Label11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 38px; WIDTH: 44px; FONT-FAMILY: ; POSITION: absolute; TOP: 45px; HEIGHT: 9px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label11" controltype="label">按键：</SPAN>
+<INPUT type=text id=FCDBedit7 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 259px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 38px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT>
+-->
+
+<SPAN id=Label12 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 38px; WIDTH: 51px; FONT-FAMILY: ; POSITION: absolute; TOP: 68px; HEIGHT: 11px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label12" controltype="label">单击：</SPAN>
+<INPUT type=text id=FCDBedit8 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 260px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 62px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT>
+
+<!--
+<SPAN id=Label15 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 13px; WIDTH: 124px; FONT-FAMILY: ; POSITION: absolute; TOP: 163px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label9" controltype="label">打开表单：</SPAN>
+<INPUT type=text id=FCDBedit11 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 70px; BORDER-LEFT: dimgray 2px solid; WIDTH: 259px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 158px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" value controltype="text" china CanSelect="false"></INPUT> 
+-->
+<DIV id=Label16 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 73px; WIDTH: 78px; COLOR: #b2b2b2; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 18px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap value="Label16" controltype="label">事件代码（不支持双引号！）</DIV>
+
+<!--
+<BUTTON id=FCButton9 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 39px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit7)")' dropstyle="是"></BUTTON>
+<BUTTON id=FCButton10 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 160px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit11)")' dropstyle="是"></BUTTON>
+<BUTTON id=FCButton11 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 136px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit5)")' dropstyle="是"></BUTTON>
+<BUTTON id=FCButton12 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 112px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit6)")' dropstyle="是"></BUTTON>
+<BUTTON id=FCButton13 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 88px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit4)")' dropstyle="是"></BUTTON>
+-->
+<BUTTON id=FCButton14 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 330px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 63px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(FCDBedit8)")' dropstyle="是"></BUTTON>
+</DIV></DIV>
+<SCRIPT>var PageControl1 = new WebFXTabPane( document.getElementById( "PageControl1" ) );</SCRIPT>
+<BUTTON id=FCButton7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 213px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 271px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON><BUTTON id=FCButton8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 294px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 271px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onclick='bill_onclick("exitbill")' dropstyle="否"></BUTTON></DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT>       </body></html>

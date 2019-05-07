@@ -1,0 +1,2 @@
+-- Add/modify columns 
+alter table OA_DATA_RESOURCES modify RESOURCES_LOGO VARCHAR2(50);

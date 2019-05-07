@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="GB2312"?>
+<map-config>
+  <!--活动处理模板-->
+  <templates>
+    <transition-rule name="idToUsername" classname="com.chinacreator.workflow.business.activity.UserTransitionRule"/>
+    <transition-rule name="idToManager" classname="com.chinacreator.workflow.business.activity.ManagerTransitionRule"/>
+    <transition-rule name="dependonUser" classname="com.chinacreator.workflow.business.activity.ControlUserTransitionRule" businessid="id" dependControlName="dependControlName"/>
+  </templates>
+  <!--千万千万,模板一个都不能删-->
+  <templates>
+    <template name="NoTransitionData" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate" flag="Ispassed">
+    </template>
+	<template name="FenFaTransitionData" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate" flag="Ispassed">
+		 <transition fromName="createman" toName="dynamicUsername" ruleName="idToUsername"/>
+    </template>
+    <template name="DepTransitionData" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate" flag="Ispassed">
+         <transition fromName="performmanid" toName="dynamicUsername" ruleName="dependonUser"/>
+    </template>
+
+	<!--模块上线用到的模板-->
+    <template name="AllTransitionData1" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="performmanid" toName="dynamicUsername" ruleName="idToUsername"/>
+        <transition fromName="managermemo1" toName="memo"/>
+		<transition fromName="ChangZhangConclusion" toName="flag"/>
+    </template>
+	<template name="AllTransitionData2" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="leaderid" toName="leader" ruleName="idToUsername"/>
+        <transition fromName="deptmemo1" toName="memo"/>
+        <transition fromName="BuMenConclusion" toName="flag"/>
+    </template>
+	<template name="AllTransitionData" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="performmanid" toName="dynamicUsername" ruleName="idToUsername"/>
+        <transition fromName="deptmemo1" toName="memo"/>
+        <transition fromName="BuMenConclusion" toName="flag"/> 
+    </template>
+	<!--end-->
+
+	<!--发文用到的模板-->
+	<!--部门模板-->
+	<template name="AllTransitionData_fw_init" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="deptdealmanid" toName="deptdealman" ruleName="idToUsername"/>	
+    </template>
+	<!--部门模板-->
+	<template name="AllTransitionData_fw_bm" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="userNameid" toName="userName" ruleName="idToUsername"/>
+        <transition fromName="deptmemo1" toName="memo"/>
+        <transition fromName="BuMenConclusion" toName="flag"/>
+		<transition fromName="deptman" toName="createman"/>
+        <transition fromName="deptdate" toName="createdate"/>		
+    </template>
+    <!--企业处模板-->
+	<template name="AllTransitionData_fw_qyc" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="companymemo1" toName="memo"/>
+		<transition fromName="companyman" toName="createman"/>
+        <transition fromName="companydate" toName="createdate"/>		
+    </template>
+    <!--办公室秘书模板-->
+	<template name="AllTransitionData_fw_bgs" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+	    <transition fromName="userNameid" toName="userName" ruleName="idToUsername"/>
+		<transition fromName="senderNameid" toName="senderName" ruleName="idToUsername"/>
+        <transition fromName="workmemo1" toName="memo"/>
+        <transition fromName="secretaryNotion" toName="flag"/>
+		<transition fromName="workman" toName="createman"/>
+        <transition fromName="workdate" toName="createdate"/>		
+    </template>
+    <!--会签模板-->
+	<template name="AllTransitionData_fw_hq" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="auditmemo1" toName="memo"/>
+		<transition fromName="auditman" toName="createman"/>
+        <transition fromName="auditdate" toName="createdate"/>		
+    </template>
+    <!--签发模板-->
+	<template name="AllTransitionData_fw_qf" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="issuememo1" toName="memo"/>
+		<transition fromName="issueman" toName="createman"/>
+        <transition fromName="issuedate" toName="createdate"/>		
+    </template>
+	<!--分发查看模板-->
+	<template name="AllTransitionData_fw_ffck" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+	    <transition fromName="receiverid" toName="receiver" ruleName="idToUsername"/>        	
+    </template>
+	<!--end-->
+
+	<!--收文使用模板-->
+	<!--办公室审核-->
+	<template name="AllTransitionData_sw_bgs" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="piShiNameid" toName="piShiName" ruleName="idToUsername"/>
+		<transition fromName="yueWenNameid" toName="yueWenName" ruleName="idToUsername"/>
+		<transition fromName="yueBanNameid" toName="yueBanName" ruleName="idToUsername"/>
+        <transition fromName="workmemo1" toName="memo"/>
+		<transition fromName="workman" toName="createman"/>
+        <transition fromName="workdate" toName="createdate"/>		
+    </template>
+
+	<!--领导批示--> 
+	<template name="AllTransitionData_sw_ldps" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="piShiNameid" toName="piShiName" ruleName="idToUsername"/>
+		<transition fromName="yueWenNameid" toName="yueWenName" ruleName="idToUsername"/>
+		<transition fromName="yueBanNameid" toName="yueBanName" ruleName="idToUsername"/>
+        <transition fromName="auditmemo1" toName="memo"/>
+		<transition fromName="auditman" toName="createman"/>
+        <transition fromName="auditdate" toName="createdate"/>		
+    </template>
+
+	<!--领导阅文--> 
+	<template name="AllTransitionData_sw_yw" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="piShiNameid" toName="piShiName" ruleName="idToUsername"/>
+		<transition fromName="yueWenNameid" toName="yueWenName" ruleName="idToUsername"/>
+		<transition fromName="yueBanNameid" toName="yueBanName" ruleName="idToUsername"/>
+        <transition fromName="readmemo1" toName="memo"/>
+		<transition fromName="readman" toName="createman"/>
+        <transition fromName="readdate" toName="createdate"/>		
+    </template>
+
+	<!--部门阅办--> 
+	<template name="AllTransitionData_sw_yb" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="piShiNameid" toName="piShiName" ruleName="idToUsername"/>
+		<transition fromName="yueWenNameid" toName="yueWenName" ruleName="idToUsername"/>
+		<transition fromName="yueBanNameid" toName="yueBanName" ruleName="idToUsername"/>
+        <transition fromName="deptmemo1" toName="memo"/>
+		<transition fromName="deptman" toName="createman"/>
+        <transition fromName="deptdate" toName="createdate"/>		
+    </template>
+
+	<!--电话维修使用模板 电话安装-->
+	<!--派单用到的模板-->
+	<template name="AllTransitionData_tel_wx_pd" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="accepterid" toName="accepter" ruleName="idToUsername"/>	
+    </template>
+    
+	<!--电话安装使用模板 -->
+	<template name="AllTransitionData_tel_az_init" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+		<transition fromName="deptmanid" toName="deptman" ruleName="idToUsername"/>	
+    </template>
+	<!--申请部门审批用到的模板-->
+	<template name="AllTransitionData_tel_az_sqsp" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="selfdeptmemo1" toName="memo"/>
+        <transition fromName="result" toName="flag"/>
+		<transition fromName="requestdeptman" toName="createman"/>
+        <transition fromName="requestdeptdate" toName="createdate"/>		
+    </template>
+
+	<!--信息技术部审批用到的模板-->
+	<template name="AllTransitionData_tel_az_xxsp" description="用于没有控制数据的活动,或没有需要转换参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+        <transition fromName="tecdeptmemo1" toName="memo"/>
+        <transition fromName="result" toName="flag"/>
+		<transition fromName="installdeptman" toName="createman"/>
+        <transition fromName="installdeptdate" toName="createdate"/>		
+    </template>
+
+    <template name="Dispatch_CreatemanManagerData" description="用于取得一个用户的部门领导控制参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+            <transition fromName="createman" toName="managerAuditUsername" ruleName="managerToId"/>
+    </template>
+    <template name="Dispatch_CreatemanData" description="用于取得一个用户的控制参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+            <transition fromName="createman" toName="checkedUsername"/>
+    </template>
+    <template name="Dispatch_OneSelectUserData_HuiQian" description="用于选择一个用户的控制参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+            <transition fromName="performmanid" toName="dynamicUsername" ruleName="idToUsername"/>
+    </template>
+    <template name="Dispatch_OneSelectUserData_ZONGHeChuLi" flag="XuanZe" description="用于选择一个用户的控制参数的活动" classname="com.chinacreator.workflow.business.activity.BaseArchivesTemplate">
+            <selector name="XuanZe">
+               <transition value="HuiQian" fromName="performmanid" toName="signUsername" ruleName="usernameToId"/>
+               <transition value="QianFa" fromName="performmanid" toName="managerSignUsername" ruleName="usernameToId"/>
+            </selector>
+    </template>
+  </templates>
+
+  <!--公文处理 发文 -->
+  <action name="FWNiGao" controlname="拟稿" template="AllTransitionData_fw_init"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+     <selector name="" defaultName="trans_flag" defaultValue="待部门领导审稿"/>
+  </action>
+
+  <action name="FWBuMenShenHe" controlname="部门领导审稿" template="AllTransitionData_fw_bm"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+	 <selector name="departConclusion">
+         <transition applyValue="toSecretary" name="trans_flag" value="待办公室秘书核稿"/>
+         <transition applyValue="toQiGuanChu" name="trans_flag" value="待企业处核稿"/>
+		 <transition applyValue="other" name="trans_flag" value="待调整"/>
+     </selector>
+  </action>
+
+  <action name="FWCL_BMYJ" controlname="处理部门领导意见" template="AllTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+    <selector name="giveUp">
+         <transition applyValue="yes" name="trans_flag" value="弃稿"/>
+         <transition applyValue="no" name="trans_flag" value="待部门领导审稿"/>
+     </selector>
+  </action>
+
+  <action name="FWQiYeChuHeGao" controlname="企业处核稿" template="AllTransitionData_fw_qyc"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待处理企业处意见"/>
+  </action>
+
+  <action name="FWCL_QYCYJ" controlname="处理企业处核稿意见" template="NoTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+     <selector name="giveUp">
+         <transition applyValue="yes" name="trans_flag" value="弃稿"/>
+         <transition applyValue="no" name="trans_flag" value="待办公室秘书核稿"/>
+     </selector>
+  </action>
+
+  <action name="FWHeGao" controlname="办公室秘书核稿" template="AllTransitionData_fw_bgs" classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="待处理秘书意见"/>
+  </action>
+
+  <action name="FWCL_BGSYJ" controlname="处理秘书意见" template="NoTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+     <selector name="giveUp">
+         <transition applyValue="yes" name="trans_flag" value="弃稿"/>
+         <transition applyValue="no" name="trans_flag" value="已处理秘书意见"/>
+     </selector>
+  </action>
+
+  <action name="FWHuiQian" controlname="会签" classname="com.chinacreator.workflow.archives.DispatchControlExecute"  template="AllTransitionData_fw_hq" conditionClassname="com.chinacreator.workflow.archives.SignConditionExecute">
+	 <selector name="" defaultName="trans_flag" defaultValue="已会签"/>
+  </action>
+
+  <action name="FWCL_HQYJ" controlname="处理会签意见" template="NoTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+     <selector name="giveUp">
+         <transition applyValue="yes" name="trans_flag" value="弃稿"/>
+         <transition applyValue="no" name="trans_flag" value="待签发"/>
+     </selector>
+  </action>
+  
+  <action name="FWQianFa" controlname="签发" classname="com.chinacreator.workflow.archives.DispatchControlExecute" template="AllTransitionData_fw_qf">
+	<selector name="" defaultName="trans_flag" defaultValue="待处理签发意见"/>
+  </action>
+
+  <action name="FWCL_QFYJ" controlname="处理签发意见" template="NoTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+     <selector name="giveUp">
+         <transition applyValue="yes" name="trans_flag" value="弃稿"/>
+         <transition applyValue="no" name="trans_flag" value="待打印"/>
+     </selector>
+  </action>
+
+  <action name="FWDaYin" controlname="打印" template="NoTransitionData" classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="待校对"/>
+  </action>
+
+  <action name="FWJiaoDui" controlname="校对" template="NoTransitionData"  classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="已校对"/>
+  </action>
+
+  <action name="FWGaiZhang" controlname="盖章" template="NoTransitionData" classname="com.chinacreator.workflow.archives.DispatchControlExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="已盖章"/>
+  </action>  
+
+  <action name="FWFenFa" controlname="分发" template="NoTransitionData" classname="com.chinacreator.workflow.archives.DispatchControlExecute" conditionClassname="com.chinacreator.workflow.archives.PrintConditionExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="已分发"/>
+  </action>
+
+  <action name="FWChaKan" controlname="查看" template="AllTransitionData_fw_ffck" classname="com.chinacreator.workflow.archives.DispatchControlExecute" conditionClassname="com.chinacreator.workflow.archives.PrintConditionExecute">
+	<selector name="" defaultName="trans_flag" defaultValue="已分发"/>
+  </action>
+  
+  <!--发文流程 AutoDocument-mapping-->
+  <!--公文处理 发文 拟稿-->
+  <autoweb name="FormFWNiGao" redirect="false" path="/archives/dispatch/FormFWNiGao"/>
+
+  <!--公文处理 发文 拟稿人处理部门领导意见-->
+  <autoweb name="FormFWCL_BMYJ" redirect="false" path="/archives/dispatch/FormFWCL_BMYJ"/>
+  <!--公文处理 发文 拟稿人处理企业处核稿-->
+  <autoweb name="FormFWCL_QYCYJ" redirect="false" path="/archives/dispatch/FormFWCL_QYCYJ"/>
+  <!--公文处理 发文 拟稿人处理秘书意见-->
+  <autoweb name="FormFWCL_BGSYJ" redirect="false" path="/archives/dispatch/FormFWCL_BGSYJ"/>
+  <!--公文处理 发文 拟稿人处理会签意见-->
+  <autoweb name="FormFWCL_HQYJ" redirect="false" path="/archives/dispatch/FormFWCL_HQYJ"/>
+  <!--公文处理 发文 拟稿人处理签发意见-->
+  <autoweb name="FormFWCL_QFYJ" redirect="false" path="/archives/dispatch/FormFWCL_QFYJ"/>   
+  <!--公文处理 发文 企业处核稿-->
+  <autoweb name="FormFWQiYeChuHeGao" redirect="false" path="/archives/dispatch/FormFWQiYeChuHeGao"/>
+  <!--公文处理 发文 部门领导审稿-->
+  <autoweb name="FormFWBuMenShenHe" redirect="false" path="/archives/dispatch/FormFWBuMenShenHe"/>  
+  <!--公文处理 发文 办公室秘书核稿-->
+  <autoweb name="FormFWHeGao" redirect="false" path="/archives/dispatch/FormFWHeGao"/>
+  <!--公文处理 发文 会签-->
+  <autoweb name="FormFWHuiQian" redirect="false" path="/archives/dispatch/FormFWHuiQian"/>
+  <!--公文处理 发文 签发-->
+  <autoweb name="FormFWQianFa" redirect="false" path="/archives/dispatch/FormFWQianFa"/>
+  <!--公文处理 发文 打印-->
+  <autoweb name="FormFWDaYin" redirect="false" path="/archives/dispatch/FormFWDaYin"/>
+  <!--公文处理 发文 校对-->
+  <autoweb name="FormFWJiaoDui" redirect="false" path="/archives/dispatch/FormFWJiaoDui"/>
+  <!--公文处理 发文 盖章-->
+  <autoweb name="FormFWGaiZhang" redirect="false" path="/archives/dispatch/FormFWGaiZhang"/>
+  <!--公文处理 发文 分发-->
+  <autoweb name="FormFWFenFa" redirect="false" path="/archives/dispatch/FormFWFenFa"/>
+  <!--公文处理 发文 分发查看-->
+  <autoweb name="FormFWFenFa_lookover" redirect="false" path="/archives/dispatchinfo_lookover"/>
+
+  <!--收文流程 Action-mapping-->
+  <action name="SWDengJi" controlname="收文登记" username="dynamicUsername" template="AllTransitionData" classname="com.chinacreator.workflow.archives.ReceiveControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待办公室审核"/>
+  </action>
+
+  <action name="SWBangGongShi" controlname="办公室审核"   template="AllTransitionData_sw_bgs"
+  classname="com.chinacreator.workflow.archives.ReceiveControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待综合处理"/>
+  </action>
+
+  <action name="SWZongHeChuLi" controlname="综合处理"  template="AllTransitionData_sw_bgs"  classname="com.chinacreator.workflow.archives.ReceiveControlExecute"
+  conditionClassname="com.chinacreator.workflow.archives.ReadConditionExecute">
+  </action>
+
+  <action name="SWLingDaoPiShi" controlname="领导批示"  template="AllTransitionData_sw_ldps"  
+  classname="com.chinacreator.workflow.archives.ReceiveControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待综合处理"/>
+  </action> 
+
+  <action name="SWLingDaoYueWen" controlname="领导阅文"  template="AllTransitionData_sw_yw"
+  classname="com.chinacreator.workflow.archives.ReceiveControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待综合处理"/>
+  </action>
+
+  <action name="SWBuMenYueBan" controlname="部门阅办"  template="AllTransitionData_sw_yb"
+  classname="com.chinacreator.workflow.archives.ReceiveControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待综合处理"/>
+  </action>
+  
+  <!--收文流程 AutoDocument-mapping-->
+  <!--草稿,点击完成后,启动流程,进入待办公室审核状态-->
+  <autoweb name="FormSWDengJi" redirect="false"  path="/archives/receive/FormSWDengJi" />
+  <!--办公室审核,填写办公室意见,点击保存,进入待综合处理状态-->
+  <autoweb name="FormSWBangGongShi" redirect="false"  path="/archives/receive/FormSWBangGongShi" />
+  <!--收文综合处理,选择流程走向(领导,传阅,承办部门草稿,归档)填写意见 选择不同的流程后,处于不同状态-->
+  <autoweb name="FormSWZongHeChuLi" redirect="false" path="/archives/receive/FormSWZongHeChuLi"/>
+  <!--领导批示,同意/不同意 填写意见,保存,进入待综合处理状态-->
+  <autoweb name="FormSWLingDaoPiShi" redirect="false" path="/archives/receive/FormSWLingDaoPiShi"/>
+  <!--部门阅办, 填写承办意见,保存,进入待综合处理状态-->
+  <autoweb name="FormSWBuMenYueBan" redirect="false" path="/archives/receive/FormSWBuMenYueBan"/>
+  <!--领导阅文, 填写传阅意见,保存,进入待综合处理状态-->
+  <autoweb name="FormSWLingDaoYueWen" redirect="false" path="/archives/receive/FormSWLingDaoYueWen"/>
+
+
+  <!--申请上线流程 Action-mapping-->
+  <action name="InitBusiness" controlname="提出申请" username="dynamicUsername" template="AllTransitionData" classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待部长审批"/>
+  </action>
+
+  <action name="BuZhangShenPiBusiness" controlname="部长审批"   template="AllTransitionData2"
+  classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="BuMenConclusion" >
+	   <transition applyValue="同意" name="trans_flag" value="待验收"/>
+	   <transition applyValue="不同意" name="trans_flag" value="待调整"/>
+	   <transition applyValue="厂领导审批" name="trans_flag" value="待厂长审批"/>
+	</selector>
+  </action>
+
+  <action name="LingDaoShenPiBusiness" controlname="厂长审批"  template="AllTransitionData1"  classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="ChangZhangConclusion" >
+	   <transition applyValue="同意" name="trans_flag" value="待验收"/>
+	   <transition applyValue="不同意" name="trans_flag" value="待调整"/>
+	</selector>
+  </action>
+
+  <action name="TiaoZhengBusiness" controlname="调整申请"  template="AllTransitionData"  
+  classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="QiGaoChoice" > 
+	   <transition applyValue="是" name="trans_flag" value="弃稿"/>
+	   <transition applyValue="否" name="trans_flag" value="待部长审批"/>
+	</selector>    
+  </action> 
+
+  <action name="QiGaoBusiness" controlname="弃稿"  template="NoTransitionData"
+  classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="已弃稿"/>
+  </action>
+
+  <action name="YanShouBusiness" controlname="验收"  template="AllTransitionData"
+  classname="com.chinacreator.workflow.archives.AuditControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="已验收"/>
+  </action>
+  
+  <!--申请流程 AutoDocument-mapping-->
+  <!--草稿,点击完成后,启动流程,进入待部长审批-->
+  <autoweb name="Init" redirect="false"  path="/archives/audit/Init" />
+  <!--部长审批,点击保存,进入待厂长审批 或者其他状态-->
+  <autoweb name="BuZhangShenPi" redirect="false"  path="/archives/audit/BuZhangShenPi" />
+  <!--厂长审批,选择不同的流程后,处于不同状态-->
+  <autoweb name="LingDaoShenPi" redirect="false" path="/archives/audit/LingDaoShenPi"/>
+  <!--调整申请,同意/不同意弃稿 -->  
+  <autoweb name="TiaoZheng" redirect="false" path="/archives/audit/TiaoZheng"/>
+  <!--弃稿, 弃稿-->
+  <autoweb name="QiGao" redirect="false" path="/archives/audit/QiGao"/>
+  <!--验收, 验收,流程走完-->
+  <autoweb name="YanShou" redirect="false" path="/archives/audit/YanShou"/>
+
+
+  <!--电话维修流程 Action-mapping-->
+  <action name="WXShenQing" controlname="提出申请" username="dynamicUsername" template="AllTransitionData" classname="com.chinacreator.workflow.archives.TeleControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待派单"/>
+  </action>
+
+  <action name="WXPaiDan" controlname="派单"   template="AllTransitionData_tel_wx_pd"
+  classname="com.chinacreator.workflow.archives.TeleControlExecute">
+     <selector name="" defaultName="trans_flag" defaultValue="待登记"/>
+  </action>
+
+  <action name="WXDengJi" controlname="结果登记"  template="AllTransitionData1"  classname="com.chinacreator.workflow.archives.TeleControlExecute">
+     <selector name="" defaultName="trans_flag" defaultValue="已登记"/>
+  </action>
+  
+  <!--电话维修流程 AutoDocument-mapping-->
+  <!--草稿,点击完成后,启动流程,进入派单-->
+  <autoweb name="FORMWXShenQing" redirect="false"  path="/archives/telrepair/FORMWXShenQing" />
+  <!--派单,点击保存,进入登记 -->
+  <autoweb name="FORMWXPaiDan" redirect="false"  path="/archives/telrepair/FORMWXPaiDan" />
+  <!--登记,办结-->
+  <autoweb name="FORMWXDengJi" redirect="false" path="/archives/telrepair/FORMWXDengJi"/>
+
+
+  <!--电话  安装  流程 Action-mapping-->
+  <action name="AZShenQing" controlname="提出申请"  template="AllTransitionData_tel_az_init" classname="com.chinacreator.workflow.archives.InstallTeleInfo">
+    <selector name="installType" >
+	   <transition applyValue="电信电话" name="trans_flag" value="待申请部门审批"/>
+	   <transition applyValue="内部电话" name="trans_flag" value="待信息技术部审批"/>
+	</selector>
+  </action>
+
+  <action name="AZBuMenShenPi" controlname="申请人部门审批"   template="AllTransitionData_tel_az_sqsp"
+  classname="com.chinacreator.workflow.archives.InstallTeleControlExecute">
+    <selector name="result" >
+	   <transition applyValue="同意" name="trans_flag" value="待信息技术部审批"/>
+	   <transition applyValue="不同意" name="trans_flag" value="办结"/>
+	</selector>
+  </action>
+
+  <action name="AZJiShuShenPi" controlname="信息技术部审批"  template="AllTransitionData_tel_az_xxsp"  classname="com.chinacreator.workflow.archives.InstallTeleControlExecute">
+    <selector name="result" >
+	   <transition applyValue="同意" name="trans_flag" value="待派单"/>
+	   <transition applyValue="不同意" name="trans_flag" value="办结"/>
+	</selector>
+  </action>
+
+  <action name="AZPaiDan" controlname="派单"  template="AllTransitionData_tel_wx_pd"  
+  classname="com.chinacreator.workflow.archives.InstallTeleControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="待登记"/>
+  </action> 
+
+  <action name="AZDengJi" controlname="结果登记"  template="AllTransitionData"
+  classname="com.chinacreator.workflow.archives.InstallTeleControlExecute">
+    <selector name="" defaultName="trans_flag" defaultValue="办结"/>
+  </action>
+  
+  <!--电话  安装  流程 AutoDocument-mapping-->
+  <!--草稿,点击完成后,启动流程,进入申请人部门审批-->
+  <autoweb name="FORMAZShenQing" redirect="false"  path="/archives/telinstall/FORMAZShenQing" />
+  <!--申请人部门审批,点击保存,进入信息技术部审批 或者其他状态-->
+  <autoweb name="FORMAZBuMenShenPi" redirect="false"  path="/archives/telinstall/FORMAZBuMenShenPi" />
+  <!--信息技术部审批,进入派单-->
+  <autoweb name="FORMAZJiShuShenPi" redirect="false" path="/archives/telinstall/FORMAZJiShuShenPi"/>
+  <!--派单,进入登记 -->  
+  <autoweb name="FORMAZPaiDan" redirect="false" path="/archives/telinstall/FORMAZPaiDan"/>
+  <!--验收, 验收,流程走完-->
+  <autoweb name="FORMAZDengJi" redirect="false" path="/archives/telinstall/FORMAZDengJi"/>
+
+
+</map-config>

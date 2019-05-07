@@ -1,0 +1,1 @@
+update oa_md_columns c set c.column_name = '正文' where c.column_code = 'T_ZW_ID';

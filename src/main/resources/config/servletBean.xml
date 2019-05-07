@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<classNames>
+
+	<className id="instanceList">com.chinacreator.xtbg.pub.upload.list.InstanceList</className>
+	<className id="fileList">com.chinacreator.xtbg.pub.upload.list.FileList</className>
+	
+	<!-- 系统管理模块 Begin -->
+	<className id="orgTypeList">com.chinacreator.xtbg.pub.core.list.OrgTypeList</className><!-- 机构类型列表 -->
+	<!-- 系统管理模块 End -->
+	
+	<!-- 流程配置模块 Begin By tian.xia 20120201 -->
+	<className id="flowInfoList">com.chinacreator.xtbg.pub.flowinfoconif.list.FlowInfoList</className>
+	<className id="flowDefInfoList">com.chinacreator.xtbg.pub.flowinfoconif.list.FlowDefInfoList</className>
+	<className id="flowWfactionInfoList">com.chinacreator.xtbg.pub.flowinfoconif.list.FlowWfactionInfoList</className>
+	<className id="flowActUserList">com.chinacreator.xtbg.pub.flowinfoconif.list.FlowActUserList</className>
+	<!-- 流程配置模块 End By tian.xia 20120201 -->
+	
+	<!-- 文档模版管理 Begin By tian.xia 20130109 -->
+	<className id="wordTemplateList">com.chinacreator.xtbg.pub.wordtemplate.list.WordTemplateList</className>
+	<!-- 文档模版管理 End By tian.xia 20130109 -->
+	<!-- add by yin.liu 20120131 start... -->
+	<className id="appStoreList">com.chinacreator.xtbg.pub.android.virtualappmanager.list.AppStoreList</className>
+	<className id="appStoreGrantList">com.chinacreator.xtbg.pub.android.virtualappmanager.list.AppStoreGrantList</className>
+	<className id="appPermissionList">com.chinacreator.xtbg.pub.android.virtualappmanager.list.AppPermissionList</className>
+	<className id="androidVersionList">com.chinacreator.xtbg.pub.android.androidversion.list.AndroidVersionList</className>
+	<!-- add by yin.liu 20120131 end... -->
+	
+	<!-- 异常信息模块 add by na.li 20120414 start... -->
+	<className id="crashList">com.chinacreator.xtbg.pub.android.debug.list.CrashList</className>
+	<!-- add by na.li 20120414 end... -->
+	<!-- 一般简报 Begin -->
+	<className id="briefsCommentList">com.chinacreator.xtbg.pub.briefseditor.list.BriefsCommentList</className>
+	<className id="briefsBrowseList">com.chinacreator.xtbg.pub.briefseditor.list.BriefsBrowseList</className>
+	<className id="briefsEditorList">com.chinacreator.xtbg.pub.briefseditor.list.BriefsEditorList</className>
+	<className id="templateManageList">com.chinacreator.xtbg.pub.template.list.TemplateManageList</className>
+	<className id="briefsBaseList">com.chinacreator.xtbg.pub.briefseditor.list.BriefsBaseList</className>
+	<className id="briefsTypeList">com.chinacreator.xtbg.pub.briefseditor.list.BriefsTypeList</className>
+	<className id="announcementApproveList1">com.chinacreator.xtbg.zhangjiajie.announcement.list.AnnouncementApproveList1</className>
+	<className id="announcementReceiveList">com.chinacreator.xtbg.zhangjiajie.announcement.list.AnnouncementReceiveList</className>
+	<className id="receiveViewUserCountList">com.chinacreator.xtbg.zhangjiajie.announcement.list.ReceiveViewUserCountList</className>
+	<className id="receiveViewUserDetailList">com.chinacreator.xtbg.zhangjiajie.announcement.list.ReceiveViewUserDetailList</className>
+	<!--一般简报  End -->
+	
+	<!-- 苏仙考勤处理 Begin -->
+	<className id="electInfoLists">com.chinacreator.xtbg.suxian.electroniccheck.list.ElectInfoList</className>
+   
+   <className id="electViewLists">com.chinacreator.xtbg.suxian.electroniccheck.list.ElectViewList</className>
+   <className id="electInfoTjList">com.chinacreator.xtbg.suxian.electroniccheck.list.ElectInfoTjList</className>
+   <className id="manageList">com.chinacreator.xtbg.suxian.electroniccheck.list.ManageList</className>
+   <className id="detailsList">com.chinacreator.xtbg.suxian.electroniccheck.list.DetailsList</className>
+   <className id="electSetList">com.chinacreator.xtbg.suxian.electroniccheck.list.ElectSetList</className>
+
+	<!--苏仙考勤处理  End -->
+	
+	<!-- 工作日志 Begin -->
+	<className id="jobTypeList">com.chinacreator.xtbg.pub.joblog.list.JobTypeList</className>
+	<className id="joblogIntensiveList">com.chinacreator.xtbg.pub.joblog.list.JoblogIntensiveList</className>
+	
+	<!--工作日志  End -->
+	<!-- 申购管理 Begin -->
+	<className id="shoppingApplyList">com.chinacreator.xtbg.pub.purchasemanage.list.ShoppingApplyList</className>
+       <className id="shoppingHandleList">com.chinacreator.xtbg.pub.purchasemanage.list.ShoppingHandleList</className>
+	<!--申购管理  End -->
+	<!-- 领导日程 Begin -->
+	<className id="leaderScheduleList">com.chinacreator.xtbg.pub.leaderschedule.list.LeaderScheduleList</className>
+	<className id="leaderArrangList">com.chinacreator.xtbg.pub.leaderschedule.list.LeaderArrangList</className>
+	<className id="scheduleCanViewList">com.chinacreator.xtbg.pub.leaderschedule.list.ScheduleCanViewList</className>
+	<className id="leaderArrangementMonthList">com.chinacreator.xtbg.pub.leaderschedule.list.LeaderArrangementMonthList</className>
+	<!-- 领导日程  End -->
+	<!-- 名录管理 Begin -->
+	<className id="directoryList">com.chinacreator.xtbg.pub.directory.list.DirectoryList</className>
+	<!-- 名录管理  End -->
+	
+	<!-- 信息报送 START -->
+	<className id="infoTypeList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoTypeList</className>
+	<className id="unitsetuplist">com.chinacreator.xtbg.zhangjiajie.inforeported.list.UnitsetupList</className>
+	<className id="releaseunitlist">com.chinacreator.xtbg.zhangjiajie.inforeported.list.ReleaseunitList</className>
+	<className id="infoReportAlternateList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportAlternateList</className>
+	<className id="infoReportDraftsList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportDraftsList</className>
+	<className id="infoReportHasBeReportedList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportHasBeReportedList</className>
+	<className id="infoReportOnlyReadList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportOnlyReadList</className>
+	<className id="infoReportPendingList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportPendingList</className>
+	<className id="infoReportAllShowList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportAllShowList</className>
+	<className id="infoReportPublishedList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportPublishedList</className>
+	<className id="infoReportRecommendedList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportRecommendedList</className>
+	<className id="infoReportRejectionList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoReportRejectionList</className>
+	<className id="briefsIntensiveList"	>com.chinacreator.xtbg.zhangjiajie.briefseditor.list.BriefsIntensiveList</className>
+	<className id="briefsEditorList">com.chinacreator.xtbg.zhangjiajie.briefseditor.list.BriefsEditorList</className>
+	<className id="briefsBrowseList">com.chinacreator.xtbg.zhangjiajie.briefseditor.list.BriefsBrowseList</className>
+	<className id="briefsTypeList">com.chinacreator.xtbg.zhangjiajie.briefseditor.list.BriefsTypeList</className>		
+	<className id="infoStatisticsList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoStatisticsList</className>		
+	<className id="infoStaDetailList">com.chinacreator.xtbg.zhangjiajie.inforeported.list.InfoStaDetailList</className>		
+	<!-- 信息报送 END -->
+	
+	<!-- 资源配置 End -->
+	<className id="resourcesConfigList">com.chinacreator.xtbg.pub.resourcesroleconfig.list.ResourcesConfigList</className>
+	<!-- 资源配置 Start -->
+
+	<!-- 电子文档:开始-->
+	<className id="documentManagementList">com.chinacreator.xtbg.pub.document.list.DocumentManagementList</className>
+	<className id="documentAuditList">com.chinacreator.xtbg.pub.document.list.DocumentAuditList</className>
+	<!-- 电子文档:结束-->
+	
+	<!-- 车辆管理   司机信息:开始-->
+	<className id="carmanageDriverList">com.chinacreator.xtbg.pub.vehicle.list.CarmanageDriverList</className>
+	<className id="typeOfVehiclesList">com.chinacreator.xtbg.pub.vehicle.list.TypeOfVehiclesList</className>
+	<className id="carmanageApplyinfolist">com.chinacreator.xtbg.pub.vehicle.list.CarmanageApplyinfolist</className>
+	<className id="basicInformationList">com.chinacreator.xtbg.pub.vehicle.list.BasicInformationList</className>
+	
+	<!-- 车辆管理  司机信息:结束-->
+	
+	<!-- WORD START-->
+	<className id="wordVariableList">com.chinacreator.xtbg.pub.wordtemplate.list.WordVariableList</className>
+	<className id="ruleItemList">com.chinacreator.xtbg.pub.wordtemplate.list.RuleItemList</className>
+	<!-- WORD END-->
+	<!-- 签呈:开始-->
+
+
+	<!-- 签呈:结束-->
+	<!-- 用户登录统计报表 start -->
+	<className id="countOlineLoginList">com.chinacreator.xtbg.pub.reportTable.list.CountOlineLoginList</className>
+	<className id="appCountPersonList">com.chinacreator.xtbg.pub.reportTable.list.AppCountPersonList</className>
+	<className id="appCountOfficeList">com.chinacreator.xtbg.pub.reportTable.list.AppCountOfficeList</className>
+	<className id="appCountPartList">com.chinacreator.xtbg.pub.reportTable.list.AppCountPartList</className>
+	<!-- 用户登录统计报表 end -->
+	
+	<!-- 登录用户信息 start -->
+	<className id="loginViewList">com.chinacreator.xtbg.pub.countOlinePerson.list.LoginViewList</className>
+	<!-- 登录用户信息 end -->
+	<className id="showTableService">com.chinacreator.xtbg.pub.schedule.service.ShowTableService</className>
+	
+	
+	<!-- 图片配置 -->
+	<className id="topPicturList">com.chinacreator.xtbg.pub.topPictur.list.TopPicturDaoList</className>
+	<!-- 资产管理 Begin -->
+	<className id="officeEquipmentTypeList">com.chinacreator.xtbg.yimingju.officeassets.list.OfficeEquipmentTypeList</className>
+	<className id="officeConsumableNameList">com.chinacreator.xtbg.yimingju.officeassets.list.OfficeConsumableNameList</className>
+	<className id="purchaseApplyList">com.chinacreator.xtbg.yimingju.officeassets.list.PurchaseApplyList</className>
+	<className id="approvalWaitRoomList">com.chinacreator.xtbg.yimingju.officeassets.list.ApprovalWaitRoomList</className>
+	<className id="approvalAlreadRoomList">com.chinacreator.xtbg.yimingju.officeassets.list.ApprovalAlreadRoomList</className>
+	<className id="detailAlreadList">com.chinacreator.xtbg.yimingju.officeassets.list.DetailAlreadList</className>
+	<className id="officeEqStockList">com.chinacreator.xtbg.yimingju.officeassets.list.OfficeEqStockList</className>
+	<className id="officeSnmStockList">com.chinacreator.xtbg.yimingju.officeassets.list.OfficeSnmStockList</className>
+	<className id="seeStockDetailedList">com.chinacreator.xtbg.yimingju.officeassets.list.SeeStockDetailedList</className>
+	<className id="seeConSumDetailedList">com.chinacreator.xtbg.yimingju.officeassets.list.SeeConSumDetailedList</className>
+	<className id="officeEqStockList">com.chinacreator.xtbg.yimingju.officeassets.list.OfficeEqStockList</className>
+	<className id="collarEqStockList">com.chinacreator.xtbg.yimingju.officeassets.list.CollarEqStockList</className>
+	<className id="collarSumStockList">com.chinacreator.xtbg.yimingju.officeassets.list.CollarSumStockList</className>
+	<className id="myAssetsList">com.chinacreator.xtbg.yimingju.officeassets.list.MyAssetsList</className>
+	
+	<!-- 资产管理  End -->
+	<!--移民局车辆管理  -->
+	<className id="carManageApplyinfoYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageApplyinfoYmjList</className>
+	<className id="carYpcYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarYpcYmjList</className>
+	<className id="carManageCarYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageCarYmjList</className>
+	<className id="carManageWxList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageWxList</className>
+	<className id="fuelCardmangeList">com.chinacreator.xtbg.yimingju.carmanage.list.FuelCardmangeList</className>
+	<!-- 湖北特检院油卡 -->
+	<className id="carManageYoukaList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageYoukaList</className>
+	<className id="carManageYoukaFafangList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageYoukaFafangList</className>
+	
+	<className id="fuelcardhistorylist">com.chinacreator.xtbg.yimingju.carmanage.list.FuelCardHistoryList</className>
+	<!--移民局车辆管理End  -->
+	<!--移民局档案管理  -->
+	<className id="DocFileInfoListymj">com.chinacreator.xtbg.yimingju.documentfile.list.DocFileInfoList</className>
+	<!--移民局档案管理End  -->
+	
+	<!--电子邮件  -->
+	<className id="mailList">com.chinacreator.xtbg.yimingju.mail.list.MailList</className>
+	<className id="yjSendMailList">com.chinacreator.xtbg.yimingju.mail.list.YjSendMailList</className>
+	<!--电子邮件End  -->
+	<!-- 用户注册 -->
+	<className id="registerList">com.chinacreator.xtbg.suxian.register.list.RegisterList</className>
+	<!-- 用户注册 -->
+	
+	<!--阅文平台 沈联成-->
+	<className id="readFileList">com.chinacreator.xtbg.yimingju.readfile.ReadFileList</className>
+ 	<!-- 投票测评配置 -->
+ 	<className id="votePaperList">com.chinacreator.xtbg.core.vote.list.VotePaperList</className>
+ 	<className id="votePaperOperateList">com.chinacreator.xtbg.core.vote.list.VotePaperOperateList</className>
+ 	<className id="voteQuestionList">com.chinacreator.xtbg.core.vote.list.VoteQuestionList</className>
+ 	<className id="voteAnswerList">com.chinacreator.xtbg.core.vote.list.VoteAnswerList</className>
+ 	<className id="voteCompleteList">com.chinacreator.xtbg.core.vote.list.VoteCompleteList</className>
+ 	<!-- 投票测评配置end -->
+ 	<!-- 郴州电子考勤 -->
+ 	<className id="electroniclist">com.chinacreator.xtbg.chenzhou.electronicAttendance.list.ElectronicList</className>
+ 	<className id="electQJDJList">com.chinacreator.xtbg.chenzhou.electronicAttendance.list.EleltQJDJList</className>
+ 	<!-- 郴州电子考勤 -->
+ 	
+ 	<!--版本控制 start -->
+ 	<className id="wc_androidVersionList">com.chinacreator.xtbg.wangcheng.androidversion.list.AndroidVersionList</className>
+ 	<className id="wc_appstorelist">com.chinacreator.xtbg.wangcheng.virtualappmanager.list.AppStoreList</className>
+ 	<className id="wc_appStoreGrantList">com.chinacreator.xtbg.wangcheng.virtualappmanager.list.AppStoreGrantList</className>
+ 	<className id="wc_appPermissionList">com.chinacreator.xtbg.wangcheng.virtualappmanager.list.AppPermissionList</className>
+ 	<!--版本控制 end -->
+	
+	<!-- 发改委车辆管理servletDirector   start -->
+	<className id="carManageMileagerecordYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageMileagerecordYmjList</className>
+	<className id="carManageRefuelmanageYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageRefuelmanageYmjList</className>
+	<className id="carManageViolationrecordYmjList">com.chinacreator.xtbg.yimingju.carmanage.list.CarManageViolationrecordYmjList</className>
+	<!-- 发改委车辆管理servletDirector   end -->
+	
+	<!-- 发改委车辆司机信息列表 -->
+	<className id="fgw_DriverList">com.chinacreator.xtbg.yimingju.carmanage.list.CarDriverList</className>
+	<!-- 发改委车辆司机信息列表 -->
+ 	
+ 	<!-- 特检院OA start  -->
+ 	<className id="commonToDoWorkList">com.chinacreator.xtbg.waitDoWork.list.CommonToDoWorkList</className>
+	<!-- 特检院OA end --> 
+	
+	<!-- 特检院OA仪器设备 start  -->
+	<className id="devAppLicationList">com.chinacreator.xtbg.tjy.device.list.DevAppLicationList</className>
+	<className id="devAppItemList">com.chinacreator.xtbg.tjy.device.list.DevAppItemList</className>
+	<!-- 特检院OA仪器设备 end  -->
+	
+	<!-- 特检院OA办公用品 start  -->
+	<className id="osExaForAppList">com.chinacreator.xtbg.tjy.officesupplies.list.OsExaForAppList</className>
+	<className id="osExaForHavaObjectList">com.chinacreator.xtbg.tjy.officesupplies.list.OsExaForHavaObjectList</className>
+	<className id="osHavaMoreList">com.chinacreator.xtbg.tjy.officesupplies.list.OsHavaMoreList</className>
+	<className id="osHavaNoMoveList">com.chinacreator.xtbg.tjy.officesupplies.list.OsHavaNoMoveList</className>
+	<className id="osHavaMoreAppList">com.chinacreator.xtbg.tjy.officesupplies.list.OsHavaMoreAppList</className>
+	<className id="osHavaLingYongobjectList">com.chinacreator.xtbg.tjy.officesupplies.list.OsHavaLingYongobjectList</className>
+	<!-- 特检院OA办公用品 end  -->
+	
+	<!-- 财政厅 图书管理 start-->
+	<className id="czt_ibraryTreeList">com.chinacreator.xtbg.caizhengting.ibrary.list.IbraryTreeList</className>
+	<className id="czt_ibraryBookInfoList">com.chinacreator.xtbg.caizhengting.ibrary.list.IbraryBookInfoList</className>
+	<className id="czt_ibraryBorrowInfoList">com.chinacreator.xtbg.caizhengting.ibrary.list.IbraryBorrowInfoList</className>
+	<className id="czt_ibraryRegBookInfoList">com.chinacreator.xtbg.caizhengting.ibrary.list.IbraryRegBookInfoList</className>
+	<!-- 我借阅的图书 -->
+	<className id="czt_myIbraryBorrowInfoList">com.chinacreator.xtbg.caizhengting.ibrary.list.MyIbraryBorrowInfoList</className>
+	<!-- 财政厅 图书管理 end-->
+	
+	<className id="electWorkIPInfoList">com.chinacreator.xtbg.suxian.electroniccheck.list.ElectWorkIPInfoList</className>
+ 	
+</classNames>

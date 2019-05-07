@@ -1,0 +1,21 @@
+   #×¢ÊÍ
+subresource_insert=insert into td_report_subresource values(?,?,?,?,?)
+subresource_delete=delete from td_report_subresource where resource_id= ?
+subresource_findall=select *  from td_report_subresource
+
+subresource_findbytype=select * from td_report_subresource where resource_type\= ?
+subresource_findbyid=select * from td_report_subresource where resource_id\= ?
+
+report_insert=insert into tb_report (REP_ID,REP_NAME,REP_ID2,EC_ID,REP_VER,REP_DESC,CREATOR,CREATTIME,PUBLISHSTATE,PUBLISHTIME,PUBLISHER,REP_STYPE) values(?,?,?,?,?,?,?,?,?,?,?,?)
+report_delete=delete from tb_report where rep_id = ?
+report_findall=select * from tb_report
+report_findbyid=select * from tb_report where rep_id = ?
+report_findbyproperty=select * from tb_report where ? = ?
+report_update=update tb_report set REP_NAME=?,REP_ID2=?,EC_ID=?,REP_VER=?,REP_DESC=?,CREATOR=?,CREATTIME=?,PUBLISHSTATE=?,PUBLISHTIME=?,PUBLISHER=?,REP_STYPE=? where REP_ID = ?
+
+reportfile_insert=insert into td_report_file (rep_id,rep_body) values (?,?)
+reportfile_findbyid=select *  from td_report_file where rep_id = ?
+reportfile_deletebyid=delete from td_report_file where rep_id= ?
+reportfile_findall=select * from td_report_file
+reportfile_update_u=update td_report_file set rep_body = empty_blob() where rep_id=?
+reportfile_update_s=select rep_body from td_report_file where rep_id =? for update

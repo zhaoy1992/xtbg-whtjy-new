@@ -1,0 +1,10 @@
+修改流程引擎：
+Shark-Extend/src/com/chinacreator/commonworkflow/WorkflowOpertionWrapper.java
+Shark-Extend/src/com/chinacreator/spi/impl/local/WorkflowManagerImpl.java
+Shark-Extend/src/com/chinacreator/workflow/shark/WorkitemAction.java
+Shark-Kernal/src/com/lutris/appserver/server/sql/standard/StandardDBTransactionImpl.java
+Shark-Kernal/src/org/enhydra/shark/SharkUtilities.java
+Shark-Kernal/src/org/enhydra/shark/WfResourceImpl.java
+Shark-Kernal/src/org/enhydra/shark/caching/jboss/JBOSSProcessCache.java
+Shark-Kernal/src/org/enhydra/shark/caching/jboss/JBOSSResourceCache.java
+Shark-Kernal/src/org/enhydra/shark/processlocking/DODSLockMaster.java

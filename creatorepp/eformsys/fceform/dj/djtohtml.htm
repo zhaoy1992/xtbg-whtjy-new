@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var sDivHtml="";
+function uf_open() {
+		var ss=SKDBListBox1.outerHTML ;
+		var sHtml=GetBillType()
+		SKDBListBox1.outerHTML=ss.substring(0,ss.length-9)+sHtml+"</select>"
+
+         SKDBListBox1.children(0).selected=true;
+         uf_onclick();
+
+
+}
+function uf_onclick() {
+         for(var i=0; i<SKDBListBox1.length; i++){
+               if(SKDBListBox1.options(i).selected) {
+                  var d=SKDBListBox1.options(i).value ;
+                    var sql="select djid,djlx,dj_name,djsn from FC_BILLZL where djlx='"+d+"' order by djsn"
+
+                  dssub1.Open(sql);
+               }
+         }
+}
+function uf_ok() {
+        // var arr=new Array() ;
+        // arr[0]=dssub1.Fields.Field['djid'].Value;
+        // arr[1]=SKDBListBox1.value
+        // window.close() ;
+         var tmpNo=dssub1.Fields.Field['djsn'].Value;
+         //var sPath=GetBillTypePath(SKDBListBox1.value);
+         var sPos=loadhtml("select djposition,dj_name from FC_BILLZL where djsn='"+tmpNo+"'",tmpNo,SKDBListBox1.options(SKDBListBox1.selectedIndex).path,SKDBListBox1.options(SKDBListBox1.selectedIndex).extname);
+         var objXML=SetDom(sPos)
+         // alert(tmpNo)
+         var tmpNo=tmpNo+'.'+SKDBListBox1.options(SKDBListBox1.selectedIndex).extname ;
+           if (objXML.documentElement.childNodes(2).childNodes(0).text==tmpNo){
+              alert (objXML.documentElement.childNodes(2).childNodes(0).text+"生成成功！") 
+           }else{
+              alert(sPos)
+           } 
+           
+       //window.showModalDialog("../design/trans.htm",arr,"status:no;dialogHeight:105px;dialogWidth:470px;center:yes;")
+}
+function uf_all() {
+	var sXml=SelectSql("select djsn from FC_BILLZL where djlx='"+SKDBListBox1.value+"' order by djsn ",1,-1)
+	var oXml=SetDom(sXml)
+	var l=oXml.documentElement.childNodes.length-1
+	for(var i=0;i<l;i++){
+		var tmpNo=oXml.documentElement.childNodes(i).childNodes(0).text
+		var sPos=loadhtml("select djposition,dj_name from FC_BILLZL where djsn='"+tmpNo+"'",tmpNo,SKDBListBox1.options(SKDBListBox1.selectedIndex).path,SKDBListBox1.options(SKDBListBox1.selectedIndex).extname)
+		var objXML=SetDom(sPos)
+		
+		var tmpNo=tmpNo+'.'+SKDBListBox1.options(SKDBListBox1.selectedIndex).extname ;
+		if (objXML.documentElement.childNodes(2).childNodes(0).text != tmpNo){
+			alert(sPos)
+			return
+		} 
+	}
+	if(l>0){
+		alert("全部生成成功!!")
+	}else{
+		alert("no dj")
+	}
+
+}
+//重新保存当前分类的表单
+function uf_resave(){
+	if(fcpubdata.databaseTypeName != "sqlserver"){
+		alert("只有sqlserver数据库才支持此功能!");
+		return;
+	}
+	var errMsg="";
+	var sXml=SelectSql("select djsn from FC_BILLZL where djlx='"+SKDBListBox1.value+"' order by djsn ",1,-1)
+	var oXml=SetDom(sXml)
+	var l=oXml.documentElement.childNodes.length-1
+	for(var i=0;i<l;i++){
+
+		var sdjsn=oXml.documentElement.childNodes(i).childNodes(0).text ;
+		sDivHtml=SqlToField("select designtext from FC_BILLZL where djsn='"+sdjsn+"'");
+		div_ifra.innerHTML="<IFRAME id=ifra  src='../design/design.htm?resave=yes&djsn="+sdjsn+"'></IFRAME>";
+		Pause(300);
+		/*
+		//在djempty.htm中将转换后的值写回sDivHtml变量中.
+		div_ifra.innerHTML="<IFRAME id=ifra  src='../common/djempty.htm?getrunstring=yes&i="+i+"'></IFRAME>"
+		
+		Pause(300);
+		//写回
+		//CopyToPub(sDivHtml);
+		var sql = "update FC_BILLZL set xmltext='"+"<![CDATA["+TransSql(sDivHtml)+"]]>"+"' where djsn='"+ sdjsn +"'" ;
+		var sret=InsertSql(sql);
+		if(IsSpace(sret)==false){
+			//CopyToPub(sql);
+			
+			errMsg += sdjsn+"保存出错: "+sret+"\n";
+		}
+		*/
+		
+	}
+	if(errMsg == ""){
+		div_ifra.innerHTML="保存成功!!";
+	}else{
+		div_ifra.innerHTML=errMsg;
+	}
+}
+function uf_savedesign() {
+	if(fcpubdata.databaseTypeName != "sqlserver"){
+		alert("只有sqlserver数据库才支持此功能!");
+		return;
+	}
+	var errMsg="";
+	var sXml=SelectSql("select djsn from FC_BILLZL where djlx='"+SKDBListBox1.value+"' order by djsn ",1,-1)
+	var oXml=SetDom(sXml)
+	var l=oXml.documentElement.childNodes.length-1
+	for(var i=0;i<l;i++){
+
+		var sdjsn=oXml.documentElement.childNodes(i).childNodes(0).text ;
+		sDivHtml=SqlToField("select designtext from FC_BILLZL where djsn='"+sdjsn+"'");
+		
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBcheckbox\""," controltype=\"checkbox\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"Label\""," controltype=\"label\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBRadioGroup\""," controltype=\"radio\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBListBox\""," controltype=\"listbox\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBMemo\""," controltype=\"textarea\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBcombobox\""," controltype=\"combobox\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKuploadfile\""," controltype=\"upload\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBchart\""," controltype=\"chart\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBImage\""," controltype=\"dbimg\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"Image\""," controltype=\"img\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"Shape\""," controltype=\"shape\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"PageControl\""," controltype=\"tab\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"FCDiv\""," controltype=\"div\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"SKDBLike\""," controltype=\"a\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"FCButton\""," controltype=\"button\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"FCDBedit\""," controltype=\"text\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"HR\""," controltype=\"hr\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"divcheckbox\""," controltype=\"checkboxlist\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"divradio\""," controltype=\"radiolist\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"fccode\""," controltype=\"dropdownlist\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"imgwebgrid\""," controltype=\"grid\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"imgdataset\""," controltype=\"dataset\"");
+		sDivHtml=RepStr(sDivHtml," controltype=\"NumEdit\""," controltype=\"spin\"");
+		//CopyToPub(sDivHtml);
+		var sql = "update FC_BILLZL set designtext='"+"<![CDATA["+TransSql(sDivHtml)+"]]>"+"' where djsn='"+ sdjsn +"'" ;
+		var sret=InsertSql(sql);
+		if(IsSpace(sret)==false){
+			//CopyToPub(sql);
+			
+			errMsg += sdjsn+"保存出错: "+sret+"\n";
+	
+			
+		}
+		
+	}
+	if(errMsg == ""){
+		div_ifra.innerHTML="保存成功!!";
+	}else{
+		div_ifra.innerHTML=errMsg;
+	}
+		
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script src='../js/fctorun.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><script >document.styleSheets[0].addRule("fc\\:webgrid","behavior: url(../htc/webgrid.htc)",0);</script><script src='../js/fcwebgrid.js'></script><script >document.styleSheets[0].addRule("fc\\:fc_code","behavior: url(../htc/fc_code.htc)",0);</script><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;fctorun.js&#13;&#10;~userfunc.js" idtype="1" isfile="否" postop posleft window="当前窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:1;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight poswidth entertype="修改" codeheader mkbh caption="将表单生成文件" type="ST" dj_sn="djtohtml" billtaborder="<root><taborder>SKDBListBox1</taborder><taborder>FCButton3</taborder><taborder>FCButton4</taborder><taborder>FCButton5</taborder><taborder>SKBILLgrid1</taborder></root>" contxml="<root><label><id>Label1</id></label><listbox><id>SKDBListBox1</id></listbox><div><id>div_ifra</id></div><button><id>FCButton3</id><id>FCButton4</id><id>FCButton5</id></button><grid><id>SKBILLgrid1</id></grid><dataset><id>dssub1</id></dataset></root>" BLONopen="uf_open()" toolbar="不带工具栏" OtherSave="否" blmode="其他"><SPAN id=Label1 style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 16px; LEFT: 13px; WIDTH: 85px; COLOR: #000080; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 18px; HEIGHT: 20px; TEXT-ALIGN: left; TEXT-DECORATION: underline; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" value="Label1">表单分类:</SPAN><SELECT id=SKDBListBox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 4px; WIDTH: 134px; FONT-FAMILY: ; POSITION: absolute; TOP: 39px; HEIGHT: 366px; BACKGROUND-COLOR: #ffffff" size=8 controltype="listbox" sql china temptext tempvalue check="2" onclick='bill_onclick("uf_onclick()")' sqltrans></SELECT><?xml:namespace prefix = fc /><fc:webgrid id=SKBILLgrid1 onkeydown='bill_ongridkeydown("<SKBILLgrid1><col></col><col></col><col></col><col></col></SKBILLgrid1>")' ondblclick='bill_ongriddblclick("<SKBILLgrid1><col></col><col>uf_ok()</col><col>uf_ok()</col><col>uf_ok()</col></SKBILLgrid1>")' onclick='bill_ongridclick("<SKBILLgrid1><col></col><col></col><col></col><col></col></SKBILLgrid1>")' visible="是" readonly="否" autoappend="否" autowidth="否" autoheight="否" canselect="是" dataset="dssub1" format="<cols><col><fname>djid</fname><cname>id</cname><width>11</width><dtype>字符</dtype><readonly>是</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>30</columnwidth><align>left</align></col><col><fname>djsn</fname><cname>单据sn</cname><width>40</width><dtype>字符</dtype><readonly>是</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>100</columnwidth><align>left</align></col><col><fname>djlx</fname><cname>类型</cname><width>20</width><dtype>字符</dtype><readonly>是</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>36</columnwidth><align>left</align></col><col><fname>dj_name</fname><cname>单据名称</cname><width>40</width><dtype>字符</dtype><readonly>是</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>160</columnwidth><align>left</align></col></cols>" width="349" height="355" top="39" left="140">
+<TABLE id=t style="TABLE-LAYOUT: fixed; FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #ffffff" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow style="FONT-SIZE: 12px; BACKGROUND-COLOR: #c0c0c0">
+<TD></TD></TR></TBODY></TABLE></fc:webgrid><fc:dataset id=dssub1 opensortno="1" temptable="tmp_STgrid1" format="<fields><field><fieldname>djid</fieldname><datatype>字符</datatype><displaylabel>id</displaylabel><size>11</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>djsn</fieldname><datatype>字符</datatype><displaylabel>单据sn</displaylabel><size>40</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>djlx</fieldname><datatype>字符</datatype><displaylabel>类型</displaylabel><size>20</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>dj_name</fieldname><datatype>字符</datatype><displaylabel>单据名称</displaylabel><size>40</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><djid></djid><djsn></djsn><djlx></djlx><dj_name></dj_name></dsid>")' onGetText='bill_ondatasetgettext("<dsid><djid></djid><djsn></djsn><djlx></djlx><dj_name></dj_name></dsid>")' onSetText='bill_ondatasetsettext("<dsid><djid></djid><djsn></djsn><djlx></djlx><dj_name></dj_name></dsid>")'></fc:dataset><BUTTON id=FCButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 370px; WIDTH: 131px; FONT-FAMILY: ; POSITION: absolute; TOP: 7px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_all()")' dropstyle="否">生成此分类的所有表单</BUTTON><BUTTON id=FCButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 193px; WIDTH: 159px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_resave()")' dropstyle="否">重新保存此分类的所有表单</BUTTON> 
+<DIV id=div_ifra style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; OVERFLOW-Y: auto; DISPLAY: block; FONT-SIZE: 12px; LEFT: 7px; OVERFLOW-X: auto; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 506px; BORDER-BOTTOM: black 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 426px; HEIGHT: 105px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div"></DIV><BUTTON id=FCButton5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 97px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 7px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_savedesign()")' dropstyle="否">重存设计串</BUTTON></DIV></body></html>

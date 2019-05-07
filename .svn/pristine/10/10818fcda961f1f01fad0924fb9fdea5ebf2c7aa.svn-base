@@ -1,0 +1,101 @@
+<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.Set"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.Enumeration"%>
+<%@ page import="com.chinacreator.security.AccessControl"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.chinacreator.dictionary.DictManager"%>
+<%@ page import="com.chinacreator.dictionary.DictManagerImpl"%>
+<%@ page import="com.frameworkset.dictionary.Data"%>
+<%@ page import="com.frameworkset.dictionary.Item"%>
+<%@ page import="com.chinacreator.security.AccessControl"%>
+<%  
+	AccessControl accesscontroler = AccessControl.getInstance();
+	accesscontroler.checkAccess(request, response);
+	String did = (String)request.getParameter("dicttypeId");	
+	String parentValue = (String)request.getParameter("parentValue");
+	String dictDataName = (String)request.getParameter("dictDataName");
+	String dictDataValue = (String)request.getParameter("dictDataValue");
+	DictManager dictManager = new DictManagerImpl();
+	Data dicttype = dictManager.getDicttypeById(did);
+	if("主键将在保存时自动生成".equals(dictDataValue)){
+	    dictDataValue = dicttype.getNextKeyValueStr();
+	}
+	String dictDataValueOrg = (String)request.getParameter("dictDataValueOrg");
+	String dictDataValidate_ = request.getParameter("dictDataValidate")==null?"1":request.getParameter("dictDataValidate");	
+	did = did==null?"":did;
+	dictDataName = dictDataName==null?"":dictDataName;
+	dictDataValue = dictDataValue==null?"":dictDataValue;
+	parentValue = parentValue==null?"":parentValue;
+	dictDataValueOrg = dictDataValueOrg==null?"":dictDataValueOrg;
+	DictManagerImpl dicManager = new DictManagerImpl();
+	dicManager.init(request,response);
+	Item dictdata = new Item();
+	dictdata.setDataId(did);
+	dictdata.setName(dictDataName);
+	dictdata.setValue(dictDataValue);
+	dictdata.setParentId(parentValue);
+	dictdata.setDataOrg(dictDataValueOrg);
+	dictdata.setDataValidate(Integer.parseInt(dictDataValidate_));	 
+	//保存
+	boolean saveResult = false;
+	try{
+		saveResult = dicManager.addAdvanceDictdata(dictdata,request);
+	}catch(Exception e){
+		e.printStackTrace();
+		String message = e.getMessage();
+		if(message != null){
+			message.replaceAll("\\n","\\\\n");
+			message.replaceAll("\\t","\\\\t");
+		}
+		%>
+		<script type="text/javascript">
+		<!--
+			if(parent.win){			    	
+	 	       parent.win.alert("保存失败，原因如下：\n" + "<%=message%>");
+	 	       parent.win.close();
+ 	        }
+ 	        parent.afterSave();	
+		//-->
+		</script>
+		<%
+	}
+	
+%>
+	<script language="javascript">		
+	    <%
+	        if(saveResult){
+	    %>
+				if(parent.win){
+					parent.win.alert("操作成功!");
+					parent.win.close();
+				}
+				parent.afterSave();					
+		<%
+		    }else{
+		%>	
+		    	//parent.win.alert("【显示数据】或者【真实值】已经存在 \n ");
+		    	if(parent.win){
+		    	    parent.win.alert("字段或者字段名称已经被使用 \n 或是该表有外键关联! \n  数据保存失败!");
+			    	parent.win.close();	 	            
+	 	        }
+		    	parent.saveFaild();
+		<%
+		    }
+		%>
+		
+	</script>
+
+
+ 
+
+
+ 
+
+
+ 
+
+
+ 
+

@@ -1,0 +1,135 @@
+
+/* 搜索下拉按钮 */
+.Searchbuttom01{ background:url(../images/Search02.gif) no-repeat 1px; width:27px; height:25px; border:0;}
+/* 搜索输入框 */
+.focus {
+	color: #AEB0B4
+}
+.SearchArea01{ width:200px; height:18px; border:1px solid #B4D5EF; background:url(../images/Search01.gif) no-repeat 2px; padding-left:25px;}
+
+/* 灰色普通按钮 */
+.cButton_Gray_wbj{background:url(../images/graybuttom01.gif) no-repeat center; width:45px; height:21px; border:0px; margin:auto; cursor:pointer; }
+.cButton_Gray{ background:url(../images/graybuttom01.gif) no-repeat center; width:45px; height:21px; border:0px; margin:auto; cursor:pointer; margin:10px 0px 0px;}
+/*3字以上的按钮（可单击状态）*/
+.cButton_3text{ background:url(../images/graybuttom03.gif) no-repeat center; width:60px; height:21px; border:0px; margin:auto; cursor:pointer;}
+/*4字button*/
+.cButton_4text{ background:url(../images/button4.gif) no-repeat center; width:74px; height:21px; border:0px; margin:auto; cursor:pointer;}
+/*靠左button*/
+.cButton_floatleft{ float:left; }
+/*4字以上的按钮（可单击状态）*/
+.cButton_long { background:url(../images/graybuttom02.gif) no-repeat center; width:89px; height:21px; border:0px; margin:auto; cursor:pointer;}
+/*4字以上的按钮（可单击状态）*/
+.cButton_longer { background:url(../images/graybuttom02.gif) no-repeat center; width:115px; height:21px; border:0px; margin:auto; cursor:pointer;}
+/*添加按扭*/ 
+.add {background:url(../images/buttom_add.gif) no-repeat; width:55px; height:20px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+.add_over{ background:url(../images/buttom_add_over.gif) no-repeat; idth:55px; height:20px; cursor:pointer; border:none; }
+
+/*删除按扭*/
+.del {background:url(../images/buttom_del.gif) left  no-repeat; width:55px; height:20px; border:none; cursor:pointer; list-style:none; float:left; text-align:left; padding-left:10px; }
+/*发布*/
+.publish {background:url(../images/publish.gif) no-repeat; width:55px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*修改按扭*/
+.Modify {background:url(../images/buttom_mod.gif) left top no-repeat; width:55px; height:20px; cursor:pointer; border:none; display:block; list-style:none; 
+float:left; text-align:left; padding-left:10px; }
+/*通过按钮*/
+.pass{background:url(../images/pass.gif) left  no-repeat; width:55px; height:20px; border:none; cursor:pointer; list-style:none; float:left; text-align:left; padding-left:10px;  }
+/*不通过按钮*/
+.notpass{background:url(../images/notpass.gif) left  no-repeat; width:90px; height:20px; border:none; cursor:pointer; list-style:none; float:left; text-align:left; padding-left:10px; }
+
+/*多选按扭*/
+.checkbox_main{width:16px; height:16px;  float:left; margin-top:4px; margin-left:5px;margin-right:2px;}
+/*输入框-单行*/
+.Inputbox220{width:220px; height:18px; border:1px solid #B4D5EF; margin-right:2px;}
+
+.cText_out_conference{width:85%;; height:18px; border:1px solid #B4D5EF; margin-left:5px; margin-top:0px; }
+.cText_out{width:95%;; height:18px; border:1px solid #B4D5EF; margin-left:5px; margin-top:0px; }
+.cText_out_hidden{width:95%; height:20px; border:1px solid #B4D5EF; margin-left:5px; margin-top:0px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none; }
+.cText_out_short{width:35%;; height:18px; border:1px solid #B4D5EF; margin-left:5px; margin-top:0px; }
+.Inputbox170{width:170px; height:18px; border:1px solid #B4D5EF; margin-right:2px;}
+.input_date-top{width:80px; height:18px; border:1px solid #B4D5EF; line-height:20px; margin-right:2px;}
+.input_date{width:120px; height:18px; border:1px solid #B4D5EF;  margin-left:5px; margin-right:2px; }
+
+
+
+/*输入框-多行*/
+.cTextarea{ width:220px; border:1px solid #B4D5EF; margin-left:5px;}
+
+/*下拉输入框 */
+.cSelected{ border:1px solid #B4D5EF; margin-left:5px;}
+/*下拉列表（可选状态）*/
+.cCombobox { border:1px solid #B4D5EF;}
+/*按钮（可单击状态）*/
+.cButton { width:82px; height:27px; background:url(../images/buttom01.gif) no-repeat; text-align:center; border:0px; cursor:pointer; text-align:center; color:#FFFFFF; font-weight:bold; margin:5px; margin-bottom:10px; }
+
+/****个人工作台按钮样式star****/
+/*导出到个人通讯录*/
+.eab {background:url(../../personwork/resources/images/exportaddressbook.gif) no-repeat; width:125px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*新增联系人*/
+.addlm {background:url(../../personwork/resources/images/addlinkman.gif) no-repeat; width:96px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*删除联系人*/
+.dellm {background:url(../../personwork/resources/images/deletelinkman.gif) no-repeat; width:96px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*添加分组*/
+.addgroup {background:url(../../personwork/resources/images/addgroup1.jpg) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*配置分组*/
+.confg {background:url(../../personwork/resources/images/configgroup.jpg) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*配置权限*/
+.confp {background:url(../../personwork/resources/images/configper.gif) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*保存分组*/
+.saveg {background:url(../../personwork/resources/images/savegroup.gif) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/****个人工作台按钮样式end****/
+
+/****信息报送and信息采编star****/
+/*取消发布*/
+.cp {background:url(../../inforeported/resources/images/cancelpublish.gif) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+
+/*取消推荐*/
+.cr {background:url(../../inforeported/resources/images/cancelrecommended.gif) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*上报*/
+.report {background:url(../../inforeported/resources/images/report.gif) no-repeat; width:55px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/*送审*/
+.sendaudit {background:url(../../pubopinionedit/resources/images/sendaudit.gif) no-repeat; width:55px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px;}
+/*重新上报*/
+.rereport {background:url(../../inforeported/resources/images/reportagain.gif) no-repeat; width:85px; height:21px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/****信息报送and信息采编end****/
+
+
+/****发文专用样式--专属样式*****/
+.cButton_d { width:50px; height:25px; background:url(../images/buttom_fw01.gif) no-repeat; text-align:center; border:0px; cursor:pointer; text-align:center; color:#FFFFFF; font-weight:bold;  }
+.cText_out_new{width:100%; height:18px; border:1px solid #B4D5EF; margin-left:5px; }
+
+.cText_out_fw{width:100%; height:18px; border:1px solid #B4D5EF;  background:#ffffff;} /*普通长度--有淡蓝色边框*/
+.cText_out_fw_d{width:75px; height:18px; border:1px solid #B4D5EF;  background:#ffffff;} /*短-----有淡蓝色边框*/
+.cTextarea_fw{ width:100%; height:120px; border:1px solid #B4D5EF;  background:#ffffff;} /*普通长度-有淡蓝色边框*/
+.cTextarea_fw_d{ width:100%; height:80px; border:1px solid #B4D5EF; background:#ffffff;}/*小文本域-有淡蓝色边框*/
+.cTextarea_fw_g{ width:98.5%; height:120px; border:1px solid #B4D5EF; background:#ffffff; margin-bottom:5px} /*普通长度*/
+/**添加人员****/
+.personwork_title{ width:100px;}
+.personwork_xl{ width:140px;}
+.personwork_box{ width:230px; text-align:left; margin-right:5px;}
+.personwork_box_leftblank{ width:230px; text-align:left; margin-right:5px;padding-left:35px;}
+.personwork_Area{ height:30px; padding-right:20px; line-height:30px;}
+
+
+.yiti_01{ border:3px solid #D5E9F4; padding:5px; }
+
+
+/****弹出框*****/
+.cTextarea_out{ width:95%; margin-left:5px;}
+.cTextarea_fw_dialog{ width:96%; height:120px; border:1px solid #B4D5EF; margin-left:5px; background:#ffffff; margin-bottom:5px} /*普通长度*/
+
+/**会议统计按钮*/
+.cButton_statistics{background:url(../images/exp_1.png) no-repeat; width:55px; height:20px; cursor:pointer; border:none; list-style:none; float:left; text-align:left; padding-left:8px; }
+/**会议室***/
+.cButton_nextweek{background:url(../images/next_week.png) no-repeat center; width:55px; height:21px; border:0px; margin:auto; cursor:pointer; margin:10px 0px 0px;}
+.cButton_upweek{background:url(../images/up_week.png) no-repeat center; width:55px; height:21px; border:0px; margin:auto; cursor:pointer; margin:10px 0px 0px;}
+
+/**会议室预约情况查看*/
+.cButton_getConferenceInfo {background:url(../images/getConferenceInfo2.gif) left no-repeat; width:125px; height:20px; border:none; cursor:pointer; list-style:none; float:left; text-align:left; padding-left:10px;}
+
+/**会议纪要-> 获取会议信息*/
+.cButton_lookroom {background:url(../images/look_rooms1.gif) left no-repeat; width:125px; height:20px; border:none; cursor:pointer; list-style:none; float:left; text-align:left; padding-left:10px;}
+
+/**自定义样式*/
+.a_link{text-decoration: underline;color: blue; cursor: hand; }
+/**来宾接待陪同人员texteare**/
+.ptTexteare{width: 60%;overflow:auto;border:1px solid #B4D5EF;}

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_open() {
+	var obj = pubDataSet;
+	SetButtonImage(FCButton2,"../images/ef_run_button_color.gif");
+	SetButtonImage(FCButton1,"../images/ef_run_button_color.gif");
+	SetButtonImage(FCButton3,"../images/ef_run_button_ok.gif");
+	SetButtonImage(FCButton4,"../images/ef_run_button_close.gif");
+	if(IsSpace(obj.width)){
+		SetCheckBoxValue(SKDBcheckbox1,'否')
+	}else{
+		SetCheckBoxValue(SKDBcheckbox1,'是') ;
+		FCDBedit1.value = parseInt(obj.width);		
+	}
+	if(IsSpace(obj.height)){
+		SetCheckBoxValue(SKDBcheckbox2,'否')
+	}else{
+		SetCheckBoxValue(SKDBcheckbox2,'是')
+		FCDBedit2.value = parseInt(obj.height);
+	}
+	var s1 = obj.width ;
+	var s2 = s1.substring(s1.length,s1.length-1)
+
+	if(s2 =="%"){
+		SetRadioValue(SKDBRadioGroup1,'2')
+		SetRadioValue(SKDBRadioGroup2,'2')
+	}else{
+		SetRadioValue(SKDBRadioGroup1,'1')
+		SetRadioValue(SKDBRadioGroup2,'1')
+	}
+	if(IsSpace(obj.rowSpan)){
+		NumEdit1.value = 1
+	}else{
+		NumEdit1.value = obj.rowSpan ;
+	}
+	if(IsSpace(obj.colSpan)){
+		NumEdit2.value = 1;
+	}else{
+		NumEdit2.value = obj.colSpan ;
+	}
+	
+	if(IsSpace(obj.valign)){
+		SKDBcombobox2.value = "top" ;
+	}else{
+		SKDBcombobox2.value = obj.valign ;
+	}
+	
+	if(IsSpace(obj.align)){
+		SKDBcombobox1.value = "left" ;
+	}else{
+		SKDBcombobox1.value = obj.align ;
+	}
+	uf_ischeck() ;
+}
+function uf_ok() {
+	var obj = pubDataSet ;
+	if(IsSpace(FCDBedit1.value) == false){
+		if(SKDBRadioGroup1.value == 1) {
+			obj.width = FCDBedit1.value +"px" ;
+		}else{
+			//FCDBedit1.value = "100";
+			obj.width = FCDBedit1.value + "%"
+		}
+	}
+	
+	if(IsSpace(FCDBedit2.value) == false){
+		if(SKDBRadioGroup1.value == 1) {
+			obj.height = FCDBedit2.value +"px" ;
+		}else{
+			//FCDBedit2.value = "100";
+			obj.height = FCDBedit2.value + "%"
+		}
+	}	
+	obj.valign = SKDBcombobox2.value;
+	//alert(obj.valign)
+	obj.align = SKDBcombobox1.value
+	obj.rowSpan = NumEdit1.value ;
+	obj.colSpan = NumEdit2.value ;
+	window.close();
+}
+function uf_ischeck() {
+	if(SKDBcheckbox1.value == "否") {
+		FCDBedit1.disabled = true;
+		SKDBRadioGroup1.disabled = true ;
+	}else{
+		FCDBedit1.disabled = false;
+		SKDBRadioGroup1.disabled = false ;
+	}
+	if(SKDBcheckbox2.value == "否") {
+		FCDBedit2.disabled = true ;
+		SKDBRadioGroup2.disabled = true;
+	}else{
+		FCDBedit2.disabled = false ;
+		SKDBRadioGroup2.disabled = false;
+	}
+}
+function uf_callColorDlg(){
+	var obj = pubDataSet ;
+	var sColor;
+	var sInitColor=obj.bgColor;
+	if (isSpace(sInitColor ))    	sInitColor="white"
+	if(typeof sInitColor=="object"){
+		var s=sInitColor.value;
+	}else{
+		var s=sInitColor;
+	}
+	sColor = dlgHelper.ChooseColorDlg(s);
+	sColor = sColor.toString(16);
+	if (sColor.length < 6) {
+		var sTempString = "000000".substring(0,6-sColor.length);
+		sColor = sTempString.concat(sColor);
+	}
+	obj.bgColor="#"+sColor ;
+}
+function borderColor() {
+	var obj = pubDataSet ;
+	var sColor;
+	var sInitColor=obj.borderColor;
+	if (isSpace(sInitColor ))    	sInitColor="white"
+	if(typeof sInitColor=="object"){
+		var s=sInitColor.value;
+	}else{
+		var s=sInitColor;
+	}
+	sColor = dlgHelper.ChooseColorDlg(s);
+	sColor = sColor.toString(16);
+	if (sColor.length < 6) {
+		var sTempString = "000000".substring(0,6-sColor.length);
+		sColor = sTempString.concat(sColor);
+	}
+	obj.borderColor="#"+sColor ;
+	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule(".xpSpin","behavior: url(../htc/NumEdit.htc)",0);</script>
+<DIV id=SKbillsheet toolbar="不带工具栏" idtype="1" isfile="否" postop posleft window="当前窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight="300" poswidth="340" entertype="修改" codeheader="BBB" mkbh caption="TD属性" type="LR" dj_sn="fcs_Tdattribute" billtaborder="<root><taborder>SKDBcheckbox1</taborder><taborder>SKDBcheckbox2</taborder><taborder>SKDBRadioGroup1</taborder><taborder>SKDBRadioGroup2</taborder><taborder>SKDBcombobox1</taborder><taborder>SKDBcombobox2</taborder><taborder>FCButton1</taborder><taborder>FCButton2</taborder><taborder>FCButton3</taborder><taborder>FCButton4</taborder><taborder>FCDBedit1</taborder><taborder>FCDBedit2</taborder><taborder>NumEdit1</taborder><taborder>NumEdit2</taborder></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" contxml="<root><checkbox><id>SKDBcheckbox1</id><id>SKDBcheckbox2</id></checkbox><label><id>Label1</id><id>Label2</id><id>Label3</id><id>Label4</id><id>Label5</id><id>Label6</id><id>Label8</id><id>Label9</id><id>Label10</id></label><radio><id>SKDBRadioGroup1</id><id>SKDBRadioGroup2</id></radio><combobox><id>SKDBcombobox1</id><id>SKDBcombobox2</id></combobox><shape><id>Shape1</id><id>Shape2</id><id>Shape3</id></shape><button><id>FCButton1</id><id>FCButton2</id><id>FCButton3</id><id>FCButton4</id></button><text><id>FCDBedit1</id><id>FCDBedit2</id></text><spin><id>NumEdit1</id><id>NumEdit2</id></spin></root>" BLONopen="uf_open()" center="居中"><DIV id=Label1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 12px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 10px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label1">布局</DIV><?xml:namespace prefix = v /><v:line id=Shape1 onresize="" style="DISPLAY: block; LEFT: 36px; WIDTH: 287px; POSITION: absolute; TOP: 15px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "215.25pt,0" fillcolor = "white" strokecolor = "black" strokeweight = ".75pt"><v:stroke></v:stroke></v:line>
+<DIV id=Label2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 187px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label1">背景</DIV><v:line id=Shape2 onresize="" style="DISPLAY: block; LEFT: 37px; WIDTH: 287px; POSITION: absolute; TOP: 192px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "215.25pt,0" fillcolor = "white" strokecolor = "black" strokeweight = ".75pt"><v:stroke></v:stroke></v:line>
+<DIV id=Label3 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 12px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 145px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label1">边框</DIV><v:line id=Shape3 onresize="" style="DISPLAY: block; LEFT: 37px; WIDTH: 287px; POSITION: absolute; TOP: 151px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "215.25pt,0" fillcolor = "white" strokecolor = "black" strokeweight = ".75pt"><v:stroke></v:stroke></v:line>
+<DIV id=Label4 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 15px; WIDTH: 42px; FONT-FAMILY: ; POSITION: absolute; TOP: 30px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label4">水平对齐方式:</DIV><SELECT id=SKDBcombobox1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 92px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 25px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="combobox" sql="1&#13;&#10;1" china temptext="左对齐&#13;&#10;右对齐&#13;&#10;水平居中" tempvalue="left&#13;&#10;right&#13;&#10;center" check="1"><OPTION value=left selected>左对齐</OPTION><OPTION value=right>右对齐</OPTION><OPTION value=center>水平居中</OPTION></SELECT> 
+<DIV id=SKDBcheckbox1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 174px; WIDTH: 80px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 21px; HEIGHT: 20px; TEXT-ALIGN: left; backgroundColor1: #ffffff" onmovestart=moveStart() noWrap controltype="checkbox" value="否" china onclick='bill_onclick("uf_ischeck()")' divtype="checkbox" truevalue="是" falsevalue="否"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>指定宽度</SPAN></DIV>
+<DIV id=Label5 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 81px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label5">行跨距:</DIV><div Class='xpSpin' DefaultValue="undefined" id="NumEdit1" field="undefined" dataset="undefined"  Min="0" value"undefined" align="left" style='align:left; position:absolute; left:92px; top:74px; width:78px; height:22px;' NextNum="1" Max="32000" fontsize="12px" fontstyle="" fontfamily="" backgroundcolor="" color="" fontweight="" enabled="否" display="block" left="92px"  top="74px" width="78px" height="22px"></div> 
+<DIV id=Label6 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 49px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 105px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label5">列跨距:</DIV><div Class='xpSpin' DefaultValue="undefined" id="NumEdit2" field="undefined" dataset="undefined"  Min="0" value"undefined" align="left" style='align:left; position:absolute; left:92px; top:99px; width:78px; height:22px;' NextNum="1" Max="32000" fontsize="12px" fontstyle="" fontfamily="" backgroundcolor="" color="" fontweight="" enabled="否" display="block" left="92px"  top="99px" width="78px" height="22px"></div><INPUT type=text id=FCDBedit1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 193px; WIDTH: 55px; FONT-FAMILY: ; POSITION: absolute; TOP: 46px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() controltype="text" value china CanSelect="false"></INPUT> 
+<FIELDSET id=SKDBRadioGroup1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 252px; WIDTH: 66px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 20px; HEIGHT: 63px; backgroundColor1: #ffffff" onmovestart=moveStart() controltype="radio" value="-1" china temptext="像素&#13;&#10;百分比" tempvalue="1&#13;&#10;2" aspect="纵向" readOnly="false" legend><LEGEND></LEGEND><INPUT type=radio value=1 name=RGSKDBRadioGroup1 text="像素"><SPAN onclick=RGSKDBRadioGroup1[0].checked=true;SKDBRadioGroup1.value=RGSKDBRadioGroup1[0].value;RGSKDBRadioGroup1[0].focus();>像素</SPAN>&nbsp;<BR><INPUT type=radio value=2 name=RGSKDBRadioGroup1 text="百分比"><SPAN onclick=RGSKDBRadioGroup1[1].checked=true;SKDBRadioGroup1.value=RGSKDBRadioGroup1[1].value;RGSKDBRadioGroup1[1].focus();>百分比</SPAN>&nbsp;</FIELDSET> 
+<DIV id=SKDBcheckbox2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 174px; WIDTH: 80px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 79px; HEIGHT: 20px; TEXT-ALIGN: left; backgroundColor1: #ffffff" onmovestart=moveStart() noWrap controltype="checkbox" value="否" china onclick='bill_onclick("uf_ischeck()")' divtype="checkbox" truevalue="是" falsevalue="否"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>指定高度</SPAN></DIV><INPUT type=text id=FCDBedit2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 193px; WIDTH: 55px; FONT-FAMILY: ; POSITION: absolute; TOP: 104px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() controltype="text" value china CanSelect="false"></INPUT>
+<FIELDSET id=SKDBRadioGroup2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 252px; WIDTH: 66px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 78px; HEIGHT: 63px; backgroundColor1: #ffffff" onmovestart=moveStart() controltype="radio" value="-1" china temptext="像素&#13;&#10;百分比" tempvalue="1&#13;&#10;2" aspect="纵向" readOnly="false" legend><LEGEND></LEGEND><INPUT type=radio value=1 name=RGSKDBRadioGroup2 text="像素"><SPAN onclick=RGSKDBRadioGroup2[0].checked=true;SKDBRadioGroup2.value=RGSKDBRadioGroup2[0].value;RGSKDBRadioGroup2[0].focus();>像素</SPAN>&nbsp;<BR><INPUT type=radio value=2 name=RGSKDBRadioGroup2 text="百分比"><SPAN onclick=RGSKDBRadioGroup2[1].checked=true;SKDBRadioGroup2.value=RGSKDBRadioGroup2[1].value;RGSKDBRadioGroup2[1].focus();>百分比</SPAN>&nbsp;</FIELDSET>&nbsp; 
+<DIV id=Label8 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 40px; WIDTH: 30px; FONT-FAMILY: ; POSITION: absolute; TOP: 165px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label8">边框颜色:</DIV><BUTTON id=FCButton1 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 96px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 160px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("borderColor()")'></BUTTON><BUTTON id=FCButton2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 96px; WIDTH: 25px; FONT-FAMILY: ; POSITION: absolute; TOP: 198px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_callColorDlg()")'></BUTTON> 
+<DIV id=Label9 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 39px; WIDTH: 30px; FONT-FAMILY: ; POSITION: absolute; TOP: 203px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label8">背景颜色:</DIV><BUTTON id=FCButton3 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 160px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 236px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'></BUTTON><BUTTON id=FCButton4 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 241px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 236px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'></BUTTON> 
+<DIV id=Label10 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 42px; FONT-FAMILY: ; POSITION: absolute; TOP: 53px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label4">垂直对齐方式:</DIV><SELECT id=SKDBcombobox2 onresizeend=resizeEnd() onresizestart=resizeStart() onmoveend=moveEnd() style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 92px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 49px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="combobox" sql="1&#13;&#10;1" china temptext="顶边对齐&#13;&#10;相对垂直居中&#13;&#10;基线&#13;&#10;相对底线对齐" tempvalue="top&#13;&#10;center&#13;&#10;baseline&#13;&#10;bottom" check="1"><OPTION value=top selected>顶边对齐</OPTION><OPTION value=center>相对垂直居中</OPTION><OPTION value=baseline>基线</OPTION><OPTION value=bottom>相对底线对齐</OPTION></SELECT> </DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT></body></html>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<classNames>
+	<className id="fileDaoImpl">com.chinacreator.xtbg.pub.jqueryupload.filebuess.dao.impl.FiletransfersSysDaoImpl</className>
+
+	<!-- 系统管理模块 Begin -->
+	<className id="orgTypeDaoImpl">com.chinacreator.xtbg.pub.core.dao.imploracle.OrgTypeDaoImpl</className><!-- 机构类型事务实现类 -->
+	<!-- 系统管理模块 End -->
+<!-- add by tian.xia 20120208 start... -->
+	<!-- 流程信息管理 -->
+	<className id="flowInfoDaoImpl">com.chinacreator.xtbg.pub.flowinfoconif.dao.imploracle.FlowInfoDaoImpl</className>
+	<!-- 所有树的相关dao -->
+	<className id="TreeDaoImpl">com.chinacreator.xtbg.pub.tree.dao.impl.TreeDaoImpl</className>
+	<!-- 通讯录 -->
+	<className id="personInfoDaoImpl">com.chinacreator.xtbg.pub.personwork.dao.impl.PersonInfoDaoImpl</className>
+	<className id="priManageDaoImpl">com.chinacreator.xtbg.pub.personwork.dao.impl.PriManageDaoImpl</className>
+	<!-- 领导日程 Begin -->
+	<className id="leaderScheduleDaoImpl">com.chinacreator.xtbg.pub.leaderschedule.dao.imploracle.LeaderScheduleDaoImpl</className>
+	<className id="leaderArrangDaoImpl">com.chinacreator.xtbg.pub.leaderschedule.dao.imploracle.LeaderArrangDaoImpl</className>
+	<className id="scheduleCanViewDaoImpl">com.chinacreator.xtbg.pub.leaderschedule.dao.imploracle.ScheduleCanViewDaoImpl</className>
+	<className id="leaderArrangementMonthDaoImpl">com.chinacreator.xtbg.pub.leaderschedule.dao.imploracle.LeaderArrangementMonthDaoImpl</className>
+	<!-- 领导日程 End -->
+	<!-- 名录管理 Begin -->
+	<className id="directoryDaoImpl">com.chinacreator.xtbg.pub.directory.dao.imploracle.DirectoryDaoImpl</className>
+	<className id="directoryDaoExcelImpl">com.chinacreator.xtbg.core.directory.dao.imploracle.DirectoryDaoExcelImpl</className>
+	<!-- 名录管理 End -->
+	<!-- 考勤管理 Begin -->
+	<className id="electResetDaoImpls">com.chinacreator.xtbg.suxian.electroniccheck.dao.imploracle.ElectResetDaoImpl</className>
+	<className id="electInfoDaoImpls">com.chinacreator.xtbg.suxian.electroniccheck.dao.imploracle.ElectInfoDaoImpl</className>
+	<className id="electViewDaoImpls">com.chinacreator.xtbg.suxian.electroniccheck.dao.imploracle.ElectViewDaoImpl</className>
+	<!-- 考勤管理 End -->
+	<!-- 资源配置 START -->
+	<className id="moduleTreeDaoImpl">com.chinacreator.xtbg.pub.tree.dao.impl.ModuleTreeDaoImpl</className>	
+	<className id="resourceConfigDaoImpl">com.chinacreator.xtbg.pub.tree.dao.impl.ResouceConfigDaoImpl</className>	
+	<!-- 资源配置 END -->
+	<!-- add by yin.liu 20120131 start... -->
+	<className id="appStoreDaoImpl">com.chinacreator.xtbg.pub.android.virtualappmanager.dao.imploracle.AppStoreDaoImpl</className>
+	<className id="appPermissionDaoImpl">com.chinacreator.xtbg.pub.android.virtualappmanager.dao.imploracle.AppPermissionDaoImpl</className>
+	<className id="apptreeDaoImpl">com.chinacreator.xtbg.pub.android.virtualappmanager.dao.imploracle.TestZtreeDaoImpl</className>
+	<className id="androidVersionDaoImpl">com.chinacreator.xtbg.pub.android.androidversion.dao.imploracle.AndroidVersionDaoImpl</className>
+	<!-- add by yin.liu 20120131 end... -->
+	<!-- WORD:开始-->
+	<className id="wordTemplateDaoImpl">com.chinacreator.xtbg.pub.wordtemplate.dao.imploracle.WordTemplateDaoImpl</className>
+	<!-- WORD :结束-->
+	<!-- 在线人数统计BEING -->
+	<className id="sessionListenerDaoImpl">com.chinacreator.xtbg.pub.countOlinePerson.dao.imploracle.SessionListenerDaoImpl</className>
+	<!-- 在线人数统计END -->
+	<!-- session监听器dao start -->
+	<className id="sessionListenerDaoImpl">com.chinacreator.xtbg.pub.countOlinePerson.dao.imploracle.SessionListenerDaoImpl</className>
+	<!-- session监听器dao end -->
+	<!-- 资产管理 Begin -->
+	<className id="officeEquipmentTypeDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.OfficeEquipmentTypeDaoImpl</className>
+	<className id="officeConsumeTypeDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.OfficeConsumeTypeDaoImpl</className>
+	<className id="purchaseApplyDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.PurchaseApplyDaoImpl</className>
+	<className id="purchaseApprovalRoolDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.PurchaseApprovalRoolDaoImpl</className>
+	<className id="officeStockDaoImple">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.OfficeStockDaoImple</className>
+	<className id="consumeStockDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.ConsumeStockDaoImpl</className>
+	<className id="collarStockDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.CollarStockDaoImpl</className>
+	<className id="collarConEqStockDaoImpl">com.chinacreator.xtbg.yimingju.officeassets.dao.imploracle.CollarConEqStockDaoImpl</className>
+	<!-- 资产管理 End -->
+	<!--移民局车辆管理  -->
+	<className id="carManageApplyinfoDaoImplymj">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageApplyinfoDaoImpl</className>
+	<className id="carManageCarDaoImplymj">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageCarDaoImpl</className>
+	<!--移民局车辆管理END  -->
+	
+	<!-- 张家界 信息报送 START-->
+	<className id="infoTypeDaoImpl">com.chinacreator.xtbg.zhangjiajie.inforeported.dao.imploracle.InfoTypeDaoImpl</className>
+	<className id="unitsetupDaoImpl">com.chinacreator.xtbg.zhangjiajie.inforeported.dao.imploracle.UnitsetupDaoImpl</className>
+	<className id="releaseunitDaoImpl">com.chinacreator.xtbg.zhangjiajie.inforeported.dao.imploracle.ReleaseunitDaoImpl</className>
+	<className id="infoReportManagerDaoImpl">com.chinacreator.xtbg.zhangjiajie.inforeported.dao.imploracle.InfoReportManagerDaoImpl</className>
+	<className id="briefsTypeDaoImpl">com.chinacreator.xtbg.zhangjiajie.briefseditor.dao.imploracle.BriefsTypeDaoImpl</className>
+	<className id="briefsIntensiveDaoImpl">com.chinacreator.xtbg.zhangjiajie.briefseditor.dao.imploracle.BriefsIntensiveDaoImpl</className>
+	<className id="briefsEditorDaoImpl">com.chinacreator.xtbg.zhangjiajie.briefseditor.dao.imploracle.BriefsEditorDaoImpl</className>	
+	<className id="briefsBrowseDaoImpl">com.chinacreator.xtbg.zhangjiajie.briefseditor.dao.imploracle.BriefsBrowseDaoImpl</className>	
+	<className id="infoStaDaoImpl">com.chinacreator.xtbg.zhangjiajie.inforeported.dao.imploracle.InfoStaDaoImpl</className>	
+	<!-- 张家界 信息报送 END-->
+	<!-- 移民局短信提醒  start -->
+	<className id="SmsSendDaoImplYMJ">com.chinacreator.xtbg.pub.sms.dao.impl.SmsSendDao</className>
+	<!-- 移民局短信提醒  end -->
+	
+	<!-- 超过1g大附件上传 -->
+	<className id="fileupload">com.chinacreator.xtbg.yimingju.fileUpload.dao.imploracle.VideoManageDaoImpl</className>
+ 	<!-- 超过1g大附件上传 -->
+ 	<!-- 张家界收文人配置 -->
+ 	<className id="orgAndUserDaoImpl">com.chinacreator.xtbg.zhangjiajie.receivedocumentcirculate.dao.imploracle.OrgAndUserDaoImpl</className>
+ 	<!-- 张家界收文人配置 -->
+ 	<!-- 公共模块，网上投票 -->
+ 	<className id="votePaperDaoImpl">com.chinacreator.xtbg.core.vote.dao.impl.VotePaperDaoImpl</className>
+ 	<className id="voteViewDaoImpl">com.chinacreator.xtbg.core.vote.dao.impl.VoteViewDaoImpl</className>
+ 	<className id="messageSendDaoImplYMJ">com.chinacreator.xtbg.core.vote.dao.impl.MessageSendDaoImplYMJ</className>
+ 	
+ 	<!-- 公共模块，网上投票 end -->
+ 	<!-- 郴州政务中心请假管理 -->
+	<className id="leaveMangeDaoImpl" >com.chinacreator.xtbg.chenzhou.leaveManage.dao.impl.LeaveManageDaoImpl</className>
+	<!-- 郴州政务中心请假管理 -->
+	<!-- 公共模块，考勤 -->
+	<className id="publicElectDaoImpl" >com.chinacreator.xtbg.pub.workflow.dao.imploracle.ElectDaoImpl</className>
+	<!-- 公共模块，考勤 -->
+	
+	<!--发改委OA  -->
+	<!-- 发改委车辆管理impiDerector start -->
+	<className id="carManageMileagerecordDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageMileagerecordDaoImpl</className>
+	<className id="carManageRefuelmanageDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageRefuelmanageDaoImpl</className>
+	<className id="carManageViolationrecordDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageViolationrecordDaoImpl</className>
+	<!-- 发改委车辆管理impiDerector end -->
+	<!-- 发改委车辆管理的司机信息管理 -->
+	<className id="carDriver">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarDriverDaoImpl</className>
+	<!-- 发改委车辆管理的司机信息管理 -->
+
+	
+	<className id="carManageMileagerecordDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageMileagerecordDaoImpl</className>
+	<className id="carManageRefuelmanageDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageRefuelmanageDaoImpl</className>
+	<className id="carManageViolationrecordDaoImpl">com.chinacreator.xtbg.yimingju.carmanage.dao.impl.CarManageViolationrecordDaoImpl</className>
+	<!--消息中心查询-->
+	<className id="mesCenterDaoImpl">com.chinacreator.xtbg.fagaiwei.messageCenter.dao.impl.MesCenterDaoImpl</className>
+	<!--消息中心查询-->
+	<!-- 待办任务 start-->
+	<className id="homeBusinessDaoImpl">com.chinacreator.xtbg.waitDoWork.dao.imploracle.HomeBusinessDaoImpl</className>
+	<!-- 待办任务end -->
+	
+	<!-- 评审管理 start-->
+	<className id="reviewUserDaoImpl">com.chinacreator.xtbg.tjy.review.dao.Impl.ReviewUserDaoImpl</className>
+	<className id="reviewInfoDaoImpl">com.chinacreator.xtbg.tjy.review.dao.Impl.ReviewInfoDaoImpl</className>
+	<!-- 评审管理end -->
+	
+	<!-- 特检院办公用品 start -->
+	<className id="osAppObjectDaoImpl.java">com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsAppObjectDaoImpl</className>
+	<!-- 特检院办公用品 end -->
+	<!-- 新加电子考勤 -->
+	<className id="electDaoImpl">com.chinacreator.xtbg.suxian.electroniccheck.dao.imploracle.ElectDaoImpl</className>
+	
+</classNames>

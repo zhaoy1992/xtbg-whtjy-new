@@ -1,0 +1,38 @@
+<HTML >
+<HEAD>
+ <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>湖南科创信息</TITLE>
+<script src="../js/csjsrequest.js"></script>
+<script src="../js/fcout.js"></script>
+<script language="javascript">
+var topdjsn = Request.QueryString("djsn");     //表单编号
+var topisfile = Request.QueryString("isfile"); //表单是否存在文件中
+var ec_id = Request.QueryString("ec_id");      //表单所属类别
+function goback(){
+    //location.href="../form_list.jsp?class_id="+ec_id;
+    if(ec_id == "undefined")
+     location.href="../form_home.jsp";
+    else
+     location.href="../form_list.jsp?class_id="+ec_id;
+}
+</script>
+</HEAD>
+<body>
+<div height="10%" width="100%">
+<table width="100%">
+<tr>
+<td align="right">
+	<input type="button" name = "fanhui" value="返回到表单列表" onclick="goback()"/>
+</td>
+</tr>
+</table>
+<hr size="1" color="#5780C5"/>
+</div>
+<div height="90%" width="100%">
+<iframe id="topic" width="100%" height="100%"  name="rightmain" src="opendjsub.htm"  scrolling=auto border=0  frameborder=1  bordercolor=LightGrey marginwidth=1 noresize>
+</iframe>
+</div>
+
+</body>
+</HTML>
+

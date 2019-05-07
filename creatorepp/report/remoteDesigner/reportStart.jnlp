@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<jnlp spec="0.2 1.0"	codebase="http://172.16.168.195:6001/demo/remoteDesigner">
+<information>
+<title>北京润乾软件技术有限公司</title>
+<vendor>北京润乾软件技术有限公司</vendor>
+<homepage href="http://www.runqian.com.cn"/>
+<icon href="app_logo.jpg"/>
+<offline-allowed/>
+</information> 
+<resources><j2se version="1.4.1+" href="http://java.sun.com/products/autodl/j2se"/><jar href="activation.jar" download="lazy"/>
+<jar href="barcode.jar" download="lazy"/>
+<jar href="defaultLicense.jar" download="lazy"/>
+<jar href="itext2_rq.jar" download="lazy"/>
+<jar href="iTextAsian.jar" download="lazy"/>
+<jar href="jai_codec.jar" download="lazy"/>
+<jar href="jai_core.jar" download="lazy"/>
+<jar href="jaxp.jar" download="lazy"/>
+<jar href="jbcl.jar" download="lazy"/>
+<jar href="jdom.jar" download="lazy"/>
+<jar href="listview.jar" download="lazy"/>
+<jar href="log4j_128.jar" download="lazy"/>
+<jar href="mail.jar" download="lazy"/>
+<jar href="mlibwrapper_jai.jar" download="lazy"/>
+<jar href="parser.jar" download="lazy"/>
+<jar href="pgslookandfeel.jar" download="lazy"/>
+<jar href="poi2.jar" download="lazy"/>
+<jar href="report4.jar" main="true" download="eager"/>
+<jar href="servlet.jar" download="lazy"/>
+<jar href="startup_helper.jar" download="lazy"/>
+<jar href="transfer3.5.jar" download="lazy"/>
+<jar href="xalan.jar" download="lazy"/>
+<jar href="xml-apis.jar" download="lazy"/>
+<jar href="zipfile.jar" download="lazy"/>
+</resources>
+<application-desc main-class="com.runqian.report4.ide.FrameMain"/>
+<security>
+<all-permissions/>
+</security>
+</jnlp>

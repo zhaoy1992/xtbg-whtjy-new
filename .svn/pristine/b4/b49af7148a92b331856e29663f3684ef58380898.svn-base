@@ -1,0 +1,10 @@
+1.顺序会签控制到到环节：添加活动扩展属性
+修改流程编辑器
+src/org/enhydra/jawe/base/controller/actions/InsertMyExtendsAttribute.java
+修改流程引擎：
+Shark-Extend/src/com/chinacreator/commonworkflow/WorkflowOpertionWrapper.java
+Shark-Extend/src/com/chinacreator/workflow/shark/SharkEngine.java
+Shark-Kernal/.classpath
+Shark-Kernal/src/jboss-cache.xml
+Shark-Kernal/src/org/enhydra/shark/WfActivityImpl.java
+Shark-Kernal/src/Shark.conf

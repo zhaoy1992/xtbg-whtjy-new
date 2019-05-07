@@ -1,0 +1,146 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: #cccccc; SCROLLBAR-HIGHLIGHT-COLOR: #cccccc; SCROLLBAR-SHADOW-COLOR: #999999; SCROLLBAR-3DLIGHT-COLOR: #999999; SCROLLBAR-ARROW-COLOR: #999999; SCROLLBAR-TRACK-COLOR: #cccccc; SCROLLBAR-DARKSHADOW-COLOR: #cccccc
+}
+
+/*交叉表样式*/
+.ct_cap
+{
+    BACKGROUND-COLOR:#D0B830;
+}
+
+.ct_capstat
+{
+    BACKGROUND-COLOR:#D0B830;
+    FONT-WEIGHT:BOLD;
+}
+
+.ct_valcol
+{
+    BACKGROUND-COLOR:#D0B830;
+}
+.ct_valrow
+{
+    BACKGROUND-COLOR:#10B830;
+}
+
+.ct_valstat
+{
+    BACKGROUND-COLOR:#D0B830;
+    FONT-WEIGHT:BOLD;
+}
+		
+
+/* 页签控件样式 */
+.dynamic-tab-pane-control .tab-page {}
+.dynamic-tab-pane-control h2 {
+	text-align:	center;
+	width:		auto;
+}
+.dynamic-tab-pane-control h2 a {
+	display:	inline;
+	width:		auto;
+}
+.dynamic-tab-pane-control a:hover {
+	background: transparent;
+}
+/**
+*默认字号为12px
+**/		
+#SKbillsheet  
+{
+	font-size:13px;
+}
+/**
+*grid控件的样式 
+**/
+.tdfilter { 
+	/*progid:DXImageTransform.Microsoft.BasicImage(invert=1);
+    */
+	filter: Invert;
+	background-color:#ffff32 ;
+ }  
+.tdfilter1 
+{
+	color:#ffffff ;
+	background-color:#0000cd ;
+	
+ } 
+   
+ .mouseover
+ {
+ 	/*sxb 20080912 鼠标移到对象的样式*/
+ 	background-color:#BECAD8 ;
+ }
+ .recStyle1
+ {
+ 	/*sxb 20080912 表格中单号行的样式*/
+ 	background-color:#EBEAE8
+ }
+  .recStyle2
+ {
+ 	/*sxb 20080912 表格中双号行的样式*/
+ 	background-color:#E3E3E3
+ 	
+ }
+ /* 点击后的背景色 
+ */
+ .creatorclickbg{
+    background-color:#BECAD8
+ }
+ 
+/* table的外框的样式 */
+#SKbillsheet #fcwebgriddiv  
+{
+	background-color:#ffffff;BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid;BORDER-COLOR:#B8B8B8;
+}
+
+/* table的样式 */
+#SKbillsheet #fcwebgriddiv #t  
+{
+	BACKGROUND-COLOR:#FFFFFF;FONT-FAMILY:MS Sans Serif;FONT-SIZE:11px;color:#000000;
+	/*background:url(tbodyBG.gif) 0 32px;*/
+}
+/* 表格的首行 */
+#SKbillsheet #fcwebgriddiv #t .fcGridFirstRow 
+{
+	/*BACKGROUND-COLOR:#c0c0c0 ;FONT-SIZE:12px;FONT-WEIGHT:bold;*/
+	BACKGROUND-COLOR:#c0c0c0 ;FONT-SIZE:12px;FONT-WEIGHT:bold;
+        background:url('../images/th_img_bg.gif') repeat-x left;
+        padding-left:5px;padding-right:5px;
+        padding-top:2px;padding-bottom:2px;
+        color:#ffffff;
+        font-size:14px;font-weight:normal
+}
+/* 表格的首行td */
+#SKbillsheet #fcwebgriddiv #t .fcGridFirstRow td
+{
+	/*BORDER-RIGHT: #a0a0a0 1px solid;*/
+	BORDER-RIGHT: #ffffff 1px solid; 
+}
+
+/* table的td样式 */
+#SKbillsheet #fcwebgriddiv #t td
+{
+	border:1px solid #5780C5;padding-left:5px
+}
+
+/* 表格控件内的编辑框 */
+#SKbillsheet #txtMyGrid 
+{
+	BACKGROUND-COLOR: white; BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none;
+}
+/* 垂直滚动条的样式 */
+#SKbillsheet #fchtcDiv1
+{
+	BACKGROUND-COLOR: #EEEDE5; BORDER-RIGHT: gray 0px solid; 
+}
+/* 水平滚动条的样式 */
+#SKbillsheet #fchtcDiv2
+{
+	BACKGROUND-COLOR: #EEEDE5; BORDER-RIGHT: gray 0px solid; 
+}
+/*表格右下角的填补块*/
+#SKbillsheet #divconer {
+	BACKGROUND-COLOR: #EEEDE5; BORDER-BOTTOM: 0px solid; BORDER-RIGHT: 0px solid;font-size:9px;
+}
+

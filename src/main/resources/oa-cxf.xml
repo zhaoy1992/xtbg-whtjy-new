@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://cxf.apache.org/jaxws
+http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<!--<jaxws:endpoint id="receiveGwIfc"
+		implementor="com.chinacreator.xtbg.pub.oagwcs.service.impl.ReceiveGwImpl"
+		address="/ReceiveGwIfc">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+
+	</jaxws:endpoint>-->
+	<jaxws:endpoint id="workFlowPhoneHandleIfc"
+		implementor="com.chinacreator.xtbg.core.process.workflowphone.service.impl.WorkFlowPhoneHandleImpl"
+		address="/WorkFlowPhoneHandleIfc">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+	
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding='gb2312'?>
+<properties>
+	
+	<!--
+		获取方法：
+		String approot = ConfigManager.getInstance().getConfigValue("approot");
+	-->
+	
+	<!--
+		索引存放目录，必须写绝对路径，如：d:\indexs，为空时，系统将在应用所在目录；同时系统会在index.dir目录创建luceneIndexs目录，然后在luceneIndexs目录下建立各应用的索引目录
+	-->
+	<property name="index.dir" value="" />
+	
+	<!--
+		索引缓存大小   索引最开始是创建在内存中，只有缓存满了之后才会写入到文件系统中，此参数如果太大，可能会影响索引的及时性，但设置过小当并发较大时对性能有些影响
+	-->
+	<property name="index.cache.size" value="2" />
+	
+	<!--
+		索引请求线程池的初始化大小
+	-->
+	<property name="requestPool.size" value="5" />
+	<!--
+		索引请求线程池的最大线程数
+	-->
+	<property name="requestPool.maxsize" value="30" />
+	<!--
+		索引请求线程池中空闲线程的保持时间，单位是秒
+	-->
+	<property name="requestPool.keepAliveTime" value="30" />
+	
+
+</properties>

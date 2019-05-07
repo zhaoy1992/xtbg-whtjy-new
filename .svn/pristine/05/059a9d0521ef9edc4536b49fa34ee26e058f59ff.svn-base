@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link href="image/style.css" rel="stylesheet" type="text/css" />
+<link href="image/base.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="right">
+			<div class="right_tab_bg">
+<div class="right_tab_bg01"></div>
+<div class="right_tab">
+
+
+
+<!----------------- 主要内容 ------------------>
+ <div  class="content">
+       <!------------  欢迎 --------------->
+	  <div class="hy_box">
+	   <div class="content_hy">
+	   <ul>
+	    <li ><span class="red_b">上午好，马坤 先生！</span></li>
+        <li>您有 <span class="red_b">12 </span>条待办事务需要处理：</li>
+        <li> <span class="red_b">5</span>条<span class="blue_unl"><a href="">会议通知</a></span>
+		     &nbsp;<span class="red_b">4</span>条<span class="blue_unl"><a href="">通知公告</a></span>
+			 &nbsp;<span class="red_b">2</span>条<span class="blue_unl"><a href="">公文处理</a></span>  
+			 &nbsp;<span class="red_b">4</span>条<span class="blue_unl"><a href="">日程安排</a></span></li>
+      
+       </ul>
+</div> 
+       <!------------  天气 --------------->
+       <div class="content_tq">
+	   <ul>
+	    <li ><span class="red">今天是： 07月27日 星期五 农历六月初九</span></li>
+		<li >株洲市          多云转阵雨 <span class="red">28℃～35℃</span>南风<=3级</li>
+		<li >此次是您第<span class="red">168</span>次登录株洲市协同及移动办公政务平台</li>
+		<li >您上次登录平台的时间是：<span class="red">2012/07/27 11:55:58</span></li>
+       </ul>
+</div>
+      </div>
+        <!-----------  列表1  -------------->
+	<div class="list_left_box">
+		
+		 <table border="0" cellpadding="0" cellspacing="0" class="list_left_table">
+  <tr>
+    <td><div class="list_tit"><span class="list_tit_w">通知公告</span>
+	       <div class="list_tit_img"></div>
+		   <div class="more"><a href="">更多>></a></div>
+	     </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" align="right" cellpadding="0" cellspacing="2" class="list_list_table">
+  <tr>
+    <td >
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">株洲市 多云转阵雨 28℃～35℃南风<=3级</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td><div class="list_list">
+      <div class="list_list_bt03"><a href="">dsdsadas</a></div>
+      <div class="list_list_name03"><a href="">代代用名</a></div>
+      <div class="list_list_date03">2012-03-12</div>
+    </div></td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03">2012-03-12</div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  
+</table></td>
+  </tr>
+  
+</table>
+
+		 
+	   </div>
+	    <!-----------  列表2  -------------->
+	    <div class="list_left_box">
+		
+		 <table border="0" cellpadding="0" cellspacing="0" class="list_right_table">
+  <tr>
+    <td><div class="list_tit"><span class="list_tit_w">通知公告</span>
+	       <div class="list_tit_img"></div>
+		   <div class="more"><a href="">更多>></a></div>
+	     </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="2" cellpadding="0" class="list_list_table">
+  <tr>
+    <td >
+	<div class="list_list">
+	<div class="list_list_bt"><a href="">dsdsadas</a></div>
+	<div class="list_list_date">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td><div class="list_list">
+      <div class="list_list_bt"><a href="">dsdsadas</a></div>
+	<div class="list_list_date">2012-03-12</div>
+    </div></td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt"><a href="">dsdsadas</a></div>
+	<div class="list_list_date">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt"><a href="">dsdsadas</a></div>
+	<div class="list_list_date">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt"><a href="">dsdsadas</a></div>
+	<div class="list_list_date">2012-03-12</div>
+	</div>	</td>
+  </tr>
+  
+</table></td>
+  </tr>
+  
+</table>
+
+		 
+	   </div>
+	    <!-----------  列表3  -------------->
+		<div class="list_left_box">
+		
+		 <table border="0" cellpadding="0" cellspacing="0" class="list_left_table">
+  <tr>
+    <td><div class="list_tit"><span class="list_tit_w">通知公告</span>
+	       <div class="list_tit_img"></div>
+		   <div class="more"><a href="">更多>></a></div>
+	     </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" align="right" cellpadding="0" cellspacing="2" class="list_list_table">
+  <tr>
+    <td >
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03">2012-03-12</div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  
+</table></td>
+  </tr>
+  
+</table>
+
+		 
+	   </div>
+	    <!-----------  列表4  -------------->
+	    <div class="list_left_box">
+		
+		 <table border="0" cellpadding="0" cellspacing="0" class="list_right_table">
+  <tr>
+    <td><div class="list_tit"><span class="list_tit_w">通知公告</span>
+	       <div class="list_tit_img"></div>
+		   <div class="more"><a href="">更多>></a></div>
+	     </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="2" cellpadding="0" class="list_list_table">
+  <tr>
+    <td >
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03"><a href="">代代用名</a></div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list_list">
+	<div class="list_list_bt03"><a href="">dsdsadas</a></div>
+	<div class="list_list_name03">2012-03-12</div>
+	<div class="list_list_date03">2012-03-12</div>
+	</div>
+	</td>
+  </tr>
+  
+</table></td>
+  </tr>
+  
+</table>
+
+		 
+	   </div>
+</div>
+<!----------------- 主要内容 结束 ------------------>	   
+
+       
+	  
+	   
+	   </div>
+
+</body>
+</html>

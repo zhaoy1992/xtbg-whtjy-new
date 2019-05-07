@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frist-config>
+	<!-- 显示信息区域块 -->
+	<item>
+		<!-- dynamicUrlColumns 为动态查询出的链接地址  值为字段名 -->
+		<!-- showColumns为真实值  realShowColumns为加样式或标签的值 -->
+		<show-item id="xzwd" name="新增文档" showColumnsTitle="标题,上传人,时间" showColumnsTileLocation="left,left,right" showColumns="k_title,k_create_user_name,k_create_time" columnsWidth="60%,10%,30%" realShowColumns="k_title,k_create_user_name,k_create_time" dynamicUrlColumns=""
+			urlParamColumns="k_doc_id" >
+			<clickurl>/ccapp/oa/kbm/jsp/kbmdocdetail4query.jsp?isview=view&amp;subid1=xzwd&amp;urls=jsy&amp;type=first&amp;opentype=query</clickurl>
+			<moreUrl>/ccapp/oa/kbm/jsp/newdocfindlist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+					select decode(sign(length(k_title) - 20),
+					              1,
+					              substr(k_title, 1, 20) || '...',
+					              k_title) k_title,
+					       k_create_user_name,
+					       to_char(k_create_time, 'yyyy-mm-dd hh24:mi') as k_create_time,
+					       k_doc_id
+					  from OA_KBM_DOC
+					 where (k_create_user = ? or 1 = 1)
+					   and k_flag = '5'
+					   and k_create_time >= to_date('2017-01-01','yyyy-MM-dd')
+					 order by k_create_time desc
+
+	 			]]>
+			</sql>
+		</show-item>
+		<show-item id="tjwd" name="推荐文档" showColumnsTitle="标题,推荐人,时间" showColumnsTileLocation="left,left,right" showColumns="k_title,k_create_user_name,k_create_time" columnsWidth="60%,10%,30%" realShowColumns="show_k_title,k_create_user_name,k_create_time" dynamicUrlColumns=""
+		 urlParamColumns="k_doc_id">
+			<clickurl>/ccapp/oa/kbm/jsp/kbmdocdetail4query.jsp?issaved=doview&amp;subid1=tjwd&amp;type=first&amp;opentype=query</clickurl>
+			<moreUrl>/ccapp/oa/kbm/jsp/kbmdocsuggestlist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				 select 
+	     			 decode(sign(length(k_title)-20),1,substr(k_title,1,20)||'...',k_title) k_title,
+	     			 k_create_user_name,	 
+	     			 to_char(k_create_time, 'yyyy-mm-dd hh24:mi') as k_create_time,
+	     			 k_doc_id,
+	     			  decode(k_is_read,
+                        '0',
+                        '<strong>' || decode(sign(length(k_title)-20),1,substr(k_title,1,20)||'...',k_title) ||
+					              '</strong>',
+					             decode(sign(length(k_title)-20),1,substr(k_title,1,20)||'...',k_title)) as show_k_title
+	     			 from oa_kbm_doc_suggest  where k_user=? 
+					 order by k_create_time desc
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="rdwd" name="热点文档" showColumnsTitle="标题,上传人,时间" showColumnsTileLocation="left,left,right" showColumns="k_title,k_create_user_name,k_create_time"  columnsWidth="60%,10%,30%" realShowColumns="k_title,k_create_user_name,k_create_time" dynamicUrlColumns="flow_form"
+		 urlParamColumns="k_doc_id">
+			<clickurl>/ccapp/oa/kbm/jsp/kbmdocdetail4query.jsp?list_type=worklist&amp;operType=daiban&amp;openwindID=sub_main_viewinfos&amp;subid1=rdwd&amp;type=first&amp;opentype=query</clickurl>
+			<moreUrl>/ccapp/oa/kbm/jsp/newdocfindbytoplist.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select 
+	     			 decode(sign(length(k_title)-20),1,substr(k_title,1,20)||'...',k_title) k_title,
+	     			 k_create_user_name,	 
+	     			 to_char(k_create_time, 'yyyy-mm-dd hh24:mi') as k_create_time,
+	     			 k_doc_id
+	     			 from OA_KBM_DOC  where (1>1 or k_create_user=?) and k_flag='5'
+	     			 and sysdate - k_create_time < 30
+					 order by k_dcount desc
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="wjgxtz" name="文件更新通知" showColumnsTitle="标题,上传人,更新时间" showColumnsTileLocation="left,left,right" showColumns="k_title,k_create_user_name,k_update_time"  columnsWidth="60%,10%,30%" realShowColumns="k_title,k_create_user_name,k_update_time" dynamicUrlColumns="flow_form"
+		 urlParamColumns="k_doc_id">
+			<clickurl>/ccapp/oa/kbm/jsp/kbmdocreceiveinfo.jsp?openwindID=sub_main_viewinfos&amp;subid1=wjgxtz&amp;type=first&amp;opentype=query</clickurl>
+			<moreUrl>/ccapp/oa/kbm/jsp/kbmdocbrowselist.jsp</moreUrl>
+			<sql paramCount="0" maxRownum="5">
+				<![CDATA[
+					   select b.k_doc_id as k_doc_id,
+					          decode(sign(length(b.k_title) - 20),
+					                 1,
+					                 substr(b.k_title, 1, 20) || '...',
+					                 b.k_title) k_title,
+					          b.k_code as k_code,
+					          b.k_type_name as k_type_name,
+					          b.k_unit_name as k_unit_name,
+					          b.k_create_user_name as k_create_user_name,
+					          to_char(b.k_create_time, 'yyyy-mm-dd hh24:mi') as k_create_time,
+					          to_char(b.k_update_time, 'yyyy-mm-dd hh24:mi') as k_update_time
+					     from oa_kbm_doc b
+					    where sysdate - b.k_update_time < 30
+					      and (b.k_luojishanchu = '0' or b.k_luojishanchu is null)
+					    order by k_create_time desc
+	             ]]>
+			</sql>
+		</show-item>
+		<!-- 
+		<show-item id="scphb" name="上传排行榜" showColumnsTitle="上传人,上传数量,排名" showColumnsTileLocation="left,left,right" showColumns="k_create_user_name,k_count,rownum"  columnsWidth="60%,10%,30%" realShowColumns="k_create_user_name,k_count,rownum" dynamicUrlColumns=""
+		 urlParamColumns="k_create_user,k_create_user_name">
+			<clickurl>/ccapp/oa/kbm/jsp/newdocfindlist.jsp?windowId=VotePaperList</clickurl>
+			<moreUrl>/ccapp/oa/kbm/jsp/kbmuploadtop.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select tr.*, rownum 
+			        from (select t.k_create_user,t.k_create_user_name, 
+			        t.k_dept_name,
+			 		count(t.k_create_user_name) k_count
+					from oa_kbm_doc t where t.k_flag='5'
+					group by t.k_create_user,t.k_create_user_name, t.k_dept_name order by k_count desc) tr 
+					where (tr.k_create_user=? or 1=1)
+					order by k_count desc
+	             ]]>
+			</sql>
+		</show-item>
+		 -->
+	</item>
+</frist-config>

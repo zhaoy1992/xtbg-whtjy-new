@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>var Printer  ;
+function uf_open() {
+	Printer = pubDataSet ;
+	cboPaper.selectedIndex = 0
+	txtWidth.value = "" ;
+	txtHeight.value ="" ;
+	txtId.value = Printer.tempid ;
+	//txtName.value = Printer.tempname;
+
+	//alert(Printer.tempid)
+	//读userdata中的zoomprint pos信息
+	var s = GetPara("zoomprintpos") ;
+	if(IsSpace(s) == false){
+		var arr=s.split(";") ;
+		txtPaper.value = arr[0] ;
+		txtWidth.value = arr[1] ;
+		txtHeight.value = arr[2] ;
+		cboPaper.value = arr[0] ;
+	}	
+	s = GetPara("zoomprintcbo") ;
+	if(IsSpace(s) == false){
+		cboPaper.outerHTML = s ; 
+	}
+}
+function uf_print(index) {
+	var s = txtPaper.value+";"+txtWidth.value+";"+txtHeight.value ;
+	SetPara("zoomprintpos",s) ;
+
+	if(cboPaper.selectedIndex <= 0){
+		switch (index) {
+			case 1 : Printer.Preview(Printer.tempid);break;
+			case 2 : Printer.Print(Printer.tempid);break;
+			case 3 : Printer.Print(Printer.tempid,true);break;
+		}
+	}else{
+		switch (index) {
+			case 1 : Printer.Preview(Printer.tempid,txtPaper.value,txtWidth.value,txtHeight.value);break;
+			case 2 : Printer.Print(Printer.tempid,false,txtPaper.value,txtWidth.value,txtHeight.value);break;
+			case 3 : Printer.Print(Printer.tempid,true,txtPaper.value,txtWidth.value,txtHeight.value);break;
+		}
+	
+	}
+}
+function uf_onchange() {
+	txtPaper.value = cboPaper.value ;
+  switch (cboPaper.value) {
+     case '无缩放':
+      	   txtWidth.value="" 
+           txtHeight.value=""
+           break; 
+     case 'A3':
+      	   txtWidth.value=297.0
+           txtHeight.value=420.0   
+           break;
+     case 'A4':
+      	   txtWidth.value=210.0
+           txtHeight.value=297.0   
+           break;
+     case 'A5':
+      	   txtWidth.value=148.0
+           txtHeight.value=210.0   
+           break;
+     case 'B4':
+      	   txtWidth.value=257.0
+           txtHeight.value=364.0       
+           break;
+     case 'B5':
+      	   txtWidth.value=182.0
+           txtHeight.value=257.0  
+           break;
+     case 'A2':
+      	   txtWidth.value=420.0
+           txtHeight.value=594.0
+           break; 
+     case 'B3':
+      	   txtWidth.value=364.0
+           txtHeight.value=515.0 
+           break;
+     case 'Letter':
+      	   txtWidth.value=215.9
+           txtHeight.value=279.4 
+           break;
+     case '自定义':
+     		break;
+     default :
+     		txtWidth.value = cboPaper.options(cboPaper.selectedIndex).paperwidth ;
+     		txtHeight.value = cboPaper.options(cboPaper.selectedIndex).paperheight ;
+           
+ 	}         
+}
+function uf_save() {
+	if(IsSpace(txtPaper.value)){
+		alert("不能为空") ;
+		txtPaper.focus() ;
+		return;
+	}
+	var sPaper = Trim(txtPaper.value);
+	var bFind = false ;
+	for(var i=0;i<cboPaper.options.length;i++){
+		if(sPaper == cboPaper.options(i).text){
+			//alert(sPaper+"已存在!");
+			bFind = true ;
+			var oOpt = cboPaper.options(i) ;
+			oOpt.text=sPaper ;
+			oOpt.value=sPaper ;
+			oOpt.paperwidth = txtWidth.value ;
+			oOpt.paperheight = txtHeight.value ;
+			break;
+		}
+	}
+	if(bFind == false){
+		var oOpt=document.createElement("option") ;
+		oOpt.text=sPaper ;
+		oOpt.value=sPaper ;
+		oOpt.paperwidth = txtWidth.value ;
+		oOpt.paperheight = txtHeight.value ;
+		cboPaper.add(oOpt) ;
+	}
+	var s = cboPaper.outerHTML ;
+	SetPara("zoomprintcbo",s) ;
+	alert("保存成功!");
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet center="居中" BLONopen="uf_open()" dj_sn="ep_zoom" type="PR" caption="放缩打印" mkbh codeheader="BBB" keyfield window="有模式窗口" entertype="修改" posleft postop poswidth="300" posheight="260" isfile="否" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" idtype="1" billtaborder="<root><taborder>cboPaper</taborder><taborder>cmdPreview</taborder><taborder>cmdPrint</taborder><taborder>cmdPrint1</taborder><taborder>FCButton4</taborder><taborder>txtWidth</taborder><taborder>txtHeight</taborder><taborder>txtId</taborder><taborder>txtPaper</taborder><taborder>cmdSave</taborder></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" contxml="<root><label><id>Label2</id><id>Label13</id><id>Label14</id><id>Label4</id><id>Label3</id><id>Label23</id><id>Label25</id></label><combobox><id>cboPaper</id></combobox><shape><id>Shape9</id></shape><button><id>cmdPrint1</id><id>FCButton4</id><id>cmdPrint</id><id>cmdPreview</id><id>cmdSave</id></button><text><id>txtWidth</id><id>txtHeight</id><id>txtId</id><id>txtPaper</id></text></root>" toolbar="不带工具栏"><?xml:namespace prefix = v /><v:Rect id=Shape9 style="LEFT: 6px; WIDTH: 262px; POSITION: absolute; TOP: 68px; HEIGHT: 109px" onmovestart=moveStart() controltype="shape" coordsize = "21600,21600" fillcolor = "white" strokecolor = "black"><v:stroke></v:stroke></v:Rect><BUTTON id=cmdPrint1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 142px; WIDTH: 60px; FONT-FAMILY: ; POSITION: absolute; TOP: 187px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_print(3)")' dropstyle="否">直接打印</BUTTON><BUTTON id=FCButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 206px; WIDTH: 60px; FONT-FAMILY: ; POSITION: absolute; TOP: 187px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否">关 闭</BUTTON><SELECT id=cboPaper style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 74px; WIDTH: 166px; FONT-FAMILY: ; POSITION: absolute; TOP: 91px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_onchange()")' controltype="combobox" china backheight="25" backwidth="191" check="1" sql tempvalue="无缩放&#13;&#10;A3&#13;&#10;A4&#13;&#10;A5&#13;&#10;B4&#13;&#10;B5&#13;&#10;A2&#13;&#10;B3&#13;&#10;Letter&#13;&#10;自定义" temptext="无缩放&#13;&#10;A3&#13;&#10;A4&#13;&#10;A5&#13;&#10;B4&#13;&#10;B5&#13;&#10;A2&#13;&#10;B3&#13;&#10;Letter&#13;&#10;自定义"><OPTION value=无缩放 selected>无缩放</OPTION><OPTION value=A3>A3</OPTION><OPTION value=A4>A4</OPTION><OPTION value=A5>A5</OPTION><OPTION value=B4>B4</OPTION><OPTION value=B5>B5</OPTION><OPTION value=A2>A2</OPTION><OPTION value=B3>B3</OPTION><OPTION value=Letter>Letter</OPTION><OPTION value=自定义>自定义</OPTION></SELECT><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 21px; WIDTH: 53px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 96px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #ffffff; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2" controltype="label">纸张大小</SPAN><INPUT type=text id=txtWidth style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 74px; WIDTH: 48px; FONT-FAMILY: ; POSITION: absolute; TOP: 136px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="210" controltype="text" china CanSelect="false"></INPUT><SPAN id=Label13 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 127px; WIDTH: 32px; FONT-FAMILY: ; POSITION: absolute; TOP: 139px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label13" controltype="label">毫米</SPAN><SPAN id=Label14 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 127px; WIDTH: 32px; FONT-FAMILY: ; POSITION: absolute; TOP: 159px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label14" controltype="label">毫米</SPAN><INPUT type=text id=txtHeight style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 74px; WIDTH: 48px; FONT-FAMILY: ; POSITION: absolute; TOP: 157px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="297" controltype="text" china CanSelect="false"></INPUT><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 21px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 160px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label4" controltype="label">高&nbsp;&nbsp;&nbsp; 度</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 21px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 140px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label3" controltype="label">宽&nbsp;&nbsp;&nbsp; 度</SPAN><SPAN id=Label23 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 10px; WIDTH: 45px; FONT-FAMILY: ; POSITION: absolute; TOP: 29px; HEIGHT: 14px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label23" controltype="label">模版ID</SPAN><INPUT type=text id=txtId style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 64px; WIDTH: 178px; FONT-FAMILY: ; POSITION: absolute; TOP: 23px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() value controltype="text" china CanSelect="false" readOnly="true"></INPUT><BUTTON id=cmdPrint style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 78px; WIDTH: 60px; FONT-FAMILY: ; POSITION: absolute; TOP: 187px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_print(2)")' dropstyle="否">打 印</BUTTON><BUTTON id=cmdPreview style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 14px; WIDTH: 60px; FONT-FAMILY: ; POSITION: absolute; TOP: 187px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_print(1)")' dropstyle="否">预 览</BUTTON><SPAN id=Label25 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 18px; WIDTH: 50px; FONT-FAMILY: ; POSITION: absolute; TOP: 72px; HEIGHT: 19px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; backgroundColor1: #ffffff; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label25" controltype="label">&nbsp;放缩到</SPAN><INPUT type=text id=txtPaper style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 74px; WIDTH: 166px; FONT-FAMILY: ; POSITION: absolute; TOP: 113px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() value controltype="text" china CanSelect="false"></INPUT><BUTTON id=cmdSave style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 155px; WIDTH: 84px; FONT-FAMILY: ; POSITION: absolute; TOP: 142px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_save()")' dropstyle="否">保存纸张信息</BUTTON></DIV></body></html>

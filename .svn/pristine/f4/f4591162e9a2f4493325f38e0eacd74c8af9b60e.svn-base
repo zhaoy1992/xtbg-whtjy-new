@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+                ">
+    <!-- 人员持证管理维护 start -->
+    <bean id="personholderDaoImpl"
+        class="com.chinacreator.xtbg.core.personholder.dao.imploracle.PersonHolderDaoImpl"></bean>
+    <bean id="holderDaoExcelImpl"
+        class="com.chinacreator.xtbg.core.personholder.data.HolderDaoExcelImpl"></bean>
+    <!-- 人员持证管理维护 end -->
+    <!--人员持证预警导出用 start -->
+    <bean id="personHolderYujingToData"
+        class="com.chinacreator.xtbg.core.personholder.data.PersonHolderYujingToData"></bean>
+     <!--人员持证预警导出用 end -->
+</beans>

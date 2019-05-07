@@ -1,0 +1,199 @@
+<HTML>
+	<HEAD></HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=GBK">
+	<script type="text/javascript" src="../../../cachloader/pre_load.js"></script>
+	
+	<script language="javascript">
+	var __dj_win_flag__ = true;	
+	function optmGetUsdatObj()
+	{
+		if((typeof(eppDataWrObj) != "undefined") && eppDataWrObj.isCanUse()) return eppDataWrObj;
+		if((typeof(userDataWrObj) != "undefined") && userDataWrObj.isCanUse()) return userDataWrObj;
+		return null;			
+	}
+	
+	function _start()
+	{	
+		var bSucced = __pre_loadjsFrame();
+		if(!bSucced) 
+		{
+			document.body.innerHTML = "<font color='#ff0000'>preload js frame failure!</font>";
+			return;
+		}
+		
+		mtJsFileArray("eformsys/fceform/js/csjsrequest.js", true, eppDataWrObj);
+		mtJsFileArray("eformsys/fceform/js/fcpub.js", true, optmGetUsdatObj());
+		
+		bSucced = prePageInit(false, false);
+		if(!bSucced) 
+		{
+			document.body.innerHTML = "<font color='#ff0000'>preload js file failure!</font>";
+			return;
+		}
+	
+	//通过该页面传递的三个参数。
+	djid = Request.QueryString("djsn").toString();  
+	workflowId = Request.QueryString("workflowId").toString();
+	cc_form_instanceid1 = Request.QueryString("cc_form_instanceid").toString();
+	oid = Request.QueryString("oid").toString(); 
+	
+	//要运行的表单文件的路径
+	creator_sys_filepath = Request.QueryString("creator_sys_filepath").toString();
+	
+	//构造参数传递通道，将传递给该页面的参数传递到下一个页面。
+	cur_search = location.search.substring(1,location.search.length);
+	my_arr =new Array();
+	new_search = "";
+	if(cur_search.indexOf("&")!=-1){
+		my_arr = cur_search.split("&");
+		for(var i=0;i<my_arr.length;i++){    	
+	   		if(my_arr[i].indexOf("djsn")==-1 
+	   		     && my_arr[i].indexOf("workflowId")==-1
+	   		     && my_arr[i].indexOf("cc_form_instanceid")==-1  
+	   		     && my_arr[i].indexOf("oid")==-1
+	   		     && my_arr[i].indexOf("djtype")==-1){   //这5个参数独立处理。djtype则不需要传递，其他4个独立处理后再传递。
+	            new_search = new_search + "&" + my_arr[i];   	   
+	   	    } 	  	
+		}	
+	}
+
+	var sver = Request.QueryString("isfile").toString();
+	pt_test = Request.QueryString("creator_dbtest").toString();//测试数据源
+	if(typeof window.dialogArguments =="undefined"){
+		//if(typeof parent.arr == "undefined") return;
+		//为了防止重名,将parent.arr 改为 parent.arrPubEformPara 
+		var arr=parent.arrPubEformPara   ; //window.opener.fcpubarr ;
+		
+	}else{
+		var arr=window.dialogArguments;
+	}
+	if(typeof arr == "undefined" && typeof parent.topic != "undefined" && parent.location.href.indexOf("fceform/design/opendj.htm") >= 0){ //定位刷新测试运行表单时
+		parent.topic.document.onreadystatechange= function ()
+		{
+			if (parent.topic.document.readyState=="complete")
+			{
+				// Finish initialization.
+				if(IsSpace(parent.topdjsn) ==false) {
+					if(parent.topisfile == "yes") {
+						DjOpenTestFile(parent.topdjsn)
+					} else {
+						DjOpenTest(parent.topdjsn)
+					}
+				}
+			}
+		}
+	}else{	
+		try{  //直接用此页面来运行正式表单时下面的命令会出错,所以try
+			sDivHtml=arr[0]  //整个表单的串.
+		}catch(e){}	
+		try{
+			sOpenDjNo=arr[1] //当前打开的单据编号.
+		}catch(e){}		
+		//加上如何在djframe中传递单据编号
+		var tmppara = Request.QueryString("paravalue").toString();
+		if(IsSpace(tmppara) == false) {
+			sOpenDjNo=tmppara;
+		}
+		if(typeof sOpenDjNo == "undefined") sOpenDjNo = "";
+		
+		try{
+			piAction=arr[2]	  //单据打开状态,=1为新增状态
+		}catch(e){}	
+		//加上如何在djframe中指定打开表单方式
+		var tmpAction = Request.QueryString("opentype").toString();
+		if(IsSpace(tmpAction) == false) {
+			tmpAction = parseInt(tmpAction);
+			if(isNaN(tmpAction) == false) piAction = tmpAction ;
+		}
+		
+		try{
+			oRequest=arr[3] ;    
+		}catch(e){}
+		try{
+			if(!IsSpace(arr[9]))
+			{
+				window.document.title = arr[9]; //窗口标题
+			}
+			var ComputerName=arr[5] ;  //客户端的机器名,arr[4]为工作流的数组
+			var modNo=arr[6] ;  //模块编号C3
+		}catch(e){}
+		var sdjsn = Request.QueryString("djsn").toString();
+		var pubsrc="fceform/common/pubdata.htm" ;
+		var topicsrc="fceform/dj/"+sdjsn+".htm"  ;  // /webbill/samples
+		var tmpB = true;
+		if(sver == "yes") {
+		//以测试模式运行文件表单
+			pubsrc += "?isfile=yes";
+			topicsrc="#";
+			try{
+				Request = arr[3];
+			}catch(e){}
+		}else if(sver == "test") {
+		//以测试模式运行数据库表单
+			pubsrc += "?isfile=test";
+			topicsrc="#";
+			try{
+				Request = arr[3]; //接收opendj.htm?后的参数
+			}catch(e){}
+		}else{
+		//通过?带上djtype的参数来决定此表单的分类信息
+			tmpB = false;
+			var stype = Request.QueryString("djtype").toString();
+			if(stype != "undefined"){
+			
+			if(!IsSpace(creator_sys_filepath))
+			{
+				topicsrc = fcpubdata.Path+"/fceform/dj/" +sdjsn+"."+fcpubdata.extname+"?cc_form_instanceid="
+				              +cc_form_instanceid1+"&djid="+djid+"&workflowId="+workflowId+"&oid="+oid+new_search;
+			}
+			else
+			{
+				//从fcpubdata里得到分类的参数信息
+				var url = fcpubdata.Path+"/"+fcpubdata.savePath +sdjsn+"."+fcpubdata.extname+"?cc_form_instanceid="
+	              +cc_form_instanceid1+"&djid="+djid+"&workflowId="+workflowId+"&oid="+oid+new_search;
+				if(!IsSpace(pt_test)){
+					 url += "&pt_test="+pt_test;
+				} 
+				topicsrc = url;
+			}
+			tmpB = true;		
+			}
+		}
+		if(fcpubvar.pubSession == "null")
+		{
+			var tmpTopic = topicsrc;
+			if(tmpB == false) tmpTopic = "../../"+topicsrc;
+			topic.location = tmpTopic;
+			pubdata.location = "../../" + pubsrc;
+		}
+		else
+		{
+			var getsessionsrc = location.protocol+"//"+location.host+ fcpubdata.servletPath + "/getSession"+fcpubdata.dotnetVersion + "?"+fcpubvar.pubSession;			
+			var sPrev = location.href ;
+			var ipos = sPrev.indexOf("fceform/common/djframe.htm");
+			sPrev = sPrev.substring(0,ipos);
+			fcpubvar.pubdatasrc=sPrev+pubsrc;
+			if(tmpB) sPrev="";
+			fcpubvar.topicsrc=sPrev+topicsrc;
+			getsession.location = getsessionsrc;			
+		}
+		}
+		
+		/*if(!IsSpace(pt_test))
+		{
+			window.onunload=function()
+			{
+				creator_setSession('menuDatasource',pt_test);		
+			};
+		}*/
+	}//function _start end
+	</script>
+
+<frameset name="mainframeset" rows="0,99%,0,0" frameborder=0 border=0 onload="_start()">
+	<frame id="toolbar" src="" scrolling=no border=0 frameborder=0  noresize>
+	<frame id="topic" src="" scrolling=auto border=0  frameborder=0  bordercolor=LightGrey marginwidth=1 noresize>
+	<frame id="pubdata" src="" scrolling=auto border=0  frameborder=0  bordercolor=LightGrey marginwidth=1 noresize>
+	<frame id="getsession" src="" scrolling=auto border=0  frameborder=0  bordercolor=LightGrey marginwidth=1 noresize>
+</frameset>		
+
+</HTML>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_convert() {
+	var ret = SendHttp(location.protocol+"//"+location.host + fcpubdata.servletPath + "/RunReport"+fcpubdata.dotnetVersion+"?key=importExcel&spath="+escape(txtSour.value)+"&excelfile="+escape(txtDest.value));
+	if(IsSpace(ret)){
+		alert("文件成功的转换到"+txtDest.value);
+	}else{
+		alert(ret);
+	}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" toolbar="不带工具栏" dj_sn="importexcel" type="PR" caption="导入excel文件" mkbh codeheader="BBB" keyfield window="有模式窗口" entertype="修改" posleft postop poswidth="350" posheight="200" isfile="否" OtherSave="否" idtype="1" billtaborder="<root><taborder>button1</taborder><taborder>button2</taborder><taborder>txtSour</taborder><taborder>txtDest</taborder></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:3;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:2;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" contxml="<root><label><id>label1</id><id>label2</id><id>label3</id></label><button><id>button1</id><id>button2</id></button><text><id>txtSour</id><id>txtDest</id></text></root>" center="居中"><BUTTON id=button1 style="LEFT: 161px; WIDTH: 75px; POSITION: absolute; TOP: 128px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_convert()")'>转 换</BUTTON><INPUT id=txtSour style="LEFT: 3px; WIDTH: 311px; POSITION: absolute; TOP: 48px; HEIGHT: 20px" onmovestart=moveStart() size=55 value=d:\\1.xls controltype="text"> 
+<DIV id=label1 style="LEFT: 7px; WIDTH: 65px; POSITION: absolute; TOP: 28px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">原文件位置:</DIV><INPUT id=txtDest style="LEFT: 4px; WIDTH: 309px; POSITION: absolute; TOP: 97px; HEIGHT: 20px" onmovestart=moveStart() size=54 value=d:\\1 controltype="text"> 
+<DIV id=label2 style="LEFT: 8px; WIDTH: 65px; POSITION: absolute; TOP: 77px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">转换后的文件要保存的位置:</DIV>
+<DIV id=label3 style="FONT-WEIGHT: bold; FONT-SIZE: 14pt; LEFT: 7px; WIDTH: 65px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 2px; HEIGHT: 15px; TEXT-DECORATION: underline" onmovestart=moveStart() noWrap controltype="label" value="label3" NotBg="否">将excel文件转换成e表的文件</DIV><BUTTON id=button2 style="LEFT: 242px; WIDTH: 75px; POSITION: absolute; TOP: 128px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>关 闭</BUTTON></DIV></body></html>

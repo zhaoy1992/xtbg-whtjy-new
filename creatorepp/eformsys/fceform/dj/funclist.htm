@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var arrFunc=[
+	["表单保存好后提示成功","DjSaveShow()","描述：<br/> 表单保存好后会提示保存成功,如保存出错会提示错误信息. "],
+ 	["表单保存","DjSave()","输出参数：<br/> 空:表示存盘正确,否则为错误提示. "],
+	["表单保存好后退出","DjSave('退出')","表单保存成功后退出,如保存不成功则提示错误信息."],
+	["打开表单","DjOpen(djsn,updataset,opentype)","输入参数：<br/> djsn 单据模版标识<br/> updataset 要传的对象<br/> opentype 打开表单的类别,可为: 默认/新增/修改/展现<br/> sModal 表示打开表单的窗口模式,值为 当前窗口/有模式窗口/无模式窗口<br/> sVersion 表示是以测试方式打开还是直接打开生成的HTML文件,值为 测试/直接<br/> sTitle 表示打开窗口的标题,如为空则系统给默认标题.<br/> 输出参数：<br/> 可自定义,当有模式或无模式打开表单时,返回值可以通过在打开的表单中给window.returnValue值, 然后在第一个表单中接收后判断此值." ],
+	["表单关闭","CloseBill()","关闭窗口"],
+	["表格保存","GridSave(dsGrid)","描述:<br/>保存表格上的变动数据到数据库中<br/>输入参数：<br/> dsGrid 表格对应的数据集对象,如dssub1<br/> sExit ='退出' 表示存盘后关闭表单,否则不关闭 <br/> 输出参数：<br/> 空:表示存盘正确,否则为错误提示. "],
+	["增加行","dsGrid.Append()","描述:<br/>在表格上增加一行,同时所对应的数据集也加一条记录。<br/> dsGrid 为表格所绑定的数据集控件."],
+	["删除行","dsGrid.Delete()","描述:<br/>在表格上删除当前行,同时所对应的数据集也删除一条记录。<br/> dsGrid 为表格所绑定的数据集控件."],
+	["删除行且删除记录","DelGridRow(dsGrid)","描述:<br/>删除表格中的当前行,包括数据库中的此记录也删除掉,是物理删除,不是作beactive标记 <br/> 输入参数：<br/> odsgrid 要删除行的表格所对应的数据集对象,如dssub1"],
+	["选择日期输入","SelectDate()","描述:<br/>显示下拉的日期输入窗口供用户选择输入日期到指定的编辑框中,<br/>输入参数：<br/> objDate 接收日期的编辑框对象,如为空则表示当前控件<br/>"],
+	["选择资料","SelectZl(fabh,likevalue,ogrid)","输入参数：<br/> fabh 方案编号<br/> likevalue 用来做模糊查找的参数,可空 <br/> ogrid 如在表格控件上用此功能,则此参数应为所在的表格对象<br/>"],
+	["用SQL语句选择资料","SelectZlSql(sql,sMultiSel,sHideField,likevalue,ogrid)","输入参数：<br/> sql sql语句,通过它控制要列出的内容<br/> sMultiSel 是否允许多选, 值为 是/否, 缺省为否<br/> sHideField 以,分隔的隐藏字段列表<br/> likevalue 用来做模糊查找的参数,可空<br/> ogrid 如在表格控件上用此功能,则此参数应为所在的表格对象<br/>"],
+	["显示计算器","ShowCalc()","描述:<br/>显示计算器,只能用于某输入框的事件中。"]
+	];
+var arrUserFunc=new Array();	
+var arrRegFunc;
+function uf_open(){
+
+	if(pubDataSet != null){
+		var sFunc = pubDataSet[0];
+		var re = new RegExp();
+		re.compile("(function )(.[^(]*)(\(.[^)]*\))","g");
+		var arr;
+		i=0;
+		while ( re.exec(sFunc) != null ) {
+			var s1=RegExp.$2+RegExp.$3+")";
+			arrUserFunc[i]=s1;
+			i++;
+		}
+		//用户注册的函数
+		arrRegFunc = pubDataSet[1];
+		if(typeof arrRegFunc != "undefined"){
+			var l=arrRegFunc.length;
+			for(var i=0;i<l;i++){
+				//加上函数分类
+				if(cboType.innerText.indexOf(arrRegFunc[i][0]) < 0){
+					var oOpt=document.createElement("option");
+					oOpt.text=arrRegFunc[i][0];
+					oOpt.value = oOpt.text ;
+					cboType.add(oOpt);
+				}
+			}
+		}
+	}
+	uf_seltype();
+}
+function uf_seltype() {
+	var sOpt= new StringBuilder();
+	if(cboType.value == "系统函数"){
+		for(var i=0;i< arrFunc.length;i++){
+			sOpt.append("<option>"+ arrFunc[i][0] +"</option>") ;
+			}
+	}else if (cboType.value == "自定义函数"){
+		for(var i=0;i< arrUserFunc.length;i++){
+			sOpt.append("<option>"+ arrUserFunc[i] +"</option>") ;
+			}
+			
+
+	}else {
+		
+		for(var i=0;i< arrRegFunc.length;i++){
+			if(arrRegFunc[i][0] == cboType.value)
+				sOpt.append("<option>"+ arrRegFunc[i][1] +"</option>") ;
+			}
+	}
+	lstFunc.options.length = 0 ;
+	lstFunc.outerHTML = SelectAddOption(lstFunc,sOpt.toString());
+	txtRet.value = "";	
+	divDesc.innerHTML = "";
+}
+function uf_selfunc() {
+	var ipos = lstFunc.selectedIndex ;
+	if( ipos<0 ) return ;
+	if(cboType.value == "系统函数"){
+		txtRet.value = arrFunc[ipos][1];
+		divDesc.innerHTML = arrFunc[ipos][2] ;
+	}else if (cboType.value == "自定义函数"){
+		txtRet.value = arrUserFunc[ipos];
+	}else {
+		txtRet.value = arrRegFunc[ipos][2];
+		divDesc.innerHTML = arrRegFunc[ipos][3] ;
+	}
+}
+function uf_ok() {
+	window.returnValue = txtRet.value;
+	window.close();
+	}</script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script src='../../fceformext/js/usertb.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet idtype="1" isfile="否" keyfield toolbar="不带工具栏" BLONopen="uf_open()" contxml="<root><label><id>label2</id><id>label3</id><id>label4</id></label><listbox><id>lstFunc</id></listbox><combobox><id>cboType</id></combobox><div><id>divDesc</id></div><button><id>button1</id><id>button2</id></button><text><id>txtRet</id></text></root>" jslib="fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;~usertb.js&#13;&#10;" billtaborder="<root><taborder>lstFunc</taborder><taborder>cboType</taborder><taborder>button1</taborder><taborder>button2</taborder><taborder>txtRet</taborder></root>" dj_sn="funclist" type="LR" caption="函数列表" mkbh codeheader="BBB" entertype="修改" poswidth="400" posheight="350" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:4;radio:0;listbox:1;textarea:0;combobox:1;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:1;SKDBTreeView:0;a:0;button:2;text:1;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" window="有模式窗口" posleft postop center="居中"><DIV id=label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 9px; WIDTH: 18px; FONT-FAMILY: ; POSITION: absolute; TOP: 6px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap value="label2" controltype="label">分类:</DIV><SELECT id=cboType style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 43px; WIDTH: 113px; FONT-FAMILY: ; POSITION: absolute; TOP: 3px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() onchange='bill_onclick("uf_seltype()")' controltype="combobox" check="1" tempvalue="系统函数&#13;&#10;自定义函数" temptext="系统函数&#13;&#10;自定义函数" china sql sqltrans><OPTION value=系统函数 selected>系统函数</OPTION><OPTION value=自定义函数>自定义函数</OPTION></SELECT><SELECT id=lstFunc style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 4px; WIDTH: 153px; FONT-FAMILY: ; POSITION: absolute; TOP: 25px; HEIGHT: 258px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() onchange='bill_onclick("uf_selfunc()")' size=8 controltype="listbox" check="1" tempvalue temptext sql ondblclick='bill_ondblclick("uf_ok()")' sqltrans></SELECT><BUTTON id=button1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 239px; WIDTH: 64px; FONT-FAMILY: ; POSITION: absolute; TOP: 249px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=button2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 309px; WIDTH: 64px; FONT-FAMILY: ; POSITION: absolute; TOP: 250px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON><INPUT type=text id=txtRet style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 165px; BORDER-LEFT: dimgray 2px solid; WIDTH: 215px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 222px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onmovestart=moveStart() value controltype="text" china CanSelect="false"></INPUT> 
+<DIV id=label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 172px; WIDTH: 36px; FONT-FAMILY: ; POSITION: absolute; TOP: 208px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap value="label3" controltype="label">返回的内容:</DIV>
+<DIV id=divDesc style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; OVERFLOW-Y: auto; DISPLAY: block; FONT-SIZE: 12px; LEFT: 165px; OVERFLOW-X: auto; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 216px; BORDER-BOTTOM: black 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 43px; HEIGHT: 159px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div"></DIV>
+<DIV id=label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 169px; WIDTH: 18px; FONT-FAMILY: ; POSITION: absolute; TOP: 28px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap value="label4" controltype="label">说明:</DIV></DIV></body></html>

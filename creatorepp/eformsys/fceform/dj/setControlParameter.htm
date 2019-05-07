@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../../fceform/css/dj.css); 
+	</STYLE>
+		<script src="../../fceform/js/fcpub.js"></script>
+		<script src="../../fceform/js/fcrundj.js"></script>
+		<script src="../../fceform/js/tabpane.js"></script>	
+		<script src="../../fceform/js/ccpub.js"></script>	
+	</HEAD>
+	<body background="../../fceform/images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+var workflowid = "";
+pub_djhtm();
+		</script>
+<script>function getPara(){
+    text1.value=pubDataSet[0];
+    text1.disabled=true;
+    dj_id.value=pubDataSet[1];
+    workflowid = pubDataSet[2];
+    return;
+}
+
+function myInsert(){
+    var CTRL_ID = text1.value;
+    var CTRL_CNNAME = text2.value;
+    var FIELD_TYPE = combobox1.value;
+    var INIT_VALUE = text4.value;
+    var FIELD_DESC = textarea1.value;
+    var DJID = dj_id.value;  
+    
+    var selectSql = "select * from td_form_ctrlattr where ctrl_id = '"+CTRL_ID+"' and oid='"+workflowid+"'";
+   
+    var isExist = SelectSql(selectSql,1,5);
+    if(isExist=="<root></root>"){
+        var uuid = creator_getUUID();
+        var insertSql = "insert into td_form_ctrlattr(CTRLATTR_ID,djid,oid,ctrl_id,ctrl_cnname,field_type,init_value,field_desc) values('"+uuid+"','"+DJID+"','"+workflowid+"','"+CTRL_ID+"','"+CTRL_CNNAME+"','"+FIELD_TYPE+"','"+INIT_VALUE+"','"+FIELD_DESC+"')";
+    
+        var result = creator_insert(insertSql);
+        if(IsSpace(result)){
+            alert("保存成功！");
+        }else{
+            alert("保存失败！");
+            alert(result);
+        }   
+    }else{
+        if(confirm('该元素已经设置为控制变量，您确认要重新保存？')){
+            var updateSql = "update td_form_ctrlattr set ctrl_cnname='"+CTRL_CNNAME+"',field_type='"+FIELD_TYPE+"',init_value='"+INIT_VALUE+"',field_desc='"+FIELD_DESC+"' where ctrl_id = '"+CTRL_ID+"' and oid = '"+workflowid+"'";
+            var result = creator_update(updateSql);
+            if(IsSpace(result)){
+                alert("保存成功！");
+            }else{
+                alert("保存失败！");
+                alert(result);
+            }
+        }
+    }
+    CloseBill();  
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet toolbar="不带工具栏" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" center="居中" BLONopen="getPara()" contxml="<root><label><id>label1</id><id>label2</id><id>label3</id><id>label4</id><id>label5</id></label><textarea><id>textarea1</id></textarea><combobox><id>combobox1</id></combobox><button><id>button1</id><id>button2</id></button><text><id>text1</id><id>text2</id><id>text4</id><id>dj_id</id></text><dataset><id>dataset1</id></dataset></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:6;radio:0;listbox:0;textarea:1;combobox:1;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:6;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:1;spin:0;excel:0;tree:0;ebshow:0" version="1.0" idtype="4" OtherSave="否" isfile="否" posheight="450" poswidth="280" postop posleft entertype="新增" window="当前窗口" keyfield="ctrlattr_id" codeheader="BBB" mkbh caption="设置控制参数" type="ST" dj_sn="setControlParameter" billtaborder="<root><taborder>textarea1</taborder><taborder>text1</taborder><taborder>text2</taborder><taborder>text4</taborder><taborder>button1</taborder><taborder>button2</taborder><taborder>dj_id</taborder><taborder>combobox1</taborder></root>"><INPUT id=text1 style="LEFT: 172px; WIDTH: 120px; POSITION: absolute; TOP: 43px; HEIGHT: 20px" onmovestart=moveStart() size=21 china="控件id" field="CTRL_ID" dataset="dataset1" controltype="text"> 
+<DIV id=label1 style="LEFT: 83px; WIDTH: 65px; POSITION: absolute; TOP: 47px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">控制参数id:</DIV>
+<DIV id=label2 style="LEFT: 60px; WIDTH: 65px; POSITION: absolute; TOP: 87px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">控制参数中文名：</DIV>
+<DIV id=label3 style="LEFT: 99px; WIDTH: 36px; POSITION: absolute; TOP: 132px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">数据类型：</DIV><INPUT id=text2 style="LEFT: 173px; WIDTH: 119px; POSITION: absolute; TOP: 85px; HEIGHT: 20px" onmovestart=moveStart() size=21 china="控件中文名" field="CTRL_CNNAME" dataset="dataset1" controltype="text"> 
+<DIV id=label4 style="LEFT: 113px; WIDTH: 47px; POSITION: absolute; TOP: 172px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label4">初始值：</DIV><INPUT id=text4 style="LEFT: 174px; WIDTH: 121px; POSITION: absolute; TOP: 167px; HEIGHT: 20px" onmovestart=moveStart() size=22 china="初始值" field="INIT_VALUE" dataset="dataset1" controltype="text"> 
+<DIV id=label5 style="LEFT: 123px; WIDTH: 34px; POSITION: absolute; TOP: 212px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label5">描述：</DIV><TEXTAREA id=textarea1 style="LEFT: 172px; WIDTH: 223px; POSITION: absolute; TOP: 210px; HEIGHT: 85px" onmovestart=moveStart() cols=42 china="描述" field="FIELD_DESC" dataset="dataset1" controltype="textarea" value="textarea1" induce="否"></TEXTAREA><BUTTON id=button1 style="LEFT: 98px; WIDTH: 75px; POSITION: absolute; TOP: 328px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("myInsert()")'>保存</BUTTON><BUTTON id=button2 style="LEFT: 233px; WIDTH: 75px; POSITION: absolute; TOP: 327px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取消</BUTTON> <?xml:namespace prefix = fc /><fc:dataset id=dataset1 saveastable="td_form_ctrlattr" temptable="TMP_DATASET1" opensortno="1" onValid='bill_ondatasetvalid("<dsid><DJID></DJID><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")' onGetText='bill_ondatasetgettext("<dsid><DJID></DJID><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")' onSetText='bill_ondatasetsettext("<dsid><DJID></DJID><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")' format="<fields><field><fieldname>DJID</fieldname><datatype>整数</datatype><displaylabel>表单id</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>CTRL_ID</fieldname><datatype>字符</datatype><displaylabel>控件id</displaylabel><size>100</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>CTRL_CNNAME</fieldname><datatype>字符</datatype><displaylabel>控件中文名</displaylabel><size>100</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>FIELD_TYPE</fieldname><datatype>字符</datatype><displaylabel>数据类型</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>INIT_VALUE</fieldname><datatype>字符</datatype><displaylabel>初始值</displaylabel><size>100</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>FIELD_DESC</fieldname><datatype>字符</datatype><displaylabel>描述</displaylabel><size>500</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>"></fc:dataset><INPUT id=dj_id style="DISPLAY: none; LEFT: 309px; WIDTH: 110px; POSITION: absolute; TOP: 42px; HEIGHT: 20px" onmovestart=moveStart() china="表单id" field="DJID" dataset="dataset1" controltype="text"><SELECT id=combobox1 style="LEFT: 173px; WIDTH: 120px; POSITION: absolute; TOP: 127px; HEIGHT: 25px" onmovestart=moveStart() china="数据类型" field="FIELD_TYPE" dataset="dataset1" controltype="combobox" check="1" tempvalue="1&#13;&#10;2&#13;&#10;3&#13;&#10;6&#13;&#10;7" temptext="boolean&#13;&#10;float&#13;&#10;int&#13;&#10;string&#13;&#10;date" sql sqltrans><OPTION value=1>boolean</OPTION><OPTION value=2>float</OPTION><OPTION value=3>int</OPTION><OPTION value=6 selected>string</OPTION><OPTION value=7>date</OPTION></SELECT></DIV></body></html>

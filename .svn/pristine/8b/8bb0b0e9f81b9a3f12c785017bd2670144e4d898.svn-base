@@ -1,0 +1,562 @@
+﻿<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head> 
+		<title>下拉多选菜单jquery代码</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" src="../../../resources/plug/jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js"></script>
+		
+		
+		<SCRIPT type=text/javascript>
+			$(function(){
+				setSelect("#control");
+			})
+			function setSelect(id){
+			     if(!$(id) || ! $(id).attr("multiple"))return;
+			     var optionList = $(id).find("option");
+			     if(optionList.length == 0) return;
+			     var root = $(id).parent();
+			     var seldiv = document.createElement("div");
+			     var select = document.createElement("input");
+				 $(select).addClass('selectbox');
+			     $(select).attr("id",$(id).attr("id"));
+			     $(select).attr("name",$(id).attr("name"));
+			     $(select).attr("class",$(id).attr("class"));
+			     $(select).attr("style",$(id).attr("style"));
+			     $(select).width($(id).width());
+			     $(seldiv).append($(select));
+			     var opts = document.createElement("div");
+				 $(opts).addClass('optionbox');
+				  $(opts).width($(select).width());
+			     $(seldiv).append($(opts));
+			     $(opts).hide();
+			     $(select).click(function(){
+			    	 if ($(opts).is(':visible')) {
+			    		 $(opts).hide();
+			    		}else{
+			    			$(opts).show();
+			    		}
+			     });
+			     var def = null;
+			     $.each(optionList,function(key,val){
+			    	 var opt = document.createElement("div");
+			    	/*  if($(val).attr("def")){
+			    		 def = $(val);
+			    		 $(select).val($(val).html());
+			    	 } */
+			    	 if($(val).attr("type")){
+			    		 var input = document.createElement("input");
+			    		 $(input).attr("type",$(val).attr('type'));
+			    		 $(input).addClass("optall");
+			    		 $(input).val($(val).val());
+			    		 $(input).attr("text",$(val).html());
+			    		 $(input).attr("name","optall")
+			    		 $(opt).append($(input));
+			    		 if($(val).attr("all")){
+			    			 $(input).click(function(){
+			    				$(".optall").attr("checked",$(this).is(":checked"));
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					 if ("" != result ) {
+			    						 result += ",";
+			    					}
+			    					 if(key>0){
+			    						 result += $(val).attr("text");
+			    					 }
+			    				  
+			    				});
+			    				
+			    					 $(select).val(result);
+			    				
+			    			 });
+			    		 }else{
+			    			 $(input).attr("name","optall");
+			    			 $(input).click(function(){
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					 result+=key==0?$(val).attr('text'):","+$(val).attr("text");
+			    				});
+			    					 $(select).val(result);
+			    				
+			    			 });
+			    		 }
+			    	 }
+			    	 $(opt).append($(val).html());
+			    	 $(opts).append($(opt));
+			     });
+			     $(root).append($(seldiv));
+			     $(id).remove();
+			}
+			
+		</SCRIPT>
+        <style type="text/css">
+        .optionbox{
+			border:1px solid #5a8dc0;
+		}
+		.redbost{
+			border:1px solid #5a8dc0; cursor:pointer; background:url(../resources/images/1.jpg) top right no-repeat; height:18px; padding-right:17px; width:200px;
+		}
+        
+        </style>
+</HEAD>
+<BODY>
+<FORM method=post action="">
+<P id=111> 
+<select id="control" class="redbost" multiple="multiple" style=" width:200px;">
+					<option value="" def='---'>请选择</option>
+					<option value="" selected="selected" type='checkbox' all='11'>全选</option>
+					<option value="2" type='checkbox' name="option">Option 2</option>
+					<option value="3" type='checkbox'>Option 3</option>
+					<option value="4" type='checkbox'>Option 4</option>
+					<option value="5" type='checkbox'>Option 5</option>
+					<option value="6" type='checkbox'>Option 6</option>
+					<option value="7" type='checkbox'>Option 7</option>
+</select>
+</P></FORM></BODY> -->
+		
+		
+		
+<HEAD><TITLE>下拉多选菜单jquery代码</TITLE>
+<META content=text/html;charset=utf-8 http-equiv=Content-Type>
+<script type="text/javascript" src="../../../resources/plug/jquery-ui-
+
+1.8.17.custom/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../../resources/plug/ifrom/js/ifrom-tools.1.1.js" charset="utf-8"></script>
+
+<SCRIPT type=text/javascript>
+			
+	$(function() {
+		setSelect("#control");
+	})
+	function setSelect(id) {
+		if (!$(id) || !$(id).attr("multiple"))
+
+			return;
+		var optionList = $(id).find("option");
+		if (optionList.length == 0)
+			return;
+		var root = $(id).parent();
+		var seldiv = document.createElement
+
+		("div");
+		var select = document.createElement
+
+		("input");
+		$(select).addClass('selectbox');
+		$(select).attr("id", $(id).attr("id"));
+		$(select).attr("name", $(id).attr("name"));
+		$(select).attr("class", $(id).attr
+
+		("class"));
+		$(select).attr("style", $(id).attr
+
+		("style"));
+		$(select).width($(id).width());
+		$(seldiv).append($(select));
+		var opts = document.createElement("div");
+		$(opts).addClass('optionbox');
+		$(opts).width($(select).width());
+		$(seldiv).append($(opts));
+		$(opts).hide();
+		$(select).click(function() {
+			if ($(opts).is(':visible')) {
+				$(opts).hide();
+			} else {
+				$(opts).show();
+			}
+		});
+		var def = null;
+		$.each(optionList, function(key, val) {
+			var opt = document.createElement
+
+			("div");
+			/*  if($(val).attr("def")){
+				 def = $(val);
+				 $(select).val($(val).html());
+			 } */
+			if ($(val).attr("type")) {
+				var input =
+
+				document.createElement("input");
+				$(input).attr
+
+				("type", $(val).attr('type'));
+				$(input).addClass("optall");
+				$(input).val($(val).val());
+				$(input).attr
+
+				("text", $(val).html());
+				$(input).attr("name", "optall")
+				$(opt).append($(input));
+				if ($(val).attr("all")) {
+					$(input).click
+
+					(function() {
+
+						$(".optall").attr("checked", $(this).is(":checked"));
+						$(select).val
+
+						($("input[name='optall']").val());
+						var list =
+
+						$("input[name='optall']:checked");
+						var result = "";
+						$.each(list,
+
+						function(key, val) {
+							if (""
+
+							!= result) {
+
+								result += ",";
+							}
+							if
+
+							(key > 0) {
+
+								result += $(val).attr("text");
+							}
+
+							//result+=key==0?$(val).attr('text'):","+$(val).attr("text");
+						});
+						/*  if("" == 
+
+						result){
+							 
+
+						$(select).val(def.html());
+						 }else{ */
+
+						$(select).val(result);
+						/*  } */
+					});
+				} else {
+					$(input).attr
+
+					("name", "optall");
+					$(input).click
+
+					(
+							function() {
+								$(select).val
+
+								($("input[name='optall']").val());
+								var list =
+
+								$("input[name='optall']:checked");
+								var result = "";
+								$.each(list,
+
+								function(key, val) {
+
+									result += key == 0 ? $(val).attr('text')
+											: "," + $(val).attr("text");
+								});
+								if ("" ==
+
+								result) {
+
+									$(select).val(def.html());
+								} else {
+
+									$(select).val(result);
+								}
+
+							});
+				}
+			}
+			$(opt).append($(val).html());
+			$(opts).append($(opt));
+		});
+		$(root).append($(seldiv));
+		$(id).remove();
+	}
+</SCRIPT>
+  <style type="text/css">
+.optionbox {
+	border: 1px solid #5a8dc0;
+}
+
+.redbost {
+	border: 1px solid #5a8dc0;
+	cursor: pointer;
+	background: url(../resources/images/1.jpg) top right no-repeat;
+	height: 22px;
+	padding-right: 17px;
+	width: 200px;
+}
+</style>
+</HEAD>
+<BODY>
+<FORM method=post action="">
+		<P id=111>
+			<select id="control" class="redbost" multiple="multiple">
+				<!-- <option value="" def='--
+
+-'>请选择</option> -->
+				<option value="" selected="selected" type='checkbox' all='11'>全选</option>
+				<option value="2" type='checkbox' name="option">Option 2</option>
+				<option value="3" type='checkbox'>Option 3</option>
+				<option value="4" type='checkbox'>Option 4</option>
+				<option value="5" type='checkbox'>Option 5</option>
+				<option value="6" type='checkbox'>Option 6</option>
+				<option value="7" type='checkbox'>Option 7</option>
+			</select>
+		</P>
+	</FORM></BODY>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- <SCRIPT type=text/javascript>
+			$(function(){
+				setSelect("#control");
+			})
+			function setSelect(id){
+			     if(!$(id) || ! $(id).attr("multiple"))return;
+			     var optionList = $(id).find("option");
+			     if(optionList.length == 0) return;
+			     var root = $(id).parent();
+			     var seldiv = document.createElement("div");
+			     var select = document.createElement("input");
+				 $(select).addClass('optionbox');
+			     $(select).attr("id",$(id).attr("id"));
+			     $(select).attr("name",$(id).attr("name"));
+			     $(select).attr("class",$(id).attr("class"));
+			     $(select).attr("style",$(id).attr("style"));
+			     $(select).width($(id).width());
+			     $(seldiv).append($(select));
+			     var opts = document.createElement("div");
+				 $(opts).addClass('optionbox');
+				  $(opts).width($(select).width());
+			     $(seldiv).append($(opts));
+			     $(opts).hide();
+			     $(select).click(function(){
+			    	 if ($(opts).is(':visible')) {
+			    		 $(opts).hide();
+			    		}else{
+			    			$(opts).show();
+			    		}
+			     });
+			     var def = null;
+			     $.each(optionList,function(key,val){
+			    	 var opt = document.createElement("div");
+			    	/*  if($(val).attr("def")){
+			    		 def = $(val);
+			    		 $(select).val($(val).html());
+			    	 } */
+			    	 if($(val).attr("type")){
+			    		 var input = document.createElement("input");
+			    		 $(input).attr("type",$(val).attr('type'));
+			    		 $(input).addClass("optall");
+			    		 $(input).val($(val).val());
+			    		 $(input).attr("text",$(val).html());
+			    		 $(input).attr("name","optall")
+			    		 $(opt).append($(input));
+			    		 if($(val).attr("all")){
+			    			 $(input).click(function(){
+			    				$(".optall").attr("checked",$(this).is(":checked"));
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+						         $(opts).hide();
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					
+			    					 if ("" != result ) {
+			    						 result += ",";
+			    					}
+			    					
+			    					 if(key!=0){
+			    						 result += $(val).attr("text");
+			    					 } 
+			    					
+			    					/*  result+=key==0?$(val).attr('text'):","+$(val).attr("text"); */
+			    					
+			    				});
+			    					 $(select).val(result);
+		
+			    			 });
+			    		 }else{
+			    			 $(input).attr("name","optall");
+			    			 $(input).click(function(){
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					/*  if ("" != result ) {
+			    						 result += ",";
+			    					}
+			    					 if(key!=0){
+			    						 result += $(val).attr("text");
+			    					 } */
+
+			    					 result+=key==0?$(val).attr('text'):","+$(val).attr("text");
+			    				
+			    				});
+			    					 $(select).val(result);
+			    			 });
+			    		 }
+			    	 }
+			    	 $(opt).append($(val).html());
+			    	 $(opts).append($(opt));
+			    	
+			     });
+			     $(root).append($(seldiv));
+			   /*   $(id).blur(function(){
+					 $(opts).hide();
+				 }); */
+			     $(id).remove();
+			}
+			
+		</SCRIPT>
+        <style type="text/css">
+         .optionbox{
+			border:1px solid #5a8dc0;
+		}
+		.redbost{
+			border:1px solid #5a8dc0; cursor:pointer; background:url(../resources/images/1.jpg) top right no-repeat; height:22px; padding-right:17px; width:200px;
+		}
+     
+        
+        </style>
+</HEAD>
+<BODY>
+<FORM method=post action="">
+<P id=111> 
+<select id="control" class="redbost" multiple="multiple"  style='width: 192px;'>
+					<option value="" def='---'>请选择</option>
+					<option value="" selected="selected" type='checkbox' all='11'>全选</option>
+					<option value="2" type='checkbox' name="option">Option 2</option>
+					<option value="3" type='checkbox'>Option 3</option>
+					<option value="4" type='checkbox'>Option 4</option>
+					<option value="5" type='checkbox'>Option 5</option>
+					<option value="6" type='checkbox'>Option 6</option>
+					<option value="7" type='checkbox'>Option 7</option>
+</select>
+</P></FORM></BODY> -->
+	<!-- 	<script type="text/javascript">
+			$(function(){
+				setSelect("#control");
+			})
+			function setSelect(id){
+			     if(!$(id) || ! $(id).attr("multiple"))return;
+			     var optionList = $(id).find("option");
+			     if(optionList.length == 0) return;
+			     var root = $(id).parent();
+			     var seldiv = document.createElement("div");
+			     var select = document.createElement("input");
+			     $(select).attr("id",$(id).attr("id"));
+			     $(select).attr("name",$(id).attr("name"));
+			     $(select).attr("class",$(id).attr("class"));
+			     $(select).attr("style",$(id).attr("style"));
+			     $(select).width($(id).width());
+			     $(seldiv).append($(select));
+			     var opts = document.createElement("div");
+			     $(seldiv).append($(opts));
+			     $(opts).hide();
+			     $(select).click(function(){
+			    	 if ($(opts).is(':visible')) {
+			    		 $(opts).hide();
+			    		}else{
+			    			$(opts).show();
+			    		}
+			     });
+			     var def = null;
+			     $.each(optionList,function(key,val){
+			    	 var opt = document.createElement("div");
+			    	/*  if($(val).attr("def")){
+			    		 def = $(val);
+			    		 $(select).val($(val).html());
+			    	 } */
+			    	 if($(val).attr("type")){
+			    		 var input = document.createElement("input");
+			    		 $(input).attr("type",$(val).attr('type'));
+			    		 $(input).addClass("optall");
+			    		 $(input).val($(val).val());
+			    		 $(input).attr("text",$(val).html());
+			    		 $(input).attr("name","optall")
+			    		 $(opt).append($(input));
+			    		 if($(val).attr("all")){
+			    			 $(input).click(function(){
+			    				$(".optall").attr("checked",$(this).is(":checked"));
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					 if ("" != result ) {
+			    						 result += ",";
+			    					}
+			    					 if(key>0){
+			    						 result += $(val).attr("text");
+			    					 }
+			    				  //result+=key==0?$(val).attr('text'):","+$(val).attr("text");
+			    				});
+			    				/*  if("" == result){
+			    					 $(select).val(def.html());
+			    				 }else{ */
+			    					 $(select).val(result);
+			    				/*  } */
+			    			 });
+			    		 }else{
+			    			 $(input).attr("name","optall");
+			    			 $(input).click(function(){
+			    				 $(select).val($("input[name='optall']").val());
+			    				 var list = $("input[name='optall']:checked");
+			    				 var result="";
+			    				 $.each(list, function(key, val){
+			    					 result+=key==0?$(val).attr('text'):","+$(val).attr("text");
+			    				});
+			    				 if("" == result){
+			    					 $(select).val( def.html());
+			    				 }else{
+			    					 $(select).val(result);
+			    				 }
+			    				
+			    			 });
+			    		 }
+			    	 }
+			    	 $(opt).append($(val).html());
+			    	 $(opts).append($(opt));
+			     });
+			     $(root).append($(seldiv));
+			     $(id).remove();
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+
+		<form action="" method="post">
+			<p id="111">
+				<select id="control" multiple="multiple"  style='width: 192px;'>
+					<option value="" def='---'>请选择</option>
+					<option value="" selected="selected" type='checkbox' all='11'>全选</option>
+					<option value="2" type='checkbox' name="option">Option 2</option>
+					<option value="3" type='checkbox'>Option 3</option>
+					<option value="4" type='checkbox'>Option 4</option>
+					<option value="5" type='checkbox'>Option 5</option>
+					<option value="6" type='checkbox'>Option 6</option>
+					<option value="7" type='checkbox'>Option 7</option>
+				</select>
+				
+			</p>			
+			
+		</form>
+</body> -->
+</html>

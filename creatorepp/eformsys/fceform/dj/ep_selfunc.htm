@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_createOpt(i,svalue,stext){
+	var newoption=document.createElement('option');
+    newoption.value=svalue;
+    newoption.text=stext;
+    SKDBListBox2.options.add(newoption,i);
+}
+function uf_selected(){
+	SKDBListBox2.options.length=0;
+	if(SKDBListBox1.options(2).selected==true){
+		uf_createOpt(0,"COLUMN#","COLUMN#");
+		uf_createOpt(1,"IF","IF");	
+		uf_createOpt(2,"INPUT","INPUT");	
+		uf_createOpt(3,"LINE#","LINE#");	
+		uf_createOpt(4,"LINETHROUGH#","LINETHROUGH#");
+		uf_createOpt(5,"MESSAGEBOX","MESSAGEBOX");
+		uf_createOpt(6,"PAGE#","PAGE#");
+		uf_createOpt(7,"TOTALPAGES","TOTALPAGES");		
+	}	
+}
+
+function uf_changed(){
+	SKDBMemo1.value="";
+	if(SKDBListBox2.options(0).selected==true){
+		SKDBMemo1.value="返回当前栏目数";
+	}	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><listbox><id>SKDBListBox1</id><id>SKDBListBox2</id></listbox><textarea><id>SKDBMemo1</id></textarea><tab><id>PageControl1</id></tab><button><id>FCButton5</id><id>FCButton4</id></button></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>SKDBListBox1</taborder><taborder>SKDBListBox2</taborder><taborder>SKDBMemo1</taborder><taborder>FCButton5</taborder><taborder>FCButton4</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="295" poswidth="255" postop posleft entertype="修改" window="当前窗口" keyfield codeheader="BBB" mkbh caption="可用函数" type="PR" dj_sn="ep_selfunc" center="居中"><div class="tab-pane" showtype="luna" IsHideTitle=undefined id=PageControl1 style="position:absolute;left:6px;top:7px;width:229px;Height:221px"><div class="tab-page" style="width:229px;height:203" ><h2 class="tab">可用函数</h2><SELECT id=SKDBListBox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 1px; WIDTH: 111px; FONT-FAMILY: ; POSITION: absolute; TOP: 11px; HEIGHT: 145px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_selected()")' size=8 controltype="listbox" temptext="解释器&#13;&#10;逻辑&#13;&#10;其它&#13;&#10;求整&#13;&#10;日期/时间&#13;&#10;数学&#13;&#10;字符串" tempvalue="解释器&#13;&#10;逻辑&#13;&#10;其它&#13;&#10;求整&#13;&#10;日期/时间&#13;&#10;数学&#13;&#10;字符串" sql check="1" china><OPTION value=解释器>解释器</OPTION><OPTION value=逻辑>逻辑</OPTION><OPTION value=其它>其它</OPTION><OPTION value=求整>求整</OPTION><OPTION value=日期/时间>日期/时间</OPTION><OPTION value=数学>数学</OPTION><OPTION value=字符串>字符串</OPTION></SELECT><SELECT id=SKDBListBox2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 111px; WIDTH: 111px; FONT-FAMILY: ; POSITION: absolute; TOP: 11px; HEIGHT: 137px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_changed()")' size=8 controltype="listbox" temptext tempvalue sql check="1" china></SELECT><TEXTAREA id=SKDBMemo1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 2px; WIDTH: 221px; FONT-FAMILY: ; POSITION: absolute; TOP: 142px; HEIGHT: 50px; BACKGROUND-COLOR: #ffffff" value="SKDBMemo1" controltype="textarea" china induce="否"></TEXTAREA></div></div><script>var PageControl1 = new WebFXTabPane( document.getElementById( "PageControl1" ) );</script><BUTTON id=FCButton5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 110px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 233px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否">确 定</BUTTON><BUTTON id=FCButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 174px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 233px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON></DIV></body></html>

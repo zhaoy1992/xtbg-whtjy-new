@@ -1,0 +1,8 @@
+<config-list>
+  <ActionList>
+     <action classID="treebusiness">
+      <className>com.chinacreator.xtbg.pub.tree.servlet.AllOrgTree</className>
+      <openRule>inqueryTreeOrganization</openRule>
+    </action>
+  </ActionList>
+</config-list>

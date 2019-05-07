@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://cxf.apache.org/jaxws
+http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<!-- 公文传输通用参数 -->
+	<bean id="gwConstant" class="com.chinacreator.xtbg.core.archive.gwcs.bean.GwConstant">
+		<!--临时文件转换的根路径  -->
+		<property name="root_path" value="C:"></property>
+		<!-- 公文传输webservice接口 -->
+		<property name="gwcs_web_url" value="http://172.16.17.147:8888/gwcs/services/ArchiveToGWCSService"></property>
+		
+		<!-- 以下参数都可以通过配置设置，一般情况下不需要修改，程序内部设置
+		<property name="oa_path" value=""></property>
+		//地址本要素
+		<property name="tmp_xml_path" value=""></property>
+		//公文落地zip
+		<property name="tmp_zip_path" value=""></property>
+		//落地公文解压路径
+		<property name="tmp_zip_dir" value=""></property>
+		//公文上传要素xml
+		<property name="archive_xml" value="archive.xml"></property>
+		//公文上传文件目录
+		<property name="archive_path" value=""></property>
+		//公文上传文件放置位置
+		<property name="archive_zip_path" value=""></property>
+		//ceb文件名称
+		<property name="gwcsword_ceb" value="gwcsword.ceb"></property>
+		//ceb文件路径
+		<property name="ceb_path" value=""></property>
+		//成功返回的值
+		<property name="ret_success" value="0"></property>
+		//失败返回的值
+		<property name="ret_failed" value="1"></property>
+		//公文传输单个机构新增
+		<property name="gwcs_org_operate_insert" value="insert"></property>
+		//公文传输单个机构更新
+		<property name="gwcs_org_operate_update" value="update"></property>
+		//公文传输单个机构删除
+		<property name="gwcs_org_operate_delete" value="delete"></property>
+		 -->
+	</bean>
+	
+	<!-- oa公文传输数据处理类 -->
+	<bean id="oaArchiveHandlerIfc" class="com.chinacreator.xtbg.core.archive.gwcs.services.impl.OaArchiveHandlerCommonImpl">
+		<property name="subSystemOrgConfigDao" ref="gwcsOrgConfigDaoImpl"></property>
+		<property name="gwConstant" ref="gwConstant"></property>
+	</bean>
+	
+	<!-- oa发送给公文传输数据的调用接口 -->
+	<bean id="archiveClientCallGWCS" class="com.chinacreator.xtbg.core.archive.gwcs.client.impl.ArchiveClientCallGWCSServiceImpl">
+		<property name="wordToGwcsWsdl" value="http://172.16.17.128:8888/gwcs/services/WordToGWCSService"></property>
+		<property name="archiveSendWsdl" value="http://172.16.17.128:8888/gwcs/services/ArchiveToGWCSService"></property>
+		<!-- 发公文传输 -->
+		<property name="archiveServerSendWsdl" value="http://172.16.17.128:8888/gwcs/services/ArchiveToServerService"></property>
+		<!-- 联合发文 -->
+		<property name="unionArchiveSendWsdl" value="http://172.16.17.128:8888/gwcs/services/UnionArchiveToServerService"></property>
+		
+	</bean>
+	<!-- Oa公文传输的实现类 -->
+	<bean id="oaSendArchiveServiceImpl" class="com.chinacreator.xtbg.core.archive.gwcs.services.impl.OaSendArchiveServiceImpl">
+		<property name="gwConstant" ref="gwConstant"></property>
+		<!-- 具体的公文传输数据处理实现类 -->
+		<property name="oaArchiveHandlerIfc" ref="oaArchiveHandlerIfc"></property>
+		<property name="archiveClientCallGWCS" ref="archiveClientCallGWCS"></property>
+	</bean>
+	
+	<!-- Oa发布的公文传输的实现类 -->
+	<bean id="oaArchiveWebServiceImpl" class="com.chinacreator.xtbg.core.archive.gwcs.services.OaArchiveWebServiceImpl">
+		<property name="gwConstant" ref="gwConstant"></property>
+		<!-- 具体的公文传输数据处理实现类 -->
+		<property name="oaArchiveHandlerIfc" ref="oaArchiveHandlerIfc"></property>
+	</bean>
+	
+
+	
+	<!-- 
+	<jaxws:endpoint id="oaVersionService"
+		implementor="com.chinacreator.xtbg.core.common.creatormaker.services.impl.OaVersionServiceImpl"
+		address="/OaVersionService">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+ 
+	</jaxws:endpoint>-->
+	
+	<jaxws:endpoint id="OaArchiveWebService" 
+				    implementor="#oaArchiveWebServiceImpl"
+				    address="/OaArchiveWebService">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+	<jaxws:endpoint id="workFlowPhoneHandleIfc"
+		implementor="com.chinacreator.xtbg.core.process.workflowphone.service.impl.WorkFlowPhoneHandleImpl"
+		address="/WorkFlowPhoneHandleIfc">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+	
+	<!--子系统修改单点登录密码的接口  -->
+	<jaxws:endpoint id="subSystemWebService" address="/SubSystemWebService">
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
+		<jaxws:implementor ref="subSystemWebServiceImpl"/>
+	</jaxws:endpoint>
+</beans>

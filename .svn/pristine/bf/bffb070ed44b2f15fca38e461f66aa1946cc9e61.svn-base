@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../../fceform/css/dj.css); 
+	</STYLE>
+		<script src="../../fceform/js/fcpub.js"></script>
+		<script src="../../fceform/js/fcrundj.js"></script>
+		<script src="../../fceform/js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../../fceform/images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function showControlPara(){
+    var djid = parent.topdjid;    
+    var selectSql = "select ctrl_id,ctrl_cnname,field_type,init_value,field_desc from td_form_ctrlattr where djid='"+djid+"'";
+    dsControlPara.Open(selectSql);        
+}
+
+function deleteRow(){
+var tt=dsControlPara.Fields.Field['CTRL_ID'].Value;
+var sql="delete from td_form_ctrlattr where CTRL_ID='"+tt+"'";
+if(confirm("你确认要删除当前行吗？")){
+    var result = InsertSql(sql);
+    if(result==""){
+        alert("删除成功！");
+        window.location.reload();
+    }else{
+        alert("删除失败！");
+        alert(result);
+        return;
+    }
+}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><script >document.styleSheets[0].addRule("fc\\:webgrid","behavior: url(../htc/webgrid.htc)",0);</script><script src='../js/fcwebgrid.js'></script><script >document.styleSheets[0].addRule("fc\\:fc_code","behavior: url(../htc/fc_code.htc)",0);</script><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet toolbar="不带工具栏" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" billtaborder="<root><taborder>grid1</taborder><taborder>button1</taborder><taborder>button2</taborder></root>" dj_sn="showControlPara" type="ST" caption="显示表单控制参数" mkbh codeheader="BBB" keyfield window="当前窗口" entertype="修改" posleft postop poswidth posheight isfile="否" OtherSave="否" idtype="1" version="1.0" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:1;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:1;dataset:1;spin:0;excel:0;tree:0;ebshow:0" contxml="<root><label><id>label1</id></label><button><id>button1</id><id>button2</id></button><grid><id>grid1</id></grid><dataset><id>dsControlPara</id></dataset></root>" BLONopen="showControlPara()"><?xml:namespace prefix = fc /><fc:webgrid id=grid1 onkeydown='bill_ongridkeydown("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' ondblclick='bill_ongriddblclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' onclick='bill_ongridclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' width="443" height="177" visible="是" readonly="否" canselect="是" autoappend="否" autowidth="否" autoheight="否" SetRowHeight="是" hideVscroll="否" hideHscroll="否" autosize="否" bodyrowheight="-1" bodyrows="-1" dataset="dsControlPara" format="<cols><col><fname>CTRL_ID</fname><cname>控件id</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>CTRL_CNNAME</fname><cname>控件中文名</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>FIELD_TYPE</fname><cname>数据类型</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>INIT_VALUE</fname><cname>初始值</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col><col><fname>FIELD_DESC</fname><cname>描述</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>80</columnwidth><align>left</align></col></cols>" top="45" left="1">
+<TABLE id=t style="TABLE-LAYOUT: fixed; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow>
+<TD></TD></TR></TBODY></TABLE></fc:webgrid> 
+<DIV id=label1 style="LEFT: 22px; WIDTH: 65px; POSITION: absolute; TOP: 19px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">已选做控制参数的元素：</DIV><fc:dataset id=dsControlPara opensortno="1" temptable="TMP_DATASET1" saveastable="td_form_ctrlattr" format="<fields><field><fieldname>CTRL_ID</fieldname><datatype>字符</datatype><displaylabel>控件id</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>CTRL_CNNAME</fieldname><datatype>字符</datatype><displaylabel>控件中文名</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>FIELD_TYPE</fieldname><datatype>字符</datatype><displaylabel>数据类型</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>INIT_VALUE</fieldname><datatype>字符</datatype><displaylabel>初始值</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>FIELD_DESC</fieldname><datatype>字符</datatype><displaylabel>描述</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")' onGetText='bill_ondatasetgettext("<dsid><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")' onSetText='bill_ondatasetsettext("<dsid><CTRL_ID></CTRL_ID><CTRL_CNNAME></CTRL_CNNAME><FIELD_TYPE></FIELD_TYPE><INIT_VALUE></INIT_VALUE><FIELD_DESC></FIELD_DESC></dsid>")'></fc:dataset><BUTTON id=button1 style="LEFT: 362px; WIDTH: 75px; POSITION: absolute; TOP: 8px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("deleteRow()")' dropstyle="否">删除</BUTTON><BUTTON id=button2 style="LEFT: 254px; WIDTH: 75px; POSITION: absolute; TOP: 10px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("showControlPara()")' dropstyle="否">刷新</BUTTON></DIV></body></html>

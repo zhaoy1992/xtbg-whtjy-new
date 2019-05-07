@@ -1,0 +1,1 @@
+alter table OA_DATA_TYPE modify d_type_remark VARCHAR2(2000);

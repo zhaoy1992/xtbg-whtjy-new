@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>var typeid
+function uf_open() {
+	SKDBListBox1.options.length = 0;
+	typeid = pubDataSet[0] ;
+	txtType.value = typeid ;
+	
+	var sOption = "" ;
+	
+	sOption = SendHttp(location.protocol+"//"+location.host + fcpubdata.servletPath + "/editeprint"+fcpubdata.dotnetVersion+"?key=readfile&typeid="+typeid+"&designpath=" +fcpubdata.designFilePath,"");
+	SKDBListBox1.outerHTML = SelectAddOption(SKDBListBox1,sOption);
+	/*
+	var oXml1 = SetDomFile("../prnfile/" + typeid + ".xml")
+	
+	if(oXml1.documentElement == null) return
+
+	var s = oXml1.documentElement.text
+	s = unescape(s) ;
+	s = "<root>"+ s + "</root>" ;
+	var oXml = SetDom(s) ;	
+	if(oXml.documentElement != null){
+		var l = oXml.documentElement.childNodes.length ;
+		var sOption ="";
+		for(var i=0;i<l;i++){
+			sOption += '<option value="' + oXml.documentElement.childNodes(i).childNodes(0).text + '">' + oXml.documentElement.childNodes(i).childNodes(1).text + '</option>' ;
+		}
+		if(sOption != "") SKDBListBox1.outerHTML = SelectAddOption(SKDBListBox1,sOption);
+	}*/
+}
+function uf_getid(){
+	var s =SKDBListBox1.options(SKDBListBox1.selectedIndex).text;
+	s =  s.substring(typeid.length+1,s.length-4);
+	return s ;
+}
+function uf_selected(){
+	if(SKDBListBox1.selectedIndex>=0) {
+		FCDBedit1.value=uf_getid();	
+	}
+}
+function uf_ok() {
+	var txtid=Trim(FCDBedit1.value);
+	if(IsSpace(txtid)){
+		alert("ID不能为空!")
+		FCDBedit1.focus()
+		return
+	}
+	if(CheckFileName(txtid) == false) {
+		FCDBedit1.focus() ;
+		return ;
+	}
+	var arr = new Array() ;
+	arr[0]=txtid ;
+
+	window.returnValue=arr ;
+	CloseBill()
+	
+}
+function uf_del() {
+
+	if(SKDBListBox1.selectedIndex>=0) {
+		if(window.confirm("确定删除当前选中的打印模版?")){
+			var sRet = DelPrintTemp(typeid,uf_getid());
+			if(IsSpace(sRet)){
+				alert("删除成功!");
+				SKDBListBox1.remove(SKDBListBox1.selectedIndex);
+				FCDBedit1.value = "";
+			}else{
+				alert(sRet)
+			}
+		}
+	}else{
+		alert("请选中要删除的打印模版后再删除!") ;
+	}
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet center="居中" toolbar="不带工具栏" contxml="<root><label><id>Label1</id><id>Label3</id><id>label1</id></label><listbox><id>SKDBListBox1</id></listbox><button><id>FCButton1</id><id>FCButton2</id><id>FCButton3</id></button><text><id>FCDBedit1</id><id>txtType</id></text></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:1;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:1;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>FCButton1</taborder><taborder>FCButton2</taborder><taborder>SKDBListBox1</taborder><taborder>FCDBedit1</taborder><taborder>FCButton3</taborder><taborder>txtType</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="290" poswidth="400" postop posleft entertype="修改" window="有模式窗口" keyfield codeheader="BBB" mkbh caption="打开打印模版" type="PR" dj_sn="ep_openprn" BLONopen="uf_open()"><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 229px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 218px; HEIGHT: 22px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>打 开</BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 292px; WIDTH: 59px; FONT-FAMILY: ; POSITION: absolute; TOP: 218px; HEIGHT: 22px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>关 闭</BUTTON><SELECT id=SKDBListBox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 1px; WIDTH: 189px; FONT-FAMILY: ; POSITION: absolute; TOP: 22px; HEIGHT: 231px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_selected()")' size=8 controltype="listbox" onclick='bill_onclick("uf_selected()")' temptext tempvalue sql check="1" china ondblclick='bill_ondblclick("uf_ok()")' backwidth="100" backheight="146"></SELECT><INPUT type=text id=FCDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 196px; WIDTH: 186px; FONT-FAMILY: ; POSITION: absolute; TOP: 129px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " controltype="text" china value CanSelect="false"></INPUT><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 198px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 115px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" value="Label1">打印模版ID</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 85px; FONT-FAMILY: ; POSITION: absolute; TOP: 6px; HEIGHT: 32px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" value="Label3">打印模版列表:</SPAN><BUTTON id=FCButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 113px; WIDTH: 56px; FONT-FAMILY: ; POSITION: absolute; TOP: 1px; HEIGHT: 22px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_del()")'>删 除</BUTTON> 
+<DIV id=label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 198px; WIDTH: 30px; FONT-FAMILY: ; POSITION: absolute; TOP: 41px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="label1">模版类别:</DIV><INPUT type=text id=txtType style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 195px; WIDTH: 185px; FONT-FAMILY: ; POSITION: absolute; TOP: 60px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() controltype="text" china value CanSelect="false" readOnly="true"></INPUT></DIV><p id=splitaddhtml /><script src="../eprint/eprint.js"></script></body></html>

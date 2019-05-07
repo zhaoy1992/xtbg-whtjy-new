@@ -1,0 +1,6 @@
+1.SharkUtil异常。解决通过类加载器不能获取文件的问题，改为从config-manage.xml获取应用路径，并初始化配置文件流
+Modified: Shark-Extend\src\com\chinacreator\workflow\shark\SharkUtil.java  
+2.兼职借调兼容历史数据
+Modified: Shark-Extend\src\com\chinacreator\commonworkflow\WorkflowOperation.java  
+3.jbosscache集群缓存使用的jgroups.jar版本不一致问题
+Modified: Shark-Kernal\lib\jgroups.jar

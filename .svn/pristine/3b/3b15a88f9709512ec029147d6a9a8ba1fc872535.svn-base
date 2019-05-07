@@ -1,0 +1,14 @@
+/* 注释 */
+.qQuery {}
+.cQueryFunArea {/*查询功能按钮位置*/
+	text-align:center;
+	/*background-color: #ffffff;*/
+}
+.cOprArea {/*操作功能按钮位置*/
+	text-align:right;
+	/*background-color: #ffffff;*/
+}
+.tylcFunction{/*功能按钮位置*/
+	text-align:right;
+	/*background-color: #ffffff;*/
+}

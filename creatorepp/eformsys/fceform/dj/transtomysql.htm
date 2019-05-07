@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_run() {
+	var sXml="<no>"+FCDBedit1.value+"</no><no>" +FCDBedit2.value+"</no><no>"+FCDBedit3.value+"</no><no>"+FCDBedit4.value+"</no>";
+	var retX=SendHttp("http://"+location.host+"/" + fcpubdata.servletPath + "/WebBill.aspx?gettextsql",sXml) ;
+	//CopyToPub(retX);
+	//SKDBMemo1.value = retX ;
+	//return
+	var sRet=SendHttp("http://192.168.0.202:8080/eform/servlet/WebDesign?transtext",retX )
+	alert(sRet)
+}
+function uf_all() {
+	uf_allsub('dj_name')
+	uf_allsub('djposition')
+	uf_allsub('designtext')
+	uf_allsub('xmltext')
+	
+	/*
+	uf_other('fdname','chnname','FC_FLDLIST')
+	uf_other('fdname','fdtype','FC_FLDLIST')
+	uf_other('tbname','chnname','FC_TBLIST')
+	uf_other('tbname','tbtype','FC_TBLIST')
+	uf_other('fangaid','fangamch','FC_ZLSEL')
+	uf_other('fangaid','multisel','FC_ZLSEL')
+	uf_other('fangaid','sqls','FC_ZLSEL')
+	
+	
+	*/
+	alert("成功!")
+}
+function uf_allsub(fieldname) {
+	for(var i=0;i<400;i++){
+		var ii=i*5;
+		var iii=(i+1)*5
+		var sql="select djid,"+fieldname+" from FC_BILLZL where djid &"+
+			"lt;"+iii+" and djid &"+"gt;="+ii ;
+		
+		var sXml="<no>"+sql+"</no><no>FC_BILLZL</no><no>djid</no><no>"+fieldname+"</no>";
+		var retX=SendHttp("http://"+location.host+"/" + fcpubdata.servletPath + "/WebBill.aspx?gettextsql",sXml) ;
+		if(IsSpace(retX))continue;
+		//CopyToPub(retX);
+		//SKDBMemo1.value = retX ;
+		//return
+		//2005-11-23 补	
+		if(fieldname == "xmltext"){ 		
+			retX = RepStr(retX,"\\","\\\\");
+		}
+		var sRet=SendHttp("http://192.168.0.202:8080/eform/servlet/WebDesign?transtext",retX )
+		if(IsSpace(sRet)==false){
+			alert(sRet)
+			alert(sql)
+			return
+		}
+
+	}
+	
+}
+function uf_other(idname,fieldname,tbname) {
+	
+		var sql="select "+idname+","+fieldname+" from "+tbname
+		
+		var sXml="<no>"+sql+"</no><no>"+tbname+"</no><no>"+idname+"</no><no>"+fieldname+"</no>";
+		var retX=SendHttp("http://"+location.host+ fcpubdata.servletPath + "/WebBill.aspx?gettextsql",sXml) ;
+		//alert(retX)
+		if(IsSpace(retX)) return
+		//CopyToPub(retX);
+		//SKDBMemo1.value = retX ;
+		//return
+		var sRet=SendHttp("http://192.168.0.202:8080/eform/servlet/WebDesign?transtext",retX )
+		if(IsSpace(sRet)==false){
+			alert(sRet)
+			alert(sql)
+			return
+		}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet postop posleft window="当前窗口" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight poswidth entertype="修改" codeheader mkbh caption="转换到mysql" type="ST" dj_sn="transtomysql" billtaborder="<root></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;" contxml="<root><dataset><id>DsMain</id></dataset></root>" blmode="其他" toolbar="不带工具栏"><INPUT type=text id=FCDBedit1 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 72px; BORDER-LEFT: dimgray 2px solid; WIDTH: 478px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 48px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" china value="select djid,designtext from FC_BILLZL where djid < 150 and djid >=100 "></INPUT><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 315px; WIDTH: 63px; FONT-FAMILY: ; POSITION: absolute; TOP: 101px; HEIGHT: 25px" onclick='bill_onclick("uf_run()")' dropstyle="否">生成</BUTTON><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 15px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 50px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label1">sql语句:</SPAN><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 19px; WIDTH: 36px; FONT-FAMILY: ; POSITION: absolute; TOP: 75px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2">表名:</SPAN><INPUT type=text id=FCDBedit2 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 73px; BORDER-LEFT: dimgray 2px solid; WIDTH: 83px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 71px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" china value="FC_BILLZL"></INPUT><SPAN id=Label3 style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 20px; LEFT: 15px; WIDTH: 254px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 10px; HEIGHT: 26px; TEXT-ALIGN: left; TEXT-DECORATION: underline; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label3">转换到mysql数据库的工具</SPAN><TEXTAREA id=SKDBMemo1 style="FONT-SIZE: 12px; LEFT: 14px; WIDTH: 436px; POSITION: absolute; TOP: 138px; HEIGHT: 312px" rows=7 cols=86 value="SKDBMemo1"></TEXTAREA><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 171px; WIDTH: 50px; FONT-FAMILY: ; POSITION: absolute; TOP: 77px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2">ID字段:</SPAN><INPUT type=text id=FCDBedit3 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 229px; BORDER-LEFT: dimgray 2px solid; WIDTH: 83px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 72px; HEIGHT: 20px; TEXT-ALIGN: left" china value="djid"></INPUT><INPUT type=text id=FCDBedit4 style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 365px; BORDER-LEFT: dimgray 2px solid; WIDTH: 83px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 72px; HEIGHT: 20px; TEXT-ALIGN: left" china value="designtext"></INPUT><SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 326px; WIDTH: 36px; FONT-FAMILY: ; POSITION: absolute; TOP: 75px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #d4d0c8; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2">text:</SPAN><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 211px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 101px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onclick='bill_onclick("uf_all()")' dropstyle="否">全部生成</BUTTON><?xml:namespace prefix = fc /><fc:dataset id=DsMain opensortno="0" onValid='bill_ondatasetvalid("<dsid></dsid>")' onGetText='bill_ondatasetgettext("<dsid></dsid>")' onSetText='bill_ondatasetsettext("<dsid></dsid>")' format="<fields></fields>"></fc:dataset></DIV></body></html>

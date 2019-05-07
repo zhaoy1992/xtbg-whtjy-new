@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>My First Grid</title>
+<link rel="stylesheet" type="text/css" href="css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="css/ui-lightness/jquery-ui-1.8.9.custom.css" />
+<script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="js/i18n/grid.locale-cn.js" type="text/javascript"></script>  
+<script src="js/jquery.jqGrid.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/menu/jquery.metadata.js"></script>
+	<script type="text/javascript" src="js/menu/mbMenu.js"></script>
+	<script type="text/javascript" src="js/menu/styleswitch.js"></script>
+	<script type="text/javascript" src="js/menu/jquery.hoverIntent.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/menu/menu_black.css" title="styles1"  media="screen" />
+	<link rel="alternate stylesheet" type="text/css" href="css/menu/menu_red.css" title="styles2" media="screen" />
+
+<!--
+<script src="js/jquery.contextmenu.r2.packed.js" type="text/javascript"></script>
+<script src="js/PopupMenuLib.js" type="text/javascript"></script>
+-->
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 75%;
+}
+</style>
+</head>
+<body>
+   <table id="gridTable" class="scroll" width="100%"></table>  
+   <div id="pager" class="scroll" style="text-align: center;"></div>
+   
+			<table  border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" class="container">
+				<tr>
+					<td class="myMenu" align="right">
+
+						<!-- start horizontal menu -->
+
+						<table class="rootVoices" cellspacing='0' cellpadding='0' border='0'><tr>
+							<td class="rootVoice {menu: 'menu_12'}" >ajax menu 12</td>
+							<td class="rootVoice {menu: 'menu_2'}" >menu 2</td>
+							<td class="rootVoice {menu: 'menu_3'}" >menu 3</td>
+							<td class="rootVoice {menu: 'empty'}" onclick="window.open('http://www.open-lab.com','ww');">menu 4 empty</td>
+						</tr></table>
+
+						<!-- end horizontal menu -->
+
+					</td>
+				</tr>
+			</table>
+			
+<!--右键菜单部分-->
+<div id="menu_2" class="menu">
+	<a rel="title" class="{action: 'document.title=(\'menu_2.1\')', img: 'icon_13.png'}">menu_2.1 TITLE</a>
+	<a class="{action: 'document.title=(\'menu_2.2\')'}">menu_2.2</a>
+	<a class="{menu: 'sub_menu_1', img: 'icon_14.png'}">menu_2.3</a>
+	<a class="{menu: 'sub_menu_2', img: '24-tag-add.png'}">menu_2.4</a>
+	<a rel="separator"> </a>
+	<a class="{action: 'document.title=(\'menu_2.4\')'}">menu_2.5</a>
+</div>
+    
+
+	<script type="text/javascript">
+	jQuery("#gridTable").jqGrid({
+		datatype: "local",
+		height: 250,
+		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colModel:[
+			{name:'id',index:'id', width:60, sorttype:"int"},
+			{name:'invdate',index:'invdate', width:90, sorttype:"date"},
+			{name:'name',index:'name', width:100},
+			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float"},
+			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
+			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
+			{name:'note',index:'note', width:150, sortable:false}		
+		],
+		imgpath: 'themes/sand/images',
+		multiselect: true,
+		pager: $('#pager'), 
+		rowNum:10, 
+		rowTotal: 50, 
+		//rowList:[10,20,30], 
+		toolbar: [true,'top'] ,
+		ondblClickRow: function(id){ //双击事件
+			alert('dbclick');
+			alert(id);
+		},
+		onRightClickRow: function(id){ //右键事件
+			//alert('rightclick');
+			//alert(id);
+			jQuery("#gridTable").jqGrid('setSelection', id,true );//选中点击的行
+			showMenu();
+		},
+		afterInsertRow: function(rowid, aData){
+			switch (aData.name) { 
+				case 'Client 1': 
+					jQuery("#gridTable").jqGrid('setCell',rowid,'total','',{color:'green'}); 
+				break; 
+				case 'Client 2': 
+					jQuery("#gridTable").jqGrid('setCell',rowid,'total','',{color:'red'}); 
+				break; 
+				case 'test3': 
+					jQuery("#gridTable").jqGrid('setCell',rowid,'total','',{color:'blue'}); 
+				break; 
+			}
+		},
+		caption: "Manipulating Array Data"
+	});
+
+	var mydata = [
+			{id:"1",invdate:"2007-10-01",name:"Client 1",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"2",invdate:"2007-10-02",name:"Client 2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"3",invdate:"2007-09-01",name:"Client 3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"4",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"7",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"9",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"10",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"11",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"12",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"13",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
+			{id:"14",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
+			{id:"15",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
+			{id:"16",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
+			];
+
+	for(var i=0;i<=mydata.length;i++)
+		$("#gridTable").addRowData(i+1,mydata[i]);
+
+	jQuery("#gridTable").navGrid('#pager',{view:true, del:false});
+
+	$("#t_gridTable").append("<input type='button' value='Click Me' style='height:20px;font-size:-3'/>");
+	$("input","#t_gridTable").click(function(){ alert("Hi! I'm added button at this toolbar"); }); 
+
+/*
+	$("#gridTable").jqGrid('navGrid','#pager',{del:true,add:true,edit:true,search:true}).navButtonAdd('#pager',{  
+        caption:"表头",    //
+        buttonicon:"ui-icon-check",    //
+        onClickButton: function(){    //       }, 
+        position:"first"  //
+    }); 
+	*/
+	
+//右键菜单
+	 /*  //这个插件在这不太适用呃。。。
+   $('tr').contextMenu('myMenu1', {
+      bindings: { 
+        'open': function(t) {
+          alert('Trigger was '+t.id+'\nAction was Open');
+        },
+        'email': function(t) {
+          alert('Trigger was '+t.id+'\nAction was Email');
+        },
+        'save': function(t) {
+          alert('Trigger was '+t.id+'\nAction was Save');
+        },
+        'delete': function(t) {
+          alert('Trigger was '+t.id+'\nAction was Delete');
+        }
+      }
+ });*/
+		$(function(){
+			$(".myMenu").buildMenu(
+			{
+				template:"menuVoices.html",
+				additionalData:"pippo=1",
+				menuWidth:200,
+				openOnRight:false,
+				menuSelector: ".menuContainer",
+        containment:"wrapper",
+				iconPath:"ico/",
+				hasImages:true,
+				fadeInTime:100,
+				fadeOutTime:300,
+				adjustLeft:2,
+				minZindex:"auto",
+				adjustTop:10,
+				opacity:.95,
+				shadow:true,
+				closeOnMouseOut:true,
+				closeAfter:1000
+			});
+
+		});
+		
+ function showMenu(){
+ 	alert("show menu!");
+}
+
+	</script>
+</body>
+</html>

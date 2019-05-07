@@ -1,0 +1,18 @@
+工作流内核修改：子流程多实例的实现，以及子流程多实例与父流程同步处理时实现会签效果
+Modified: Shark-Kernal\src\org\enhydra\shark\WfActivityImpl.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\WfProcessImpl.java  
+Modified: Shark-Kernal\src\org\enhydra\shark\api\SharkTransaction.java  
+工作流扩展修改：流程配置实现子流程的配置和流程监控图能够监控到子流程
+Modified: Shark-Extend\WebRoot\common_workflow\procconfig\editform.js  
+Modified: Shark-Extend\WebRoot\common_workflow\procconfig\editgrid.js  
+Modified: Shark-Extend\WebRoot\common_workflow\procconfig\shark_content.jsp  
+Modified: Shark-Extend\WebRoot\common_workflow\spprocconfig\editform.js  
+Modified: Shark-Extend\WebRoot\common_workflow\spprocconfig\editgrid.js  
+Modified: Shark-Extend\lib\shark-kernal.jar  
+Modified: Shark-Extend\src\com\chinacreator\spi\api\WorkflowManager.java  
+Modified: Shark-Extend\src\com\chinacreator\spi\impl\local\WorkflowManagerImpl.java  
+Modified: Shark-Extend\src\com\chinacreator\workflow\shark\ProcessInstanceMonitor.java  
+Modified: Shark-Extend\src\com\chinacreator\workflow\shark\SharkEngine.java  
+Modified: Shark-Extend\src\com\chinacreator\workflow\shark\procconfig\ProcessConfigManager.java  
+流程编辑器修改：添加子流程实例化控制参数
+Modified: JaWE\src\org\enhydra\jawe\base\controller\actions\InsertMyExtendsAttribute.java  

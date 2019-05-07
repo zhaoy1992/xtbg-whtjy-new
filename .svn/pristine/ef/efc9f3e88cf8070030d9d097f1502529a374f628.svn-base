@@ -1,0 +1,230 @@
+Ext.namespace("Ext.ux");
+/**
+ * @class Ext.ux.DWRTreeLoader
+ * @extends Ext.tree.TreeLoader
+ * @author Carina Stumpf
+ * 
+ * DWRTreeloader loads tree nodes by calling a DWR service. Version 2.1
+ * 
+ */
+
+/**
+ * @constructor
+ * @param cfg
+ *            {Object} config A config object
+ * @cfg dwrCall the DWR function to call when loading the nodes
+ */
+
+Ext.ux.DWRTreeLoader = function(config) {
+	Ext.ux.DWRTreeLoader.superclass.constructor.call(this, config);
+};
+Ext.extend(Ext.ux.DWRTreeLoader, Ext.tree.TreeLoader, {
+	/**
+	 * Load an {@link Ext.tree.TreeNode} from the DWR service. This function is
+	 * called automatically when a node is expanded, but may be used to reload a
+	 * node (or append new children if the {@link #clearOnLoad} option is
+	 * false.)
+	 * 
+	 * @param {Object}
+	 *            node node for which child elements should be retrieved
+	 * @param {Function}
+	 *            callback function that should be called before executing the
+	 *            DWR call
+	 */
+	load : function(node, callback) {
+       
+		dwr.engine.setAsync(false); 
+		var cs, i;
+		if (this.clearOnLoad) {
+			while (node.firstChild) {
+				node.removeChild(node.firstChild);
+			}
+		}
+		if (node.attributes.children && node.attributes.hasChildren) { // preloaded
+																		// json
+																		// children
+			cs = node.attributes.children;
+			for (i = 0, len = cs.length; i < len; i++) {
+				node.appendChild(this.createNode(cs[i]));
+			}
+			if (typeof callback == "function") {
+				callback();
+			}
+		} else if (this.dwrCall) {
+			this.requestData(node, callback);
+		}
+		 try{
+				//勾选已选节点checkOrgUserJob格式为【机构#用户#岗位】
+				var id = checkOrgUserJob.split("#");//activity_participant.jsp页面全局变量
+				var tmp = "";
+				var orgs = id[0].split(",");//机构截取
+				var users = id[1].split(",");//用户截取
+				var jobs = id[2].split(",");//岗位截取
+				for(var a=0;a<orgs.length;a++){//机构
+					var aa = orgs[a];
+					tmp += aa=="" ? "" : "org:" + aa + ",";
+				}
+				for(var b=0;b<users.length;b++){//用户
+					var bb = users[b];
+					if(bb=="admin"){
+						continue;
+					}
+					tmp += bb=="" ? "" : "user:" + bb + ",";
+				}
+				for(var c=0;c<jobs.length;c++){//岗位
+					var cc = jobs[c];
+					tmp += cc=="" ? "" : "job:" + cc + ",";
+				}
+				var ids=tmp.split(",");
+				if(notYetLoadNodeIds.length == 0){
+					notYetLoadNodeIds = ids;
+				}
+				//从页面去已选参数结束
+				if(node.hasChildNodes()){
+				   childNodes=node.childNodes;
+				   for(i=0;i<childNodes.length;i++){
+				       for(j=0;j<ids.length;j++){
+				           if(childNodes[i].id==ids[j] || (ids[j] != "" && childNodes[i].id.indexOf(ids[j] + ":") != -1)){
+				              childNodes[i].getUI().checkbox.checked=true;
+				              childNodes[i].attributes.checked=true;
+				              notYetLoadNodeIds.splice(j,1,"");
+				              //alert();
+				             // childNodes[i].getUI().toggleCheck(true);
+				           }
+				       }
+				   }
+				}
+			}catch(e){
+			
+			}
+		dwr.engine.setAsync(true);
+	},
+
+	/**
+	 * Performs the actual load request
+	 * 
+	 * @param {Object}
+	 *            node node for which child elements should be retrieved
+	 * @param {Function}
+	 *            callback function that should be called before executing the
+	 *            DWR call
+	 */
+	requestData : function(node, callback) {
+		var callParams;
+		var success, error, rootId, dataContainsRoot;
+
+		if (this.fireEvent("beforeload", this, node, callback) !== false) {
+
+			callParams = this.getParams(node);
+
+			success = this.handleResponse.createDelegate(this,
+					[node, callback], 1);
+			error = this.handleFailure
+					.createDelegate(this, [node, callback], 1);
+
+			callParams.push({
+						callback : success,
+						errorHandler : error
+					});
+
+			this.transId = true;
+			this.dwrCall.apply(this, callParams);
+		} else {
+		    
+			// if the load is cancelled, make sure we notify
+			// the node that we are done
+			if (typeof callback == "function") {
+				callback();
+			}
+		}
+
+	},
+    
+	/**
+	 * Override this to add custom request parameters. Default adds the node id
+	 * as first and only parameter
+	 */
+	
+	getParams : function(node) {
+		try{
+			return [node.id,checkOrgUserJob];
+		}catch(e){
+		    return [node.id];
+		}
+	},
+
+	/**
+	 * Handles a successful response.
+	 * 
+	 * @param {Object}
+	 *            childrenData data that was sent back by the server that
+	 *            contains the child nodes
+	 * @param {Object}
+	 *            parent parent node to which the child nodes will be appended
+	 * @param {Function}
+	 *            callback callback that will be performed after appending the
+	 *            nodes
+	 */
+	handleResponse : function(childrenData, parent, callback) {
+		this.transId = false;
+		this.processResponse(childrenData, parent, callback);
+		
+	},
+
+	/**
+	 * Handles loading error
+	 * 
+	 * @param {Object}
+	 *            response data that was sent back by the server that contains
+	 *            the child nodes
+	 * @param {Object}
+	 *            parent parent node to which child nodes will be appended
+	 * @param {Function}
+	 *            callback callback that will be performed after appending the
+	 *            nodes
+	 */
+	handleFailure : function(response, parent, callback) {
+		this.transId = false;
+		this.fireEvent("loadexception", this, parent, response);
+		if (typeof callback == "function") {
+			callback(this, parent);
+		}
+		//console.log(e)("DwrTreeLoader: error during tree loading. Received response: "
+		//		+ response);
+				
+	   
+	},
+
+	/**
+	 * Process the response that was received from server
+	 * 
+	 * @param {Object}
+	 *            childrenData data that was sent back by the server that
+	 *            contains the attributes for the child nodes to be created
+	 * @param {Object}
+	 *            parent parent node to which child nodes will be appended
+	 * @param {Function}
+	 *            callback callback that will be performed after appending the
+	 *            nodes
+	 */
+	processResponse : function(childrenData, parent, callback) {
+		var i, n, nodeData;
+		try {
+			for (var i = 0; i < childrenData.length; i++) {
+				var n = this.createNode(childrenData[i]);
+				if (n) {
+					n.hasChildren = childrenData[i].hasChildren;
+					parent.appendChild(n);
+				}
+			}
+
+			if (typeof callback == "function") {
+				callback(this, parent);
+			}
+		} catch (e) {
+			this.handleFailure(childrenData);
+		}
+
+				
+	}
+});

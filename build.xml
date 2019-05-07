@@ -1,0 +1,70 @@
+<project basedir="." default="run" name="xtbgbase">
+	<property name="build.dir" value="build">
+	</property>
+	<property name="deploy.dir" value="build/deploy">
+	</property>
+	<property name="dist.dir" value="build/xtbgbase1.0/dist">
+	</property>
+	<property name="classes.dir" value="creatorepp/WEB-INF/classes">
+	</property>
+	<property name="lib.dir" value="creatorepp/WEB-INF/lib">
+	</property>
+
+	<tstamp prefix="my">
+		<format property="day" pattern="yyyy-MM-dd" />
+		<format property="time" pattern="HH:mm:ss" />
+		<format property="dt" pattern="yyyyMMddHHmmss" />
+	</tstamp>
+
+
+	<path id="compile.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+			<exclude name="**/ant*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile-init">
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${deploy.dir}" />
+	</target>
+
+
+	<!-- delete all hot build files and dir -->
+	<target name="compile-clean">
+		<delete dir="${classes.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${deploy.dir}" />
+	</target>
+
+	<target name="core-compile" depends="compile-clean,compile-init">
+		<echo>starting core core-compiling </echo>
+		<javac srcdir="src/main/java" destdir="${classes.dir}" debug="true" fork="true" memorymaximumsize="200M" failonerror="on" encoding="UTF-8">
+			<classpath refid="compile.classpath" />
+		</javac>
+		<javac srcdir="src/test/java" destdir="${classes.dir}" debug="true" fork="true" memorymaximumsize="200M" failonerror="on"  encoding="UTF-8">
+			<classpath refid="compile.classpath" />
+		</javac>
+		<copy includeemptydirs="false" todir="${classes.dir}">
+			<fileset dir="src/main/resources" />
+		</copy>
+		<copy includeemptydirs="false" todir="${classes.dir}">
+			<fileset dir="src/test/resources" />
+		</copy>
+		<echo>ended core core-compiling </echo>
+	</target>
+
+	<target name="core-zip" depends="core-compile">
+		<zip destfile="${deploy.dir}/xtbgbase-${my.dt}.zip">
+			<zipfileset dir="creatorepp" prefix="creatorepp"/>
+		</zip>
+	</target>
+	
+	<target name="findbugs-oa">
+		<ant antfile="findbug-ant.xml" inheritAll="true" inheritrefs="true" target="all"></ant>
+	</target>
+
+	
+	<target name="run" depends="core-zip,findbugs-oa">
+	</target>
+</project>

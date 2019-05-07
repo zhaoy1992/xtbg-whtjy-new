@@ -1,0 +1,46 @@
+<%@page import="com.chinacreator.security.AccessControl"%>
+<%@page import="com.frameworkset.common.poolman.DBUtil"%>
+
+<%AccessControl accesscontroler = AccessControl.getInstance();
+  if(!accesscontroler.checkAccess(request, response)){
+  		return;
+  }
+  String appPath = "app_"+accesscontroler.getCurrentSystemID();
+  String appId = accesscontroler.getCurrentSystemID();
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(~/css/dj.css); 
+	</STYLE>		
+		<script src="~/js/fcpub.js"></script>
+		<script src="~/js/fcrundj.js"></script>
+		<script src="~/js/tabpane.js"></script>	
+		<script src="~/js/ccpub.js" defer></script>
+		<script src="../../../eformsys/gaeditor/js/gaeditor.js" defer></script>
+		<script src="../../../iWebOffice2006/js/iWebOffice2006.js"  defer></script>
+		<script langage="javascript">
+		    //根据应用确定样式的目录
+			var stylePath = "../../../ccapp/<%=appPath%>/";
+			var mylink = document.createElement("link");
+			mylink.setAttribute("type","text/css");
+			mylink.setAttribute("rel","stylesheet");
+			var _my_namespace_js = "<script src='"+stylePath+"js/namespace.js"+"'></"+"script>";
+			window.document.write(_my_namespace_js);
+		</script>		
+		<%@ include file="../../../iWebOffice2006/js/iWebOffice2006Event.jsp"%>
+	</HEAD>
+	<body background="~/images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<iframe id="_newframe" name="_newframe" height="0" width="0"></iframe>
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>

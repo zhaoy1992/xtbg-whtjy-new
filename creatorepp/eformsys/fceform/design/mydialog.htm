@@ -1,0 +1,25 @@
+<html>
+	<head>
+<SCRIPT>
+function fnGetInfo()
+{
+  var sData = dialogArguments;
+  sData.version_num = oEnterName.value;
+  //sData.fnUpdate();
+}
+function fnCancel()
+{
+  var sData = dialogArguments;
+  sData.version_num = "1.0";
+  //sData.fnUpdate(); 
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<LABEL FOR="oEnterName" ACCESSKEY="f">Enter your 
+<SPAN STYLE="text-decoration:underline">F</SPAN>°æ±¾ºÅ£º</LABEL>
+<INPUT ID=oEnterName value="1.0"><BR><BR>
+<INPUT VALUE="Ok" TYPE=button onclick="fnGetInfo();window.close();">
+<INPUT VALUE="Cancel" TYPE=button onclick="fnCancel();window.close();">
+</BODY>
+</html>

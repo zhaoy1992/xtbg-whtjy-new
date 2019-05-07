@@ -1,0 +1,81 @@
+<HTML>
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<script type="text/javascript" src="dialog.js"></script>
+		<script type="text/javascript">document.write("<link href='../skin/"+config.Skin+"/dialog.css' type='text/css' rel='stylesheet'>");document.write("<TITLE>"+lang["DlgFile"]+"</TITLE>");var aA=((parseFloat(config.AllowFileSize)>0)?true:false);function aq(af){if(af=="url"){d_fromurl.disabled=false;if(config.AllowBrowse=="1"){d_browse.disabled=false;}d_checkfromurl.checked=true;if(aA){d_checkfromfile.checked=false;document.myuploadform.uploadfile.disabled=true;}}else{d_checkfromurl.checked=false;document.myuploadform.uploadfile.disabled=false;d_checkfromfile.checked=true;d_fromurl.disabled=true;if(config.AllowBrowse=="1"){d_browse.disabled=true;}}};function UploadError(aJ){bZ();aq('file');divProcessing.style.display="none";try{aF(document.myuploadform.uploadfile,eA(aJ,config.AllowFileExt,config.AllowFileSize));}catch(e){}};function UploadSaved(bL){d_fromurl.value=bL;aR();};function aR(){var url=d_fromurl.value;var lg=eh(url);var ik=cG("sysimage/icon16/"+lg);dialogArguments.insertHTML("<img id=eWebEditor_TempElement_Img border=0 src='"+ik+"'><a id=eWebEditor_TempElement_Href href='"+url+"' target=_blank>"+d_filename.value+"</a>");var au=dialogArguments.eWebEditor.document.getElementById("eWebEditor_TempElement_Img");au.src=ik;au.removeAttribute("id");au=dialogArguments.eWebEditor.document.getElementById("eWebEditor_TempElement_Href");au.href=url;au.removeAttribute("id");window.returnValue=null;window.close();};function ok(){if(d_checkfromurl.checked){jx(d_fromurl.value,"/");aR();}else{if(!da(document.myuploadform.uploadfile.value,config.AllowFileExt)){UploadError("ext");return false;}jx(document.myuploadform.uploadfile.value,"\\");ca();divProcessing.style.display="";document.myuploadform.submit();}};function ca(){d_checkfromfile.disabled=true;d_checkfromurl.disabled=true;d_fromurl.disabled=true;if(config.AllowBrowse=="1"){d_browse.disabled=true;}Ok.disabled=true;};function bZ(){d_checkfromfile.disabled=false;d_checkfromurl.disabled=false;d_fromurl.disabled=false;if(config.AllowBrowse=="1"){d_browse.disabled=false;}Ok.disabled=false;};function eh(url){var cT;cT=url.substr(url.lastIndexOf(".")+1);cT=cT.toUpperCase();var M;switch(cT){case "TXT":M="txt.gif";break;case "CHM":case "HLP":M="hlp.gif";break;case "DOC":M="doc.gif";break;case "PDF":M="pdf.gif";break;case "MDB":M="mdb.gif";break;case "GIF":M="gif.gif";break;case "JPG":M="jpg.gif";break;case "BMP":M="bmp.gif";break;case "PNG":M="png.gif";break;case "ASP":case "JSP":case "JS":case "PHP":case "PHP3":case "ASPX":M="code.gif";break;case "HTM":case "HTML":case "SHTML":M="htm.gif";break;case "ZIP":M="zip.gif";break;case "RAR":M="rar.gif";break;case "EXE":M="exe.gif";break;case "AVI":M="avi.gif";break;case "MPG":case "MPEG":case "ASF":M="mp.gif";break;case "RA":case "RM":M="rm.gif";break;case "MP3":M="mp3.gif";break;case "MID":case "MIDI":M="mid.gif";break;case "WAV":M="audio.gif";break;case "XLS":M="xls.gif";break;case "PPT":case "PPS":M="ppt.gif";break;case "SWF":M="swf.gif";break;default:M="unknow.gif";break;}return M;};function jx(url,opt){d_filename.value=url.substr(url.lastIndexOf(opt)+1);};function I(){lang.as(document);if(!aA){aq("url");}else{aq("file");}at();}</script>
+	<BODY onload="I()">
+		<table border=0 cellpadding=0 cellspacing=5 id=tabDialogSize>
+			<tr>
+				<td>
+					<table border=0 cellpadding=0 cellspacing=0 align=center>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>
+										<span lang=DlgFileSource></span>
+									</legend>
+									<table border=0 cellpadding=5 cellspacing=0 width="100%">
+										<tr>
+											<td>
+												<table border=0 cellpadding=0 cellspacing=0 width="300px">
+													<tr>
+														<td></td>
+													</tr>
+												</table>
+												<table border=0 cellpadding=0 cellspacing=2 width="100%">
+													<script type="text/javascript">
+if(aA){document.write("<tr>");document.write("<td noWrap width=\"20%\"><input type=radio id=\"d_checkfromfile\" value=\"1\" onclick=\"aq('file')\"><label for=d_checkfromfile>"+lang["DlgFromFile"]+"</label>:</td>");document.write("<td noWrap width=\"80%\">");document.write(ez("file"));document.write("</td>");document.write("</tr>");}</script>
+													<tr>
+														<td noWrap width="20%">
+															<input type=radio id="d_checkfromurl" value="1"
+																onclick="aq('url')">
+															<label for=d_checkfromurl>
+																<span lang=DlgFromUrl></span>
+															</label>
+															:
+														</td>
+														<td noWrap width="80%">
+															<script type="text/javascript">
+if(config.AllowBrowse=="1"){document.write("<table border=0 cellpadding=0 cellspacing=0 width='100%'><tr><td width='100%'><input type=text id='d_fromurl' style='width:100%' size=20 value='http://'></td><td><input class='dlgBtnBrowse' type=button id='d_browse' onclick=\"eG('file','fromurl')\"  value='"+lang["DlgBtnBrowse"]+"' align=absmiddle></td></tr></table>");}else{document.write("<input type=text id='d_fromurl' style='width:100%' size=40 value='http://'>");}</script>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td height=5></td>
+						</tr>
+						<tr>
+							<td noWrap align=right>
+								<input type=submit class="dlgBtnCommon" value='' id=Ok
+									onclick="ok()" lang=DlgBtnOK>
+								&nbsp;&nbsp;
+								<input type=button class="dlgBtnCommon" value=''
+									onclick="window.close();" lang=DlgBtnCancel>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div id=divProcessing
+			style="width: 200px; height: 30px; position: absolute; left: 70px; top: 30px; display: none">
+			<table border=0 cellpadding=0 cellspacing=1 bgcolor="#000000"
+				width="100%" height="100%">
+				<tr>
+					<td bgcolor=#3A6EA5>
+						<marquee align="middle" behavior="alternate" scrollamount="5">
+							<font color=#FFFFFF><span lang=DlgComUploading></span>
+							</font>
+						</marquee>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<input type=hidden id=d_filename value="">
+	</body>
+</html>

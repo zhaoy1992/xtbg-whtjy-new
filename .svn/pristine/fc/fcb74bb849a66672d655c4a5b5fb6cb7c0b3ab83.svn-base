@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frist-config>
+	<!-- 系统参数配置 -->
+	<system>
+		<sys_name></sys_name>
+		<weather_url></weather_url>
+	</system>
+	<!-- 侍办事项配置 -->
+	<pending functionSql = "select getCountInfo(?) as object from dual">
+		<pending-item id="waitsp" name="等待审批" >
+			<clickurl>/ccapp/oa/todolist/todomain.jsp?pageId=waitsp</clickurl>
+			<iframurl>/ccapp/oa/meeting/jsp/meetingchecklist4wait.jsp?m_check_flag=0</iframurl>
+		</pending-item>
+	</pending>
+	<!-- 显示信息区域块 -->
+	<item>
+		<!-- dynamicUrlColumns 为动态查询出的链接地址  值为字段名 -->
+		<!-- showColumns为真实值  realShowColumns为加样式或标签的值 -->
+		<show-item id="paper" name="信息采编" showColumns="P_REP_TITLE,P_REP_TIME" columnsWidth="50%,50%" 
+			realShowColumns="P_REP_TITLE,P_REP_TIME" dynamicUrlColumns=""
+		 	urlParamColumns="p_manage_id">
+			<clickurl>/ccapp/oa/paper/jsp/paperlist4reporteddetail.jsp?subid=paperlist4reporteddetail&amp;loadurl=paperlist4acc&amp;actionName=update2acc</clickurl>
+			<moreUrl>/ccapp/oa/paper/jsp/paperlist4accmain.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select '5' readrate,t.P_MANAGE_ID p_manage_id,t.P_IS_USE,t.P_LEADER,t.P_EDITOR,t.P_REP_TITLE,t.P_REP_TYPE_ID,t.P_REP_TYPE_NAME,t.P_REP_KEYWORD,t.P_REP_CONTENTS,t.P_REP_ATTACH_ID,t.P_REP_USER_ID,t.P_REP_USER_NAME,p_rep_time,p_acc_title,t.P_REP_UNIT_ID,t.P_REP_UNIT_NAME,t.P_FLAG_ID,t.P_FLAG_NAME,t.P_REP_FLAG_ID,t.P_REP_FLAG_NAME,t.P_ACC_UNIT_IDS,t.P_ACC_UNIT_NAMES,t.P_ACC_USER_ID,t.P_ACC_USER_NAME,t.P_ACC_TIME,t.P_SUB_USER_IDS,t.P_SUB_USER_NAMES,t.P_SUB_TIME,t.P_CONTENTS,t.P_PUB_USER_ID,t.P_PUB_USER_NAME,t.P_PUB_TIME,t.P_PUB_UNIT_ID,t.P_PUB_UNIT_NAME
+				  from OA_PAPER t
+				 where 1 = 1
+				   and t.p_is_use = '1'
+           		   and InStr(t.p_acc_unit_ids, (select v.unitid from v_user_info v where v.userid = ?)) > 0
+				   and (t.p_rep_flag_id = '1' or t.p_rep_flag_id = '0' or t.p_rep_flag_id = '2')
+				 order by p_rep_time desc
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="inspect" name="任务通知查看" showColumns="inspect_name,send_time" columnsWidth="50%,50%" 
+			realShowColumns="inspect_name,send_time" dynamicUrlColumns=""
+		 	urlParamColumns="id,inspect_state,recept_id,recept_state">
+			<clickurl>/ccapp/oa/inspect/jsp/inspectview4recept.jsp?windowId=update_inspect&amp;manage=manage</clickurl>
+			<moreUrl>/ccapp/oa/inspect/jsp/inspectmain4manage.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select a.info_id as id,
+					       a.inspect_name,
+					       a.inspect_type,
+					       a.inspect_state,
+					       decode(a.inspect_state,
+					              '0',
+					              '草稿',
+					              '1',
+					              '办理中',
+					              '2',
+					              '已完成',
+					              '3',
+					              '未完成') inspect_state_name,
+					       a.create_time,
+					       to_char(a.send_time, 'yyyy-mm-dd hh24:mi') as send_time,
+					       to_char(a.plan_endtime, 'yyyy-mm-dd hh24:mi') as plan_endtime,
+					       to_char(a.remind_time, 'yyyy-mm-dd hh24:mi') as remind_time,
+					       a.send_user_id,
+					       a.send_user_name,
+					       a.user_orgid,
+					       a.user_orgname,
+					       decode(d.recept_state, '2', '退回重办', '1', '已反馈', '未反馈') as recept_state_name,
+					       d.recept_state,
+					       d.recept_id,
+					       e.type_name
+					  from oa_inspect_type e
+					 right join oa_inspect_baseinfo a on a.inspect_type = e.type_id,
+					 (select b.info_id,
+					                                             b.recept_state,
+					                                             b.recept_id
+					                                        from oa_inspect_recept b
+					                                       where exists
+					                                       (select 1
+					                                                from oa_inspect_receptuser c
+					                                               where b.recept_id =
+					                                                     c.recept_id
+					                                                 and c.recept_userid = ?)) d
+					 where a.info_id = d.info_id
+					   and a.inspect_state <> '0'
+	             ]]>
+			</sql>
+		</show-item>
+		<show-item id="hytz" name="会议通知" showColumns="rem_title,m_begin_time" columnsWidth="50%,50%" realShowColumns="m_title,m_begin_time" dynamicUrlColumns=""
+		 urlParamColumns="m_notice_id,m_check_flag,m_check_flag_name,m_receiver_id,m_is_need_signup,m_receiver_user_id,m_receiver_user_name">
+			<clickurl>/ccapp/oa/meeting/jsp/meetingnoticeview.jsp?issaved=doview</clickurl>
+			<moreUrl>/ccapp/oa/meeting/jsp/meetingviewmain.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+				select t.m_notice_id,
+				       to_char(t.m_begin_time, 'yyyy-mm-dd hh24:mi') as m_begin_time,
+				       t.m_check_flag,
+				       t.m_check_flag_name,
+				       u.m_receiver_id,
+				       t.m_is_need_signup,
+				       u.m_receiver_user_id,
+				       u.m_receiver_user_name,
+				       t.m_title as rem_title,
+				       decode(u.m_is_read,
+				              '1',
+				              t.m_title,
+				              '<strong>' || t.m_title || '</strong>') as m_title
+				  from oa_meeting_notice t, oa_meeting_room r, oa_meeting_receiver_user u
+				 where t.m_room_id = r.m_room_id(+)
+				   and t.m_notice_id = u.m_notice_id
+				   and to_date(to_char(t.m_begin_time, 'yyyy/mm/dd hh24:mi:ss'),
+				               'yyyy/mm/dd hh24:mi:ss') >=
+				       to_date(to_char(sysdate, 'yyyy/mm/dd') || ' 00:00:01',
+				               'yyyy/mm/dd hh24:mi:ss')
+				   and (t.m_check_flag = '4' or t.m_check_flag = '5')
+				   and u.m_receiver_user_id = ?
+				 order by t.m_begin_time desc
+	             ]]>
+			</sql>
+		</show-item>
+		
+	</item>
+</frist-config>

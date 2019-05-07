@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>gridster.js Demo by GBin1.com</title>
+	<script src="../jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.gridster.js"></script>
+	<script type="text/javascript" src="js/cufon-yui.js"></script>
+	<script type="text/javascript" src="js/voxBOX_400.font.js"></script>
+	
+	<script>
+		var ids = 1;
+		$(function(){ //DOM Ready
+			Cufon.replace('a, h1').CSS.ready(function() {
+				$(".gridster ul").gridster({
+					widget_margins: [0.5, 0.5],
+					widget_base_dimensions: [40, 40],
+					avoid_overlapped_widgets: true//,
+					//collision:{on_overlap_stop: function(collider_data){ }}
+					});
+			
+			});
+		
+			
+		});
+		
+		function add(){
+			 $(".gridster ul").gridster().data('gridster').add_widget("<li id='liid"+ids+"' ondblclick='setParm(this)'>标     题：<input type='text'  value = '测试'/></li>",1,8);
+			 ids++;
+		}
+		
+		function setParm(tag){
+			 $(".gridster ul").gridster().data('gridster').resize_widget( $(tag), 8,1 );
+		}
+		
+		function get(){
+			alert($(".gridster ul").html())
+			var data = $(".gridster ul").gridster().data('gridster').serialize();
+			$(".gridster ul li").each(function(){
+			
+			});
+			
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.gridster.min.css">
+	<style>
+		body{
+			font-family: Helvetica, arial, sans-serif;
+			margin:150px auto;
+			color: #fff;
+			font-size: 12px;
+			width:940px;
+			text-align:center;
+		}
+		
+		ul{	
+			background:green;
+			list-style:none;
+			border: solid 1px green;
+		}
+		
+		li{	
+			background:white;
+			border-collapse:collapse;
+			color: black;
+			text-align: left;
+			line-height: 100%;
+			font: normal;
+		}
+		
+		
+	</style>
+
+</head>
+<body>
+	
+	<article>
+	
+		<section>
+		<input type="text" id= "" value="">
+		<input type="button" value="增加" onclick="add()"/>
+		<input type="button" value="获取" onclick="get()"/>
+		<div class="gridster">
+			<ul>
+			<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid1 class=gs_w ondblclick=setParm(this) data-col="1" data-row="1" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid2 class=gs_w ondblclick=setParm(this) data-col="7" data-row="1" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid3 class=gs_w ondblclick=setParm(this) data-col="13" data-row="1" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid4 class=gs_w ondblclick=setParm(this) data-col="1" data-row="2" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid5 class=gs_w ondblclick=setParm(this) data-col="7" data-row="2" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: block" id=liid6 class=gs_w ondblclick=setParm(this) data-col="13" data-row="2" data-sizex="6" data-sizey="1">标 题：<INPUT value=测试></LI>
+<LI style="FILTER:  ; ZOOM: 1; DISPLAY: inline;" id=liid16 class=gs_w ondblclick=setParm(this) data-col="1" data-row="3" data-sizex="12" data-sizey="1">标 题12111111111111111111111113：<INPUT value=测试></LI>
+			</ul>
+		</div>
+
+		</section>
+		
+	</article>
+	
+	
+</body>
+</html>

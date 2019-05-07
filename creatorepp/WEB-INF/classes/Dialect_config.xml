@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 方言配置 -->
+<dialect>
+	<!-- 
+	==========================================================================
+		*name:函数名称
+		pramnum:参数个数(-1为不限个数 默认0个)
+		*func:对应目标数据库函数名称
+		funtype:函数类型(NORMALFUN:一般函数
+						ITERATORFUN:可多次迭代使用的操作符函数
+						SPECIALFUN:处理关键字一类的特殊函数
+						KEYWORD:关键字
+						默认：NORMALFUN)
+		specialtype:用于对数据库重载函数的区分(DATEFMT:时间类型
+											NUMBERFMT:数字类型
+											默认：-1不区分)
+		注：
+			1.SQLTransition_config.xml配置文件下的<dialect>标签中，
+			  对应数据库类型的used属性为true，该配置中对应数据库方言配置才生效；
+			2.name和func两属性为必填，其他属性可选。
+	==========================================================================
+	-->
+	<mysql>
+		<function name="sysdate" func="sysdate()" funtype="KEYWORD" />
+		<function name="systimestamp" func="current_timestamp()" funtype="KEYWORD" />
+		<function name="ltrim" pramnum="2" func="f_ltrim" funtype="NORMALFUN" />
+		<function name="rtrim" pramnum="2" func="f_ltrim" funtype="NORMALFUN" />
+		<function name="instr" pramnum="3" func="instr_pos" funtype="NORMALFUN" />
+		<function name="instr" pramnum="4" func="instr_pos_count" funtype="" specialtype="NORMALFUN" />		
+		<function name="||" pramnum="-1" func="concat" funtype="ITERATORFUN" />
+		<function name="decode" pramnum="-1" func="case" funtype="SPECIALFUN" />
+		<function name="to_number" pramnum="1" func="" funtype="SPECIALFUN" />
+		<function name="to_number" pramnum="2" func="" funtype="SPECIALFUN" />
+		<function name="to_char" pramnum="1" func="" funtype="SPECIALFUN" />
+		<function name="to_char" pramnum="2" func="date_format" funtype="SPECIALFUN" specialtype="DATEFMT" />		
+		<function name="to_char" pramnum="2" func="format" funtype="SPECIALFUN" specialtype="NUMBERFMT" />
+		<function name="to_date" pramnum="2" func="STR_TO_DATE" funtype="SPECIALFUN" />
+	</mysql>
+
+	<db2net>
+		<function name="dual" func="sysibm.sysdummy1" funtype="KEYWORD" />
+		<function name="sysdate" func="current_timestamp" funtype="KEYWORD" />
+		<function name="rownum" func="row_number() over()" funtype="KEYWORD" />
+		<function name="rowid" func="row_number() over()" funtype="KEYWORD" />
+		<function name="to_number" pramnum="1" func="double" funtype="NORMALFUN" />
+		<function name="||" pramnum="-1" func="concat" funtype="ITERATORFUN" />
+		<function name="to_char" pramnum="-1" func="char" funtype="SPECIALFUN" />
+		<function name="to_date" pramnum="-1" func="date" funtype="SPECIALFUN" />
+		<function name="decode" pramnum="-1" func="case" funtype="SPECIALFUN" />
+	</db2net>
+
+	<db2app>
+		<function name="dual" func="sysibm.sysdummy1" funtype="KEYWORD" />
+		<function name="sysdate" func="current_timestamp" funtype="KEYWORD" />
+		<function name="rownum" func="row_number() over()" funtype="KEYWORD" />
+		<function name="rowid" func="row_number() over()" funtype="KEYWORD" />
+		<function name="to_number" pramnum="1" func="double" funtype="NORMALFUN" />
+		<function name="||" pramnum="-1" func="concat" funtype="ITERATORFUN" />
+		<function name="to_char" pramnum="-1" func="char" funtype="SPECIALFUN" />
+		<function name="to_date" pramnum="-1" func="date" funtype="SPECIALFUN" />
+		<function name="decode" pramnum="-1" func="case" funtype="SPECIALFUN" />
+	</db2app>
+</dialect>

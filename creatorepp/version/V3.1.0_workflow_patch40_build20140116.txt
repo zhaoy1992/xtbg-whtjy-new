@@ -1,0 +1,2 @@
+#修改查询流程实例监控查询sql，将or条件的左右两边分别查询，如果流程没有子流程，则将or右边的条件省去，免得影响性能，如果有子流程，则查询子流程的信息返回即可。
+Shark-Extend\src\com\chinacreator\commonworkflow\dao\CommonWorkflowDao.java

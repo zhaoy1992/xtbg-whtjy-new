@@ -1,0 +1,4 @@
+<iReportPlugin 	name="远程javabean数据源管理" class="it.businesslogic.ireport.plugin.collectionfactory.CollectionFactoryDialogPlugin">
+	<IconFile>/it/businesslogic/ireport/plugin/collectionfactory/collection.png</IconFile>
+	<Description>template manager</Description>
+</iReportPlugin>

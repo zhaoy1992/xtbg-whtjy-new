@@ -1,0 +1,10 @@
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table OA_WORD_NUMBER
+  drop constraint PK_OA_WORD_NUMBER cascade;
+alter table OA_WORD_NUMBER
+  add constraint PK_OA_WORD_NUMBER primary key (BUSI_ID, NUMBER_TYPE, NUMBER_YEAR);
+
+
+-- Add/modify columns 
+alter table OA_WORD_NUMBER modify NUMBER_CODE null;
+

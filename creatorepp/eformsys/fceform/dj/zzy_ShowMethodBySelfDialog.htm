@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<TITLE>自定义列呈现方式</TITLE>
+</HEAD>
+<style type="text/css">
+	TEXTAREA {
+		BORDER-RIGHT: #7ac4ea 1px solid; 
+		BORDER-TOP: #7ac4ea 1px solid; 
+		FONT-WEIGHT: normal; 
+		BORDER-LEFT: #7ac4ea 1px solid; 
+		COLOR: #333333; 
+		BORDER-BOTTOM: #7ac4ea 1px solid; 
+		BACKGROUND-COLOR: #f5fbff
+	}
+	.STYLE1 {font-size: 12px}
+</style>
+<script type="text/javascript">
+	var initData;
+	var flag = 0;
+	function submitM(){
+		flag = 1;
+		window.returnValue = document.getElementById("show_method_byself").value;
+		window.close();
+	}
+	
+	function cancleM(){
+		flag = 2;
+		window.returnValue = initData;
+		window.close();
+	}
+	
+	window.onunload=function(){
+		if(flag==0){
+			window.returnValue = initData;
+		}
+	};
+	
+	function load(){
+		if(window.dialogArguments){
+			document.getElementById("show_method_byself").value= window.dialogArguments;
+			initData = window.dialogArguments;
+		}
+	}
+</script>
+	<BODY onload="load()">
+		<div class="STYLE1" style="POSITION: absolute; TOP: 5px; HEIGHT: 20px; left: 5px;">
+			自定义列呈现方式：
+		</div>
+		<textarea name="textarea" cols="49" rows="8" id="show_method_byself" style="POSITION: absolute; TOP: 20px; HEIGHT: 185px; left: 5px;">[{Rule:'条件',showtype:'显示方式'},{Rule:'条件',showtype:'显示方式'}]</textarea>
+		<div style="POSITION:absolute; TOP: 219px; HEIGHT: 24px; left: 110px;">
+			<input type="button" value="确 定" style="width:50px;" onClick="submitM();" />
+		</div>
+		<div style="POSITION:absolute; TOP: 219px; HEIGHT: 24px; left: 182px;">
+			<input type="button" value="取 消" style="width:50px;" onClick="cancleM();" />
+		</div>
+	</BODY>
+</HTML>

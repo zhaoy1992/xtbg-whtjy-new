@@ -1,0 +1,4 @@
+1.添加流程引擎启动时是否计算期限和是否启动新线程计算期限的开关
+Shark-Kernal/src/Shark.conf
+Shark-Kernal/src/org/enhydra/shark/Shark.java
+

@@ -1,0 +1,33 @@
+/* CSS Document */
+.tds{background-color:#fdf0bb;height:34px;padding-left:5px;	padding-right:5px;line-height: 34px;}
+
+.ainp,.ainp a:link,.ainp a:visited{border:1px solid #e1c281;padding:1px;background-color:#fdf4d7;color:#886c00;	font-weight:bold;display: block;
+	width:71px;	height:22px;line-height:22px;margin-left:4px;float: left;cursor:pointer; font-size:12px;}
+.ainp a:hover {color: ##886c00;	POSITION: relative;	TOP: 1px;background-color:#efefef;	display: block;	cursor:pointer}
+
+.ainp1,.ainp1 a:link,.ainp1 a:visited{font-size:12px; border:1px solid #e1c281;background-color:#fdf4d7;color:#886c00;font-weight:bold;	display: block;	width:81px;height:22px;line-height:22px;margin-left:4px;float: left;background-image:url(../images/s1.gif);background-repeat: no-repeat;background-position: 68px;
+	padding-top: 1px;padding-right: 3px;padding-bottom: 1px;padding-left: 1px; cursor:pointer;}
+.ainp1 a:hover {color: ##886c00;POSITION: relative; TOP: 1px;background-color:#efefef;display: block;}
+
+.ainp2{ width:200px;}
+
+.ainp3,.ainp3 a:link,.ainp3 a:visited{font-size:12px;border:1px solid #c6c6c6;color:#6d6d6d;display: block;	height:20px;line-height:20px;
+	background-image: url(../images/be.gif);background-repeat: no-repeat;cursor:pointer;width:49px;	padding-top: 1px;padding-right: 10px;padding-bottom: 1px;
+	padding-left: 1px;}	
+	
+.ainp4{ width:200px; background-image:url(../images/tds.gif); background-repeat:no-repeat; background-position:185px; border:1px solid #7e9db9;}	
+
+.select1{ width:100px;}
+
+
+
+.td{ line-height:30px; font-size:12px;}
+.td_text{font-size:12px; color:#866a00;	display: block;	float: left;margin-right: 15px; }
+
+.td1{ font-size:12px; color:#886c00; font-weight:bold;}
+
+.td1 td{border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #ebd6a9; height:30px; line-height:30px; padding-left:5px; padding-right:5px;}
+
+.tddiv{float: left; margin-right:4px;}
+.tddiv1{float: left; margin-top:4px;}
+.tddiv3{float: left;}

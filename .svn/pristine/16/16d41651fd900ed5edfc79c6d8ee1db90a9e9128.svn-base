@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+                ">
+    <!-- 设备易耗品类型维护 start -->
+    <bean id="osupplieTypeDaoImp"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsupplieTypeDaoImpl"></bean>
+    <!-- 设备易耗品类型维护 end -->
+    <!-- 常用类型维护 start -->
+    <bean id="osupplieusetypedaoimpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsupplieUseTypeDaoImpl"></bean>
+    <!-- 常用类型维护 end -->
+    <!-- 物品规格维护 start -->
+    <bean id="osusertypeitemdaoimpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsuserTypeItemDaoImpl"></bean>
+    <!-- 物品规格维护 end -->
+    <!-- 物品列表维护 start -->
+    <bean id="osapPlanItemDaoImp"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsapPlanItemDaoImpl"></bean>
+    <!-- 物品列表维护 end -->
+    <!-- 维修登记维护 start -->
+    <bean id="osupplieRepairDaoImpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OsupplieRepairDaoImpl"></bean>
+    <!-- 维修登记维护 end -->
+    
+    <!-- 申购计划打印start -->
+    <bean id="osapplandaoexcelimpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.data.OsApplanDaoExcelImpl"></bean>
+    <!-- 申购计划打印  end -->
+    <!-- 申购审批打印start -->
+    <bean id="osexaminationdaoexcelimp"
+        class="com.chinacreator.xtbg.tjy.officesupplies.data.OsexaminationDaoExcelImp"></bean>
+    <!-- 申购审批打印  end -->
+    <!-- 领用登记打印start -->
+    <bean id="oshavalydaoexcelimpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.data.OsHavaLyDaoExcelImpl"></bean>
+    <!-- 领用登记打印  end -->
+    <!-- 固定资产领用审批表-打印start -->
+    <bean id="osnomovedaoexceelimpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.data.OsnoMoveDaoExceelImpl"></bean>
+    <!-- 固定资产领用审批表-打印 end --> 
+    
+    <!-- 固定资产台帐管理导入导出start -->
+    <bean id="officedetailDaoExcelImpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.data.OfficedetailDaoExcelImpl"></bean>
+    <!-- 固定资产台帐管理导入导出 end --> 
+    
+    <!-- 固定资产土地房屋导入导出 start -->
+    <bean id="landHouseInfoDaoExcelImpl"
+        class="com.chinacreator.xtbg.tjy.device.dao.Impl.LandHouseInfoDaoExcelImpl"></bean>
+    <!-- 固定资产土地房屋导入导出 end -->
+    
+    <!-- 办公用品易耗品类型导入导出 start -->
+    <bean id="officeTypeInfoDaoExcelImpl"
+        class="com.chinacreator.xtbg.tjy.officesupplies.dao.impl.OfficeTypeInfoDaoExcelImpl"></bean>
+    <!-- 办公用品易耗品类型导入导出 end -->
+</beans>

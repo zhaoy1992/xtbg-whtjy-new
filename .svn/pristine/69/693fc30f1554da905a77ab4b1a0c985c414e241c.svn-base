@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var t,curCol,oCol
+function uf_open() {
+	t = pubDataSet[0];
+	curCol = pubDataSet[1];
+	oCol = t.childNodes[0].childNodes[curCol];
+	txtWidth.value = oCol.style.pixelWidth ;
+	e_SetComboValue(oCol.e_col_type,cboType); 
+	e_SetCheckBoxValue(oCol.e_hide_col,chkHide);
+	e_SetCheckBoxValue(oCol.e_page_break_col,chkBreak);
+	if(IsSpace(oCol.x_hide_col) == false ) txtHide.value = unescape(oCol.x_hide_col);
+	if(IsSpace(oCol.x_col_width) == false ) txtWidthExp.value = unescape(oCol.x_col_width);
+	e_PropWinOnload();
+
+	var sGifUrl = "../images/eb_fx.gif";
+	SetButtonImage(cmdFx01,sGifUrl);
+	SetButtonImage(cmdFx02,sGifUrl);
+	
+}
+function uf_ok() {
+	var width1 = Num(txtWidth.value) ; 
+	if(width1<= 0 ) {
+		alert("列宽必须>0!");
+		return ;
+	}
+	var arrRet = new Array();
+	oCol.e_col_type = cboType.value ;
+	arrRet[0]=oCol.e_col_type;
+	arrRet[1]="";
+	oCol.e_hide_col = chkHide.value ;
+	if(IsSpace(txtHide.value)){
+		oCol.x_hide_col = "";
+		oCol.removeAttribute("x_hide_col");
+	}else{
+		oCol.x_hide_col = escape(txtHide.value);
+	}
+	if(IsSpace(txtWidthExp.value)){
+		oCol.x_col_width = "";
+		oCol.removeAttribute("x_col_width");
+	}else{
+		oCol.x_col_width = escape(txtWidthExp.value);
+	}
+	
+	oCol.e_page_break_col = chkBreak.value ;
+
+	if(oCol.style.pixelWidth != txtWidth.value){
+		oCol.style.width = width1 ;
+		arrRet[1] = width1;
+	}
+	window.returnValue = arrRet;
+	window.close();
+	
+}
+function uf_selectFormula(obj) {
+	var arr = [ pubDataSet[0],obj.value];
+	var sRet = DjOpen("eb_fx",arr,"展现","有模式窗口","直接","设置单元格的公式");
+	if(IsSpace(sRet)==false){
+		obj.value = sRet;	
+	}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../js/fcdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule(".xpSpin","behavior: url(../htc/NumEdit.htc)",0);</script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;fcdate.js&#13;&#10;~userfunc.js" OtherSave="否" toolbar="不带工具栏" idtype="1" isfile="否" postop posleft window="有模式窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:0;label:4;radio:0;listbox:0;textarea:0;combobox:1;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:1;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:1;excel:0;tree:0" posheight="190" poswidth="390" entertype="修改" codeheader="BBB" mkbh caption="列属性" type="PR" dj_sn="eb_col" billtaborder="<root><taborder>cboType</taborder><taborder>chkBreak</taborder><taborder>chkHide</taborder><taborder>cmdOk</taborder><taborder>cmdClose</taborder><taborder>txtWidth</taborder><taborder>cmdFx02</taborder><taborder>cmdFx01</taborder><taborder>txtHide</taborder><taborder>txtWidthExp</taborder></root>" contxml="<root><checkbox><id>chkBreak</id><id>chkHide</id></checkbox><label><id>label1</id><id>label2</id><id>label3</id><id>label14</id><id>label4</id></label><combobox><id>cboType</id></combobox><button><id>cmdOk</id><id>cmdClose</id><id>cmdFx02</id><id>cmdFx01</id></button><text><id>txtHide</id><id>txtWidthExp</id></text><spin><id>txtWidth</id></spin></root>" center="居中" BLONopen="uf_open()"><DIV id=label1 style="LEFT: 131px; WIDTH: 18px; POSITION: absolute; TOP: 34px; HEIGHT: 18px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">列宽:</DIV>
+<DIV id=label2 style="LEFT: 9px; WIDTH: 60px; POSITION: absolute; TOP: 7px; HEIGHT: 18px" onmovestart=moveStart() noWrap controltype="label" value="label2" NotBg="否">所属区域:</DIV><SELECT id=cboType style="LEFT: 71px; WIDTH: 83px; POSITION: absolute; TOP: 4px; HEIGHT: 25px" onmovestart=moveStart() controltype="combobox" sql check="1" tempvalue="0&#13;&#10;10" temptext="表头区&#13;&#10;数据区" sqltrans><OPTION value=0>表头区</OPTION><OPTION value=10 selected>数据区</OPTION></SELECT> 
+<DIV id=chkBreak style="LEFT: 249px; WIDTH: 80px; POSITION: absolute; TOP: 1px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="0" NotBg="否" falsevalue="0" truevalue="1" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>列后分页</SPAN></DIV>
+<DIV id=chkHide style="LEFT: 134px; WIDTH: 53px; POSITION: absolute; TOP: 82px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="0" NotBg="否" falsevalue="0" truevalue="1" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>隐藏</SPAN></DIV><BUTTON id=cmdOk style="LEFT: 233px; WIDTH: 55px; POSITION: absolute; TOP: 127px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON><BUTTON id=cmdClose style="LEFT: 296px; WIDTH: 55px; POSITION: absolute; TOP: 127px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否"></BUTTON>
+<DIV class=xpSpin id=txtWidth style="LEFT: 167px; WIDTH: 59px; POSITION: absolute; TOP: 30px; HEIGHT: 22px; align: undefined" align=undefined value="" enabled="否" Min="1" Max="32000" NextNum="1" height="22px" width="59px" top="30px" left="167px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label3 style="LEFT: 228px; WIDTH: 27px; POSITION: absolute; TOP: 34px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label3" NotBg="否">象素</DIV><BUTTON id=cmdFx02 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 83px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 77px; HEIGHT: 24px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_selectFormula(txtHide)")' dropstyle="否"></BUTTON> <INPUT id=txtHide style="LEFT: 9px; WIDTH: 361px; POSITION: absolute; TOP: 102px; HEIGHT: 20px" onmovestart=moveStart() size=58 controltype="text"> 
+<DIV id=label14 style="LEFT: 9px; WIDTH: 52px; POSITION: absolute; TOP: 85px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label12" NotBg="否">隐藏公式值:</DIV>
+<DIV id=label4 style="LEFT: 9px; WIDTH: 52px; POSITION: absolute; TOP: 34px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label12" NotBg="否">列宽公式值:</DIV><INPUT id=txtWidthExp style="LEFT: 9px; WIDTH: 361px; POSITION: absolute; TOP: 53px; HEIGHT: 20px" onmovestart=moveStart() size=58 controltype="text"><BUTTON id=cmdFx01 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 83px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 24px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_selectFormula(txtWidthExp)")' dropstyle="否"></BUTTON></DIV></body></html>

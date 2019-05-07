@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>/*打开时调用函数
+*第一、从控件传到div1上.
+*第二、判断div1的线、颜色、和宽度是否相等，如相等时选中的值
+*/
+function uf_open() {
+	var obj=pubDataSet[0];
+	var obj1=div1
+	SetButtonImage(FCButton1,"../images/ef_run_button_color.gif")
+	SetButtonImage(FCButton7,"../images/ep_linedown3.gif")
+	SetButtonImage(FCButton8,"../images/ep_linedown4.gif")
+	SetButtonImage(FCButton9,"../images/ep_linedown1.gif")
+	SetButtonImage(FCButton10,"../images/ep_linedown2.gif")	
+	obj1.style.borderLeftColor = obj.style.borderLeftColor
+	obj1.style.borderTopColor = obj.style.borderTopColor;
+	obj1.style.borderRightColor = obj.style.borderRightColor ;
+	obj1.style.borderBottomColor = obj.style.borderBottomColor; 
+
+	obj1.style.borderLeftStyle = obj.style.borderLeftStyle
+	obj1.style.borderTopStyle = obj.style.borderTopStyle 
+	obj1.style.borderRightStyle = obj.style.borderRightStyle
+	obj1.style.borderBottomStyle = obj.style.borderBottomStyle
+
+    obj1.style.borderLeftWidth = obj.style.borderLeftWidth ;
+    obj1.style.borderTopWidth = obj.style.borderTopWidth ;
+    obj1.style.borderRightWidth = obj.style.borderRightWidth ;
+    obj1.style.borderBottomWidth = obj.style.borderBottomWidth ;
+
+	var oStyle = obj.style.borderStyle ;
+	var oColor = obj.style.borderColor ;
+	var oWidth = obj.style.borderWidth
+	//判断选中SKDBRadioGroup1的值和SKDBListBox的值
+	if(obj.style.borderStyle != 'none' && obj.style.borderStyle != '') {
+		if(oWidth == obj1.style.borderLeftWidth && oWidth == obj1.style.borderTopWidth && oWidth == obj1.style.borderRightWidth && oWidth == obj1.style.borderBottomWidth && oColor == obj1.style.borderLeftColor && oColor == obj1.style.borderTopColor && oColor == obj1.style.borderRightColor && oColor == obj1.style.borderBottomColor && oStyle == obj1.style.borderLeftStyle && oStyle == obj1.style.borderTopStyle && oStyle == obj1.style.borderRightStyle && oStyle == obj1.style.borderBottomStyle ) {
+			SetRadioValue(SKDBRadioGroup1,"2")
+			FCDiv1.style.backgroundColor = obj.style.borderColor;
+			FCDBedit5.value = parseInt(obj.style.borderWidth)
+			SKDBListBox2.value = obj.style.borderStyle 
+			for (var i=0; i<SKDBListBox2.length; i++){
+				if(SKDBListBox2.value == "solid") {
+					SKDBListBox2.selectedIndex = i
+					SKDBListBox2.selectedIndex = 0
+				}
+			}
+			Button_Click("是",FCButton7)
+			Button_Click("是",FCButton8)
+			Button_Click("是",FCButton9)
+			Button_Click("是",FCButton10)
+		}else{
+			SetRadioValue(SKDBRadioGroup1,"3")
+			if(obj.style.borderLeftStyle != "none") Button_Click("是",FCButton7) ;
+			if(obj.style.borderTopStyle != "none") Button_Click("是",FCButton10) ;
+			if(obj.style.borderRightStyle != "none") Button_Click("是",FCButton8)
+			if(obj.style.borderBottomStyle != "none") Button_Click("是",FCButton9)
+		}
+	}else{
+		FCDiv1.style.backgroundColor = "#000000"
+		SetRadioValue(SKDBRadioGroup1,"1")
+	}
+    if(IsSpace(obj.style.paddingLeft) ){
+    	FCDBedit1.value = 0
+    }else{
+    	FCDBedit1.value = Num(obj.style.paddingLeft) ;
+    }
+    if(IsSpace(obj.style.paddingTop)) {
+    	FCDBedit3.value = 0	
+    }else{
+    	FCDBedit3.value = Num(obj.style.paddingTop) ;
+    }
+    if(IsSpace(obj.style.paddingRight)) {
+    	FCDBedit2.value = 0
+    }else{
+    	FCDBedit2.value = Num(obj.style.paddingRight) ;
+    }
+    if(IsSpace(obj.style.paddingBottom)) {
+    	FCDBedit4.value = 0
+    }else{
+    	FCDBedit4.value = Num(obj.style.paddingBottom) ;
+    }
+    if(IsSpace(obj.style.borderWidth) || obj.style.borderWidth == "medium") {
+    	FCDBedit5.value = 1
+    }else{
+		FCDBedit5.value = Num(obj.style.borderWidth) ;
+	}
+
+}
+function SetRadio() {
+	switch(SKDBRadioGroup1.value) {
+		case '1': {
+			div1.style.borderStyle = ""
+			div1.style.borderWidth = "0";
+			Button_Click("否",FCButton7)
+			Button_Click("否",FCButton8)
+			Button_Click("否",FCButton9)
+			Button_Click("否",FCButton10)
+			SKDBListBox2.selectedIndex = -1;	
+			break
+		}
+		case '2':{
+			div1.style.borderStyle = SKDBListBox2.value ;
+			if(SKDBRadioGroup1.value == "2" && SKDBListBox2.selectedIndex == -1) {
+				SKDBListBox2.selectedIndex = 0
+				div1.style.borderWidth = FCDBedit5.value 
+				div1.style.borderLeftStyle = "solid"
+				div1.style.borderTopStyle = "solid"
+				div1.style.borderRightStyle = "solid"
+				div1.style.borderBottomStyle = "solid"
+				div1.style.borderColor = FCDiv1.style.backgroundColor ;
+				Button_Click("是",FCButton7)
+				Button_Click("是",FCButton8)
+				Button_Click("是",FCButton9)
+				Button_Click("是",FCButton10)
+			}
+			break
+		}
+		case '3':{
+			if(div1.style.borderStyle != "" || SKDBListBox2.selectedIndex != "-1") {
+				Button_Click("是",FCButton7)
+				Button_Click("是",FCButton8)
+				Button_Click("是",FCButton9)
+				Button_Click("是",FCButton10)
+			}
+			break;
+		}
+	}
+}
+// sPos ="Left"/"Top" 
+//chk_borderstyle("Left")
+/*
+*点击按钮时触发的事件
+*sPos是点击控件的位置,比如：left、top、right、bottom
+*/
+function chk_borderstyle(sPos) {
+	
+	var o = eval("div1.style.border"+sPos) ;
+	var oStyle = eval("div1.style.border"+sPos+"Style") ;
+	var oColor = eval("div1.style.border"+sPos+"Color") ;
+	var oWidth = eval("div1.style.border"+sPos+"Width") ;
+
+	var mwidth = FCDBedit5.value
+	var mColor = FCDiv1.style.backgroundColor ;
+	var mBorder = SKDBListBox2.value ;
+	var curCont = event.srcElement ; //点击的按钮
+	var bSet = false ;
+	if(curCont.toggle == "是") {
+		SetRadioValue(SKDBRadioGroup1,"3")
+	}
+	if(SKDBRadioGroup1.value == '3'){
+		if(curCont.toggle == "是"){
+			if(mwidth == parseInt(oWidth) && mBorder == oStyle && mColor == oColor ){ 
+				Button_Click("否",curCont)
+				eval("div1.style.border"+sPos+"='0'" )
+			}else{
+				bSet = true
+			}	
+		}else{
+			Button_Click("是",curCont)
+			bSet = true
+		}
+	}
+	if(bSet){
+		eval("div1.style.border"+sPos+"Width=" + mwidth )
+		eval("div1.style.border"+sPos+"Style='" + mBorder +"'" )
+		eval("div1.style.border"+sPos+"Color='" + mColor +"'" )
+	}
+
+}
+/*
+*改变border的宽度时触发
+*/
+function ChangeTextValue() {
+	var mWidth = FCDBedit5.value 
+	if(SKDBRadioGroup1.value == "2") {
+			div1.style.borderWidth = mWidth
+	}
+}
+/*
+*选择borderStyle时触发事件;
+*/
+function uf_checkbox2() {
+	if(SKDBRadioGroup1.value=="1" || SKDBRadioGroup1.value=="2"){
+		SetRadioValue(SKDBRadioGroup1,"2")
+		div1.style.borderLeftStyle = SKDBListBox2.value ;
+		div1.style.borderTopStyle = SKDBListBox2.value
+		div1.style.borderRightStyle = SKDBListBox2.value
+		div1.style.borderBottomStyle = SKDBListBox2.value
+		if(SKDBRadioGroup1.value == "2") {
+			div1.style.borderWidth = FCDBedit5.value 
+			Button_Click("是",FCButton7)
+			Button_Click("是",FCButton8)
+			Button_Click("是",FCButton9)
+			Button_Click("是",FCButton10)				
+		}
+		div1.style.borderColor = FCDiv1.style.backgroundColor;
+	}
+}
+/*
+*点击按钮时按钮的样式，
+*cut:控件是否按下，如为是则按下否则为否
+object:当前控件的ID
+*/
+function Button_Click(cut,object){
+	var o = object;
+	var scolor1 ="#717171"; //A4A3A2
+	var scolor2 ="#F6F5F4";
+	o.style.borderStyle = "solid";
+	o.style.borderWidth = 2 ;
+	if(cut == "是"){
+		o.style.borderTopColor=scolor1;
+		o.style.borderLeftColor=scolor1;
+		o.style.borderRightColor=scolor2;
+		o.style.borderBottomColor=scolor2;
+		o.toggle="是";	
+	}else{
+		o.style.borderTopColor=scolor2;
+		o.style.borderLeftColor=scolor2;
+		o.style.borderRightColor=scolor1;
+		o.style.borderBottomColor=scolor1;
+		o.toggle="否";
+	}
+}
+function uf_SelColor() {
+      var sInitColor = FCDiv1.style.backgroundColor;
+      var sColor;
+      if (isSpace(sInitColor ))
+         sColor = dlgHelper.ChooseColorDlg();
+        else
+         sColor = dlgHelper.ChooseColorDlg(sInitColor);
+        
+		sColor = sColor.toString(16);
+      if (sColor.length < 6) {
+	      var sTempString = "000000".substring(0,6-sColor.length);
+	      sColor = sTempString.concat(sColor);
+	      
+      }
+     
+  	  FCDiv1.style.backgroundColor= "#" + sColor;
+  	  if(SKDBRadioGroup1.value == "2") {
+	  	div1.style.borderColor = FCDiv1.style.backgroundColor ;
+  	  }
+}
+/*
+*点击确定
+*/
+function uf_ok() {
+	var obj = pubDataSet[0] 
+	var obj1 = div1
+	if(SKDBRadioGroup1.value == "2") {
+		obj.style.borderStyle = obj1.style.borderStyle;
+	}else{
+		obj.style.borderStyle = "";
+		obj.style.borderLeft = obj1.style.borderLeft ;
+		obj.style.borderRight = obj1.style.borderRight ;
+		obj.style.borderTop = obj1.style.borderTop ;
+		obj.style.borderBottom = obj1.style.borderBottom ;
+	}
+	obj.style.borderColor = obj1.style.borderColor;
+	if(IsInt(FCDBedit5.value) == false) {
+		alert("您填写的不是数字,请填写数字")
+		return		
+	}else{
+		obj.style.borderWidth = FCDBedit5.value ;
+	}
+	obj.style.borderLeft = obj1.style.borderLeft ;
+	obj.style.borderRight = obj1.style.borderRight ;
+	obj.style.borderTop = obj1.style.borderTop ;
+	obj.style.borderBottom = obj1.style.borderBottom ;
+	if(IsInt(FCDBedit1.value) == false) {
+		alert("您填写的不是数字,请填写数字")
+		return		
+	}else{
+		obj.style.paddingLeft = FCDBedit1.value ;
+	}
+	if(IsInt(FCDBedit2.value) == false) {
+		alert("您填写的不是数字,请填写数字")
+		return	
+	}else{
+		obj.style.paddingRight = FCDBedit2.value ;
+	}
+	if(IsInt(FCDBedit3.value) == false) {
+		alert("您填写的不是数字,请填写数字")
+		return	
+	}else{
+		obj.style.paddingTop = FCDBedit3.value ;
+	}
+	if(IsInt(FCDBedit4.value) == false) {
+		alert("您填写的不是数字,请填写数字")
+		return	
+	}else{
+		obj.style.paddingBottom = FCDBedit4.value ;
+	}
+	window.close();
+	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet center="居中" BLONopen="uf_open()" dj_sn="ep_borderstyle" type="PR" caption="边框设置" mkbh codeheader="BBB" keyfield window="有模式窗口" entertype="展现" posleft postop poswidth="395" posheight="400" isfile="否" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" idtype="1" billtaborder="<root><taborder>SKDBListBox2</taborder><taborder>FCButton1</taborder><taborder>FCDBedit1</taborder><taborder>FCDBedit2</taborder><taborder>FCDBedit3</taborder><taborder>FCDBedit4</taborder><taborder>FCButton6</taborder><taborder>SKDBRadioGroup1</taborder><taborder>FCDBedit5</taborder><taborder>FCButton7</taborder><taborder>FCButton8</taborder><taborder>FCButton9</taborder><taborder>FCButton10</taborder><taborder>FCButton11</taborder><taborder>FCDiv1</taborder></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" contxml="<root><label><id>Label2</id><id>Label3</id><id>Label4</id><id>Label5</id><id>Label6</id><id>Label1</id><id>Label8</id><id>Label9</id><id>Label10</id><id>Label11</id></label><radio><id>SKDBRadioGroup1</id></radio><listbox><id>SKDBListBox2</id></listbox><shape><id>Shape1</id><id>Shape2</id><id>Shape3</id><id>Shape4</id></shape><button><id>FCButton1</id><id>FCButton6</id><id>FCButton7</id><id>FCButton8</id><id>FCButton9</id><id>FCButton10</id><id>FCButton11</id></button><text><id>FCDBedit1</id><id>FCDBedit2</id><id>FCDBedit3</id><id>FCDBedit4</id><id>FCDBedit5</id><id>FCDiv1</id></text></root>" toolbar="不带工具栏"><?xml:namespace prefix = v /><v:Rect id=Shape1 style="DISPLAY: block; LEFT: 0px; WIDTH: 385px; POSITION: absolute; TOP: 1px; HEIGHT: 370px" controltype="shape" coordsize = "21600,21600" fillcolor = "#d6d7ce" strokecolor = "#d6d3ce"><v:stroke></v:stroke></v:Rect><SELECT id=SKDBListBox2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 92px; WIDTH: 89px; FONT-FAMILY: ; POSITION: absolute; TOP: 31px; HEIGHT: 146px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_checkbox2()")' size=8 controltype="listbox" china check="1" sql tempvalue="solid&#13;&#10;dotted&#13;&#10;dashed&#13;&#10;double&#13;&#10;groove&#13;&#10;ridge&#13;&#10;inset&#13;&#10;outset" temptext="实  线&#13;&#10;虚  线&#13;&#10;破 折 线&#13;&#10;双  线&#13;&#10;凹  线&#13;&#10;凸  线&#13;&#10;嵌  入&#13;&#10;开  端"><OPTION value=solid>实 线</OPTION><OPTION value=dotted>虚 线</OPTION><OPTION value=dashed>破 折 线</OPTION><OPTION value=double>双 线</OPTION><OPTION value=groove>凹 线</OPTION><OPTION value=ridge>凸 线</OPTION><OPTION value=inset>嵌 入</OPTION><OPTION value=outset>开 端</OPTION></SELECT><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 99px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 13px; HEIGHT: 11px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2" controltype="label">样式</SPAN><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 155px; WIDTH: 25px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 197px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_SelColor()")' dropstyle="否"></BUTTON> <SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 227px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 302px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label3" controltype="label">右</SPAN><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 228px; WIDTH: 13px; FONT-FAMILY: ; POSITION: absolute; TOP: 282px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label4" controltype="label">左</SPAN><SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 87px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 302px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">下</SPAN><SPAN id=Label6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 87px; WIDTH: 13px; FONT-FAMILY: ; POSITION: absolute; TOP: 283px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label6" controltype="label">上</SPAN><INPUT type=text id=FCDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 258px; WIDTH: 110px; FONT-FAMILY: ; POSITION: absolute; TOP: 276px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="1" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=FCDBedit2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 258px; WIDTH: 110px; FONT-FAMILY: ; POSITION: absolute; TOP: 298px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="1" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=FCDBedit3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 110px; WIDTH: 110px; FONT-FAMILY: ; POSITION: absolute; TOP: 276px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="1" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=FCDBedit4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 110px; WIDTH: 110px; FONT-FAMILY: ; POSITION: absolute; TOP: 298px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="1" controltype="text" china CanSelect="false"></INPUT><BUTTON id=FCButton6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 216px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 334px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否">确定</BUTTON><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 93px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 181px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label7" controltype="label">边框颜色</SPAN> 
+<FIELDSET id=SKDBRadioGroup1 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 7px; WIDTH: 73px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 25px; HEIGHT: 85px; backgroundColor1: #ffffff" value="2" controltype="radio" china onclick='bill_onclick("SetRadio()")' tempvalue="1&#13;&#10;2&#13;&#10;3" temptext="无&#13;&#10;边框&#13;&#10;自定义" readOnly="false" legend="设置"><LEGEND>设置</LEGEND><INPUT type=radio value=1 name=RGSKDBRadioGroup1 text="无"><SPAN onclick=RGSKDBRadioGroup1[0].checked=true;SKDBRadioGroup1.value=RGSKDBRadioGroup1[0].value;RGSKDBRadioGroup1[0].focus();>无</SPAN><BR><INPUT type=radio CHECKED value=2 name=RGSKDBRadioGroup1 text="边框"><SPAN onclick=RGSKDBRadioGroup1[1].checked=true;SKDBRadioGroup1.value=RGSKDBRadioGroup1[1].value;RGSKDBRadioGroup1[1].focus();>边框</SPAN><BR><INPUT type=radio value=3 name=RGSKDBRadioGroup1 text="自定义"><SPAN onclick=RGSKDBRadioGroup1[2].checked=true;SKDBRadioGroup1.value=RGSKDBRadioGroup1[2].value;RGSKDBRadioGroup1[2].focus();>自定义</SPAN></FIELDSET> <INPUT type=text id=FCDBedit5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 92px; WIDTH: 87px; FONT-FAMILY: ; POSITION: absolute; TOP: 241px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="1" controltype="text" china onchange='bill_onclick("ChangeTextValue()")' CanSelect="false"></INPUT><SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 93px; WIDTH: 39px; FONT-FAMILY: ; POSITION: absolute; TOP: 225px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label8" controltype="label">宽&nbsp; 度</SPAN><BUTTON id=FCButton7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 243px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 184px; HEIGHT: 26px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick="bill_onclick(&quot;chk_borderstyle('Left')&quot;)" dropstyle="否"></BUTTON><BUTTON id=FCButton8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 332px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 184px; HEIGHT: 26px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick="bill_onclick(&quot;chk_borderstyle('Right')&quot;)" dropstyle="否"></BUTTON><BUTTON id=FCButton9 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 196px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 148px; HEIGHT: 26px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick="bill_onclick(&quot;chk_borderstyle('Bottom')&quot;)" dropstyle="否"></BUTTON><BUTTON id=FCButton10 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 196px; WIDTH: 26px; FONT-FAMILY: ; POSITION: absolute; TOP: 84px; HEIGHT: 26px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick="bill_onclick(&quot;chk_borderstyle('Top')&quot;)" dropstyle="否"></BUTTON><BUTTON id=FCButton11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 299px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 334px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否">关闭</BUTTON><SPAN id=Label9 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 195px; WIDTH: 38px; FONT-FAMILY: ; POSITION: absolute; TOP: 13px; HEIGHT: 12px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label9" controltype="label">预览</SPAN><v:line id=Shape2 onresize="" style="DISPLAY: block; LEFT: 85px; WIDTH: 2px; POSITION: absolute; TOP: 10px; HEIGHT: 270px" controltype="shape" id1="2" from = "0,0" to = "0,173.25pt" fillcolor = "white" strokecolor = "gray"><v:stroke></v:stroke></v:line><v:line id=Shape3 onresize="" style="DISPLAY: block; LEFT: 189px; WIDTH: 2px; POSITION: absolute; TOP: 12px; HEIGHT: 268px" controltype="shape" id1="2" from = "0,0" to = "0,173.25pt" fillcolor = "white" strokecolor = "gray"><v:stroke></v:stroke></v:line><v:line id=Shape4 onresize="" style="DISPLAY: block; LEFT: 43px; WIDTH: 325px; POSITION: absolute; TOP: 268px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "234.75pt,0" fillcolor = "white" strokecolor = "gray"><v:stroke></v:stroke></v:line><SPAN id=Label10 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 13px; WIDTH: 39px; FONT-FAMILY: ; POSITION: absolute; TOP: 261px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label10" controltype="label">填充</SPAN><SPAN id=Label11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 220px; WIDTH: 146px; FONT-FAMILY: ; POSITION: absolute; TOP: 36px; HEIGHT: 12px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label11" controltype="label">单击下面的按钮以应用边框</SPAN><INPUT type=text id=FCDiv1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 95px; WIDTH: 56px; FONT-FAMILY: ; POSITION: absolute; TOP: 197px; HEIGHT: 24px; BACKGROUND-COLOR: #000000; TEXT-ALIGN: left; medium: " value controltype="text" china CanSelect="false" readOnly="true"></INPUT> </DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT>
+<table border=1 style="table-layout:fixed; LEFT:232px; POSITION: absolute; TOP: 77px; BORDER-COLLAPSE: collapse; " bgcolor =#ffffff>
+	<tr>
+		<td width="130" height="100" >
+		<div id="div1"nowrap=false valign=center align=center  style="position:absolute; left:15; top:20; border-left:solid 1 #000000;border-top:solid 1 #000000; border-right:solid 1 #000000; border-bottom:solid 1 #000000;"><font size="8pt">样式</font><div>
+		</td>
+	</tr>
+</table></body></html>

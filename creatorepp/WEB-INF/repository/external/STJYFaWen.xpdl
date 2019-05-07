@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="STJYFaWen" Name="STJYFaWen" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>Together</Vendor>
+        <Created>2014-02-19 10:00:41</Created>
+    </PackageHeader>
+    <Script Type="text/javascript"/>
+    <WorkflowProcesses>
+        <WorkflowProcess Id="STJYFaWen_wp1" Name="STJYFaWen_wp1">
+            <ProcessHeader>
+                <Created>2014-02-19 10:00:54</Created>
+            </ProcessHeader>
+            <FormalParameters>
+                <FormalParameter Id="MODULE_ID" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，事项ID</Description>
+                </FormalParameter>
+                <FormalParameter Id="DYNAMICPERFORMER" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，动态执行人</Description>
+                </FormalParameter>
+                <FormalParameter Id="NEXT_ACT" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，下一步活动</Description>
+                </FormalParameter>
+                <FormalParameter Id="ANDSPLITUSERS" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>默认形参，与分支执行人</Description>
+                </FormalParameter>
+            </FormalParameters>
+            <Participants>
+                <Participant Id="STJYFaWen_wp1_par1">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="STJYFaWen_wp1_par2">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="STJYFaWen_wp1_par3">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="STJYFaWen_wp1_act1" Name="起草">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par1</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par1"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="154,49"/>
+                        <ExtendedAttribute Name="XOffset" Value="154"/>
+                        <ExtendedAttribute Name="YOffset" Value="49"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act2" Name="部门核稿">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par1</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra3"/>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra2"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par1"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="298,55"/>
+                        <ExtendedAttribute Name="XOffset" Value="298"/>
+                        <ExtendedAttribute Name="YOffset" Value="55"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act3" Name="分管院长审核">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra5"/>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra4"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="287,60"/>
+                        <ExtendedAttribute Name="XOffset" Value="287"/>
+                        <ExtendedAttribute Name="YOffset" Value="60"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act4" Name="办公室核稿/中转">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra6"/>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra7"/>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra9"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="414,61"/>
+                        <ExtendedAttribute Name="XOffset" Value="414"/>
+                        <ExtendedAttribute Name="YOffset" Value="61"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act5" Name="领导会签">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par2</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="328,159"/>
+                        <ExtendedAttribute Name="XOffset" Value="328"/>
+                        <ExtendedAttribute Name="YOffset" Value="159"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act6" Name="院领导签发">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par2</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra10"/>
+                                    <TransitionRef Id="STJYFaWen_wp1_tra14"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par2"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="504,160"/>
+                        <ExtendedAttribute Name="XOffset" Value="504"/>
+                        <ExtendedAttribute Name="YOffset" Value="160"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act8" Name="编号">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par3</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="212,64"/>
+                        <ExtendedAttribute Name="XOffset" Value="212"/>
+                        <ExtendedAttribute Name="YOffset" Value="64"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act9" Name="盖章">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par3</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="388,65"/>
+                        <ExtendedAttribute Name="XOffset" Value="388"/>
+                        <ExtendedAttribute Name="YOffset" Value="65"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act10" Name="分发">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par3</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="551,62"/>
+                        <ExtendedAttribute Name="XOffset" Value="551"/>
+                        <ExtendedAttribute Name="YOffset" Value="62"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="STJYFaWen_wp1_act12" Name="存档">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>STJYFaWen_wp1_par3</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="STJYFaWen_wp1_par3"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="734,61"/>
+                        <ExtendedAttribute Name="XOffset" Value="734"/>
+                        <ExtendedAttribute Name="YOffset" Value="61"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="DYNAMICPERFORMER"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="NEXT_ACT"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="STJYFaWen_wp1_act1" Id="STJYFaWen_wp1_tra1" To="STJYFaWen_wp1_act2">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act2"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act2" Id="STJYFaWen_wp1_tra2" To="STJYFaWen_wp1_act1">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act1"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="262,97"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act2" Id="STJYFaWen_wp1_tra3" To="STJYFaWen_wp1_act3">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act3"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act3" Id="STJYFaWen_wp1_tra4" To="STJYFaWen_wp1_act2">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act2"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="351,159"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act3" Id="STJYFaWen_wp1_tra5" To="STJYFaWen_wp1_act4">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act4"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act4" Id="STJYFaWen_wp1_tra6" To="STJYFaWen_wp1_act3">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act3"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="391,220"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act4" Id="STJYFaWen_wp1_tra7" To="STJYFaWen_wp1_act5">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act5"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act5" Id="STJYFaWen_wp1_tra8" To="STJYFaWen_wp1_act4">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="422,294"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act4" Id="STJYFaWen_wp1_tra9" To="STJYFaWen_wp1_act6">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act6"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act6" Id="STJYFaWen_wp1_tra10" To="STJYFaWen_wp1_act8">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act8"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act8" Id="STJYFaWen_wp1_tra11" To="STJYFaWen_wp1_act9">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act9" Id="STJYFaWen_wp1_tra12" To="STJYFaWen_wp1_act10">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act10" Id="STJYFaWen_wp1_tra13" To="STJYFaWen_wp1_act12">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="STJYFaWen_wp1_act6" Id="STJYFaWen_wp1_tra14" To="STJYFaWen_wp1_act4">
+                    <Condition Type="CONDITION">NEXT_ACT=="STJYFaWen_wp1_act4"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="528,283"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=STJYFaWen_wp1_par3,CONNECTING_ACTIVITY_ID=STJYFaWen_wp1_act12,X_OFFSET=873,Y_OFFSET=135,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=STJYFaWen_wp1_par1,CONNECTING_ACTIVITY_ID=STJYFaWen_wp1_act1,X_OFFSET=78,Y_OFFSET=50,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="STJYFaWen_wp1_par1;STJYFaWen_wp1_par2;STJYFaWen_wp1_par3"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="2.0-12--"/>
+        <ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </ExtendedAttributes>
+</Package>

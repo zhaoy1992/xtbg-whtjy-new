@@ -1,0 +1,279 @@
+
+<public:component>
+<ATTACH EVENT="ondocumentready" HANDLER="Init" />
+<PUBLIC:PROPERTY ID="Text"  />
+<PUBLIC:PROPERTY ID="fontsizeID" NAME="fontsize" PUT="fnPutfontsize" GET="fnGetfontsize"  />
+<PUBLIC:PROPERTY ID="fontfamilyID" NAME="fontfamily" PUT="fnPutfontfamily" GET="fnGetfontfamily"  />
+<PUBLIC:PROPERTY ID="fontstyleID" NAME="fontstyle" PUT="fnPutfontstyle" GET="fnGetfontstyle"  />
+<PUBLIC:PROPERTY ID="backgroundColorID" NAME="backgroundColor" PUT="fnPutbackgroundColor" GET="fnGetbackgroundColor"  />
+<PUBLIC:PROPERTY ID="colorID" NAME="color" PUT="fnPutcolor" GET="fnGetcolor"  />
+<PUBLIC:PROPERTY ID="fontweightID" NAME="fontweight" PUT="fnPutfontweight" GET="fnGetfontweight"  />
+<PUBLIC:PROPERTY Name="ParentPos"/>
+<PUBLIC:PROPERTY ID="txtID" NAME="txt" GET="fnGettxt"  />
+<PUBLIC:PROPERTY ID="alignID" NAME="textalign" PUT="fnPutalign" GET="fnGetalign"  />
+<public:property ID="valueID" NAME="value" PUT="fnPutNumeditValue" GET="fnGetNumeditValue">
+<public:property NAME="Min" PUT="fnPutNumeditMin" />
+<public:property NAME="Max" PUT="fnPutNumeditMax" />
+<public:property NAME="NextNum" PUT="fnPutNextMin" />
+<public:property id="disabledID" name="enabled" PUT="fnPutdisabled" />
+<public:property NAME="display" PUT="fnputvisible">
+<script language="javascript">
+var Numedit ;
+var upButton;
+var downButton;
+var Min = 0 ;
+var Max = 32000;
+var NextNum = 1 ;
+var malign = "right" ;
+var mfontsize = "12px";
+var mfontfamily = "宋体";
+var mfontstyle = "normal";
+var mbackgroundColor = "";
+var mcolor = "black";
+var mfontweight = "bold";
+var sdisplay = "block" ;
+var enabled = "否" ;
+function fnPutfontsize(vValue) {
+mfontsize=vValue;
+fontsizeID.fireChange();
+}
+function fnGetfontsize() {
+return mfontsize;
+}
+function fnputvisible(vValue) {
+sdisplay=vValue ;
+return sdisplay;
+}
+function fnPutfontstyle(vValue) {
+mfontstyle=vValue;
+fontstyleID.fireChange();
+}
+function fnGetfontstyle() {
+return mfontstyle;
+}
+function fnPutfontfamily(vValue) {
+mfontfamily=vValue;
+fontfamilyID.fireChange();
+}
+function fnGetfontfamily() {
+return mfontfamily;
+}
+function fnPutbackgroundColor(vValue) {
+mbackgroundColor=vValue;
+backgroundColorID.fireChange();
+}
+function fnGettxt(){
+return Numedit;
+}
+var svalue=""
+function fnGetNumeditValue() {
+try{
+svalue = Numedit.value;
+}catch(e){}
+return svalue ;
+}
+function fnPutNumeditValue(vValue) {
+svalue = vValue
+try{
+Numedit.value = vValue;
+}catch(e){}
+valueID.fireChange();
+}
+function fnGetbackgroundColor() {
+return mbackgroundColor;
+}
+function fnPutcolor(vValue) {
+mcolor=vValue;
+colorID.fireChange();
+}
+function fnGetcolor() {
+return mcolor;
+}
+function fnPutfontweight(vValue) {
+mfontweight=vValue;
+fontweightID.fireChange();
+}
+function fnGetfontweight() {
+return mfontweight;
+}
+function fnPutalign(vValue) {
+malign = vValue;
+alignID.fireChange();
+}
+function fnGetalign() {
+return malign;
+}
+function fnPutdisabled(vValue)
+{
+var o = element.id;
+try{
+enabled = vValue ;
+if(typeof Numedit != "undefined") {
+if(enabled=="否"){
+Numedit.disabled = true;
+upButton.disabled = true;
+downButton.disabled = true ;
+}else {
+Numedit.removeAttribute("disabled");
+upButton.removeAttribute("disabled");
+downButton.removeAttribute("disabled");
+}
+}
+}catch(e){}
+disabledID.fireChange();
+}
+function fnPutNextMin(vValue) {
+try{
+NextNum = vValue ;
+Numedit.NextNum = NexMin ;
+}catch(e){}
+}
+function fnPutNumeditMax(vValue) {
+try{
+Max = vValue ;
+Numedit.Max = Max;
+}catch(e){}
+}
+function fnPutNumeditMin(vValue) {
+try{
+Min = vValue ;
+Numedit.Min = Min;
+}catch(e){}
+}
+function Max_Min() {
+if(parseInt(Numedit.value) < Min ){
+Numedit.value = Min ;
+}
+if(parseInt(Numedit.value) > Max) {
+Numedit.value = Max ;
+}
+if(isNaN(parseInt(Numedit.value)) ){
+Numedit.value = "" ;
+}
+}
+function Numedit_down() {
+if (parseInt(Numedit.value) > Min)
+{
+if(parseInt(Numedit.value) - parseInt(NextNum) > Min ) {
+Numedit.value = parseInt(Numedit.value) - parseInt(NextNum) ;
+}else{
+Numedit.value = Min;
+}
+}else{
+Numedit.value = parseInt(Min) ;
+}
+}
+function Numedit_up() {
+if (parseInt(Numedit.value) < Max)
+{
+if(parseInt(Numedit.value) + parseInt(NextNum) < Max ) {
+Numedit.value = parseInt(Numedit.value) + parseInt(NextNum) ;
+}else{
+Numedit.value = Max;
+}
+}else{
+if(Numedit.value == "") {
+Numedit.value = parseInt(Min);
+}else{
+Numedit.value = parseInt(Max);
+}
+}
+}
+function Button_onblur() {
+upButton.blur() ;
+downButton.blur() ;
+}
+function Init() {
+var divWidth = element.style.width;
+var divLeft = "" ;
+var divHeight = parseInt(element.style.height) ;
+var iWidthButton = 14;
+var iHeightButton = 10 ;
+var iHeight = parseInt(divHeight);
+var downTop = "";
+var divTop = "" ;
+if(element.style.position == "static" ) {
+var len = divWidth.length ;
+if(len != "" || typeof len != "undefined") {
+var s2 = element.style.width.substring(len-1,len);
+}
+if(s2 == "%") {
+var tmpW = parentNode.offsetWidth;
+var txtWidth = (100 * ((tmpW * parseInt(divWidth) /100) - 14)/tmpW) + "%";
+var mButtonWidth = 14;
+ButtonLeft = parseInt(element.offsetWidth) + parseInt(getAbsLeft(element)) -14  ;
+divTop = getAbsTop(element);
+downTop = parseInt(divTop) + 11 ;
+divLeft = getAbsLeft(element) ;
+}else{
+txtWidth = divWidth ;
+mButtonWidth = "14";
+if(ParentPos == "相对"){
+downTop = parseInt(divTop) + 11 ;
+divLeft = parseInt(element.style.left);
+}else{
+divLeft = getAbsLeft(element);
+divTop = getAbsTop(element);
+}
+ButtonLeft =  parseInt(element.offsetWidth) + parseInt(getAbsLeft(element)) ;
+downTop = parseInt(divTop) + 11 ;
+}
+}else{
+txtWidth = parseInt(divWidth) - 14 ;
+divTop = 0;
+downTop = divTop + 11 ;
+divLeft = 0 ;
+ButtonLeft = divLeft + txtWidth ;
+}
+var sdisabled = "" ;
+if(enabled == "是" ) sdisabled = " disabled " ;
+var sHtml = "" ;
+sHtml += "<input type='text' "+ sdisabled +" value='"+svalue+"' id=Numedit style='display:"+sdisplay+"; POSITION: absolute; width:"+txtWidth+"; left:"+divLeft+";  height:"+iHeight+"; top:"+divTop+"; TEXT-ALIGN:"+align+";font-size:"+mfontsize+"; font-style:"+mfontstyle+"; font-family:"+mfontfamily+"; background-color:"+mbackgroundColor+"; font-weight:"+mfontweight+" ; color:"+mcolor+";'>";
+sHtml += "<input type='button' "+ sdisabled +" id='upButton' style='display:"+sdisplay+"; position:absolute; top:"+divTop+"; left:"+ButtonLeft+"; height:"+iHeightButton+"; width:"+iWidthButton+"; BACKGROUND-COLOR:white;BACKGROUND-IMAGE:url("+fcpubdata.Path+"/fceform/images/ef_run_up.gif);'>";
+sHtml += "<input type='button' "+ sdisabled +" id='downButton' style='display:"+sdisplay+"; position: absolute; top:"+downTop+";  left:"+ButtonLeft+"; height:"+iHeightButton+"; width:"+iWidthButton+"; BACKGROUND-COLOR:white;BACKGROUND-IMAGE:url("+fcpubdata.Path+"/fceform/images/ef_run_down.gif);' >";
+element.innerHTML = sHtml;
+element.children[0].attachEvent("onchange", Max_Min) ;
+element.children[1].attachEvent("onclick", Numedit_up) ;
+element.children[2].attachEvent("onclick", Numedit_down) ;
+element.children[1].attachEvent("onmouseup", Button_onblur) ;
+element.children[2].attachEvent("onmouseup", Button_onblur) ;
+element.children[0].attachEvent("onkeydown", fc_txt_onkeydown);
+Numedit = element.children[0] ;
+upButton = element.children[1] ;
+downButton = element.children[2] ;
+if(element.style.position == "static") {
+var len = divWidth.length ;
+if(len != "" || typeof len != "undefined") {
+var s2 = element.style.width.substring(len-1,len);
+}
+if(s2 == "%") {
+if(typeof Numedit!="undefined" ){
+Numedit.attachEvent( "onresize", buttononresize );
+}
+}
+}
+}
+function buttononresize() {
+var tmpW = parentNode.offsetWidth ;
+var tmp1 = (tmpW * parseInt(element.width) /100) - 14 ;
+if( upButton.style.pixelLeft != tmp1 ) {
+Numedit.style.pixelWidth = tmp1;
+Numedit.style.pixelLeft = getAbsLeft(element);
+Numedit.style.pixelTop = getAbsTop(element);
+upButton.style.pixelLeft = tmp1 + getAbsLeft(element)  ;
+downButton.style.pixelLeft = tmp1 + getAbsLeft(element) ;
+upButton.style.pixelTop = getAbsTop(element);
+downButton.style.pixelTop = parseInt(upButton.style.pixelTop) + 11 ;
+}
+}
+function fc_txt_onkeydown() {
+var scode = event.keyCode ;
+if(scode == "40") {
+Numedit_down() ;
+}
+if(scode == "38") {
+Numedit_up();
+}
+}
+</script>
+</public:coponent>

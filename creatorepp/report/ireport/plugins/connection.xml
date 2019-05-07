@@ -1,0 +1,4 @@
+<iReportPlugin 	name="连接信息" class="it.businesslogic.ireport.plugin.login.LoginOptionPlugin">
+	<IconFile>/it/businesslogic/ireport/plugin/connect.gif</IconFile>
+	<Description>template manager</Description>
+</iReportPlugin>

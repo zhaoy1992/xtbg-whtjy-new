@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_open() {
+      //SetButtonImage(SKButton3,"../image/button/button00.gif");
+      //SetButtonImage(SKButton2,"../image/button/button00.gif");
+      //SetButtonImage(SKButton1,"../image/button/button00.gif");
+      //var s="<no>djsnfilename</no><no>billtype.xml</no>"
+      //var sxml=readdesignhtml(s)
+      var oXml = SetDomFile("../billtype.xml") ;
+      
+      dssub1.OpenXmlData(oXml.documentElement.xml);
+}
+
+function uf_save() {
+	var shead = '<?xml version="1.0" encoding="gb2312" ?>' ;
+	var sxml="<no>djsn</no><no><!["+"CDATA["+ shead + dssub1.xml+"]]"+"></no><no>billtype.xml</no>"+"<no>"+fcpubdata.Path+"</no>"
+	var ret=savedesignhtml(sxml)
+	if(ret==""){
+		alert("保存成功!")
+	}else{
+		alert(ret)
+	}
+	
+	
+}
+function uf_openfile() {
+	var spath = '../';
+	var sRet = DjOpen('getUrl',[spath,'url','yes'],'展现','有模式窗口','直接','选择路径');
+	if(IsSpace(sRet) == false){
+		var s1 = sRet.substring(1,sRet.length); 
+		if(s1.substring(s1.length-1,s1.length) == "/") s1=s1.substring(0,s1.length-1);
+		if(s1.split("/").length != 2){
+			alert("只能选择两级目录!");
+			return;	
+		}
+		var s = s1+"/";	
+		dssub1.Fields.Field['flbs'].Value = s;
+		dssub1.bEdit = true;
+		dssub1.Update();
+		dssub1.fset_cont();
+		grid1.hide();
+	}	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script src='../js/design.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule("fc\\:webgrid","behavior: url(../htc/webgrid.htc)",0);</script><script src='../js/fcwebgrid.js'></script><script >document.styleSheets[0].addRule("fc\\:fc_code","behavior: url(../htc/fc_code.htc)",0);</script><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV class=dj id=SKbillsheet onkeydown="" ondblclick="" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;design.js&#13;&#10;" para="<r></r>" dj_id="345" center="居中" idtype="1" isfile="否" postop posleft window="有模式窗口" keyfield controlno="SKButton:3;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:1;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight="380" poswidth="596" entertype="展现" codeheader mkbh="E5" caption="表单分类列表" type="LR" dj_sn="billtypefile" billtaborder="<root><taborder>SKButton3</taborder><taborder>SKButton1</taborder><taborder>SKButton2</taborder><taborder>grid1</taborder></root>" contxml="<root><SKButton><id>SKButton2</id><id>SKButton1</id><id>SKButton3</id></SKButton><label><id>Label1</id></label><grid><id>grid1</id></grid><dataset><id>dssub1</id></dataset></root>" blmode="表格数据维护" BLONopen="uf_open()" toolbar="不带工具栏"><?xml:namespace prefix = fc /><fc:webgrid id=grid1 onkeydown='bill_ongridkeydown("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' ondblclick='bill_ongriddblclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' onclick='bill_ongridclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' dataset="dssub1" canselect="是" autoheight="是" autowidth="是" autoappend="否" readonly="是" visible="是" format="<cols><col><fname>flbh</fname><cname>分类ID</cname><width>10</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>60</columnwidth><align>left</align></col><col><fname>flsm</fname><cname>分类说明</cname><width>40</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>120</columnwidth><align>left</align></col><col><fname>fllx</fname><cname>类型</cname><width>20</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>40</columnwidth><align>left</align></col><col><fname>flbs</fname><cname>正式文件路径</cname><width>200</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Conclickopen%3Euf_openfile%28%29%3Bevent.showlist%3Dfalse%3B%3C/onclickopen%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>250</columnwidth><align>left</align></col><col><fname>extname</fname><cname>扩展名</cname><width>5</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>60</columnwidth><align>left</align></col></cols>" width="573" height="375" top="34" left="1">
+<TABLE id=t style="TABLE-LAYOUT: fixed; FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #ffffff" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow style="FONT-SIZE: 12px; BACKGROUND-COLOR: #c0c0c0">
+<TD></TD></TR></TBODY></TABLE></fc:webgrid><fc:dataset id=dssub1 temptable="TMP_LRGRID1" opensortno="1" chnname="分类类型" format="<fields><field><fieldname>flbh</fieldname><datatype>字符</datatype><displaylabel>分类ID</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target>_blank</target><href></href><visible>是</visible><primarykey>是</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>flsm</fieldname><datatype>字符</datatype><displaylabel>分类说明</displaylabel><size>40</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target>_blank</target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>fllx</fieldname><datatype>字符</datatype><displaylabel>类型</displaylabel><size>20</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target>_blank</target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>flbs</fieldname><datatype>字符</datatype><displaylabel>正式文件路径</displaylabel><size>200</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target>_blank</target><href></href><visible>是</visible><primarykey>是</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>extname</fieldname><datatype>字符</datatype><displaylabel>扩展名</displaylabel><size>5</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><flbh></flbh><flsm></flsm><fllx></fllx><flbs></flbs><extname></extname></dsid>")' onGetText='bill_ondatasetgettext("<dsid><flbh></flbh><flsm></flsm><fllx></fllx><flbs></flbs><extname></extname></dsid>")' onSetText='bill_ondatasetsettext("<dsid><flbh></flbh><flsm></flsm><fllx></fllx><flbs></flbs><extname></extname></dsid>")'></fc:dataset><INPUT id=SKButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 384px; WIDTH: 57px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 11px; HEIGHT: 21px; BACKGROUND-COLOR: #ecece3" type=button value=保存 controltype="SKButton" onclick='bill_onclick("uf_save()")' dropstyle="否"> <INPUT id=SKButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 313px; WIDTH: 57px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 10px; HEIGHT: 21px; BACKGROUND-COLOR: #ecece3" type=button value=删除 controltype="SKButton" onclick='bill_onclick("dssub1.Delete()")' dropstyle="否"><INPUT id=SKButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 242px; WIDTH: 57px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 10px; HEIGHT: 21px; BACKGROUND-COLOR: #ecece3" type=button value=增加 controltype="SKButton" onclick='bill_onclick("dssub1.Append()")' dropstyle="否"><SPAN id=Label1 style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 18px; LEFT: 9px; WIDTH: 108px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 15px; HEIGHT: 21px; TEXT-ALIGN: left; TEXT-DECORATION: underline; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" value="Label1">表单分类:</SPAN></DIV></body></html>

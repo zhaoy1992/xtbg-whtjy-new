@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+                ">
+    <!-- 约稿通知 start -->
+    <bean id="paperMakeNoticeDaoImpl" class="com.chinacreator.xtbg.core.paper.dao.impl.PaperMakeNoticeDaoImpl"></bean>
+    <bean id="paperReceiveNoticeDaoImpl" class="com.chinacreator.xtbg.core.paper.dao.impl.PaperReceiveNoticeDaoImpl"></bean>
+    <bean id="paperReceiveInfoDaoImpl" class="com.chinacreator.xtbg.core.paper.dao.impl.PaperReceiveInfoDaoImpl"></bean>
+    <bean id="paperDaoImpl" class="com.chinacreator.xtbg.core.paper.dao.impl.PaperDaoImpl"></bean>
+    <!-- 约稿通知   end -->
+    
+    <!-- 信息报送模版管理start -->
+    <bean id="paperTemplateDaoImpl" class="com.chinacreator.xtbg.core.paper.dao.impl.PaperTemplateDaoImpl"></bean>
+    <!-- 信息报送模版管理   end -->
+    
+</beans>

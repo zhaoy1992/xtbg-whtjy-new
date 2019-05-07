@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+	定义系统中的子系统功能模块
+	子元素：subsystem－对应不同的子系统，例如：内容管理和工作流
+-->
+<system>
+  <!--
+		定义系统中的子系统功能模块 属性：name－子系统中文名称 id－子系统标识 module－模块文件名称
+		baseuri－如果子系统部署在其他的应用
+	-->
+  <sysmenu left_width="15%" name="spplatform" showhidden="true" showhidden_width="10" top_height="96px">
+    <description>应用支撑平台V3.0</description> 
+    <!--
+			公共缺省的栏目，如果用户登录系统后无访问权限，或者main为true时，将显示该栏目
+		-->
+    <publicitem id="indexpage" main="true" name="系统首页">
+      <workspace>
+        <content>eppExample.jsp</content>
+      </workspace>
+    </publicitem>
+    <module datasource="bspf" id="scheduleManage" isdelete="true" isedit="true" name="日程安排" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="myldrcb" isdelete="true" isedit="true" name="日程安排">
+        <workspace>
+          <content>ccapp/xtbg/public/mySchedule/jsp/schedule.html</content>
+        </workspace>
+      </item>
+    </module>
+    <!--
+			name 模块名称 id 模块标识 datasource 模块使用的数据源名称 used
+			标识模块是否使用，true为使用，false不使用，缺省为true isedit
+			模块是否可以修改，true为可以，false为不可以，缺省为true isdelete
+			模块是否可以被删除，true为可以，false为不可以，缺省为true
+		-->
+	<module datasource="bspf" id="gwgl" isdelete="false" isedit="false" name="公文管理">
+      <item datasource="bspf" id="xjgw" isdelete="false" isedit="false" name="新建公文">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/newflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="wdgw" isdelete="false" isedit="false" name="我的公文">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/flowprocessing/jsp/mainwork.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="cywj" isdelete="false" isedit="false" name="传阅文件">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/circularizelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="gwbh" isdelete="false" isedit="false" name="纸质公文编号">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/papernumber.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="fwdjb" isdelete="false" isedit="false" name="发文登记薄">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/worklistcount/jsp/fwcountlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="swdjb" isdelete="false" isedit="false" name="收文登记薄">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/worklistcount/jsp/swcountlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="zbwlog" isdelete="false" isedit="false" name="指标文拆分记录">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/split/jsp/budgetfilelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="zbwunit" isdelete="false" isedit="false" name="指标文拆分单位维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/split/jsp/splitunitlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="htgl" isdelete="false" isedit="false" name="后台管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/flowprocessing/jsp/flowmanagelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="wjcx" isdelete="false" isedit="false" name="文件查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/flowprocessing/jsp/doneworkfindlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="lhfwjk" isdelete="false" isedit="false" name="联合发文监控">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/gwcs/unionarchivefeedback.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="ptfwjk" isdelete="false" isedit="false" name="普通发文监控">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/gwcs/nounionarchivefeedback.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="dbfwjk" isdelete="false" isedit="false" name="督办发文">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/flowprocessing/jsp/flowchieffindlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="gwjs" isdelete="false" isedit="false" name="收文管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/gwcs/gwreceivelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="wtdb" isdelete="false" isedit="false" name="委托代办">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/agency/agencylist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="sldb" isdelete="false" isedit="false" name="受理代办">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/agency/agencylist1.jsp</content>
+        </workspace>
+      </item>
+      <!--此菜单用于来文处理直接分配单位时用到该列表。
+			<item datasource="bspf" id="dclsw" isdelete="false" isedit="false"
+				name="待处理收文">
+				<workspace>
+					<toolbar />
+					<content>
+						ccapp/oa/archive/gwcs/gwreceivedolist.jsp
+					</content>
+				</workspace>
+			</item>
+			<item datasource="bspf" id="lwbl" isdelete="false" isedit="false"
+				name="收文办理情况">
+				<workspace>
+					<toolbar />
+					<content>
+						ccapp/oa/archive/gwcs/gwreceivehandlelist.jsp
+					</content>
+				</workspace>
+			</item>  -->
+    </module>
+    <!-- start 事务处理  -->
+	<module datasource="bspf" id="processing" isdelete="true" isedit="true" name="事务处理" used="true">
+      <description/>
+      	  <item datasource="bspf" default="false" id="processnew" isdelete="true" isedit="true" name="事务申请">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/processing/newflowmain.jsp</content>
+	        </workspace>
+      	  </item>
+      <item datasource="bspf" id="meetingnotice" isdelete="false" isedit="false" name="会议申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/archive/HBTJ-hysqspd.jsp?busiTypeCode=hysqsp</content>
+        </workspace>
+      </item>
+		  <item datasource="bspf" default="false" id="filereply" isdelete="false" isedit="false" name="分院文件上报">
+			<workspace>
+			  <toolbar/>
+			  <content>/ccapp/oa/news/fysbflowmain.jsp</content>
+			</workspace>
+		  </item>
+		  <item datasource="bspf" default="false" id="msgpublish" isdelete="false" isedit="false" name="新闻信息上报">
+			<workspace>
+			  <toolbar/>
+			  <content>/ccapp/oa/news/newflowmain.jsp</content>
+			</workspace>
+		  </item>
+	      <item datasource="bspf" default="false" id="process" isdelete="true" isedit="true" name="我的事务">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/processing/mainhandlist.jsp</content>
+	        </workspace>
+      	  </item>
+    </module>
+	<!-- end   事务处理  -->
+    <module datasource="bspf" id="task" isdelete="true" isedit="true" name="任务管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="taskassigned" isdelete="true" isedit="true" name="交办任务">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/task/jsp/assignedtasklist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="mytask" isdelete="true" isedit="true" name="我的任务">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/task/jsp/mytasklist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tasktj" isdelete="true" isedit="true" name="任务统计">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/task/jsp/tasktjlist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="emails" isdelete="true" isedit="true" name="电子邮件" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="email" isdelete="true" isedit="true" name="电子邮件" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/mail/jsp/mailTabs.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="tzgg" isdelete="true" isedit="true" name="通知通告" used="true">
+      <mouseclickimg>func_an5</mouseclickimg>
+      <item datasource="bspf" default="false" id="ggfs" isdelete="true" isedit="true" name="公告发送">
+        <workspace>
+          <content>ccapp/oa/notice/jsp/noticemain.jsp</content>
+        </workspace>
+      </item>
+      <!-- <item datasource="bspf" default="false" id="ggsh" isdelete="true" isedit="true" name="公告审核">
+        <workspace>
+          <content>ccapp/oa/notice/jsp/noticeauditmain.jsp</content>
+        </workspace>
+      </item> -->
+      <item datasource="bspf" default="false" id="ggjs" isdelete="true" isedit="true" name="公告接收">
+        <workspace>
+          <content>ccapp/oa/notice/jsp/noticeviewlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ggl" isdelete="true" isedit="true" name="公告栏">
+        <workspace>
+          <content>ccapp/oa/notice/jsp/noticespecialtypetabl.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="answers" isdelete="true" isedit="true" name="有问必答" used="true">
+      <item datasource="bspf" default="false" id="wtqc" isdelete="true" isedit="true" name="问题起草">
+        <workspace>
+          <content>ccapp/xtbg/tjy/answers/jsp/newAnswerslist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="wdwd" isdelete="true" isedit="true" name="我的问答">
+        <workspace>
+          <content>ccapp/xtbg/tjy/answers/jsp/mainAnswers.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="wdgbl" isdelete="true" isedit="true" name="问答公布栏">
+        <workspace>
+          <content>ccapp/xtbg/tjy/answers/jsp/viewAnswerslist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="meetingmanager" isdelete="false" isedit="false" name="会议管理">
+      <mouseclickimg>func_an3</mouseclickimg>
+      <headimg>ccapp/oa/meeting/jsp/meetingnoticedetail.jsp</headimg>
+      <description>新增会议</description>
+      
+	  <item datasource="bspf" id="meetingnoticeapply" isdelete="false" isedit="false" name="会议发布">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingnoticemain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingroomview" isdelete="false" isedit="false" name="会议室预约查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/viewroomoccupancy.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingtype" isdelete="false" isedit="false" name="会议类型管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingtypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingview" isdelete="false" isedit="false" name="会议通知查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingviewmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingcheck" isdelete="false" isedit="false" name="会议通知审核">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingcheckmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingroom" isdelete="false" isedit="false" name="会议室管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingroomlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingminutesmanage" isdelete="false" isedit="false" name="会议纪要登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingminute_tab.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingminutesview" isdelete="false" isedit="false" name="会议纪要查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingminutelist4view.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingtemplate" isdelete="false" isedit="false" name="会议模板管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingtemplatelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingnotetemplate" isdelete="false" isedit="false" name="短信模板管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingnotetemplatelist4noticechoose.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="meetingnoticegeneralview" isdelete="false" isedit="false" name="会议通知查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/meeting/jsp/meetingnoticelist4generalview.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <!-- 张家界信息报送 strat -->
+    <module datasource="bspf" id="paper" isdelete="true" isedit="true" name="信息报送" used="true">
+      <item datasource="bspf" default="false" id="infoconfig" isdelete="true" isedit="true" name="信息维护">
+        <workspace>
+          <content>ccapp/xtbg/zhangjiajie/inforeported/jsp/infotypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="infoview" isdelete="true" isedit="true" name="信息浏览">
+        <workspace>
+          <content>ccapp/xtbg/zhangjiajie/inforeported/jsp/infobrowsinglist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="inforeport" isdelete="true" isedit="true" name="信息上报">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/zhangjiajie/inforeported/jsp/inforeport.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="infocaibian" isdelete="true" isedit="true" name="信息采编">
+        <workspace>
+          <content>ccapp/xtbg/zhangjiajie/inforeported/jsp/infocaibian.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="infoleadreport" isdelete="true" isedit="true" name="省院领导直达">
+        <workspace>
+          <content>ccapp/xtbg/zhangjiajie/inforeported/jsp/infoinputleadreport.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <!-- 张家界信息报送  end -->
+    <!-- start资产管理!
+    <module datasource="bspf" id="ymj_zcgl" isdelete="true" isedit="true" name="资产管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="ymj_wzc" isdelete="true" isedit="true" name="我的资产">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/myAssetsList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_bcgsq" isdelete="true" isedit="true" name="我的采购申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/myPurchaseApply.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_cgspcs" isdelete="true" isedit="true" name="采购审批">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/approvalRoomList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_cgqdllist" isdelete="true" isedit="true" name="采购清单">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/detailList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_bgskc" isdelete="true" isedit="true" name="办公室库存">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/officeStockList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_sbly" isdelete="true" isedit="true" name="设备领用">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/officeCollarList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_bstwh" isdelete="true" isedit="true" name="办公设备类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/equipmenttypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_yhtwh" isdelete="true" isedit="true" name="易耗品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/officeassets/jsp/consumablenamelist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    -->
+      <!-- start新闻发布-->
+    <module datasource="bspf" id="news" isdelete="true" isedit="true" name="新闻信息" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="news_release" isdelete="true" isedit="true" name="新闻信息发布" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/news/newsrelease.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="news_list" isdelete="true" isedit="true" name="新闻信息统计" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/news/newscount.jsp</content>
+        </workspace>
+      </item>
+    </module>
+     <!-- end新闻发布 -->
+    
+     <!-- start办公用品管理-->
+    <module datasource="bspf" id="officeSupplies" isdelete="true" isedit="true" name="办公用品管理" used="true">
+      <description/>
+       <item datasource="bspf" default="false" id="tjy_cgqd2" isdelete="true" isedit="true" name="填写采购清单">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/osapplyplan2.jsp?action=insert</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_cgcx" isdelete="true" isedit="true" name="采购清单查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/showpersonosplan.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_lysq" isdelete="true" isedit="true" name="填写领用申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/newosappflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_kcgl" isdelete="true" isedit="true" name="物品库存管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/kcmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_wpff" isdelete="true" isedit="true" name="物品发放查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/oschukulist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_wpggwh" isdelete="true" isedit="true" name="物品规格登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/osusertypeItemmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_yhptwh" isdelete="true" isedit="true" name="物品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/osupplietypemain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_wptzgli" isdelete="true" isedit="true" name="物品台帐管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/officeaccountmain.jsp</content>
+        </workspace>
+      </item>
+      <!-- 
+      <item datasource="bspf" default="false" id="tjy_cgqd" isdelete="true" isedit="true" name="填写采购清单">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies2/jsp/osapplyplan.jsp?action=insert</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_account" isdelete="true" isedit="true" name="台账管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/officeaccountlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_bgwpnewflow" isdelete="true" isedit="true" name="填写申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/newosappflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_bgtables" isdelete="true" isedit="true" name="申请查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/showosbgtables.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_bgwpwdzc" isdelete="true" isedit="true" name="我的资产">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/osmyobjectlylist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_bgwpwpkc" isdelete="true" isedit="true" name="物品库存">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/objectnosmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_bgwpwpff" isdelete="true" isedit="true" name="物品发放查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/jsp/objectlingyongmain.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_cywpwh" isdelete="true" isedit="true" name="常用物品登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/type/jsp/osupplieusetypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_bstwh" isdelete="true" isedit="true" name="办公用品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/type/jsp/osupplietypelist.jsp?oftype_flag=1</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="repair_device" isdelete="true" isedit="true" name="维修登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/officesupplies/repair/jsp/repairDetailMain.jsp</content>
+        </workspace>
+      </item>
+     -->
+    </module>
+     <!-- end办公用品管理 -->
+          
+      <!-- start耗材用品管理-->
+    <module datasource="bspf" id="detectionSupplies" isdelete="true" isedit="true" name="检测耗材管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="tjy_detection_account" isdelete="true" isedit="true" name="台账管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/detectionaccountlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_detection_bgwpnewflow" isdelete="true" isedit="true" name="填写申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/newosappflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_detection_bgtables" isdelete="true" isedit="true" name="申请查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/showosbgtables.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_detection_bgwpwdzc" isdelete="true" isedit="true" name="我的资产">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/osmyobjectlylist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_detection_bgwpwpkc" isdelete="true" isedit="true" name="物品库存">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/objectnosmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_detection_bgwpwpff" isdelete="true" isedit="true" name="物品发放查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/jsp/objectlingyongmain.jsp</content>
+        </workspace>
+      </item>
+        <item datasource="bspf" default="false" id="tjy_detection_wpggwh" isdelete="true" isedit="true" name="物品规格登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/type/jsp/osusertypeItemlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_detection_cywpwh" isdelete="true" isedit="true" name="常用物品登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/type/jsp/osupplieusetypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_detection_bstwh" isdelete="true" isedit="true" name="检测耗材类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/type/jsp/osupplietypelist.jsp?oftype_flag=1</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_detection_yhptwh" isdelete="true" isedit="true" name="易耗品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/type/jsp/osupplietypelist.jsp?oftype_flag=2</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="repair_detection_device" isdelete="true" isedit="true" name="维修登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/detectionsupplies/repair/jsp/repairDetailMain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+     <!-- end耗材用品管理 -->
+     
+      <!-- start食堂物品管理-->
+    <module datasource="bspf" id="canteenitemsSupplies" isdelete="true" isedit="true" name="食堂物品管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_account" isdelete="true" isedit="true" name="台账管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/officeaccountlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_canteenitems_bgwpnewflow" isdelete="true" isedit="true" name="填写申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/newosappflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_bgtables" isdelete="true" isedit="true" name="申请查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/showosbgtables.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_bgwpwdzc" isdelete="true" isedit="true" name="我的资产">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/osmyobjectlylist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_canteenitems_bgwpwpkc" isdelete="true" isedit="true" name="物品库存">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/objectnosmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_bgwpwpff" isdelete="true" isedit="true" name="物品发放查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/jsp/objectlingyongmain.jsp</content>
+        </workspace>
+      </item>
+        <item datasource="bspf" default="false" id="tjy_canteenitems_wpggwh" isdelete="true" isedit="true" name="物品规格登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/type/jsp/osusertypeItemlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="tjy_canteenitems_cywpwh" isdelete="true" isedit="true" name="常用物品登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/type/jsp/osupplieusetypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_bstwh" isdelete="true" isedit="true" name="食堂物品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/type/jsp/osupplietypelist.jsp?oftype_flag=1</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="tjy_canteenitems_yhptwh" isdelete="true" isedit="true" name="易耗品类别维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/type/jsp/osupplietypelist.jsp?oftype_flag=2</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="repair_canteenitems_device" isdelete="true" isedit="true" name="维修登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/canteenitemssupplies/repair/jsp/repairDetailMain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+     <!-- end食堂物品管理 -->
+     
+    <!-- 车辆申请记录 -->
+    <module datasource="bspf" id="ymj_clgl" isdelete="true" isedit="true" name="车辆管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="ymj_clgllc" isdelete="true" isedit="true" name="车辆管理操作" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carguanliaction.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_clsq" isdelete="true" isedit="true" name="车辆申请记录 " used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carManageApplyInfoList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_clfp" isdelete="true" isedit="true" name="车辆分派 " used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carfptabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_pcsp" isdelete="true" isedit="true" name="派车审批 " used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carPcsptabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_hcdj" isdelete="true" isedit="true" name="回车登记" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carbackdjtabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_yclsjl" isdelete="true" isedit="true" name="用车历史记录" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carHistoryList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_clda" isdelete="true" isedit="true" name="车辆档案" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carRecordList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_fuelCard" isdelete="true" isedit="true" name="油卡管理" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/youkamain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_wxby" isdelete="true" isedit="true" name="维修保养" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carWxbyList.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="ymj_wxbysp" isdelete="true" isedit="true" name="维修保养审批" used="true">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/yimingju/carmanage/jsp/carWxtabs.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    
+    <module datasource="bspf" id="suxian_elect" isdelete="true" isedit="true" name="电子考勤" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="newattendanceflowmain" isdelete="true" isedit="true" name="休假申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/attendancemanage/jsp/newattendanceflowmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="suxian_electreset" isdelete="true" isedit="true" name="考勤设置">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/suxian/electroniccheck/jsp/electsetlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="elecholiday" isdelete="true" isedit="true" name="节假日管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/holiday/jsp/setholiday.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="suxian_elc" isdelete="true" isedit="true" name="考勤打卡">
+        <workspace>
+          <content>ccapp/xtbg/suxian/electroniccheck/jsp/electcheckinfolist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="suxian_elcquery" isdelete="true" isedit="true" name="考勤查询">
+        <workspace>
+          <content>ccapp/xtbg/suxian/electroniccheck/jsp/electcheckviewlist.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="suxian_elcquerytj" isdelete="true" isedit="true" name="考勤统计">
+        <workspace>
+          <content>ccapp/xtbg/suxian/electroniccheck/jsp/electronicchecktjlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="electronic_htgl" isdelete="true" isedit="true" name="后台管理">
+        <workspace>
+          <content>ccapp/xtbg/suxian/electroniccheck/jsp/managelist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="directory" isdelete="true" isedit="true" name="人员信息" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="mlglmanager" isdelete="true" isedit="true" name="人员信息管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/directory/jsp/directoryViewMain.jsp?readonly=0</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="birthday" isdelete="true" isedit="true" name="生日提醒">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/birthday/jsp/birthdaylist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="mlglxcmanager" isdelete="true" isedit="true" name="薪酬信息">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/directory/jsp/directoryXCseelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="hetongyujing" isdelete="true" isedit="true" name="合同预警">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/directory/jsp/hetongyujinglist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="personholder" isdelete="true" isedit="true" name="人员持证" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="holdermanager" isdelete="true" isedit="true" name="人员持证管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/personholder/jsp/holderViewMain.jsp?readonly=0</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="holderyujing" isdelete="true" isedit="true" name="持证预警">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/personholder/jsp/holderyujing.jsp?readonly=0</content>
+        </workspace>
+      </item>
+    </module>
+    <!-- 绩效管理 -->
+	<module datasource="wstp" id="vote" isdelete="true" isedit="true" name="绩效考核" used="true">
+		<description />
+		<item datasource="bspf" default="false" id="vote_manage"
+			isdelete="true" isedit="true" name="绩效管理">
+			<workspace>
+				<toolbar />
+				<content>ccapp/oa/vote/jsp/votepaperlist.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="vote_online"
+			isdelete="true" isedit="true" name="绩效评论">
+			<workspace>
+				<toolbar />
+				<content>ccapp/oa/vote/jsp/votepaperoperatelist.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="vote_total"
+			isdelete="true" isedit="true" name="绩效统计">
+			<workspace>
+				<toolbar />
+				<content>ccapp/oa/vote/jsp/votepapertotallist.jsp</content>
+			</workspace>
+		</item>
+	</module>
+    <!-- start评审管理 -->
+    <module datasource="bspf" id="review" isdelete="true" isedit="true" name="职称管理" used="true">
+      <description/>
+        <item datasource="bspf" default="false" id="review_user" isdelete="true" isedit="true" name="职称管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/review/jsp/reviewUserlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="review_recode" isdelete="true" isedit="true" name="评审记录管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/review/jsp/reviewRecodelist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <!-- end评审管理 -->
+    <module datasource="bspf" id="beforearchivelistManage" isdelete="false" isedit="true" name="公文待归档管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filedocbeforearchivelist" isdelete="true" isedit="true" name="公文待归档管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filedocbeforearchivelist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="filedocManage" isdelete="false" isedit="true" name="文件管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filedoc" isdelete="true" isedit="true" name="文件管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filedocmain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="filefilesmanage_m" isdelete="false" isedit="true" name="档案管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filefilesmanage" isdelete="true" isedit="true" name="档案管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefilesmain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="filequeryManage" isdelete="false" isedit="true" name="档案查询" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filequery" isdelete="true" isedit="true" name="档案查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefilesqueryindex.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filefilesquerybydeptindex" isdelete="true" isedit="true" name="档案按部门查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefilesquerybydeptindex.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="filecollectManage" isdelete="false" isedit="true" name="我的收藏" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filecollect" isdelete="true" isedit="true" name="我的收藏">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefilescollectindex.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="fileBorrowManage" isdelete="false" isedit="true" name="档案借阅" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filelendingflowlist" isdelete="true" isedit="true" name="档案借阅申请">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filelendingflowtabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="fileborrow" isdelete="true" isedit="true" name="我的借阅篮">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/fileborrowindex.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="myfilelendingflowtabs" isdelete="true" isedit="true" name="我借阅的档案">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/myfilelendingflowtabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="fileborrowmanagement" isdelete="true" isedit="true" name="档案借阅管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/fileborrowtabs.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="fileDestroyManage" isdelete="false" isedit="true" name="档案保管" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="filedestroy" isdelete="true" isedit="true" name="档案销毁">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filedestroytabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="fileinventory" isdelete="true" isedit="true" name="档案销毁清单">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/fileinventory.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filefilesdevolveindex" isdelete="true" isedit="true" name="档案移交">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefilesdevolvelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filetjlist1" isdelete="true" isedit="true" name="阅读数量统计（按分类）">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filetjlist1.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filetjlist2" isdelete="true" isedit="true" name="阅读数量统计（按文档）">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filetjlist2.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="file" isdelete="true" isedit="true" name="基础数据管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="fileprogrampage" isdelete="true" isedit="true" name="程序界面管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/fileprogramviewlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filefondsno" isdelete="true" isedit="true" name="全宗号管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filefondsnolist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filetype" isdelete="true" isedit="true" name="档案分类管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filetypeindex.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="filestoragelocation" isdelete="true" isedit="true" name="存放位置管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/file/jsp/filestoragelocationviewmain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="sysparam" isdelete="true" isedit="true" name="系统参数设置" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="param" isdelete="true" isedit="true" name="参数设置">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/sysparam/jsp/sysparamviewmain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="dict" isdelete="true" isedit="true" name="数据字典" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="dictdata" isdelete="true" isedit="true" name="数据字典">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/dict/jsp/dictviewmain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <!-- start图书管理 --> 
+   	<module datasource="bspf" id="czt_tsgl" isdelete="true" isedit="true" name="图书管理" used="true">
+		<description />
+		<item datasource="bspf" default="false" id="czt_tsflgl" isdelete="true"
+			isedit="true" name="图书分类管理">
+			<workspace>
+				<toolbar />
+				<content>ccapp/xtbg/caizhengting/ibrary/jsp/ibrarytypeindex.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="czt_tsdjgl" isdelete="true"
+			isedit="true" name="图书登记管理">
+			<workspace>
+				<toolbar />
+				<content>ccapp/xtbg/caizhengting/ibrary/jsp/ibrarybookrindex.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="czt_tscxgl" isdelete="true"
+			isedit="true" name="图书查询管理">
+			<workspace>
+				<toolbar />
+				<content>ccapp/xtbg/caizhengting/ibrary/jsp/ibraryqueryindex.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="czt_wjtdts" isdelete="true"
+			isedit="true" name="我借阅的图书">
+			<workspace>
+				<toolbar />
+				<content>ccapp/xtbg/caizhengting/ibrary/jsp/myibraryborrowtab.jsp</content>
+			</workspace>
+		</item>
+		<item datasource="bspf" default="false" id="czt_tsjygl" isdelete="true"
+			isedit="true" name="图书借阅管理">
+			<workspace>
+				<toolbar />
+				<content>ccapp/xtbg/caizhengting/ibrary/jsp/ibraryborrowtab.jsp</content>
+			</workspace>
+		</item>
+	</module>
+	<!-- end  图书管理 -->
+    <module datasource="bspf" id="stdlib" isdelete="true" isedit="true" name="标准库查询" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="stdlib_search" isdelete="true" isedit="true" name="标准库查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/stdlib/stdlibsearch.jsp</content>
+        </workspace>
+      </item>
+    </module>
+	<!-- start仪器设备管理 -->
+    <module datasource="bspf" id="device" isdelete="true" isedit="true" name="固定资产" used="true">
+      <description/>
+       <item datasource="bspf" default="false" id="gdzc_tz" isdelete="true" isedit="true" name="台账管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devaccountinfomain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_sygl" isdelete="true" isedit="true" name="使用管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/officeaccountmanagelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_zcbf" isdelete="true" isedit="true" name="资产报废">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devscrap.jsp</content>
+        </workspace>
+      </item>
+            <item datasource="bspf" default="false" id="gdzc_xdhyjh" isdelete="true" isedit="true" name="下达核检计划">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devissuedplanlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_wdhyjh" isdelete="true" isedit="true" name="我的核检计划">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devissuedplanlist.jsp?type=myPlay</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_jdhc" isdelete="true" isedit="true" name="检定核查登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devappraisallist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="devtakcare" isdelete="true" isedit="true" name="维修和保养管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/type/jsp/devtakcarelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_type" isdelete="true" isedit="true" name="按资产类别查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/typelookmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="gdzc_zzjg" isdelete="true" isedit="true" name="按组织结构查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/account/jsp/devunitlookmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="device_sygl" isdelete="true" isedit="true" name="信息设备维修审批">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/newdevflowmain.jsp?busitype_type_code=yqsygl</content>
+	        </workspace>
+    </item>
+      <!--
+	   	  <item datasource="bspf" default="false" id="device_info" isdelete="true" isedit="true" name="台账管理">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devaccountinfomain.jsp</content>
+	        </workspace>
+	      </item>
+	      <item datasource="bspf" default="false" id="device_txsq" isdelete="true" isedit="true" name="填写申请">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/newosappflowmain.jsp</content>
+	        </workspace>
+	      </item>
+
+	      <item datasource="bspf" default="false" id="device_new" isdelete="true" isedit="true" name="政府采购管理">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/newdevflowmain.jsp?busitype_type_code=yqzfcgl</content>
+	        </workspace>
+	      </item>
+	       <item datasource="bspf" default="false" id="devscrap" isdelete="true" isedit="true" name="资产报废">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devscrap2.jsp?busiTypeCode=uuid_727</content>
+	        </workspace>
+	      </item>
+	      
+	      <item datasource="bspf" default="false" id="dev_chuzu" isdelete="true" isedit="true" name="资产出租">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devchuzu.jsp?busiTypeCode=uuid_727</content>
+	        </workspace>
+	      </item>
+	      <item datasource="bspf" default="false" id="dev_diaobo" isdelete="true" isedit="true" name="资产调拨">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devdiaobo.jsp?busiTypeCode=uuid_727</content>
+	        </workspace>
+	      </item>
+	      <item datasource="bspf" default="false" id="dev_jieyong" isdelete="true" isedit="true" name="资产借用">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devjieyong.jsp?busiTypeCode=uuid_727</content>
+	        </workspace>
+	      </item>
+	      <item datasource="bspf" default="false" id="dev_guih" isdelete="true" isedit="true" name="资产归还">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/device/jsp/devguih.jsp?busiTypeCode=uuid_727</content>
+	        </workspace>
+	      </item>
+
+	       <item datasource="bspf" default="false" id="tjy_bstwh" isdelete="true" isedit="true" name="办公用品类别维护">
+	        <workspace>
+	          <toolbar/>
+	          <content>ccapp/xtbg/tjy/officesupplies/type/jsp/osupplietypelist.jsp?oftype_flag=1</content>
+	        </workspace>
+	      </item>
+      <item datasource="bspf" default="false" id="devsupplier" isdelete="true" isedit="true" name="供应商名录">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/type/jsp/devsupplierlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="devissuedplan" isdelete="true" isedit="true" name="下达核检计划">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/type/jsp/devissuedplanlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="mydevissuedplan" isdelete="true" isedit="true" name="我的核检计划">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/type/jsp/devissuedplanlist.jsp?type=myPlay</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="devcheckAppraisal" isdelete="true" isedit="true" name="检定核查登记">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/type/jsp/devckapprTabs.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="device_type" isdelete="true" isedit="true" name="按资产类别查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/jsp/main.jsp</content>
+        </workspace>
+      </item>
+       <item datasource="bspf" default="false" id="device_unit" isdelete="true" isedit="true" name="按组织结构查看">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/tjy/device/jsp/devunitlookmain.jsp</content>
+        </workspace>
+      </item>
+      -->
+    </module>
+    <!-- 体系文件管理 start -->
+    <module datasource="bspf" id="kbm" isdelete="true" isedit="true" name="体系文件管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="kbmdoc" isdelete="true" isedit="true" name="文件上传编制">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/kbm/jsp/kbmdoclist4where.jsp</content>
+        </workspace>
+      </item>
+<!--       <item datasource="bspf" default="false" id="kbmdoccheck" isdelete="true" isedit="true" name="文件审批管理"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/kbmdocchecklistmain.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+      <item datasource="bspf" default="false" id="kbmdocBrowse" isdelete="true" isedit="true" name="文件更新通知">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/kbm/jsp/kbmdocbrowselist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="kbmdocquery" isdelete="true" isedit="true" name="体系文件查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/kbm/jsp/kbmdocquerymain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="doctype" isdelete="true" isedit="true" name="文件分类">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/kbm/doctype/jsp/kbmdoctype.jsp</content>
+        </workspace>
+      </item>
+<!--       <item datasource="bspf" default="false" id="newdocfind" isdelete="true" isedit="true" name="新增文档查询"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/newdocfindlist.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+<!--       <item datasource="bspf" default="false" id="newdocfindbytop" isdelete="true" isedit="true" name="热点文档查询"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/newdocfindbytoplist.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+<!--       <item datasource="bspf" default="false" id="uploadtop" isdelete="true" isedit="true" name="上传排行榜"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/kbmuploadtop.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+<!--       <item datasource="bspf" default="false" id="suggest" isdelete="true" isedit="true" name="推荐文档查询"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/kbmdocsuggestlist.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+      <item datasource="bspf" default="false" id="favorites" isdelete="true" isedit="true" name="我的收藏查询">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/kbm/jsp/kbmdocfavoriteslist.jsp</content>
+        </workspace>
+      </item>
+<!--       <item datasource="bspf" default="false" id="rss" isdelete="true" isedit="true" name="文档订阅"> -->
+<!--         <workspace> -->
+<!--           <toolbar/> -->
+<!--           <content>ccapp/oa/kbm/jsp/kbmdocrsslist.jsp</content> -->
+<!--         </workspace> -->
+<!--       </item> -->
+    </module>
+    <!-- 体系文件管理 end -->
+    <!-- 配置管理 start -->
+    <module datasource="bspf" id="pzgl" isdelete="true" isedit="true" name="配置管理" used="true">
+      <description/>
+      <item datasource="bspf" default="false" id="resourceConfig" isdelete="true" isedit="true" name="人员配置管理">
+        <workspace>
+          <content>ccapp/xtbg/public/resourcesTreeConfig/jsp/configResourcesTree.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="false" id="orgResourceConfig" isdelete="true" isedit="true" name="机构配置管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/xtbg/public/resourcesTreeConfig/jsp/rcOrgMain.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="workflowHadder" isdelete="false" isedit="false" name="流程管理">
+      <item datasource="bspf" id="zdybd" isdelete="false" isedit="false" name="自定义表单">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/form/formconfiglist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="flowConfig" isdelete="false" isedit="false" name="流程配置">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/processconfig/jsp/flowinfoconfiglist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="dbmanager" isdelete="false" isedit="false" name="数据库管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/dbmanager/jsp/dbmanager.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="flowtypeconfig" isdelete="false" isedit="false" name="业务类型配置">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/pubconfig/jsp/flowbusitypemain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="wordnum" isdelete="false" isedit="false" name="文号维护">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/wordnumdef/jsp/wordnumdefmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="pubconfig" isdelete="false" isedit="false" name="与公文无关的流程配置">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/pubconfig/jsp/formbusitypelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="doc_templete" isdelete="false" isedit="false" name="文档模板管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/wordtemplate/wordtemplatelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="doc_templete_th" isdelete="false" isedit="false" name="套红文档模板管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/process/wordtemplate/thwordtemplatelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="jawemanage" isdelete="false" isedit="false" name="流程管理">
+        <top>perspective_toolbar.jsp</top>
+        <left>perspective_outlookbar.jsp</left>
+        <navigator>
+          <toolbar>jawe/navigator_toolbar.jsp</toolbar>
+          <content>jawe/navigator_content.jsp</content>
+        </navigator>
+        <workspace>
+          <toolbar>jawe/properties_toolbar.jsp</toolbar>
+          <content>jawe/jawe_default.jsp</content>
+        </workspace>
+      </item>
+    </module>
+	<module datasource="bspf" id="eppmanager" isdelete="false" isedit="false" name="平台管理">
+      <description>平台管理</description>
+      <!-- <item datasource="bspf" id="datasourcemanager" isdelete="false" isedit="false" name="数据源管理">
+				<top>perspective_toolbar.jsp</top>
+				<left>perspective_outlookbar.jsp</left>
+				<navigator />
+				<workspace>
+					<toolbar>epp/datasourcemanage/properties_toolbar.jsp</toolbar>
+					<content>epp/datasourcemanage/datasourceList.jsp</content>
+				</workspace>
+			</item> -->
+      <item datasource="bspf" default="false" id="datasourcemanager" isdelete="true" isedit="true" name="数据源管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/datasourcemanage/jsp/datasourcelist.jsp</content>
+        </workspace>
+      </item>
+      <!-- <item datasource="bspf" id="work_class_manage" isdelete="false" isedit="false" name="业务类别管理">
+				<top>perspective_toolbar.jsp</top>
+				<left>perspective_outlookbar.jsp</left>
+				<navigator>
+					<toolbar>epp/businessclassmanager/navigator_toolbar.jsp?_type=class
+					</toolbar>
+					<content>epp/businessclassmanager/navigator_content.jsp?_type=class
+					</content>
+				</navigator>
+				<workspace>
+					<toolbar>epp/businessclassmanager/properties_toolbar.jsp?_type=class_home
+					</toolbar>
+					<content>epp/businessclassmanager/form_class_home.jsp</content>
+				</workspace>
+			</item> -->
+      <item datasource="bspf" default="false" id="work_class_manage" isdelete="true" isedit="true" name="业务类别管理">
+        <workspace>
+          <toolbar/>
+          <content>ccapp/oa/businessclassmanager/jsp/formclassmain.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="menuconfigure" isdelete="false" isedit="false" name="模块管理">
+        <top>perspective_toolbar.jsp</top>
+        <left>perspective_outlookbar.jsp</left>
+        <navigator>
+          <toolbar>epp/menuconfigure/navigator_toolbar.jsp</toolbar>
+          <content>epp/menuconfigure/navigator_content.jsp</content>
+        </navigator>
+        <workspace>
+          <toolbar>epp/menuconfigure/properties_toolbar.jsp</toolbar>
+          <content>epp/menuconfigure/menulist.jsp</content>
+        </workspace>
+      </item>
+    </module>
+    <module datasource="bspf" id="sysmanager" isdelete="false" isedit="false" name="系统管理">
+      <description>系统管理</description>
+      <!-- 
+			<item datasource="bspf" default="true" id="purviewmanager"
+				isdelete="false" isedit="false" name="权限管理">
+				<top>perspective_toolbar.jsp</top>
+				<left>perspective_outlookbar.jsp</left>
+				<workspace>
+					<content>purviewmanager/main.jsp</content>
+				</workspace>
+			</item>
+			 -->
+      <item datasource="bspf" default="true" id="purviewmanager_new" isdelete="false" isedit="false" name="权限管理">
+        <workspace>
+          <content>ccapp/oa/purviewmanager/main.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="true" id="data_resources" isdelete="false" isedit="false" name="数据权限">
+        <workspace>
+          <content>ccapp/oa/purviewmanager/dataresource/jsp/dateresourcestree.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" default="true" id="unit_resources" isdelete="false" isedit="false" name="单位接收人">
+        <workspace>
+          <content>ccapp/oa/purviewmanager/dataresource/jsp/datamain.jsp</content>
+        </workspace>
+      </item>
+      <!-- <item datasource="bspf" id="holidaymanager" isdelete="false" isedit="false" name="节假日管理">
+				<top>perspective_toolbar.jsp</top>
+				<left>perspective_outlookbar.jsp</left>
+				<workspace>
+					<toolbar>sysmanager/holiday/toolbar.jsp</toolbar>
+					<content>sysmanager/holiday/setholiday.jsp</content>
+				</workspace>
+			</item> -->
+      <item datasource="bspf" id="logquery" isdelete="false" isedit="false" name="日志查询">
+        <top>perspective_toolbar.jsp</top>
+        <left>perspective_outlookbar.jsp</left>
+        <navigator/>
+        <workspace>
+          <toolbar>sysmanager/logmanager/logquery_toolbar.jsp</toolbar>
+          <content>sysmanager/logmanager/logList_tab.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="bbkz" isdelete="false" isedit="false" name="版本控制">
+        <workspace>
+          <content>ccapp/xtbg/wangcheng/androidversion/jsp/androidversionlist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="yysdgl" isdelete="false" isedit="false" name="应用商店管理">
+        <workspace>
+          <content>ccapp/xtbg/wangcheng/virtualappmanager/jsp/appstorelist.jsp</content>
+        </workspace>
+      </item>
+      <item datasource="bspf" id="xnyyzc" isdelete="false" isedit="false" name="虚拟应用注册">
+        <workspace>
+          <content>ccapp/xtbg/wangcheng/virtualappmanager/jsp/apppermission.jsp</content>
+        </workspace>
+      </item>
+    </module>
+  </sysmenu>
+</system>

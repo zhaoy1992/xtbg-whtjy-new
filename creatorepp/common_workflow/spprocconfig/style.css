@@ -1,0 +1,68 @@
+    body {
+	margin:0;
+	padding:0;
+	font: bold 11px/1.5em Verdana;
+}
+
+h2 {
+	font: bold 14px Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	margin: 0px;
+	padding: 0px 0px 0px 15px;
+}
+
+img {
+border: none;
+} 
+
+	  
+/*- Menu Tabs 2--------------------------- */
+
+    #tabs2 {
+      float:left;
+      width:100%;
+      font-size:93%;
+      line-height:normal;
+	  border-bottom:1px solid #84776B;
+      }
+    #tabs2 ul {
+	  margin:0;
+	  padding:10px 10px 0 0px;
+	  list-style:none;
+      }
+    #tabs2 li {
+      display:inline;
+      margin:0;
+      padding:0;
+      }
+    #tabs2 a {
+      float:left;
+      background:url("images/tableft2.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+      }
+    #tabs2 a span {
+      float:left;
+      display:block;
+      background:url("images/tabright2.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#84776B;
+      }
+    #tabs2 a span {float:none;}
+    #tabs2 a:hover span {
+      color:#74675B;
+      }
+    #tabs2 a:hover {
+      background-position:0% -42px;
+      }
+    #tabs2 a:hover span {
+      background-position:100% -42px;
+      }
+
+      #tabs2 #current a {
+      	background-position:0% -42px;
+      }
+      #tabs2 #current a span {
+      	background-position:100% -42px;
+      }

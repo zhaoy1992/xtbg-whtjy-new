@@ -1,0 +1,17 @@
+animation=1
+caption=test_MSArea2D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+showValues=0
+showAlternateVGridColor=1
+AlternateVGridColor=e1f5ff
+decimals=0
+
+dataset.filed=filed^filed^filed
+dataset.seriesName=aa^bb^cc^
+dataset.color=AFD8F8^F6BD0F^8BBA00
+
+trendLines.startValue=70000
+trendLines.color=009933
+trendLines.displayValue=Target

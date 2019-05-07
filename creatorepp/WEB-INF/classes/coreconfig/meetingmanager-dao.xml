@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ http://www.sprin gframework.org/schema/context http://www.sprin gframework.org/schema/context/sprin g-context-2.5.xsd
+ http://www.sprin gframework.org/schema/tx http://www.sprin gframework.org/schema/tx/sprin g-tx-2.5.xsd
+ http://www.sprin gframework.org/schema/aop http://www.sprin gframework.org/schema/aop/sprin g-aop-2.5.xsd
+ http://www.sprin gframework.org/schema/jee http://www.sprin gframework.org/schema/jee/sprin g-jee-2.5.xsd
+ ">
+	<bean id="meetingDaoImpl"
+		class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingDaoImpl">
+	</bean>
+	<bean id="meetingTypeDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingTypeDaoImpl">
+    </bean>
+    <bean id="meetingTopicDaoImpl" 
+    	class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingTopicDaoImpl">
+    </bean>
+	<bean id="meetingReceiverUserDaoImpl" 
+		class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingReceiverUserDaoImpl">
+	</bean>
+	<bean id="meetingReceiverUnitDaoImpl" 
+		class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingReceiverUnitDaoImpl">
+	</bean>
+	<bean id="meetingCheckStatusDaoImpl" 
+		class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingCheckStatusDaoImpl">
+	</bean>
+	  <bean id="meetingRoomDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingRoomDaoImpl">
+    </bean>    
+      <bean id="meetingMinutesDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingMinutesDaoImpl">
+    </bean> 
+    <bean id="meetingAttenderDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingAttenderDaoImpl">
+    </bean> 
+    <bean id="meetingMsgLogDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingMsgLogDaoImpl">
+    </bean> 
+    <bean id="meetingRoomoccupancyDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingRoomoccupancyDaoImpl">
+    </bean> 
+     <bean id="meetingTemplateDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingTemplateDaoImpl">
+    </bean> 
+    <bean id="meetingNoticeViewDaoImpl"
+        class="com.chinacreator.xtbg.core.meeting.dao.impl.MeetingNoticeViewDaoImpl">
+    </bean> 
+</beans>

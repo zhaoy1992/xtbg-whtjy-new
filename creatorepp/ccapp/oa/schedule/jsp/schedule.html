@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../../resources/style/blue/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../resources/plug/jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../resources/plug/ifrom/js/ifrom-min.1.1.js"></script>
+
+<script type="text/javascript" src="../../resources/plug/ifrom/js/ifrom-remote.1.1.js"></script>
+<script type="text/javascript" src="../resources/js/schedule.js"></script>
+
+<script type="text/javascript" src="../../resources/plug/ifrom/js/ifrom-ui-alert.1.1.js"></script>
+<script type="text/javascript" src="../../resources/plug/ifrom/js/ifrom-tools.1.1.js"></script>
+<script type="text/javascript" src="../../resources/plug/ifrom/js/ifrom-ui-ztree.1.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../resources/plug/JQuery zTree v3.0/js/jquery.ztree.core-3.0.js"></script>
+<script type="text/javascript" src="../../resources/plug/JQuery zTree v3.0/js/jquery.ztree.excheck-3.0.js"></script>
+<script src="../../resources/plug/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="../../resources/util/public.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+<!-- 后台注册 -->
+<input type="hidden" class="select" name="type" value="21"/>
+<input type="hidden" class="add delete" name="modflyUserID" id="modflyUserID"/>
+<input type="hidden" class="selectMonth" name="month" id="monthdate"/>
+<input type="hidden" class="selectMonth selectDay selectWeek"  name="userIDs" id="userIDs" value=""/>
+<input type="hidden" class="selectDay selectWeek" name="endtime" id="_endtime"/>
+<input type="hidden" class="selectDay selectWeek" name="starttime" id="_starttime"/>
+<input type="hidden" class="delete add log" name="id" id="deleteID"/>
+<input type="hidden" class="event" id="deleteSchedule" submitKey="delete" actionId="schedule" methodName="delete"   successful="deleteSucessful"/>
+<input type="hidden" class="event" id="ruleModfiy" submitKey="delete" actionId="schedule" methodName="rule"   successful="ruleSucessful"/>
+<input type="hidden" class="event" id="logseeinput" submitKey="log" actionId="schedule" methodName="selectLog"   successful="logSucessful"/>
+<input type="hidden" class="initload" submitKey="select" actionId="schedule" methodName="initUserList" successful="initsucessful"/>
+<input type="hidden" class="event" id="initMonths" submitKey="selectMonth" actionId="schedule" methodName="searchMonthList" successful="initMonth"/>
+<input type="hidden" class="event" id="initDay" submitKey="selectDay" actionId="schedule" methodName="searchSingleList" successful="initDay"/>
+<input type="hidden" class="event" id="initWeek" submitKey="selectWeek" actionId="schedule" methodName="searchSingleList" successful="initWeek"/>
+<input type="hidden" class="onload" />
+
+<!-- 前台展示 -->
+	<table width="99%" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<!-- 头 -->
+		<tr>
+			<td height="55" id="header_td"><table width="100%" border="0"
+					cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="15%" height="55"><input type="button"
+							class="l_day" value="今天" id="thisday_but" /></td>
+						<td width="25%"><table border="0" cellspacing="0"
+								cellpadding="0">
+								<tr>
+									<td width="29"><input type="button" class="l_date1"
+										value="" id="last_but" /></td>
+									<td  align="center"><span class="l_font14"
+										id="show_date">&nbsp;</span></td>
+									<td width="29" ><input type="button" class="l_date2"
+										value="" id="next_but"  />
+									    
+									</td>
+								</tr>
+							</table></td>
+						<td width="30%" id="showName_td"><input type="button" class="l_downbox"
+							value="" id="showName_but"/>
+							<div class="show_users_div" id="show_users_div">
+							  <div  id="showName">
+							  </div>    
+							 </div>
+							</td>
+						<td width="30%" align="right"><input type="button"
+							class="l_riqi" value="日" id="day_but" />&nbsp;<input
+							type="button" class="l_riqi" value="周" id="week_but" />&nbsp;<input
+							type="button" class="l_riqi" value="月" id="month_but" /></td>
+					</tr>
+				</table></td>
+		</tr>
+		<!-- 月-->
+		<tr id="month_tr">
+			<td><table width="100%" border="0" align="center"
+					cellpadding="0" cellspacing="1" class="l_yun" id="month">
+					<tr>
+						<td class="l_week">星期日</td>
+						<td class="l_week">星期一</td>
+						<td class="l_week">星期二</td>
+						<td class="l_week">星期三</td>
+						<td class="l_week">星期四</td>
+						<td class="l_week">星期五</td>
+						<td class="l_week">星期六</td>
+					</tr> 
+				</table></td>
+		</tr>
+		<!-- 日-->
+		<tr id="day_tr">
+			<td>
+					<table width="100%" border="0"  cellpadding="0"
+						cellspacing="1" class="l_ri" id="day_header_table" >
+						<tr>
+							<td  height="30" width="30" align="center">&nbsp;</td>
+							<td colspan="7" class="tdhui" id="day_remark"></td>
+						</tr>
+					</table>
+					<div class="gongdong vcenter" id="day_div">
+					<table id="day_table"  width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="1" class="l_ri"></table>
+				    </div>
+			</td>
+		</tr>
+		<!-- 周-->
+
+		<tr id="week_tr">
+			<td>
+					<table width="100%" border="0" cellpadding="0"
+						cellspacing="1" class="l_zhou" id="week_header_table">
+						<tr>
+							<td class="l_week" width="30">&nbsp;</td>
+							<td class="l_week">星期日</td>
+							<td class="l_week">星期一</td>
+							<td class="l_week">星期二</td>
+							<td class="l_week">星期三</td>
+							<td class="l_week">星期四</td>
+							<td class="l_week">星期五</td>
+							<td class="l_week">星期六</td>
+						</tr>
+						<tr>
+							<td height="30" width="30" align="center">&nbsp;</td>
+							<td id="time_0">&nbsp;</td>
+							<td id="time_1">&nbsp;</td>
+							<td id="time_2">&nbsp;</td>
+							<td id="time_3">&nbsp;</td>
+							<td id="time_4">&nbsp;</td>
+							<td id="time_5">&nbsp;</td>
+							<td id="time_6">&nbsp;</td>
+						</tr>
+					</table>
+				<div class="gongdong vcenter" id="week_div">
+				<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="1" class="l_zhou" id="week_table"></table>
+				</div>
+			</td>
+		</tr>
+	</table>
+   
+   <!-- 添加/修改 -->
+	<div class="add_schedule vcenter" id="add_schedule" >
+	    <div class="_alert_div_title"><div class="_alert_div_title_img"></div><span id="add_title">添加日程</span><div class="_alert_div_title_close" onclick="javascript:$('#clear').click()"></div></div>
+	    <table width="100%" border="0"  cellpadding="0"
+						cellspacing="1" class="add_schedule_table" >
+			<tr id="inqueryAddTypetr">
+	           <td style="width: 100%;" class="add_schedule_table_th" colspan="2">
+	               &nbsp;<input type="radio" name="addType" value="1" />&nbsp;自己添加日程 &nbsp;<input type="radio" name="addType" value="2"/>&nbsp;给别人添加日程
+	           </td>
+	       </tr>
+	       <tr id="personNamestr">
+	           <td style="width: 27px;" class="add_schedule_table_th" >
+	           <span style="color: red">*&nbsp;</span>选取领导：
+	           </td>
+	           <td>
+	             <input name="personNames"  id="personNames" style="width:99%" class="xz_187 add" onclick="inqueryAddUser()" validation="notNull" readonly="readonly"/>
+	             <input type="hidden" name="personIds" id="personIds" class="add"/>
+	           </td>
+	       </tr>
+	       <tr>
+	           <td class="add_schedule_table_th" style="width:15%;" >
+	           <span style="color: red">*&nbsp;</span>主题：
+	           </td>
+	           <td style="width:85%;" >
+	           <input name="theme" style="width:99%" class="input_title_text add" validation="notNull"/>
+	           </td>
+	       </tr>
+	        <tr>
+	           <td class="add_schedule_table_th" >
+	                               地址：
+	           </td>
+	           <td>
+	           <input name="address" style="width:99%" class="input_title_text add" />
+	           </td>
+	       </tr>
+	       <tr>
+	           <td class="add_schedule_table_th">
+	      <span style="color: red">*&nbsp;</span> 重要性：       
+	           </td>
+	            <td>
+	             &nbsp;<input type="radio" class="add" name="level" value="1" transform="radio"/>&nbsp;重要 &nbsp;<input class="add" type="radio" name="level" value="3"/>&nbsp;紧急&nbsp; <input class="add" type="radio" name="level" value="2" checked="checked"/>&nbsp;一般
+	           </td>
+	       </tr>
+	       
+	       
+	       
+	       <tr>
+	           <td class="add_schedule_table_th">
+	      <span style="color: red">*&nbsp;</span> 开始时间：       
+	           </td>
+	            <td>
+                <input type="text" name="beginDate"
+								class="date_120 add" onclick="var input_endtime=$dp.$('endDate');WdatePicker({onpicked:function(){input_endtime.focus();},minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endDate\')}',dateFmt:'yyyy-MM-dd HH:mm'})" id="beginDate" readonly="readonly" validation="notNull"/>
+								<span style="float:left;color: red">*</span><div style="float:left;">&nbsp;结束时间：</div><input type="text" name="endDate"
+								onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginDate\')}',dateFmt:'yyyy-MM-dd HH:mm'})"
+								id="endDate" readonly="readonly" class="date_120 add" dateId="beginDate,endDate"  validation="notNull,bengEndDate"/>
+								 <!-- 
+								是否提醒：<input type="radio" name="isCall" 
+								value="1" class="add"  transform="radio"/>&nbsp;是&nbsp;&nbsp; <input class="add" type="radio"
+								name="isCall" value="0" checked="checked" />&nbsp;否
+								-->
+                
+                </td>
+	       </tr>
+	       
+	       
+	       
+	       
+	       
+	       
+	        <!-- 
+	       <tr>
+	           <td class="add_schedule_table_th">
+	  	                     提醒：      
+	           </td>
+				<td>&nbsp;<input type="checkbox" name="callType"
+					class="add" value="1" transform="checkbox"/>&nbsp;短信&nbsp;&nbsp; <input class="add" type="checkbox" name="callType"  value="2" />&nbsp;系统内消息
+				</td>
+			</tr>
+			 -->
+	        <tr>
+	           <td class="add_schedule_table_th">
+                                                 说明：     
+	           </td>
+	            <td >
+	              <textarea style="width: 99%" rows="5" name="remark" class="add"></textarea>
+	           </td>
+	       </tr>
+	     
+	    </table>
+	      <div class="_alert_div_edit"><input value="取消" type="button" class="but_y_01" id="clear"/><input value="添加" type="button" class="but_y_01 event" id="add_but" submitKey="add" actionId="schedule" methodName="insertSchedule" successful="addsuccessful"/> </div>
+	</div>
+
+<div class="show_schedule" id="show_schedule">
+ <div class="_alert_div_title"><div class="_alert_div_title_img"></div>日程查看<div class="_alert_div_title_close" onclick="javascript:$('#close').click()"></div></div>
+ <div><span id="remarkLevle" class="remark_level"></span><span id="remarkHeader" class="remark_header"></span></div>
+ <div><div class="remark_title">参与者：</div><div id="remarkUser" class="remark_body"></div></div>
+ <div><div class="remark_title">地址：</div><div id="remarkAddress" class="remark_body"></div></div>
+ <div><div class="remark_title">时间:</div><div id="remarkTime" class="remark_body"></div></div>
+ <div><div class="remark_title"> 说明：</div><div id="remarkBody" class="remark_body"></div></div>
+ <div><div class="remark_title"> 最后操作：</div><div id="remarkLog" class="remark_body"></div></div>
+ <div class="_alert_div_edit"><input value="关闭" type="button" class="but_y_01" id="close"/><input value="日志查看" type="button" class="but_y_01" id="seelog"/><input value="编辑" type="button" class="but_y_01" id="modify"/> <input value="删除" type="button" class="but_y_01" id="delete" /></div>
+</div>
+<div class="show_schedule" id="show_schedule_log">
+ <div class="_alert_div_title"><div class="_alert_div_title_img"></div>日志查看<div class="_alert_div_title_close" onclick="javascript:$('#close_log').click()"></div></div>
+ <div style="min-height: 200px;text-align: center;">
+   <ul id="logui" style="padding-left: 10px;padding-top: 5px;">
+   </ul>
+ </div>
+ <div class="_alert_div_edit"><input value="返回" type="button" class="but_y_01" id="close_log"/></div>
+</div>
+<div id="myschedule_locket" style="position: absolute;
+	top: 0px;
+	filter:alpha(opacity=25);-moz-opacity:0.25;opacity:0.25;
+	background-color: #777;
+	z-index: 10;
+	left: 0px;
+	width: 100%;
+	height: 100%;"></div>
+</body>
+</html>
+

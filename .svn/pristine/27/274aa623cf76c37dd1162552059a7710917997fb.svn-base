@@ -1,0 +1,36 @@
+
+TABLE.Toolbar
+{
+	BACKGROUND-IMAGE: URL(../../images/ef_design_ToolbarBg.gif);
+    BORDER-COLLAPSE: collapse;
+	HEIGHT: 26px;
+}
+TABLE.Toolbar TD
+{
+	BACKGROUND-IMAGE: URL(../../images/ef_design_ToolbarRIGHT1.gif);
+	BACKGROUND-REPEAT:no-repeat;
+	BACKGROUND-POSITION:RIGHT;
+	padding-right:1px;
+	HEIGHT: 26px;
+	LEFT: 0px;
+	POSITION: relative;
+	TOP: 0px;
+}
+TABLE.Toolbar TR
+{
+	BACKGROUND-IMAGE: URL(../../images/ef_design_ToolbarRIGHT.gif);
+	BACKGROUND-REPEAT:no-repeat;
+	BACKGROUND-POSITION:RIGHT;
+	padding-left:1px;
+	HEIGHT: 26px;
+	LEFT: 0px;
+	POSITION: relative;
+	TOP: 0px;
+}
+
+BODY
+{
+	BACKGROUND-COLOR:#9EBEF5;
+	MARGIN: 10px;
+	PADDING: 12px;
+}

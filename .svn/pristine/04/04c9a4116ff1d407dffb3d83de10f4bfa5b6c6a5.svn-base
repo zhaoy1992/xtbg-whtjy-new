@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package Id="AnJianJu" Name="安监局" xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>Together</Vendor>
+        <Created>2006-06-02 10:56:24</Created>
+    </PackageHeader>
+    <RedefinableHeader PublicationStatus="UNDER_TEST"/>
+    <ConformanceClass GraphConformance="NON_BLOCKED"/>
+    <Script Type="text/javascript"/>
+    <Participants>
+        <Participant Id="AnJianJu_Par1" Name="窗口人员">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="AnJianJu_Par2" Name="主管领导">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="AnJianJu_Par3" Name="中心领导">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+    </Participants>
+    <DataFields>
+        <DataField Id="charge" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>YES</InitialValue>
+        </DataField>
+        <DataField Id="special" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>YES</InitialValue>
+        </DataField>
+    </DataFields>
+    <WorkflowProcesses>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="AnJianJu_Wor1" Name="安监局通用流程">
+            <ProcessHeader DurationUnit="D">
+                <Created>2006-06-02 10:59:47</Created>
+            </ProcessHeader>
+            <RedefinableHeader PublicationStatus="UNDER_TEST"/>
+            <Activities>
+                <Activity Id="AnJianJu_Wor1_Act1" Name="受理">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="80"/>
+                        <ExtendedAttribute Name="YOffset" Value="60"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act2" Name="处理任务">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="AnJianJu_Wor1_Tra2"/>
+                                    <TransitionRef Id="AnJianJu_Wor1_Tra3"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="210"/>
+                        <ExtendedAttribute Name="YOffset" Value="60"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="charge"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act3" Name="统一算费">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="AnJianJu_Wor1_Tra4"/>
+                                    <TransitionRef Id="AnJianJu_Wor1_Tra6"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="350"/>
+                        <ExtendedAttribute Name="YOffset" Value="60"/>
+                        <ExtendedAttribute Name="VariableToProcess_UPDATE" Value="special"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act4" Name="给予优惠意见">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par3</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par3"/>
+                        <ExtendedAttribute Name="XOffset" Value="350"/>
+                        <ExtendedAttribute Name="YOffset" Value="90"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act5" Name="打印缴费通知单">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="460"/>
+                        <ExtendedAttribute Name="YOffset" Value="120"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act6" Name="收费确认">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="460"/>
+                        <ExtendedAttribute Name="YOffset" Value="50"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act7" Name="领导审批">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par2</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par2"/>
+                        <ExtendedAttribute Name="XOffset" Value="440"/>
+                        <ExtendedAttribute Name="YOffset" Value="70"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="AnJianJu_Wor1_Act8" Name="办结">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>AnJianJu_Par1</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="ParticipantID" Value="AnJianJu_Par1"/>
+                        <ExtendedAttribute Name="XOffset" Value="630"/>
+                        <ExtendedAttribute Name="YOffset" Value="80"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="AnJianJu_Wor1_Act1" Id="AnJianJu_Wor1_Tra1" Name="转移" To="AnJianJu_Wor1_Act2">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act2" Id="AnJianJu_Wor1_Tra2" Name="转移" To="AnJianJu_Wor1_Act3">
+                    <Condition Type="CONDITION">charge=="YES"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act2" Id="AnJianJu_Wor1_Tra3" Name="转移" To="AnJianJu_Wor1_Act7">
+                    <Condition Type="OTHERWISE"/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act3" Id="AnJianJu_Wor1_Tra4" Name="转移" To="AnJianJu_Wor1_Act4">
+                    <Condition Type="CONDITION">special=="YES"</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act4" Id="AnJianJu_Wor1_Tra5" Name="转移" To="AnJianJu_Wor1_Act5">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act3" Id="AnJianJu_Wor1_Tra6" Name="转移" To="AnJianJu_Wor1_Act5">
+                    <Condition Type="OTHERWISE"/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act5" Id="AnJianJu_Wor1_Tra7" Name="转移" To="AnJianJu_Wor1_Act6">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act6" Id="AnJianJu_Wor1_Tra9" Name="转移" To="AnJianJu_Wor1_Act7">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="AnJianJu_Wor1_Act7" Id="AnJianJu_Wor1_Tra10" Name="转移" To="AnJianJu_Wor1_Act8">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="RoutingType" Value="NOROUTING"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="StartOfWorkflow" Value="AnJianJu_Par2;AnJianJu_Wor1_Act1;100;60;NOROUTING"/>
+                <ExtendedAttribute Name="EndOfWorkflow" Value="AnJianJu_Par1;AnJianJu_Wor1_Act8;730;80;NOROUTING"/>
+                <ExtendedAttribute Name="ParticipantVisualOrder" Value="AnJianJu_Par2;AnJianJu_Par1;AnJianJu_Par3;"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="MadeBy" Value="JaWE"/>
+        <ExtendedAttribute Name="Version" Value="1.2"/>
+    </ExtendedAttributes>
+</Package>

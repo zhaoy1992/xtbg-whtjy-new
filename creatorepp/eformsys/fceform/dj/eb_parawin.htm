@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var obj 
+function uf_open() {
+	e_PropWinOnload();
+	var s = pubDataSet[0] ;
+	obj = pubDataSet[1]; //SKbillsheet
+	if(IsSpace(s) == false){ 
+		var arr = s.split(",");
+		SetRadioValue(rdoType,arr[0]);
+		uf_typechange();
+		if(rdoType.value == "1"){
+			chkCenter.value = arr[1];
+			txtWidth.value = arr[2];
+			txtHeight.value = arr[3];
+			txtLeft.value = arr[4];
+			txtTop.value = arr[5];
+		}else{
+			chkPos.value = arr[1];
+			txtHeight1.value = arr[2];
+		}	
+		SetCheckBoxValue(chkPerRun,arr[6]);
+	}
+	if(typeof obj.BLONopen == "undefined"){
+		txtOnLoad.value = "";	
+	}else{
+		txtOnLoad.value = obj.BLONopen;
+	}
+	
+}
+function uf_ok() {
+	var sRet="";
+	if(rdoType.value == "1"){
+		sRet = rdoType.value+","+chkCenter.value+","+txtWidth.value+","+txtHeight.value+","+txtLeft.value+","+txtTop.value;
+	}else{
+		sRet = rdoType.value+","+chkPos.value+","+txtHeight1.value+",,,";
+	}
+	sRet += ","+chkPerRun.value;
+	window.returnValue=sRet;
+	
+	obj.BLONopen = txtOnLoad.value; 
+	
+	CloseBill();
+}
+function uf_typechange() {
+	if(rdoType.value != "1"){
+		div1.style.display="none";	
+	}else{
+		div1.style.display="";
+	}
+	if(rdoType.value != "3"){
+		div2.style.display="none";	
+	}else{
+		div2.style.display="";
+	}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule(".xpSpin","behavior: url(../htc/NumEdit.htc)",0);</script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js" BLONopen="uf_open()" center="居中" contxml="<root><checkbox><id>chkPos</id><id>chkCenter</id><id>chkPerRun</id></checkbox><label><id>label1</id><id>label2</id><id>label3</id><id>label4</id><id>label5</id><id>label6</id><id>label10</id><id>label9</id><id>label8</id><id>label7</id><id>Label8</id><id>Label18</id></label><radio><id>rdoType</id></radio><div><id>div1</id><id>div2</id></div><button><id>cmdOk</id><id>cmdClose</id><id>FCButton9</id></button><text><id>txtOnLoad</id></text><spin><id>txtHeight1</id><id>txtWidth</id><id>txtHeight</id><id>txtTop</id><id>txtLeft</id></spin></root>" billtaborder="<root><taborder>chkPos</taborder><taborder>rdoType</taborder><taborder>txtHeight1</taborder><taborder>chkCenter</taborder><taborder>txtWidth</taborder><taborder>txtHeight</taborder><taborder>txtTop</taborder><taborder>txtLeft</taborder><taborder>cmdOk</taborder><taborder>cmdClose</taborder><taborder>chkPerRun</taborder><taborder>FCButton9</taborder><taborder>txtOnLoad</taborder></root>" dj_sn="eb_parawin" type="PR" caption="报表参数窗口设置" mkbh codeheader="BBB" entertype="修改" poswidth="500" posheight="200" controlno="SKButton:0;SKDBedit:0;checkbox:3;label:13;radio:1;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:2;DsMain_field:0;a:0;button:0;text:2;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:5;excel:0;tree:0;ebshow:0" keyfield window="有模式窗口" posleft postop isfile="否" idtype="1" toolbar="不带工具栏" OtherSave="否"><DIV id=label1 style="LEFT: 208px; WIDTH: 30px; POSITION: absolute; TOP: 55px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">高度</DIV>
+<FIELDSET id=rdoType contentEditable=false style="LEFT: 12px; WIDTH: 149px; COLOR: #000000; POSITION: absolute; TOP: 26px; HEIGHT: 79px" onmovestart=moveStart() controltype="radio" NotBg="否" value="2" onclick='bill_onclick("uf_typechange()")' aspect="横向" legend="输入报表参数的窗口为" tempvalue="1&#13;&#10;2&#13;&#10;3" temptext="新的模态窗口&#13;&#10;当前窗口&#13;&#10;iframe中显示结果"><LEGEND>输入报表参数的窗口为</LEGEND><INPUT type=radio value=1 name=RGrdoType text="新的模态窗口"><SPAN onclick=RGrdoType[0].checked=true;rdoType.value=RGrdoType[0].value;RGrdoType[0].focus();>新的模态窗口</SPAN>&nbsp;<BR><INPUT type=radio CHECKED value=2 name=RGrdoType text="当前窗口"><SPAN onclick=RGrdoType[1].checked=true;rdoType.value=RGrdoType[1].value;RGrdoType[1].focus();>当前窗口</SPAN>&nbsp;<BR><INPUT type=radio value=3 name=RGrdoType text="iframe中显示结果"><SPAN onclick=RGrdoType[2].checked=true;rdoType.value=RGrdoType[2].value;RGrdoType[2].focus();>iframe中显示结果</SPAN>&nbsp;</FIELDSET> 
+<DIV id=chkPos style="LEFT: 203px; WIDTH: 80px; POSITION: absolute; TOP: 19px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" NotBg="否" value="是" falsevalue="否" truevalue="是" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>条件在上边输入,报表内容在下边显示</SPAN></DIV>
+<DIV class=xpSpin id=txtHeight1 style="LEFT: 237px; WIDTH: 60px; POSITION: absolute; TOP: 50px; HEIGHT: 22px; align: undefined" align=undefined value="300" NextNum="1" Max="32000" Min="1" enabled="否" height="22px" width="60px" top="50px" left="237px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label2 style="LEFT: 300px; WIDTH: 28px; POSITION: absolute; TOP: 54px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">px</DIV>&nbsp;&nbsp;&nbsp; 
+<DIV id=div1 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: none; LEFT: 174px; OVERFLOW: auto; BORDER-LEFT: 0px; WIDTH: 292px; BORDER-BOTTOM: 0px; POSITION: absolute; TOP: 19px; HEIGHT: 86px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=chkCenter style="LEFT: 12px; WIDTH: 56px; POSITION: absolute; TOP: 6px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" NotBg="否" value="是" falsevalue="否" truevalue="是" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>居中</SPAN></DIV>
+<DIV id=label3 style="LEFT: 17px; WIDTH: 36px; POSITION: absolute; TOP: 34px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">宽度</DIV>
+<DIV class=xpSpin id=txtWidth style="LEFT: 46px; WIDTH: 57px; POSITION: absolute; TOP: 29px; HEIGHT: 22px; align: undefined" align="undefined ParentPos='相对' " value="500" NextNum="1" Max="32000" Min="1" enabled="否" height="22px" width="57px" top="29px" left="46px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label4 style="LEFT: 109px; WIDTH: 34px; POSITION: absolute; TOP: 33px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">px</DIV>
+<DIV id=label5 style="LEFT: 132px; WIDTH: 36px; POSITION: absolute; TOP: 34px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">高度</DIV>
+<DIV class=xpSpin id=txtHeight style="LEFT: 161px; WIDTH: 57px; POSITION: absolute; TOP: 29px; HEIGHT: 22px; align: undefined" align="undefined ParentPos='相对' " value="350" NextNum="1" Max="32000" Min="1" enabled="否" height="22px" width="57px" top="29px" left="161px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label6 style="LEFT: 224px; WIDTH: 34px; POSITION: absolute; TOP: 33px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">px</DIV>
+<DIV id=label10 style="LEFT: 224px; WIDTH: 34px; POSITION: absolute; TOP: 56px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">px</DIV>
+<DIV class=xpSpin id=txtTop style="LEFT: 161px; WIDTH: 57px; POSITION: absolute; TOP: 52px; HEIGHT: 22px; align: undefined" align="undefined ParentPos='相对' " value="" NextNum="1" Max="32000" Min="1" enabled="否" height="22px" width="57px" top="52px" left="161px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label9 style="LEFT: 132px; WIDTH: 36px; POSITION: absolute; TOP: 57px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">上:</DIV>
+<DIV id=label8 style="LEFT: 109px; WIDTH: 34px; POSITION: absolute; TOP: 57px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">px</DIV>
+<DIV class=xpSpin id=txtLeft style="LEFT: 46px; WIDTH: 57px; POSITION: absolute; TOP: 53px; HEIGHT: 22px; align: undefined" align="undefined ParentPos='相对' " value="" NextNum="1" Max="32000" Min="1" enabled="否" height="22px" width="57px" top="53px" left="46px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label7 style="LEFT: 17px; WIDTH: 36px; POSITION: absolute; TOP: 58px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">左:</DIV></DIV>&nbsp;&nbsp;&nbsp;<BUTTON id=cmdOk style="LEFT: 308px; WIDTH: 55px; POSITION: absolute; TOP: 135px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON><BUTTON id=cmdClose style="LEFT: 369px; WIDTH: 55px; POSITION: absolute; TOP: 135px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否"></BUTTON> 
+<DIV id=chkPerRun style="LEFT: 15px; WIDTH: 80px; POSITION: absolute; TOP: 0px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" NotBg="否" value="是" falsevalue="否" truevalue="是" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox CHECKED><SPAN>先用默认的参数值运行报表</SPAN></DIV><BUTTON id=FCButton9 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: block; FONT-SIZE: 12px; LEFT: 435px; BORDER-LEFT: 0px; WIDTH: 17px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 109px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" onclick='bill_onclick("SelFunction(txtOnLoad)")' dropstyle="是"></BUTTON><SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 10px; WIDTH: 85px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 113px; HEIGHT: 13px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" align="Left">表单打开事件：</SPAN><INPUT id=txtOnLoad style="LEFT: 96px; WIDTH: 338px; POSITION: absolute; TOP: 110px; HEIGHT: 20px" onmovestart=moveStart() size=49 controltype="text"><SPAN id=Label18 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 99px; WIDTH: 157px; COLOR: #b2b2b2; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 136px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" value="Label18">事件代码（不支持双引号！）</SPAN> 
+<DIV id=div2 style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; DISPLAY: none; LEFT: 169px; OVERFLOW: auto; BORDER-LEFT: 0px; WIDTH: 298px; BORDER-BOTTOM: 0px; POSITION: absolute; TOP: 22px; HEIGHT: 79px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否"><BR><B>注意：当这种模式时,一定要在报表参数表单中加上显示e表结果的控件.报表结果将以iframe方式显示在此控件上。 </B></DIV></DIV></body></html>

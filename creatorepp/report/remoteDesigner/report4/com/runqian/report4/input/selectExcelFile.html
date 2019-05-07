@@ -1,0 +1,15 @@
+<script language=javascript>
+	document.body.bgcolor = "#ffe4e1";
+</script>
+
+<DIV style="FONT-SIZE: 16px; COLOR: royalblue; FONT-FAMILY: 宋体">请选择Excel文件：</DIV>
+<br>
+<input type=file name=file1 style="width:350px" size=35>
+<div id=uptype><p>
+<input type=radio name=r1 checked onclick="document.form1.importTo.value = 'web';" ><span style="FONT-SIZE: 14px; COLOR: royalblue; FONT-FAMILY: 宋体">导入到报表数据录入页面</span>
+<input id=importToDB type=radio name=r1 onclick="document.form1.importTo.value = 'db';" ><span id=importToDBLabel style="FONT-SIZE: 14px; COLOR: royalblue; FONT-FAMILY: 宋体">直接导入到数据库</span>
+</div><p>
+<INPUT type=submit id=okbtn value=确定 style="border:none; WIDTH: 45px; COLOR: fuchsia; HEIGHT: 20px; BACKGROUND-COLOR: gold">
+<p>
+<!--  下面是上载文件类型说明的字体样式  -->
+<div style="font-family:宋体;font-size:13px;font-style:italic; color:tomato">

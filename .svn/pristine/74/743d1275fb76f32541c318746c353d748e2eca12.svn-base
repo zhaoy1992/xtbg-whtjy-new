@@ -1,0 +1,186 @@
+.btn{ border:0px; background-image: url(images/button.jpg); width:74px; height:24px; color:#2f71d1; font-weight:bold; letter-spacing:5px  } 
+.btncoll{ border:0px; background-image: url(images/button.jpg); width:74px; height:24px; color:#2f71d1; font-weight:bold;  } 
+TABLE,td {
+	FONT-SIZE: 12px
+}
+img{ border:0px}
+.input_text {
+	FONT-SIZE: 12px; height:19px; border:1px solid  #999999; color:#333333
+}
+
+.common_button {
+	FONT-SIZE: 12px; height:22px; width:92px; border:0px; color:#ffffff; background-color:#EEEEEE; padding-top:2px; background-image: url(images/button.gif)
+}
+
+.common_backbutton {
+	FONT-SIZE: 12px; height:22px; width:92px; border:0px; color:#333333; background-color:#EEEEEE; padding-top:2px; background-image: url(images/backbtn.gif); 
+}
+
+.short_button {
+	FONT-SIZE: 12px; height:22px; width:34px; border:0px; color:#333333; background-color:#EEEEEE; padding-top:2px; background-image: url(images/shortbutton.gif); 
+}
+
+
+.input_textarea {
+	FONT-SIZE: 12px; border:1px solid  #999999; color:#333333
+}
+
+
+SELECT {
+	FONT-SIZE: 12px; height:19px
+}
+.14font {
+	FONT-SIZE: 14px; COLOR: #ff6600; LINE-HEIGHT: 150%
+}
+.nrfont {
+	FONT-SIZE: 14px; COLOR: #000000; LINE-HEIGHT: 150%
+}
+.btfont {
+	FONT-SIZE: 18px; COLOR: #ff6600; LINE-HEIGHT: 150%
+}
+.t1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; TEXT-ALIGN: center
+}
+.review_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #0033ff; TEXT-ALIGN: center
+}
+.review_t1 {
+	PADDING-LEFT: 23px; FONT-WEIGHT: bold; FONT-SIZE: 14px
+}
+.arrlist {
+	LIST-STYLE-IMAGE: url(images/arrow.gif); COLOR: #999999; LINE-HEIGHT: 150%
+}
+.arrlist addtime {
+	COLOR: silver
+}
+.input {
+	BORDER-RIGHT: #8db0df 1px solid; BORDER-TOP: #8db0df 1px solid; BORDER-LEFT: #8db0df 1px solid; BORDER-BOTTOM: #8db0df 1px solid; HEIGHT: 18px; BACKGROUND: #ffffff
+}
+.textarea {
+	BORDER-RIGHT: #333333 1px solid; BORDER-TOP: #333333 1px solid; BORDER-LEFT: #333333 1px solid; BORDER-BOTTOM: #333333 1px solid
+}
+.submit {
+	BORDER-RIGHT: #333333 1px solid; BORDER-TOP: #333333 1px solid; BACKGROUND: #f2f2f2; BORDER-LEFT: #333333 1px solid; BORDER-BOTTOM: #333333 1px solid; HEIGHT: 18px
+}
+.selectList {
+	FONT-SIZE: 12px
+}
+A {
+	TEXT-DECORATION: none
+}
+A:link {
+	FONT-SIZE: 12px; COLOR: #000000; TEXT-DECORATION: none
+}
+A:active {
+	FONT-SIZE: 12px; COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 12px; COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 12px; COLOR: #ff6600; TEXT-DECORATION: none
+}
+A.head:link {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.head:visited {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.head:active {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.head:hover {
+	FONT-SIZE: 12px; COLOR: #ffff00; TEXT-DECORATION: none
+}
+
+A.white:link {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.white:visited {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.white:active {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.white:hover {
+	FONT-SIZE: 12px; COLOR: #ffff00; TEXT-DECORATION: none
+}
+
+A.foot:link {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.foot:visited {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.foot:active {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.foot:hover {
+	FONT-SIZE: 12px; COLOR: #00ff00; TEXT-DECORATION: none
+}
+.soinput {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: normal; FONT-SIZE: 14px; BORDER-LEFT: #cccccc 1px solid; COLOR: #006600; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 23px; BACKGROUND-COLOR: #e7fee9
+}
+.12font {
+	FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 150%; TEXT-DECORATION: none
+}
+.tableright {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none
+}
+.table1px {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+FONT {
+	LINE-HEIGHT: normal
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 180%
+}
+
+FORM {
+	MARGIN: 0px
+}
+.c1 {
+	FONT-SIZE: 10.5pt; LINE-HEIGHT: 150%
+}
+.common {
+	FONT-SIZE: 9pt; LINE-HEIGHT: 150%
+}
+.box {
+	BORDER-RIGHT: #97bef9 1px solid; BORDER-TOP: #97bef9 1px solid; OVERFLOW: hidden; BORDER-LEFT: #97bef9 1px solid; WIDTH: 51px; CLIP: rect(0px 181px 18px 0px); BORDER-BOTTOM: #97bef9 1px solid; HEIGHT: 19px
+}
+.box2 {
+	BORDER-RIGHT: #f4f4f4 1px solid; BORDER-TOP: #f4f4f4 1px solid; OVERFLOW: hidden; BORDER-LEFT: #f4f4f4 1px solid; WIDTH: 49px; CLIP: rect(0px 179px 16px 0px); BORDER-BOTTOM: #f4f4f4 1px solid; HEIGHT: 17px
+}
+.SELECT1 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-SIZE: 12px; LEFT: -3px; BORDER-LEFT: 0px; WIDTH: 52px; COLOR: #609bdd; LINE-HEIGHT: 15px; BORDER-BOTTOM: 0px; POSITION: relative; TOP: -3px
+}
+.box3 {
+	BORDER-RIGHT: #97bef9 1px solid; BORDER-TOP: #97bef9 1px solid; OVERFLOW: hidden; BORDER-LEFT: #97bef9 1px solid; WIDTH: 120px; CLIP: rect(0px 181px 18px 0px); BORDER-BOTTOM: #97bef9 1px solid; HEIGHT: 19px
+}
+.box4 {
+	BORDER-RIGHT: #f4f4f4 1px solid; BORDER-TOP: #f4f4f4 1px solid; OVERFLOW: hidden; BORDER-LEFT: #f4f4f4 1px solid; WIDTH: 118px; CLIP: rect(0px 179px 16px 0px); BORDER-BOTTOM: #f4f4f4 1px solid; HEIGHT: 17px
+}
+.SELECT2 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-SIZE: 12px; LEFT: -3px; BORDER-LEFT: 0px; WIDTH: 121px; COLOR: #609bdd; LINE-HEIGHT: 15px; BORDER-BOTTOM: 0px; POSITION: relative; TOP: -3px
+}
+.box5 {
+	BORDER-RIGHT: #97bef9 1px solid; BORDER-TOP: #97bef9 1px solid; OVERFLOW: hidden; BORDER-LEFT: #97bef9 1px solid; WIDTH: 181px; CLIP: rect(0px 181px 18px 0px); BORDER-BOTTOM: #97bef9 1px solid; HEIGHT: 19px
+}
+.box6 {
+	BORDER-RIGHT: #f4f4f4 1px solid; BORDER-TOP: #f4f4f4 1px solid; OVERFLOW: hidden; BORDER-LEFT: #f4f4f4 1px solid; WIDTH: 179px; CLIP: rect(0px 179px 16px 0px); BORDER-BOTTOM: #f4f4f4 1px solid; HEIGHT: 17px
+}
+.SELECT3 {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-SIZE: 12px; LEFT: -3px; BORDER-LEFT: 0px; WIDTH: 182px; COLOR: #609bdd; LINE-HEIGHT: 15px; BORDER-BOTTOM: 0px; POSITION: relative; TOP: -3px
+}
+
+
+TEXTAREA {
+
+}
+.bd {
+	BORDER-RIGHT: 0px; BORDER-TOP: #fccc6b thin solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+.table1 {
+	BORDER-RIGHT: #f9cd6e thin; BORDER-TOP: #f9cd6e thin solid; BORDER-LEFT: #f9cd6e thin; BORDER-BOTTOM: #f9cd6e thin solid
+}

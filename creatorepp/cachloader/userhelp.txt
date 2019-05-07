@@ -1,0 +1,77 @@
+/////////////////////////////////////
+//是否弹出出错信息提示框开关
+var bShowDebugMsg = true;
+//是否检查js|css文件已使用Script|link方式加载开关
+//为方便使用script方式引入调试js程序文件
+var bCheckJsCssRepeatLoad = true;
+/////////////////////////////////////
+
+/////////////////////////////////////
+//初始化flash本地磁盘文件读写对象
+//要用到flashWrObj读写模块前才调用
+//返回flase时表示初始化失败，不能起用flash本地磁盘文件读写对象
+function initSave2local()
+/////////////////////////////////////
+//初始化自建ActiveX本地磁盘文件读写对象
+function initSaveForEpp()
+/////////////////////////////////////
+//设置本地磁盘读写和版本控制策略对象
+//diskWrObj：本地磁盘读写对象，已经实现的有userDataWrObj, flashWrObj
+//verCtlObj：版本控制策略对象（可以为空），已经实现的有jwVerCtlObject
+function setDiskWrVerObj(diskWrObj, verCtlObj)
+/////////////////////////////////////
+//sFileUrl：js文件地址（建议使用绝对路径，提高men_loadjsfile调用参数的可读性）
+//bCheckRepeat：下载前检查是否该文件已用<script src=strFileUrl>加载过，避免重复加载
+//bForceDirect：用于设置个别文件因无法保存到本地磁盘（容量限制）而直接从服务器读
+//wrObj：指定本文件缓存到磁盘的读写操作对象（缺省时使用预先设定的读写对象）
+//chName：js文件的编码格式（GBK, UTF-8, GB2312...），缺省值为GBK
+function svd_loadjsfile(sFileUrl, bCheckRepeat, bForceDirect, wrObj, chName)
+/////////////////////////////////////
+//先尝试从内存加载，加载失败则从服务器加载
+//不做本地磁盘缓存，只缓存到内存，一般用于页面专用js程序部分
+//避免同一页面第再次打开时重新从服务器取程序
+function adv_loadjsfile(sFileUrl, bCheckRepeat)
+/////////////////////////////////////
+//直接使用ajax从服务器提取一个文件
+//sFileUrl：应用根目录的相对路径
+//bDrt：是否不使用Servlet方式取文件
+//csName：文件编码格式（bDrt不为true时才有效，缺省为GBK）
+function drt_loadServerFile(sFileUrl, bDrt, chName)
+/////////////////////////////////////
+//设置触发刷新本地程序缓存区全部刷新标记
+//bEnabled为true表示设置清除标记有效（缺省为true）
+function makeRefreshAllJsfile(bEnabled)
+/////////////////////////////////////
+//准备本窗口和主窗口全局内存的关联关系
+function getJsSourceStoreObj()
+/////////////////////////////////////
+//sFileUrl：js文件地址（要与svd_loadjsfile函数调用时的地址串完全一致）
+//bCheckRepeat：下载前检查是否该文件通过<script src=strFileUrl>加载过，避免重复加载
+function men_loadjsfile(sFileUrl, bCheckRepeat)
+/////////////////////////////////////
+//创建一个模态弹出式窗口
+//posCont：用于定位创建窗口左上角位置的控件对象
+//tWidth: 窗口初始宽度
+//tHeight：窗口初始高度
+//bResize：是否可以拖动设置窗口大小
+function showWindow(strUrl, paramOb, posCont, tWidth, tHeight, bResize)
+/////////////////////////////////////
+//创建一个非模态弹出式窗口
+//posCont：用于定位创建窗口左上角位置的控件对象
+//tWidth: 窗口初始宽度
+//tHeight：窗口初始高度
+//bResize：是否可以拖动设置窗口大小
+function openWindow(strUrl, strName, posCont, tWidth, tHeight, bResize)
+/////////////////////////////////////
+
+/////////////////////////////////////
+//获取主窗口的全局内存对象
+function getJsSourceStoreObj()
+/////////////////////////////////////
+//全局内存数据对象保存和读取
+//value只能是string，number,boolean类的数据
+//不是能是随创建窗口关闭而失效的object,date等类型数据
+function g_setKeyValue(strKey, value)
+function g_getKeyValue(strKey)
+function g_delKeyValue(strKey)
+/////////////////////////////////////

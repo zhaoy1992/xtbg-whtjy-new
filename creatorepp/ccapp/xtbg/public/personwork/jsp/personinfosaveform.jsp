@@ -1,0 +1,61 @@
+<%@page import="com.chinacreator.security.AccessControl"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@page import="com.chinacreator.xtbg.pub.personwork.service.impl.PersonInfoServiceImpl"%>
+<%@page import="com.chinacreator.xtbg.pub.personwork.service.PersonInfoServiceIfc"%><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>人员信息保存form</title>
+<%
+AccessControl accesscontroler = AccessControl.getInstance();
+accesscontroler.checkAccess(request, response);
+	String baseinfoJson = request.getParameter("baseinfoJson");
+	String phoneVOList = request.getParameter("phoneVOList");
+	String foxVOList = request.getParameter("foxVOList");
+	String emailVOList = request.getParameter("emailVOList");
+	String qqVOList = request.getParameter("qqVOList");
+	String birthVOList = request.getParameter("birthVOList");
+	String companyVOList = request.getParameter("companyVOList");
+	String positionVOList = request.getParameter("positionVOList");
+	String addressVOList = request.getParameter("addressVOList");
+	String websiteVOList = request.getParameter("websiteVOList");
+	
+	PersonInfoServiceIfc personInfoServiceIfc = new PersonInfoServiceImpl();
+
+
+	boolean flag = true;
+	String person_id = "";
+	
+	try{
+		person_id = personInfoServiceIfc.savePersonInfo(baseinfoJson,phoneVOList,foxVOList,
+				emailVOList,qqVOList,birthVOList,companyVOList,positionVOList,
+				addressVOList,websiteVOList);
+	}catch(Exception e){
+		flag = false;
+	}
+%>
+</head>
+<body>
+<script type="text/javascript">
+var mes = "";
+var bool = true;
+if(<%=flag%>){
+	mes = "操作成功";
+}else{
+	mes = "操作失败"	;
+	bool = false;
+}
+
+var OKF = function(){
+	if(window.top.removeWindows('',true)){
+		window.parent.person_id = '<%=person_id%>';
+		window.parent.saveBack();//掉父页面的方法
+	}
+}
+window.top.alert(mes,{headerText:'提示',okName:'确认',okFunction:OKF});
+
+</script>
+</body>
+</html>

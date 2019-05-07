@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var t,curRow,oRow
+function uf_open() {
+	t = pubDataSet[0];
+	curRow = pubDataSet[1];
+	oRow = t.rows(curRow);
+	txtHeight.value = oRow.style.pixelHeight ;
+	e_SetComboValue(oRow.e_row_type,cboType); 
+	e_SetCheckBoxValue(oRow.e_hide_row,chkHide);
+	e_SetCheckBoxValue(oRow.e_page_break_row,chkBreak);
+	if(IsSpace(oRow.x_hide_row) == false ) txtHide.value = unescape(oRow.x_hide_row);
+	if(IsSpace(oRow.x_row_height) == false ) txtHeightExp.value = unescape(oRow.x_row_height);
+	
+	e_PropWinOnload();
+	var sGifUrl = "../images/eb_fx.gif";
+	SetButtonImage(cmdFx01,sGifUrl);
+	SetButtonImage(cmdFx02,sGifUrl);
+
+}
+function uf_ok() {
+	var height1 = Num(txtHeight.value) ; 
+	if(height1<= 0 ) {
+		alert("行高必须大于0!");
+		return ;
+	}
+	var arrRet = new Array();
+	oRow.e_row_type = cboType.value ;
+	arrRet[0] = oRow.e_row_type;
+	arrRet[1] = "";
+	oRow.e_hide_row = chkHide.value ;
+
+	if(IsSpace(txtHide.value)){
+		oRow.x_hide_row = "";
+		oRow.removeAttribute("x_hide_row");
+	}else{
+		oRow.x_hide_row = escape(txtHide.value);
+	}
+	if(IsSpace(txtHeightExp.value)){
+		oRow.x_row_height = "";
+		oRow.removeAttribute("x_row_height");
+	}else{
+		oRow.x_row_height = escape(txtHeightExp.value);
+	}
+	
+	oRow.e_page_break_row = chkBreak.value ;
+	if(oRow.style.height != txtHeight.value) {
+		oRow.style.height = height1 ;
+		arrRet[1] = height1;
+	}
+	window.returnValue = arrRet;
+	window.close();
+	
+}
+function uf_selectFormula(obj) {
+	var arr = [ pubDataSet[0],obj.value];
+	var sRet = DjOpen("eb_fx",arr,"展现","有模式窗口","直接","设置单元格的公式");
+	if(IsSpace(sRet)==false){
+		obj.value = sRet;	
+	}
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../js/fcdate.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule(".xpSpin","behavior: url(../htc/NumEdit.htc)",0);</script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;fcdate.js&#13;&#10;~userfunc.js" OtherSave="否" toolbar="不带工具栏" idtype="1" isfile="否" postop posleft window="有模式窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:2;label:3;radio:0;listbox:0;textarea:0;combobox:1;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:2;text:1;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:1;excel:0;tree:0" posheight="190" poswidth="390" entertype="修改" codeheader="BBB" mkbh caption="行属性" type="PR" dj_sn="eb_row" billtaborder="<root><taborder>cboType</taborder><taborder>chkHide</taborder><taborder>chkBreak</taborder><taborder>cmdOk</taborder><taborder>cmdClose</taborder><taborder>txtHeight</taborder><taborder>cmdFx01</taborder><taborder>cmdFx02</taborder><taborder>txtHeightExp</taborder><taborder>txtHide</taborder></root>" contxml="<root><checkbox><id>chkHide</id><id>chkBreak</id></checkbox><label><id>label1</id><id>label2</id><id>label3</id><id>label4</id><id>label14</id></label><combobox><id>cboType</id></combobox><button><id>cmdOk</id><id>cmdClose</id><id>cmdFx01</id><id>cmdFx02</id></button><text><id>txtHeightExp</id><id>txtHide</id></text><spin><id>txtHeight</id></spin></root>" center="居中" BLONopen="uf_open()"><DIV id=label1 style="LEFT: 146px; WIDTH: 36px; POSITION: absolute; TOP: 35px; HEIGHT: 18px" onmovestart=moveStart() noWrap controltype="label" value="label1" NotBg="否">行高:</DIV>
+<DIV id=label2 style="LEFT: 10px; WIDTH: 60px; POSITION: absolute; TOP: 9px; HEIGHT: 18px" onmovestart=moveStart() noWrap controltype="label" value="label2" NotBg="否">所属区域:</DIV><SELECT id=cboType style="LEFT: 72px; WIDTH: 88px; POSITION: absolute; TOP: 4px; HEIGHT: 25px" onmovestart=moveStart() controltype="combobox" sql check="1" tempvalue="0&#13;&#10;1&#13;&#10;3&#13;&#10;10&#13;&#10;4&#13;&#10;2" temptext="标题区&#13;&#10;表头区&#13;&#10;页眉区&#13;&#10;数据区&#13;&#10;页脚区&#13;&#10;表尾区" sqltrans><OPTION value=0>标题区</OPTION><OPTION value=1>表头区</OPTION><OPTION value=3>页眉区</OPTION><OPTION value=10 selected>数据区</OPTION><OPTION value=4>页脚区</OPTION><OPTION value=2>表尾区</OPTION></SELECT> 
+<DIV id=chkHide style="LEFT: 144px; WIDTH: 53px; POSITION: absolute; TOP: 80px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="0" NotBg="否" falsevalue="0" truevalue="1" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>隐藏</SPAN></DIV>
+<DIV id=chkBreak style="LEFT: 226px; WIDTH: 80px; POSITION: absolute; TOP: 3px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" value="0" NotBg="否" falsevalue="0" truevalue="1" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>行后分页</SPAN></DIV><BUTTON id=cmdOk style="LEFT: 224px; WIDTH: 55px; POSITION: absolute; TOP: 127px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON><BUTTON id=cmdClose style="LEFT: 285px; WIDTH: 55px; POSITION: absolute; TOP: 127px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否"></BUTTON>
+<DIV class=xpSpin id=txtHeight style="LEFT: 180px; WIDTH: 62px; POSITION: absolute; TOP: 32px; HEIGHT: 22px; align: undefined" align=undefined value="" enabled="否" Min="1" Max="32000" NextNum="1" height="22px" width="62px" top="32px" left="180px" display="" fontweight="" color="" backgroundcolor="" fontfamily="" fontstyle="" fontsize="" dataset="undefined" field="undefined"></DIV> 
+<DIV id=label3 style="LEFT: 244px; WIDTH: 28px; POSITION: absolute; TOP: 37px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label3" NotBg="否">象素</DIV>
+<DIV id=label4 style="LEFT: 9px; WIDTH: 52px; POSITION: absolute; TOP: 34px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label12" NotBg="否">行高公式值:</DIV><BUTTON id=cmdFx01 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 83px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 27px; HEIGHT: 24px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_selectFormula(txtHeightExp)")' dropstyle="否"></BUTTON><INPUT id=txtHeightExp style="LEFT: 9px; WIDTH: 361px; POSITION: absolute; TOP: 53px; HEIGHT: 20px" onmovestart=moveStart() size=58 controltype="text"><BUTTON id=cmdFx02 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 83px; WIDTH: 24px; FONT-FAMILY: ; POSITION: absolute; TOP: 77px; HEIGHT: 24px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_selectFormula(txtHide)")' dropstyle="否"></BUTTON> 
+<DIV id=label14 style="LEFT: 9px; WIDTH: 52px; POSITION: absolute; TOP: 85px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" value="label12" NotBg="否">隐藏公式值:</DIV><INPUT id=txtHide style="LEFT: 9px; WIDTH: 361px; POSITION: absolute; TOP: 102px; HEIGHT: 20px" onmovestart=moveStart() size=58 controltype="text"></DIV></body></html>

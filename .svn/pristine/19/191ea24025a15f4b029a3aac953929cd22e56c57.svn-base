@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REPORT>
+<RECENTFILE>
+<rq0 filename=""/>
+<rq1 filename=""/>
+<rq2 filename=""/>
+<rq3 filename=""/>
+<rq4 filename=""/>
+</RECENTFILE>
+<RECENTCONN>
+<rq0 sourcename="reportsource"/>
+<rq1 sourcename=""/>
+<rq2 sourcename=""/>
+<rq3 sourcename=""/>
+<rq4 sourcename=""/>
+</RECENTCONN>
+<RECENTFILE_QUERY>
+<rq0 filename=""/>
+<rq1 filename=""/>
+<rq2 filename=""/>
+<rq3 filename=""/>
+<rq4 filename=""/>
+</RECENTFILE_QUERY>
+<RECENTCONN_QUERY>
+<rq0 sourcename=""/>
+<rq1 sourcename=""/>
+<rq2 sourcename=""/>
+<rq3 sourcename=""/>
+<rq4 sourcename=""/>
+</RECENTCONN_QUERY>
+<PARAM/>
+<FUNCTIONS>
+<DataSet/>
+<Normal/>
+</FUNCTIONS>
+<OPTIONS TABLE_STATEMENT="0" fileDirectory="" semanticsFiles=""/>
+
+
+<REMOTE auto="false"/>
+<WINDOW_DIMENSION com.runqian.report4.ide.dialog.DialogAbout.dimension="399,327,312,220" com.runqian.report4.ide.dialog.DialogDataSet.dimension="470,380,277,194" com.runqian.report4.ide.dialog.DialogDataSource.dimension="410,310,307,229" com.runqian.report4.ide.dialog.DialogDataSourcePara.dimension="508,438,258,165" com.runqian.report4.ide.dialog.DialogDataSourceType.dimension="410,310,307,229" com.runqian.report4.ide.dialog.DialogSQLDataSet.dimension="550,430,237,169" com.runqian.report4.ide.wizard.DialogWizard.dimension="510,410,257,179" com.runqian.report4.ide.wizard.DialogWizardType.dimension="310,210,357,279" com.runqian.report4.remote.dialog.DialogLogin.dimension="510,290,257,239"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<PRESET_CELLS/>
+<DATASOURCE>
+<DS1 config="password=&quot;&quot;;user=&quot;dzzwpt&quot;;type=&quot;1&quot;;dstype=&quot;0&quot;;isaddtilde=&quot;false&quot;;driver=&quot;oracle.jdbc.driver.OracleDriver&quot;;useschema=&quot;false&quot;;extend=&quot;&quot;;clientcharset=&quot;GBK&quot;;convertdata=&quot;false&quot;;casesentence=&quot;false&quot;;convertsql=&quot;false&quot;;dbcharset=&quot;GBK&quot;;url=&quot;jdbc:oracle:thin:@172.16.168.222:1521:workflow&quot;" name="reportsource"/>
+</DATASOURCE>
+</REPORT>

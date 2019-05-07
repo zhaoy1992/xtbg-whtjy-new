@@ -1,0 +1,1 @@
+alter table TD_SM_USER modify REMARK5 VARCHAR2(200);

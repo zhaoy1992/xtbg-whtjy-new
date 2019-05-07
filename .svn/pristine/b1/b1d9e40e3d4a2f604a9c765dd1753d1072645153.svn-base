@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_open() {
+         SetButtonImage(SKButton3,"../images/ef_run_button_up.gif") ;
+         SetButtonImage(SKButton4,"../images/ef_run_button_down.gif") ;
+         SetButtonImage(FCButton1,"../images/ef_run_button_ok.gif");
+		 SetButtonImage(FCButton2,"../images/ef_run_button_close.gif");
+        var obj=pubdjbh ;
+        //alert(obj)
+         var oXml=new ActiveXObject("Microsoft.XMLDOM");
+         oXml.async=false;
+         oXml.loadXML(obj);
+         var sLen=oXml.documentElement.childNodes.length;
+         SKDBListBox1.options.length=0
+
+         for(var i=0;i<sLen;i++){
+
+           sid=oXml.documentElement.childNodes(i).text;
+           cboTarget=document.createElement ("option")  //创建option元素
+           cboTarget.value=sid
+           cboTarget.text=sid
+
+           SKDBListBox1.add(cboTarget)
+         }
+
+         //alert(SKDBListBox1.value)
+}
+function uf_up(){
+     for (var i=SKDBListBox1.length-1;i>0;i--){
+      if (SKDBListBox1.options(i).selected){
+        var s
+        var d
+        s=SKDBListBox1.options(i-1).text ;
+        d=SKDBListBox1.options(i-1).value ;
+        SKDBListBox1.options(i-1).text=SKDBListBox1.options(i).text ;
+        SKDBListBox1.options(i-1).value=SKDBListBox1.options(i).value ;
+        SKDBListBox1.options(i).text=s ;
+        SKDBListBox1.options(i).value=d ;
+        SKDBListBox1.options(i-1).selected=true ;
+        break ;
+      }
+    }
+  }
+function uf_down(){
+   for (var i=0;i<SKDBListBox1.length-1;i++){
+    if (SKDBListBox1.options(i).selected){
+      var s
+      var d
+      s=SKDBListBox1.options(i+1).text ;
+      d=SKDBListBox1.options(i+1).value ;
+      SKDBListBox1.options(i+1).text=SKDBListBox1.options(i).text ;
+      SKDBListBox1.options(i+1).value=SKDBListBox1.options(i).value ;
+      SKDBListBox1.options(i).text=s ;
+      SKDBListBox1.options(i).value=d ;
+      SKDBListBox1.options(i+1).selected=true ;
+      break ;
+    }
+  }
+}
+function uf_ok() {
+      var obj="<root>" ;
+      for(var i=0; i<SKDBListBox1.length ;i++){
+          obj=obj+'<taborder>'+SKDBListBox1.options(i).value+'</taborder>';
+
+
+      }
+      obj=obj+"</root>"
+      // alert(obj)
+      window.returnValue=obj ;
+       window.close();
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/Button.css'/><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV class=dj id=SKbillsheet onkeydown="" ondblclick="" toolbar="不带工具栏" BLONopen="uf_open()" blmode="其它" contxml="<root><SKButton><id>SKButton3</id><id>SKButton4</id></SKButton><button><id>FCButton1</id><id>FCButton2</id></button><dataset><id>DsMain</id></dataset></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;" billtaborder="<root><taborder>SKButton3</taborder><taborder>SKButton4</taborder><taborder>FCButton1</taborder><taborder>FCButton2</taborder></root>" dj_sn="SKDBfocus" type="LR" caption="焦点编辑框" mkbh="E5" codeheader entertype="修改" poswidth="339" posheight="241" controlno="SKButton:4;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" window="当前窗口" posleft postop center="居中" dj_id="254" para="<r></r>"><SELECT id=SKDBListBox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 5px; WIDTH: 232px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 6px; HEIGHT: 192px; BACKGROUND-COLOR: #ffffff" size=8 dataset="" onclick='bill_onclick("")' field="" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><OPTION value=""></OPTION></SELECT><INPUT id=SKButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 240px; WIDTH: 24px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 80px; HEIGHT: 24px; BACKGROUND-COLOR: #c0c0c0" type=button controltype="SKButton" dropstyle="否" onclick='bill_onclick("uf_up()")'><INPUT id=SKButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 240px; WIDTH: 24px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 112px; HEIGHT: 24px; BACKGROUND-COLOR: #c0c0c0" type=button controltype="SKButton" dropstyle="否" onclick='bill_onclick("uf_down()")'><fc:dataset id=DsMain opensortno='0' format="<fields></fields>" onSetText='bill_ondatasetsettext("<dsid></dsid>")'  onGetText='bill_ondatasetgettext("<dsid></dsid>")'  onValid='bill_ondatasetvalid("<dsid></dsid>")'  ></fc:dataset><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 246px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'></BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 246px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 38px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("exitbill")'></BUTTON></DIV></body></html>

@@ -1,0 +1,2331 @@
+
+<PROPERTY NAME="showerr" />
+<ATTACH EVENT="ondocumentready" HANDLER="fnInit0" />
+<PUBLIC:PROPERTY ID="datasetID" NAME="DID" PUT="fnPutdatasetID" GET="fnGetdatasetID"/>
+<PUBLIC:PROPERTY ID="datastoreID" NAME="datastore" PUT="fnPutdatastoreID" GET="fnGetdatastoreID"/>
+<PUBLIC:PROPERTY ID="visibleID" NAME="visible" PUT="fnPutvisible" GET="fnGetvisible"  />
+<PUBLIC:PROPERTY ID="leftID" NAME="left" PUT="fnPutleft" GET="fnGetleft"  />
+<PUBLIC:PROPERTY ID="topID" NAME="top" PUT="fnPuttop" GET="fnGettop"  />
+<PUBLIC:PROPERTY ID="heightID" NAME="height" PUT="fnPutheight" GET="fnGetheight"  />
+<PUBLIC:PROPERTY ID="widthID" NAME="width" PUT="fnPutwidth" GET="fnGetwidth"  />
+<PUBLIC:PROPERTY ID="FieldsID" NAME="Fields" PUT="fnPutFields" GET="fnGetFields"  />
+<PUBLIC:PROPERTY ID="xmlID" NAME="xml" GET="fnGetxml"  />
+<PUBLIC:PROPERTY ID="oDomID" NAME="oDom" GET="fnGetoDom"  />
+<PUBLIC:PROPERTY ID="oDataFieldID" NAME="oDataField" GET="fnGetoDataField"  />
+<PUBLIC:PROPERTY ID="HideFieldID" NAME="HideField" PUT="fnPutHideField" GET="fnGetHideField"  />
+<PUBLIC:PROPERTY ID="RecordCountID" NAME="RecordCount" GET="fnGetRecordCount"  />
+<PUBLIC:PROPERTY ID="FieldCountID" NAME="FieldCount" GET="fnGetFieldCount"  />
+<PUBLIC:PROPERTY ID="RecordCountAllID" NAME="RecordCountAll" GET="fnGetRecordCountAll"  />
+<PUBLIC:PROPERTY ID="PageSizeID" NAME="PageSize" PUT="fnPutPageSize" GET="fnGetPageSize"  />
+<PUBLIC:PROPERTY ID="PageNoID" NAME="PageNo" PUT="fnPutPageNo" GET="fnGetPageNo"  />
+<PUBLIC:PROPERTY ID="PageCountID" NAME="PageCount" GET="fnGetPageCount"  />
+<PUBLIC:PROPERTY ID="RecNoID" NAME="RecNo" PUT="fnPutRecNo" GET="fnGetRecNo"  />
+<PUBLIC:PROPERTY ID="BofID" NAME="Bof" GET="fnGetBof"  />
+<PUBLIC:PROPERTY ID="EofID" NAME="Eof" GET="fnGetEof"  />
+<PUBLIC:PROPERTY ID="bAddID" NAME="bAdd" PUT="fnPutbAdd" GET="fnGetbAdd"  />
+<PUBLIC:PROPERTY ID="bEditID" NAME="bEdit" PUT="fnPutbEdit" GET="fnGetbEdit"  />
+<PUBLIC:PROPERTY ID="AutoControlID" NAME="AutoControl" PUT="fnPutAutoControl" GET="fnGetAutoControl"  />
+<PUBLIC:PROPERTY ID="opensqlID" NAME="opensql" PUT="fnPutopensql" GET="fnGetopensql"  />
+<PUBLIC:PROPERTY ID="formatID" NAME="format" PUT="fnPutformat" GET="fnGetformat"  />
+<PUBLIC:PROPERTY ID="EmptyID" NAME="Empty" PUT="fnPutEmpty" GET="fnGetEmpty"  />
+<PUBLIC:PROPERTY NAME="DeletedData"  />
+<PUBLIC:PROPERTY NAME="RecordData" GET="fnGetRecordData"  />
+<PUBLIC:PROPERTY NAME="multiResult"/>
+<PUBLIC:PROPERTY ID="runclassID" NAME="runclass" PUT="fnPutRunclass" GET="fnGetRunclass"  />
+<!-- sxb 设置dataset中按钮的名字 -->
+<PUBLIC:PROPERTY ID="buttonnameID" NAME="buttonname" PUT="fnPutButton" GET="fnGetButton"/>
+<PUBLIC:PROPERTY ID="fc_onclickID" NAME="fc_onclick" PUT="fnPutFcOnclick" GET="fnGutFcOnclick"/>
+<!-- -->        
+<!-- sxb 设置dataset中image的名字 -->
+<PUBLIC:PROPERTY ID="imageSrcID" NAME="imageSrc" PUT="fnPutImageSrc" GET="fnGutImageSrc"/>
+<!-- -->                              
+<PUBLIC:METHOD NAME="MoveGridRow"/>
+<PUBLIC:METHOD NAME="ClearData"/>
+<PUBLIC:METHOD NAME="LineSum"/>
+<PUBLIC:METHOD NAME="dataValid"/>
+<PUBLIC:METHOD NAME="ReSum"/>
+<PUBLIC:METHOD NAME="base_dset"/>
+<PUBLIC:METHOD NAME="dset_cont"/>
+<PUBLIC:METHOD NAME="dset_fset"/>
+<PUBLIC:METHOD NAME="fset_cont1"/>
+<PUBLIC:METHOD NAME="MoveFirst"/>
+<PUBLIC:METHOD NAME="MovePrev"/>
+<PUBLIC:METHOD NAME="MoveNext"/>
+<PUBLIC:METHOD NAME="MoveLast"/>
+<PUBLIC:METHOD NAME="SetPos"/>
+<PUBLIC:METHOD NAME="NextPage"/>
+<PUBLIC:METHOD NAME="PrevPage"/>
+<PUBLIC:METHOD NAME="FirstPage"/>
+<PUBLIC:METHOD NAME="LastPage"/>
+<PUBLIC:METHOD NAME="Append"/>
+<PUBLIC:METHOD NAME="Insert"/>
+<PUBLIC:METHOD NAME="Edit"/>
+<PUBLIC:METHOD NAME="forDatastoreCallback"/>
+<PUBLIC:METHOD NAME="CheckField"/>
+<PUBLIC:METHOD NAME="Update"/>
+<PUBLIC:METHOD NAME="Cancel"/>
+<PUBLIC:METHOD NAME="Delete"/>
+<PUBLIC:METHOD NAME="UpdateDatabase"/>
+<PUBLIC:METHOD NAME="Open"/>
+<PUBLIC:METHOD NAME="OpenEmpty"/>
+<PUBLIC:METHOD NAME="Find"/>
+<PUBLIC:METHOD NAME="FindAll"/>
+<PUBLIC:METHOD NAME="JumpTo"/>
+<PUBLIC:METHOD NAME="Filter"/>
+<PUBLIC:METHOD NAME="UnFilter"/>
+<PUBLIC:METHOD NAME="Sort"/>
+<PUBLIC:METHOD NAME="fset_cont"/>
+<PUBLIC:METHOD NAME="FieldNoToName"/>
+<public:METHOD NAME="FieldNameToNo"/>
+<PUBLIC:METHOD NAME="cont1_fset"/>
+<PUBLIC:METHOD NAME="cont_onDataChange"/>
+<PUBLIC:METHOD NAME="cont1_onblur"/>
+<PUBLIC:METHOD NAME="fset_cont1"/>
+<PUBLIC:METHOD NAME="OpenXml"/>
+<PUBLIC:METHOD NAME="OpenBigXml"/>
+<PUBLIC:METHOD NAME="OpenXmlData"/>
+<PUBLIC:METHOD NAME="InitLinkObj"/>
+<PUBLIC:EVENT NAME="AfterOpen" ID="AfterOpenID">
+<PUBLIC:EVENT NAME="BeforeOpen" ID="BeforeOpenID">
+<PUBLIC:EVENT NAME="BeforePost" ID="BeforePostID">
+<PUBLIC:EVENT NAME="AfterPost" ID="AfterPostID">
+<PUBLIC:EVENT NAME="BeforeDelete" ID="BeforeDeleteID">
+<PUBLIC:EVENT NAME="AfterDelete" ID="AfterDeleteID">
+<PUBLIC:EVENT NAME="BeforeInsert" ID="BeforeInsertID">
+<PUBLIC:EVENT NAME="AfterInsert" ID="AfterInsertID">
+<PUBLIC:EVENT NAME="BeforeEdit" ID="BeforeEditID">
+<PUBLIC:EVENT NAME="AfterEdit" ID="AfterEditID">
+<PUBLIC:EVENT NAME="BeforeCancel" ID="BeforeCancelID">
+<PUBLIC:EVENT NAME="AfterCancel" ID="AfterCancelID">
+<PUBLIC:EVENT NAME="BeforeScroll" ID="BeforeScrollID">
+<PUBLIC:EVENT NAME="AfterScroll" ID="AfterScrollID">
+<PUBLIC:EVENT NAME="OnNewRecord" ID="OnNewRecordID">
+<PUBLIC:EVENT NAME="OnFilterRecord" ID="OnFilterRecordID">
+<PUBLIC:EVENT NAME="onValidError"  ID="onValidErrorID"  />
+<PUBLIC:EVENT NAME="onValid"  ID="onValidID"  />
+<PUBLIC:EVENT NAME="onSetText"  ID="onSetTextID"  />
+<PUBLIC:EVENT NAME="onGetText"  ID="onGetTextID"  />
+<SCRIPT LANGUAGE=javascript >
+var mDatasetID ="";
+var dataset_mformat_isnull=false;
+var mleft=100,mtop=50,mwidth=150,mheight=20 ;
+var mwidthButton=17 ;
+var mPageNo=1;
+var mMainSql="";
+var mDatastore=null;
+var mopensql="";
+var mformat="";
+var mEmpty="null";
+var mbTagCol=true ;
+var mXmlData="" ;
+var mXmlDataNew="";
+var runclass = "";
+var oData;
+var oFilter=new ActiveXObject("Microsoft.XMLDOM");
+oFilter.async=false;
+oFilter.loadXML ("<root></root>");
+var mbFilter=false ;
+var oDataField ;
+var mFieldCount	;
+var mRecordCount=0	;
+var mRecordCountAll	;
+var mPageSize=-1;
+var mPageCount=1;
+var iFind=0;
+var oFields	;
+var LinkObjs=new Array();
+var mBof=false,mEof=false;
+var mRecNo=0;
+var mbEdit=false;
+var mbAdd=false;
+function OpenBigXml(sXml){
+BeforeOpenID.fire();
+DeletedData = "" ;
+mXmlData=sXml;
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+XmlRepGrid(o[ii],sXml);
+o[ii].tab.rows(0).style.height=19;
+o[ii].hideVscroll=true;
+o[ii].hideHscroll=true;
+o[ii].autosize=true;
+o[ii].ReadOnly=true;
+}
+}
+AfterOpenID.fire();
+return "";
+}
+function OpenXml(sXml){
+BeforeOpenID.fire()	;
+DeletedData = "" ;
+mXmlData=sXml;
+base_dset(2);
+AfterOpenID.fire();
+return "";
+}
+function OpenXmlData(sXml){
+BeforeOpenID.fire()	;
+DeletedData = "" ;
+mXmlData=sXml;
+base_dset(4);
+AfterOpenID.fire();
+return "";
+}
+function ClearData() {
+mXmlData="<root>"+oData.documentElement.childNodes(oData.documentElement.childNodes.length-1).xml+"</root>";
+base_dset(3);
+}
+function OpenEmpty(){
+BeforeOpenID.fire()	;
+DeletedData = "" ;
+if(eval(uniqueID+".id")==fcpubvar.DsMain ){
+var oSour=new ActiveXObject("Microsoft.XMLDOM");
+oSour.async=false;
+oSour.loadXML (mformat);
+var s1="";
+for(var i=0;i<oSour.documentElement.childNodes.length;i++){
+var oNode=oSour.documentElement.childNodes(i);
+if(oNode.childNodes(5).text=="数据项" && isSpace(oNode.childNodes(6).text)==false){
+s1+="<td>"+oNode.childNodes(6).text+"</td>";
+}else if(oNode.childNodes(5).text=="变量默认值" && isSpace(oNode.childNodes(6).text)==false){
+s1+="<td>"+eval(oNode.childNodes(6).text)+"</td>";
+}else if(eval(uniqueID+".id")==fcpubvar.DsMain && isSpace(oNode.childNodes(6).text)==false){
+s1+="<td>"+eval(oNode.childNodes(6).text)+"</td>";
+}else {
+s1+="<td></td>";
+}
+}
+mXmlData="<root><tr rowstate=\"add\">"+s1+"</tr><set><pages>1</pages>"+mformat+"</set></root>";
+} else {
+mXmlData="<root><set><pages>0</pages>"+mformat+"</set></root>";
+}
+var   d = new Date();
+var   t = d.getTime();
+base_dset(1);
+mEmpty="yes";
+AfterOpenID.fire();
+var   d = new Date();
+var   t1 = d.getTime()  ;
+return "";
+}
+function Open(sSql, ismovepage, callback, context) {
+	BeforeOpenID.fire();
+	DeletedData = "";
+	var sql = mopensql;
+	if (mopensql == "") {
+		if (typeof sqltrans != "undefined") {
+			sql = UnSqlPropTrans(sqltrans);
+		}
+	}
+	if (typeof sSql != "undefined") {
+		sql = sSql;
+		mopensql = sSql;
+	}
+	if (isSpace(sql)&&isSpace(runclass)) {
+		mEmpty = "null";
+		return;
+	} else {
+		mEmpty = "no";
+	}
+	var oSelf = eval(uniqueID + ".id");
+	var sSour = mformat;
+	var sFieldNameList = "";
+	if ((isSpace(sSour) == false && mformat != '<fields></fields>')
+			&& dataset_mformat_isnull == false) {
+		var oSour = new ActiveXObject("Microsoft.XMLDOM");
+		oSour.async = false;
+		oSour.loadXML(sSour);
+		for ( var i = 0; i < oSour.documentElement.childNodes.length; i++) {
+			sFieldNameList += oSour.documentElement.childNodes(i).childNodes(0).text
+					+ ";";
+		}
+		sFieldNameList = sFieldNameList.substring(0, sFieldNameList.length - 1);
+		if (mPageSize == 0)
+			mPageSize = -1;
+		if (ismovepage != "是") {
+			mPageNo = 1;
+			mRecordCount = 0;
+		}	
+		creator_setSession("cc_form_showid", fcpubdata.cc_form_showid);
+		if (typeof callback == "function") {
+			//add by zuojian.xiang for datastore
+			if(IsSpace(mDatastore)==false&&!mDatastore.runflag){
+				var sXml="<No>"+RepXml(RepOpenSql(sql))+"</No>"+"<No1>"+mPageNo+"</No1>"+"<No2>"+mPageSize+"</No2>"+"<No3>"+sFieldNameList+"</No3>"+"<No4>"+multiResult+"</No4>";
+				var newRequest = {dataset:mDatasetID,requeststr:sXml,key:'dataset_fields1',sql:sql,callback:getFunname(callback)};
+				mDatastore.requestsJson.push(newRequest);
+				return "";
+			}
+			dataset_fields1(RepOpenSql(sql), mPageNo, mPageSize,
+					sFieldNameList, function(result) {
+						var sRet = result.value;
+						mXmlData = repStr(sRet, "<fields></fields>", mformat);
+						_OpenAfter(sql);
+						callback(result);
+					});
+		} else {
+			if(IsSpace(mDatastore)==false&&!mDatastore.runflag){
+				var sXml="<No>"+RepXml(RepOpenSql(sql))+"</No>"+"<No1>"+mPageNo+"</No1>"+"<No2>"+mPageSize+"</No2>"+"<No3>"+sFieldNameList+"</No3>"+"<No4>"+multiResult+"</No4>";
+				var newRequest = {dataset:mDatasetID,requeststr:sXml,key:'dataset_fields1',sql:sql,callback:""};
+				mDatastore.requestsJson.push(newRequest);
+				return "";
+			}
+			var sRet = dataset_fields1(RepOpenSql(sql), mPageNo, mPageSize,
+					sFieldNameList);
+			mXmlData = repStr(sRet, "<fields></fields>", mformat);
+			_OpenAfter(sql);
+		}
+	} else {
+		if (typeof callback == "function") {
+			if(IsSpace(mDatastore)==false&&!mDatastore.runflag){
+				var sXml="<No>"+RepXml(RepOpenSql(sql))+"</No>"+"<No1>"+mPageNo+"</No1>"+"<No2>"+mPageSize+"</No2>"+"<No3>"+sFieldNameList+"</No3>"+"<No4>"+multiResult+"</No4>";
+				var newRequest = {dataset:mDatasetID,requeststr:sXml,key:'dataset_select',sql:sql,callback:getFunname(callback)};
+				mDatastore.requestsJson.push(newRequest);
+				return "";
+			}
+			dataset_select(RepOpenSql(sql), mPageNo, mPageSize, mHideField,
+					function(result) {
+						mXmlData = result.value;
+						var oF = new ActiveXObject("Microsoft.XMLDOM");
+						oF.async = false;
+						oF.loadXML(mXmlData);
+						if (oF.documentElement == null) {
+							alert("SQL语句: " + sql + " 执行错误! 错误信息:" + mXmlData);
+							CopyToPub(sql);
+							return;
+						}
+						mformat = oF.documentElement.childNodes(
+								oF.documentElement.childNodes.length - 1)
+								.childNodes(1).xml;
+						dataset_mformat_isnull = true;
+						_OpenAfter(sql);
+						callback(result);
+					});
+		} else {
+			if(IsSpace(mDatastore)==false&&!mDatastore.runflag){
+				var sXml="<No>"+RepXml(RepOpenSql(sql))+"</No>"+"<No1>"+mPageNo+"</No1>"+"<No2>"+mPageSize+"</No2>"+"<No3>"+sFieldNameList+"</No3>"+"<No4>"+multiResult+"</No4>";
+				var newRequest = {dataset:mDatasetID,requeststr:sXml,key:'dataset_select',sql:sql,callback:""};
+				mDatastore.requestsJson.push(newRequest);
+				return "";
+			}
+			var newsql = RepOpenSql(sql);
+			mXmlData = dataset_select(newsql, mPageNo, mPageSize, mHideField);
+			var oF = new ActiveXObject("Microsoft.XMLDOM");
+			oF.async = false;
+			oF.loadXML(mXmlData);
+			if (oF.documentElement == null) {
+				alert("SQL语句: " + newsql + " 执行错误! 错误信息:" + mXmlData);
+				CopyToPub(newsql);
+				return;
+			}
+			mformat = oF.documentElement.childNodes(
+					oF.documentElement.childNodes.length - 1).childNodes(1).xml;
+			dataset_mformat_isnull = true;
+			_OpenAfter(sql);
+		}
+	}
+	creator_gotofirstpage(this);
+	return "";
+}
+//用于datastore请求数据后表单页面控件数据填充
+function forDatastoreCallback(datastoreData){
+	if(datastoreData.key=="dataset_select"){
+		mXmlData = datastoreData.xml;
+		var oF = new ActiveXObject("Microsoft.XMLDOM");
+		oF.async = false;
+		oF.loadXML(mXmlData);
+		if (oF.documentElement == null) {
+			alert("SQL语句执行错误! 错误信息:" + mXmlData);
+			CopyToPub(datastoreData.sql);
+			return;
+		}
+		mformat = oF.documentElement.childNodes(
+				oF.documentElement.childNodes.length - 1)
+				.childNodes(1).xml;
+		dataset_mformat_isnull = true;
+	}
+	if(datastoreData.key=="dataset_fields1"){
+		var sRet = datastoreData.xml;
+		mXmlData = repStr(sRet, "<fields></fields>", mformat);
+	}
+	_OpenAfter(datastoreData.sql);
+	var callback = datastoreData.callback;
+	if(!IsSpace(callback)){
+		callback(datastoreData.result);
+	}
+}
+function getFunname(fun){
+	var tempreg = /(function\s+)(.+?)(\s*{*)/g;
+	return tempreg.exec(fun.toString())[2];
+}
+function _OpenAfter(sql) {
+if(isSpace(mXmlData)) return;
+if(mXmlData==fcpubdata.pub_sendhttp_errmsg) return;
+if(mXmlData=="<root>"){
+window.clipboardData.setData("Text",sql);
+alert("下面这条SQL语句运行不正确: "+sql+"\n请确定SQL语句无错误或者此数据源下存在该表");
+return;
+}
+base_dset();
+AfterOpenID.fire();
+}
+function NextPage(){
+if(mEmpty == "yes") return ;
+if(mPageNo<mPageCount){
+mPageNo++;
+Open(mopensql,"是");
+}
+}
+function PrevPage(){
+if(mEmpty == "yes") return ;
+if(mPageNo>1){
+mPageNo--;
+Open(mopensql,"是");
+}
+}
+function FirstPage(){
+if(mEmpty == "yes") return ;
+mPageNo=1;
+Open(mopensql,"是");
+}
+function LastPage(){
+if(mEmpty == "yes") return ;
+mPageNo=mPageCount;
+Open(mopensql,"是");
+}
+function JumpTo(n,callback){
+if(typeof callback != "function"){
+alert("回调函数不存在!");
+return;
+}
+mPageNo=n;
+Open(mopensql,"是",callback);
+}
+function dataValid(curOF,value,iTag){
+if(typeof curOF=="undefined")return "";
+if(typeof value=="undefined")return "";
+if(curOF.DataType=="实数" || curOF.DataType=="整数"){
+value=RemoveComma(value);
+}
+if((iTag==2 || iTag==3 || iTag==5 ) && curOF.valid == "是"){
+if(curOF.Empty=="是"){
+if(isSpace(Trim(value))){
+return RunValidError(curOF.DisplayLabel+"不能为空! ",iTag);
+}
+}
+if(curOF.isKey=="是"){
+for(var ii=0;ii<oData.documentElement.childNodes.length-1;ii++){
+if(ii!=mRecNo){
+if(value==oData.documentElement.childNodes(ii).childNodes(curOF.index).text){
+return RunValidError(curOF.DisplayLabel+"的值重复! ",iTag);
+}
+}
+}
+}
+if(isSpace(value)==false){
+switch(curOF.DataType)
+{
+case "整数"            :
+if(isNum(value,"整数") == false  ){
+return RunValidError(curOF.DisplayLabel+"不是个整数 ",iTag);
+}
+break;
+case "实数"            :
+if(isNum(value,"实数") == false ){
+return RunValidError(curOF.DisplayLabel+"不是个数字 ",iTag);
+}
+break;
+case "字串"  :
+case "字符"  :
+var iLen=curOF.Length;
+if(isSpace(iLen)==false && iLen>0){
+if(GetLength(value)>iLen){
+return RunValidError(curOF.DisplayLabel+"长度不能大于 "+iLen,iTag);
+}
+}
+break;
+case "日期" :
+try {
+var oDate = new PowerDate(value);
+}catch(e){
+return RunValidError("必须在表单上引入fcdate.js!",iTag);
+}
+if (isNaN(oDate.date)){
+return RunValidError(curOF.DisplayLabel+"不是个合法日期! ",iTag);
+}
+break;
+}
+}
+}
+var oEvent = createEventObject();
+oEvent.FieldName=curOF.FieldName;
+oEvent.DisplayLabel=curOF.DisplayLabel;
+oEvent.FieldValue=value;
+if(iTag==1  || iTag==3 || iTag==5 ){
+oEvent.returnValue="";
+onValidID.fire(oEvent);
+if(oEvent.returnValue != "") return RunValidError(oEvent.returnValue,iTag)  ;
+}
+if(iTag != 5 ){
+curOF.Value=value;
+}
+if(isSpace(curOF.fieldvalid) == false) {
+var stmp = unescape(curOF.fieldvalid);
+var sRet = eval(stmp);
+if(isSpace(sRet) == false ) return RunValidError(sRet,iTag);
+}
+return "";
+function GetLength(str){
+var i,rt=0;
+for(i=0;i<str.length;i++)
+{
+rt++;
+if(str.charCodeAt(i)>256)rt++;
+}
+return rt;
+}
+function RemoveComma(sSour){
+var s1=sSour+"";
+s1=repStr(s1,",","");
+return s1;
+}
+}
+function cont_onDataChange(){
+var curObj;
+try {
+curObj=event.srcElement;
+if(curObj.tagName!="webgrid"){
+curObj=GetDsGrid(eval(uniqueID));
+}
+}catch (e){
+curObj=GetDsGrid(eval(uniqueID));
+}
+var value=curObj.curTD.innerText;
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (curObj.format);
+var colNo=curObj.curTD.cellIndex ;
+if(mbTagCol && colNo>0) colNo--;
+if(colNo<0)colNo=0;
+var curFieldName=oXml.documentElement.childNodes(colNo).childNodes(0).text ;
+var curOF=oFields.Field[curFieldName];
+var sRet=dataValid(curOF,value,3);
+mbEdit=true;
+var oEvent = createEventObject();
+oEvent.FieldName=curOF.FieldName;
+oEvent.ods = eval(uniqueID);
+onSetTextID.fire(oEvent);
+var s11=eval(uniqueID+".format");
+if(isSpace(s11)==false){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (s11);
+var oList=oXml.documentElement.selectNodes("//field[fieldkind='实际计算项']");
+for(var iList=0;iList<oList.length;iList++){
+var sExp=oList.item(iList).childNodes(6).text;
+var sFieldName=oList.item(iList).childNodes(0).text;
+var vValue="";
+try {
+vValue=eval(sExp);
+}catch(E){
+alert("字段: "+sFieldName+" 的默认值处公式不正确!");
+}
+oFields.Field[sFieldName].Value=vValue;
+}
+if(oList.length>0)
+ReSum("只算fset");
+}
+fset_cont(mRecNo);
+fset_cont1();
+}
+function LineSum(ogrid,curRow) {
+LineSumSub(curRow);
+var s11=eval(uniqueID+".format");
+if(isSpace(s11)==false){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (s11);
+var oList=oXml.documentElement.selectNodes("//field[fieldkind='实际计算项']");
+for(var iList=0;iList<oList.length;iList++){
+var sExp=oList.item(iList).childNodes(6).text;
+var sFieldName=oList.item(iList).childNodes(0).text;
+if( ogrid == null ) {
+dset_fset(curRow);
+var vValue="";
+try {
+vValue=eval(sExp);
+}catch(E){
+alert("字段: "+sFieldName+" 的默认值处公式不正确!");
+}
+oData.documentElement.childNodes(curRow).childNodes(FieldNameToNo(sFieldName)).text=vValue;
+}else {
+var vValue="";
+try {
+vValue=eval(sExp);
+}catch(E){
+alert("字段: "+sFieldName+" 的默认值处公式不正确!");
+}
+oFields.Field[sFieldName].Value=vValue;
+var curRowNo=ogrid.curTD.parentNode.rowIndex;
+var sumColNo=FieldNameToColNo(ogrid,sFieldName);
+ogrid.tab.rows(curRowNo).cells(sumColNo).innerText=fset_contall(oFields.Field[sFieldName]);
+}
+}
+}
+}
+function LineSumSub(curRow) {
+SetPos(curRow);
+var oEvent = createEventObject();
+oEvent.FieldName="";
+oEvent.ods = eval(uniqueID);
+onSetTextID.fire(oEvent);
+mbEdit=true;
+Update("不检查");
+return;
+var oSelf=eval(uniqueID);
+var s1=oSelf.onSetText;
+eval(s1);
+return;
+var istart=s1.indexOf("<dsid>");
+alert(istart)	;
+s1=s1.substring(23,s1.length-2);
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (s1);
+for(var i=0;i<oXml.documentElement.childNodes.length;i++){
+eval(oXml.documentElement.childNodes(i).text);
+}
+}
+function cont1_onblur(){
+var curObj=event.srcElement;
+if(curObj.tagName.toUpperCase()=="DIV" ){
+if(curObj.id=="divCheckBox"){
+curObj=curObj.parentNode;
+}
+}
+if(curObj.tagName.toUpperCase()=="INPUT" || curObj.tagName.toUpperCase()=="SPAN" ){
+if(curObj.parentNode.id=="divCheckBox"){
+curObj=curObj.parentNode.parentNode;
+}
+}
+if(curObj.tagName.toUpperCase()=="INPUT" && (curObj.type=="radio" || curObj.type=="checkbox" ) ){
+curObj=curObj.parentNode;
+if(curObj.divtype=="checkbox"){
+if(curObj.childNodes(0).checked) {
+curObj.value=curObj.truevalue ;
+}else{
+curObj.value=curObj.falsevalue ;
+}
+}
+}
+if(typeof curObj.field == "undefined" ) return;
+var curOF=oFields.Field[curObj.field];
+var svalue = curObj.value ;
+if(curObj.tagName.toUpperCase()=="TEXTAREA" ){
+svalue = RepStr(svalue,"\r\n","&#13;&#10;") ;
+svalue = RepStr(svalue,"\t","&#9;") ;
+}
+var iRet=dataValid(curOF,svalue,3);
+if(curOF.DataType=="实数" || curOF.DataType=="整数"){
+fset_cont1(2,curOF.FieldName);
+}
+fset_cont(mRecNo);
+mbEdit=true;
+}
+function radioclick() {
+radioclick1();
+cont1_onblur();
+}
+function radioclick1() {
+var o=event.srcElement ;
+o.parentNode.value=o.value ;
+}
+function InitLinkObj(){
+var l;
+var iLinkObjs=0;
+var o=window.document.all.tags("INPUT");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onchange", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("TEXTAREA");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onchange", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("span");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("SELECT");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onchange", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("fieldset");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+for(var jj=1;jj<o[i].children.length;jj++){
+if(o[i].children[jj].tagName=="INPUT"){
+o[i].children[jj].attachEvent("onclick", radioclick);
+}
+}
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("checkbox");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onfocusout", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("div") ;
+l=o.length;
+for(var i=0;i<l;i++){
+if(o[i].divtype != "checkbox") continue ;
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].childNodes(0).attachEvent("onclick", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("img");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("fc_code");
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onchange", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+var o=window.document.all.tags("div")
+l=o.length;
+for(var i=0;i<l;i++){
+var ds1=o[i].getAttribute("dataset");
+if(isSpace(ds1)==false){
+if (ds1==eval(uniqueID+".id")){
+o[i].attachEvent("onchange", cont1_onblur);
+LinkObjs[iLinkObjs]=o[i];
+iLinkObjs++;
+}
+}
+}
+}
+function checkboxclick(){
+var obj=event.srcElement ;
+var bool=obj.checked ;
+obj=obj.parentNode;
+if(bool){
+obj.value=obj.truevalue;
+}else{
+obj.value=obj.falsevalue ;
+}
+}
+function FindAll(sFind,bLike){
+if(typeof bLike == "undefined" ) bLike=true ;
+var bln;
+for(var i=0;i<mRecordCount;i++){
+for(var j=0;j<mFieldCount;j++){
+if(bLike){
+if(oData.documentElement.childNodes(i).childNodes(j).text.indexOf(sFind)!=-1){
+SetPos(i);
+return true;
+}
+}else{
+if(oData.documentElement.childNodes(i).childNodes(j).text==sFind){
+SetPos(i);
+return true;
+}
+}
+}
+}
+return false;
+}
+function MoveGridRow(){
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+var tmprow=mRecNo+o[ii].FixRows;
+o[ii].lostfocustd=null;
+var td=o[ii].FindFirstTD(tmprow);
+o[ii].SetFocus(td,"程序给焦点");
+}
+}
+}
+function Find(sFind){
+for(iFind=0;iFind<mRecordCount;iFind++){
+if(eval(sFind)){
+SetPos(iFind);
+return true;
+}
+}
+return false;
+}
+function getlineno(){
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+return o[ii].Row;
+}
+}
+}
+function sum(sFieldName){
+var FieldNo=FieldNameToNo(sFieldName);
+var sum1=0;
+var bool = true;
+if(typeof oFields.Field[sFieldName].Value == "undefined") bool=false;
+for(var i=0;i<mRecordCount;i++){
+if(i==mRecNo && bool) continue;
+var f1=parseFloat(oData.documentElement.childNodes(i).childNodes(FieldNo).text);
+if(isNaN(f1)==false)
+sum1+=f1;
+}
+if(bool){
+var f1=parseFloat(oFields.Field[sFieldName].Value);
+if(isNaN(f1)==false)
+sum1+=f1;
+}
+return sum1;
+}
+function getmaxdjbh(){
+var s1=getMaxNo(window.SKbillsheet.codeheader,window.SKbillsheet.mkbh);
+return s1;
+}
+function ff(sFieldName){
+var sexp=oFields.Field[sFieldName].DefaultValue;
+if(isSpace(sexp)==false && oFields.Field[sFieldName].Type=="实际计算项" ){
+return eval(sexp);
+}else {
+return oFields.Field[sFieldName].Value;
+}
+}
+function F(sField){
+var i=FieldNameToNo(sField);
+return oData.documentElement.childNodes(iFind).childNodes(i).text;
+}
+function IN(sField,sValue){
+var i=FieldNameToNo(sField);
+var s1=oData.documentElement.childNodes(iFind).childNodes(i).text;
+if(s1.indexOf(sValue)==-1)
+return false;
+else
+return true;
+}
+function Filter(sFind){
+if(mbFilter){
+UnFilter();
+}else{
+mXmlDataNew=oData.documentElement.xml;
+}
+mbFilter=true;
+var tmpCount=oData.documentElement.childNodes.length-1;
+for(iFind=tmpCount-1;iFind>=0;iFind--){
+if(eval(sFind)){
+}else{
+var oClone=oData.documentElement.childNodes(iFind).cloneNode(true);
+oFilter.documentElement.appendChild(oClone);
+oData.documentElement.removeChild(oData.documentElement.childNodes(iFind));
+}
+}
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].hide();
+o[ii].Rows=1;
+o[ii].Rows=oData.documentElement.childNodes.length-1+1;
+o[ii].EndRowState="edit";
+}
+}
+dset_cont();
+OnFilterRecordID.fire();
+}
+function UnFilter(iTag){
+if(mbFilter==false) return;
+oData=new ActiveXObject("Microsoft.XMLDOM");
+oData.async=false;
+oData.loadXML (mXmlDataNew);
+oFilter=new ActiveXObject("Microsoft.XMLDOM");
+oFilter.async=false;
+oFilter.loadXML ("<root></root>");
+if(iTag==1){
+dset_cont();
+MoveFirst();
+}
+}
+function Sort(sortcol,asc){
+if(oData.documentElement.childNodes.length<=1) return;
+var oSort=new ActiveXObject("Microsoft.XMLDOM");
+oSort.async=false;
+oSort.loadXML ("<root></root>");
+while (oData.documentElement.childNodes.length-1>0) {
+var sendrow=MaxMinSort(sortcol,asc) ;
+var oClone=oData.documentElement.childNodes(sendrow).cloneNode(true);
+oSort.documentElement.appendChild(oClone);
+oData.documentElement.removeChild(oData.documentElement.childNodes(sendrow));
+}
+oSort.documentElement.appendChild(oData.documentElement.childNodes(oData.documentElement.childNodes.length-1));
+oData=oSort;
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].hide();
+o[ii].EndRowState="edit";
+}
+}
+dset_cont();
+dset_fset();
+fset_cont1();
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+GridAddHref(o[ii]);
+}
+}
+}
+function MaxMinSort(sortcol,asc) {
+var sMax;
+var SendRow;
+var datatype=oFields.Field[sortcol].DataType;
+for(var i=0;i<oData.documentElement.childNodes.length-1;i++){
+var s1=oData.documentElement.childNodes(i).childNodes(sortcol).text;
+if(datatype=="实数" || datatype=="整数"){
+s1=parseFloat(s1);
+if(isNaN(s1)) s1=0;
+}
+if(i==0) sMax=s1;
+if(asc=="升序"){
+if(sMax>s1 ){
+sMax=s1;
+SendRow=i;
+}
+}else{
+if(sMax<s1 ) {
+sMax=s1;
+SendRow=i;
+}
+}
+}
+return SendRow;
+}
+function FieldNameToColNo(grid,sFieldName){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (grid.format);
+for(var i=0;i<oXml.documentElement.childNodes.length;i++){
+if(sFieldName==oXml.documentElement.childNodes(i).childNodes(0).text){
+if(mbTagCol){
+return i+1;
+}else{
+return i;
+}
+}
+}
+}
+function Append(sTag,pos){
+var sRowState="rowstate='new'";
+if(sTag != "强行加一行" ){
+if(mbAdd || mbEdit ){
+if(Update()==1) return;
+}
+BeforeInsertID.fire();
+sRowState = "rowstate='add'";
+}
+var sNode="<root><tr " + sRowState + ">";
+for(var i=0;i<mFieldCount;i++){
+if(oFields.Field[i].Type=="数据项" && isSpace(oFields.Field[i].DefaultValue)==false){
+sNode+="<td>"+oFields.Field[i].DefaultValue+"</td>";
+}else if(oFields.Field[i].Type=="变量默认值" && isSpace(oFields.Field[i].DefaultValue)==false){
+var sss=eval(oFields.Field[i].DefaultValue);
+sNode+="<td>"+sss+"</td>";
+}else {
+sNode+="<td></td>";
+}
+}
+sNode+="</tr></root>";
+var newNode=new ActiveXObject("Microsoft.XMLDOM");
+newNode.async=false;
+newNode.loadXML (sNode);
+var oClone=newNode.documentElement.childNodes(0).cloneNode(true);
+if(typeof pos == "undefined" ){
+oData.documentElement.insertBefore(oClone, oData.documentElement.childNodes(oData.documentElement.childNodes.length-1));
+}else{
+oData.documentElement.insertBefore(oClone, oData.documentElement.childNodes(pos));
+}
+mRecordCount++;
+if(sTag != "强行加一行" ){
+OnNewRecordID.fire();
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].RemoveBackColor();
+if(typeof pos == "undefined" ){
+o[ii].InsertRow();
+if(sTag != "不置表格的焦点"){
+var tmprow=o[ii].tab.rows.length-1;
+o[ii].SetFocus(o[ii].FindFirstTD(tmprow),"程序给焦点");
+}
+}else{
+var tmprow=pos+o[ii].FixRows;
+o[ii].InsertRow(tmprow);
+o[ii].SetFocus(o[ii].FindFirstTD(tmprow),"程序给焦点");
+}
+o[ii].VscrollTo(o[ii].Vmax);
+}
+}
+mbAdd=true;
+if(typeof pos == "undefined" ){
+mRecNo=mRecordCount-1;
+}else{
+mRecNo=pos;
+}
+SetPos(mRecNo);
+AfterInsertID.fire();
+}
+}
+function Insert() {
+Append("",mRecNo);
+}
+function Edit(){
+BeforeEditID.fire();
+if(oData.documentElement.childNodes(mRecNo).getAttribute("rowstate")=="new")
+oData.documentElement.childNodes(mRecNo).setAttribute("rowstate", "add");
+if(oData.documentElement.childNodes(mRecNo).getAttribute("rowstate")!="add")
+oData.documentElement.childNodes(mRecNo).setAttribute("rowstate", "edit");
+mbEdit=true;
+AfterEditID.fire();
+}
+function checkbeforeupdate(){
+for(var i=0;i<mFieldCount;i++){
+//解决 点击grid的时候，经常弹出 XX列宽，不是整数的问题 2009-6-4
+if(oFields.Field[i].DisplayLabel=="列宽"){
+oFields.Field[i].DataType="字符";
+}
+var sRet=dataValid(oFields.Field[i],oFields.Field[i].Value,3);
+if(sRet!=""){
+return false	;
+}
+}
+return true;
+}
+function CheckField(){
+ var oDsMain = GetDsMainObj();
+ oDsMain.cont1_fset();
+ oDsMain.bEdit=true;
+ mbEdit=true;
+ var bool=Update("检查");
+ if(bool=="1"){
+   return false;
+ }else{
+   return true;
+ }
+}
+function Update(novalid){
+if(mbEdit==false && mbAdd==false) return;
+if(novalid != "不检查") {
+if(checkbeforeupdate()==false) return 1;
+}
+var d=new Date();
+var t = d.getTime();
+var oEvent = createEventObject();
+oEvent.returnValue=true;
+BeforePostID.fire(oEvent);
+if(oEvent.returnValue==false) return 1;
+if(oData.documentElement.childNodes.length>1){
+for(var i=0;i<mFieldCount;i++){
+oData.documentElement.childNodes(mRecNo).childNodes(i).text=oFields.Field[i].Value;
+}
+if(oData.documentElement.childNodes(mRecNo).getAttribute("rowstate")=="new")
+oData.documentElement.childNodes(mRecNo).setAttribute("rowstate","add");
+if(oData.documentElement.childNodes(mRecNo).getAttribute("rowstate")!="add")
+oData.documentElement.childNodes(mRecNo).setAttribute("rowstate","edit");
+}
+ReSum("只算fset");
+mbEdit=false;
+mbAdd=false;
+AfterPostID.fire();
+var d=new Date();
+var t1 = d.getTime();
+}
+function Cancel(){
+BeforeCancelID.fire();
+SetPos(mRecNo);
+var sState=oData.documentElement.childNodes(mRecNo).getAttribute("rowstate");
+if(sState=="add"){
+Delete(1);
+}
+mbEdit=false;
+mbAdd=false;
+AfterCancelID.fire();
+}
+function Delete(type){
+if(oData.documentElement.childNodes.length<=1) return;
+if(type!=1){
+BeforeDeleteID.fire();
+var oTr = oData.documentElement.childNodes(mRecNo);
+if(oTr.getAttribute("rowstate") != "add" && oTr.getAttribute("rowstate") != "del"){
+oTr.setAttribute("rowstate","del");
+DeletedData += oTr.xml;
+}
+}
+var curcol=1;
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+curcol=o[ii].curTD.cellIndex;
+o[ii].DeleteRow(mRecNo+o[ii].FixRows);
+}
+}
+oData.documentElement.removeChild(oData.documentElement.childNodes(mRecNo));
+mRecordCount--;
+ReSum("只算fset");
+if(mRecordCount>0){
+if(mRecNo>0){
+mRecNo--;
+}
+SetPos(mRecNo);
+}
+else {
+fset_cont1(1)	;
+}
+mbAdd=false;
+mbEdit=false;
+if(mRecordCount>0){
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].SetFocus(o[ii].tab.rows(mRecNo+o[ii].FixRows).cells(curcol),"程序给焦点");
+}
+}
+}
+AfterDeleteID.fire();
+}
+function UpdateDatabase(){
+var sql;
+for(var i=0;i<mRecordCount;i++){
+var sState=oData.documentElement.childNodes(i).getAttribute("rowstate");
+if(sState=="add"){
+sql="insert into Customer ";
+var sFieldName=" (",sFieldValue=" (";
+for(var j=0;j<mFieldCount-1;j++){
+sFieldName+=oDataField.childNodes(j).childNodes(0).text+",";
+sFieldValue+="'"+oData.documentElement.childNodes(i).childNodes(j).text+"'"+",";
+}
+sFieldName=sFieldName.substring(0,sFieldName.length-1);
+sFieldValue=sFieldValue.substring(0,sFieldValue.length-1);
+sql+=sFieldName+") Values "+sFieldValue+") ";
+alert(sql);
+var s1=fc_insert(sql)   ;
+if(isSpace(s1)==false) {
+alert(s1);
+return;
+}
+}
+}
+}
+function MoveFirst(){return SetPos(-1);}
+function MoveNext(){return SetPos(mRecNo+1);}
+function MovePrev(){return SetPos(mRecNo-1);}
+function MoveLast(){return SetPos(mRecordCount);}
+function SetPos(pos)
+{
+BeforeScrollID.fire();
+mBof=false;mEof=false;
+var tmpCount=oData.documentElement.childNodes.length-1;
+if(pos>=tmpCount)pos=tmpCount-1;
+if(pos<0 || isNaN(pos))pos=0;
+if(pos==0)mBof=true;
+if(pos>=tmpCount-1)mEof=true;
+var d=new Date();
+var t = d.getTime();
+fnPutRecNo(pos);
+dset_fset();
+fset_cont1();
+var d=new Date();
+var t1 = d.getTime();
+AfterScrollID.fire();
+return 0;
+}
+function MakeRow(pos){
+for (var i=0;i<mFieldCount;i++){
+f=oFields.Field[i];
+FLD_setvalue(f,oData.documentElement.childNodes(pos).childNodes(i).text);
+}
+}
+function fset_cont1(type,fieldname){
+if(type==1){
+for(var i=0;i<LinkObjs.length;i++){
+if(LinkObjs[i].tagName.toUpperCase()=="SPAN"){
+LinkObjs[i].innerText="";
+}else{
+LinkObjs[i].value="";
+}
+}
+}else {
+for(var i=0;i<LinkObjs.length;i++){
+if((type==2 && fieldname==LinkObjs[i].field && isSpace(fieldname)==false ) || type !=2 )	{
+if(LinkObjs[i].tagName.toUpperCase()=="SPAN"){
+LinkObjs[i].innerText=oFields.Field[LinkObjs[i].field].Value;
+}else if(LinkObjs[i].tagName.toUpperCase()=="IMG"){
+if(typeof LinkObjs[i].field != "undefined"){
+var stable=SKbillsheet.mastertable;
+if(IsSpace(stable)) stable=eval(LinkObjs[i].dataset+".saveastable");
+var s1=location.protocol+"//"+location.host + fcpubdata.servletPath + "/imagefield"+fcpubdata.dotnetVersion+"?key=readimage&sTablename="+stable+"&sImgname="+LinkObjs[i].field+"&sKeyname="+window.SKbillsheet.keyfield+"&sKeyvalue=";
+s1+=oFields.Field[window.SKbillsheet.keyfield].Value;
+s1+="&random="+Math.random();
+LinkObjs[i].src=s1;
+}
+}else if(LinkObjs[i].tagName.toUpperCase()=="FIELDSET"){
+SetRadioValue(LinkObjs[i],oFields.Field[LinkObjs[i].field].Value);
+}else if(LinkObjs[i].tagName.toUpperCase()=="DIV" && LinkObjs[i].divtype=="checkbox" ){
+var v1="";
+try{
+v1=oFields.Field[LinkObjs[i].field].Value;
+}catch (e){
+alert(LinkObjs[i].field+"字段在数据集中没有"); continue;
+}
+SetCheckBoxValue(LinkObjs[i],v1);
+}else{
+var v1="";
+try{
+v1=oFields.Field[LinkObjs[i].field].Value;
+}catch (e){
+alert(LinkObjs[i].field+"字段在数据集中没有")
+continue;
+}
+v1=fset_contall(oFields.Field[LinkObjs[i].field]);
+if(LinkObjs[i].tagName.toUpperCase()=="TEXTAREA"){
+v1 = RepStr(v1,"&#13;&#10;","\r\n");
+v1 = RepStr(v1,"&#9;","\t");
+}
+LinkObjs[i].value=v1;
+}
+}
+}
+}
+}
+function fset_contall(oF,v1){
+if(typeof oF=="undefined") return "";
+if(typeof v1 == "undefined"){
+var v1=oF.Value;
+}
+if(oF.DataType=="日期")	{
+var sFormat = oF.DisplayFormat;
+if(IsSpace(sFormat) == false && IsSpace(v1) == false){
+try{
+var oDate =new PowerDate(v1);
+}catch(e){
+alert("必须在表单上引入fcdate.js!");
+return v1;
+}
+oDate.isFmtZero = true;
+v1 = oDate.getString(sFormat);
+}
+}
+if(oF.DataType=="实数")	{
+v1=ContDec(v1,oF.DotLength)	;
+}
+if(oF.DataType=="实数" || oF.DataType=="整数")  {
+var s1=oF.DisplayFormat;
+if(s1.indexOf(",")>=0){
+v1=AddComma(v1);
+}
+}
+return v1;
+function AddComma(sSour){
+var s1=trim(sSour);
+var ret="";
+var s2="";
+var start1=s1.indexOf(".");
+if(start1<0) {
+start1=s1.length;
+}else{
+s2=s1.substring(start1,s1.length);
+}
+for(var i=start1-3;i>0;i=i-3){
+ret=","+s1.substring(i,i+3)+ret;
+}
+if(ret==""){
+ret=s1;
+}else{
+ret=s1.substring(0,i+3)+ret+s2;
+}
+return ret;
+}
+}
+function cont1_fset(){
+for(var i=0;i<LinkObjs.length;i++){
+if(LinkObjs[i].tagName.toUpperCase()=="SPAN"){
+oFields.Field[FieldNameToNo(LinkObjs[i].field)].Value=LinkObjs[i].innerText;
+}else if(LinkObjs[i].tagName.toUpperCase()=="IMG"){
+}else if(LinkObjs[i].tagName.toUpperCase()=="FIELDSET"){
+}else if(LinkObjs[i].controltype == "SKDBMemo" ) {
+var svalue = LinkObjs[i].value ;
+if( LinkObjs[i].induce == "是") svalue = RepStr(svalue,"_","");
+svalue = RepStr(svalue,"\r\n","&#13;&#10;") ;
+svalue = RepStr(svalue,"\t","&#9;") ;
+oFields.Field[FieldNameToNo(LinkObjs[i].field)].Value = svalue ;
+}else{
+oFields.Field[FieldNameToNo(LinkObjs[i].field)].Value = LinkObjs[i].value;
+}
+}
+}
+function cont_fset(r){
+r=parseInt(r);
+if(isNaN(r))return;
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+for(var i=0;i<mFieldCount;i++){
+if(mbTagCol){
+oFields.Field[i].Value=o[ii].tab.rows(r).cells(i+1).innerText;
+}else{
+oFields.Field[i].Value=o[ii].tab.rows(r).cells(i).innerText;
+}
+}
+}
+}
+}
+function fset_cont(r){
+r=parseInt(r);
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+r=r+o[ii].FixRows;
+if(isNaN(r)) {
+r=o[ii].curTD.parentNode.rowIndex;
+}else if(r>=o[ii].tab.rows.length){
+break;
+}
+for(var i=1;i<o[ii].tab.childNodes(0).childNodes.length;i++){
+var v1;
+var ifieldno=o[ii].tab.children[0].children[i].getAttribute("dsfield");
+ifieldno=parseInt(ifieldno);
+if(isNaN(ifieldno))ifieldno=0;
+var sReadOnly=o[ii].tab.children[0].children[i].getAttribute("cz");
+if(sReadOnly == "<img></img>"){
+  continue;
+}
+if(sReadOnly == "<checkbox></checkbox>"){
+v1=oFields.Field[ifieldno].Value;
+o[ii].tab.rows(r).cells(i).innerText="";
+if(IsTrue(v1))
+o[ii].tab.rows(r).cells(i).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_checked.gif)";
+else
+o[ii].tab.rows(r).cells(i).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_uncheck.gif)";
+}else {
+if(sReadOnly == null){
+v1=oFields.Field[ifieldno].Value;
+}else{
+v1=fset_contall(oFields.Field[ifieldno]);
+}
+o[ii].tab.rows(r).cells(i).innerText=v1;
+}
+}
+}
+}
+}
+function FieldNameToNo(name){
+var index=0 ;
+try{
+index =oFields.Field[name].index;
+}catch(e){};
+return index ;
+}
+function FieldNoToName(no){
+return oDataField.childNodes(no).childNodes(0).text;
+}
+function base_dset(iTag){
+oData=new ActiveXObject("Microsoft.XMLDOM");
+oData.async=false;
+oData.loadXML (mXmlData);
+if(oData.documentElement == null){
+alert(mXmlData);
+return;
+}
+mRecordCount=oData.documentElement.childNodes.length-1;
+mRecordCountAll=parseInt(oData.documentElement.childNodes(oData.documentElement.childNodes.length-1).childNodes(0).text);
+oDataField=oData.documentElement.childNodes(oData.documentElement.childNodes.length-1).childNodes(1);
+mFieldCount=oDataField.childNodes.length;
+if(mPageSize==-1){
+mPageCount=1;
+}else {
+mPageCount=Math.ceil(mRecordCountAll/mPageSize);
+}
+initRowSet() ;
+initGrid(iTag);
+ReSum("只算fset");
+if(mRecordCount>0){
+MoveFirst();
+}else {
+//sxb
+////
+dset_fset();
+fset_cont1();
+}
+}
+function dset_fset(curRow) {
+if(typeof curRow == "undefined" ) curRow=mRecNo;
+for (var i=0;i<mFieldCount;i++){
+if(oFields.Field[i].Type != "汇总项" ){
+if(mRecordCount==0){
+oFields.Field[i].Value="";
+}else {
+oFields.Field[i].Value=oData.documentElement.childNodes(curRow).childNodes(i).text;
+}
+}
+}
+}
+function ReSum(sTag){
+if(sTag == "只算fset" ){
+if(isSpace(mformat)==false){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (mformat);
+var oList=oXml.documentElement.selectNodes("//field[fieldkind='汇总项']");
+for(var iList=0;iList<oList.length;iList++){
+var sExp=oList.item(iList).selectSingleNode("defaultvalue").text;
+var v1="";
+try {
+v1=eval(sExp);
+}catch(E){
+alert("汇总项: "+sExp+" 公式不正确!");
+}
+oFields.Field[oList.item(iList).childNodes(0).text].Value=v1;
+}
+}
+}else{
+for (var i=0;i<mFieldCount;i++){
+if(oFields.Field[i].Type == "汇总项" ){
+for(var j=0;j<oData.documentElement.childNodes.length-1;j++){
+oData.documentElement.childNodes(j).childNodes(i).text=oFields.Field[i].Value;
+}
+}
+}
+}
+}
+function initGrid(iTag){
+var d=new Date();
+var t = d.getTime();
+var format_empty='否';
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+if(isSpace(o[ii].format) || trim(o[ii].format)=="<cols></cols>") format_empty="是";
+if(iTag==2 || iTag == 4) format_empty="是";
+var HeadRows=1;
+var SumCols=mFieldCount;
+if(format_empty=="是" ){
+var oXmlFormat = SetDom(o[ii].format);
+var sX="<cols>";
+var jj = 0 ;
+for(var kk=0;kk<oDataField.childNodes.length;kk++){
+var bool=false;
+if(iTag==2  ){
+bool=true;
+}else if(oDataField.childNodes(kk).childNodes(15).text=="是"){
+bool=true;
+}
+if(bool){
+sX+="<col><fname>"+oFields.Field[kk].FieldName+"</fname><cname>"
++oFields.Field[kk].DisplayLabel+"</cname><width>"+parseInt(oFields.Field[kk].Length)
++"</width><dtype>"+oFields.Field[kk].DataType+"</dtype>";
+sX += initFormatCol(oXmlFormat,jj);
+jj++;
+sX+="</col>";
+}
+}
+sX+="</cols>";
+o[ii].format=sX;
+}
+var oXml=SetDom(o[ii].format);
+HeadRows=1;
+SumCols=oXml.documentElement.childNodes.length;
+XmlRepGrid(o[ii]) ;
+HeadRows=o[ii].FixRows;
+if(iTag==1){
+var tmprows = parseInt(o[ii].headrows);
+if(isNaN(tmprows) == false) o[ii].FixRows = tmprows;
+o[ii].Rows=1;
+o[ii].Rows=mRecordCount+HeadRows;
+if(mbTagCol){
+SumCols++;
+}
+o[ii].Cols=SumCols;
+}
+if(iTag == 4){
+}
+InitColField();
+GridAddHref(o[ii]);
+if(IsTrue(o[ii].SetRowHeight)){
+var tmpHeight = 21 ;
+if(o[ii].bodyrowheight == -1 || IsSpace(o[ii].bodyrowheight)){
+if(isNaN(parseInt(o[ii].tab.style.fontSize)) == false ) tmpHeight = parseInt(o[ii].tab.style.fontSize)+8;
+}else  {
+tmpHeight = o[ii].bodyrowheight;
+}
+for(var iirow=HeadRows; iirow<o[ii].Rows; iirow++){
+o[ii].tab.rows(iirow).style.height=tmpHeight ;
+}
+}
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (o[ii].format);
+for(var i=0;i<oXml.documentElement.childNodes.length;i++){
+var curCol;
+if(mbTagCol)
+curCol=i+1;
+else
+curCol=i;
+var svisible="";
+try{
+svisible=oXml.documentElement.childNodes(i).selectSingleNode("visible").text;
+}catch (e){}
+if(svisible=="否"){
+}else {
+var blnErr=false;
+var sWidth="60";
+try{
+sWidth=oXml.documentElement.childNodes(i).childNodes(10).text;
+}catch (e){blnErr=true; }
+if(blnErr==false){
+o[ii].tab.childNodes(0).childNodes(curCol).style.width=sWidth;
+}else {
+var sWidth=oXml.documentElement.childNodes(i).childNodes(2).text;
+var iWidth=isNaN(parseInt(sWidth))?60:parseInt(sWidth)*6;
+if(iWidth>300) iWidth=300;
+if(iWidth<30) iWidth=30;
+o[ii].tab.childNodes(0).childNodes(curCol).style.width=iWidth;
+}
+}
+var blnErr=false;
+var sAlign="left";
+try{
+sAlign=oXml.documentElement.childNodes(i).childNodes(11).text;
+}catch (e){ blnErr=true; }
+if(blnErr==false){
+o[ii].tab.childNodes(0).childNodes(curCol).align=sAlign;
+}else {
+var sDtype=oXml.documentElement.childNodes(i).childNodes(3).text;
+if(sDtype=="整数" || sDtype == "实数"){
+o[ii].tab.childNodes(0).childNodes(curCol).align="right";
+}
+}
+if(HeadRows==1){
+o[ii].tab.rows(0).cells(i+1).align="center";
+var sTitle=oXml.documentElement.childNodes(i).childNodes(1).text;
+var ii1=sTitle.indexOf("%%");
+var sTitle1="";
+if(ii1>=0){
+sTitle1=sTitle.substring(ii1+2,sTitle.length);
+var arrtmp=sTitle1.split(";");
+sTitle=sTitle.substring(0,ii1)+' <a href="'+arrtmp[0]+'" target=_blank >'+arrtmp[1]+'</a>';
+}
+o[ii].tab.rows(0).cells(curCol).innerHTML=sTitle;
+if(o[ii].tab.rows(0).style.pixelHeight<=1){
+var iFontSize = parseInt(o[ii].tab.rows(0).style.fontSize);
+if(isNaN(iFontSize)) iFontSize=12 ;
+o[ii].tab.rows(0).style.height=iFontSize+8 ;
+}
+o[ii].tab.rows(0).align="center";
+}else {
+}
+}
+SumCols=oXml.documentElement.childNodes.length;
+if(mbTagCol){
+o[ii].tab.childNodes(0).childNodes(0).style.width=9;
+}
+o[ii].attachEvent("onDataChange", cont_onDataChange);
+o[ii].HScroll();
+o[ii].VScroll();
+o[ii].ReadOnly=false;
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (o[ii].format);
+var scoledit="<root><readonly></readonly>";
+for(var i=0;i<oXml.documentElement.childNodes.length;i++){
+var s1 = oXml.documentElement.childNodes(i).childNodes(4).text ;
+if(s1 == "是"){
+scoledit+="<readonly></readonly>";
+}else if(s1.substring(0,1)=="选"){
+scoledit += unescape(s1.substring(1,s1.length)) ;
+}else if(s1.substring(0,1)=="勾"){
+scoledit += "<checkbox></checkbox>";
+check_one_col(o[ii],i+1);
+}
+//sxb 20080909
+else if(s1.substring(0,1)=="按"){
+scoledit += "<button></button>";
+button_one_col(o[ii],i+1);
+}
+//sxb 20090918
+else if(s1.substring(0,1)=="图"){
+scoledit += "<img></img>";
+image_one_col(o[ii],i+1);
+}
+///////////
+else if(oXml.documentElement.childNodes(i).childNodes(3).text=="字符" || oXml.documentElement.childNodes(i).childNodes(3).text=="自定" || oXml.documentElement.childNodes(i).childNodes(3).text=="日期"){
+scoledit+="<str><maxlength>"+oXml.documentElement.childNodes(i).childNodes(2).text+"</maxlength></str>";
+}else if(oXml.documentElement.childNodes(i).childNodes(3).text=="实数"){
+scoledit+="<double><pointnum>2</pointnum></double>";
+}else if(oXml.documentElement.childNodes(i).childNodes(3).text=="整数"){
+scoledit+="<int></int>";
+}
+}
+scoledit+="</root>";
+o[ii].coledit=scoledit;
+if(iTag==1){
+try {
+var dsO=eval(o[ii].dataset);
+dsO.bAdd=false;
+dsO.bEdit=false;
+dsO.Append("不置表格的焦点")   ;
+}catch (e) {}
+}else{
+o[ii].EndRowState="edit"	;
+}
+o[ii].ResizeDiv();
+try{o[ii].tab.rows(0).cells(0).focus();}catch(E){}
+}
+//设置title
+	for(var i=0;i<o[ii].tab.rows.length;i++)
+	{
+		var row_ = o[ii].tab.rows(i);
+		for(var j=0;j<row_.cells.length;j++)
+		{
+			row_.cells(j).title = row_.cells(j).innerText;
+		}
+	}
+}
+var d=new Date();
+var t1 = d.getTime();
+function check_one_col(ogrid,curcol) {
+var l=ogrid.tab.rows.length;
+var istart = ogrid.FixRows;
+for(var i=istart;i<l;i++){
+var oTd = ogrid.tab.rows(i).cells(curcol);
+oTd.style.backgroundRepeat="no-repeat";
+if(IsTrue(oTd.innerText)){
+oTd.style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_checked.gif)"
+}else{
+oTd.style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_uncheck.gif)"
+}
+
+
+oTd.innerText = "";
+}
+}
+
+//sxb  20080909 grid里添加button////////////
+function button_one_col(ogrid,curcol) {
+var l=ogrid.tab.rows.length;
+var istart = ogrid.FixRows;
+for(var i=istart;i<l;i++){
+var oTd = ogrid.tab.rows(i).cells(curcol);
+
+//取onclick
+var reg=new RegExp("%3Cfc_onclick%3E(.*)%3C/fc_onclick%3E","ig");
+var arr = reg.exec(s1);
+var mt = "''";
+if(!IsSpace(arr))
+{
+	mt = unescape(RegExp.$1);
+}
+
+//取button的value
+reg = new RegExp("%3Cbuttonname%3E(.*)%3C/buttonname%3E","ig");
+arr = reg.exec(s1);
+var button_name = "button";
+if(!IsSpace(arr))
+{
+	button_name = unescape(RegExp.$1);
+}
+
+oTd.innerHTML="<input type='button' onclick="+mt+" value="+button_name+">";
+//alert(oTd.innerHTML);
+}
+}
+
+//sxb 20080918 grid里添加img ，未完成
+function image_one_col(ogrid,curcol) {
+var l=ogrid.tab.rows.length;
+var istart = ogrid.FixRows;
+for(var i=istart;i<l;i++){
+var oTd = ogrid.tab.rows(i).cells(curcol);
+
+//取onclick
+var reg=new RegExp("%3Cfc_onclick%3E(.*)%3C/fc_onclick%3E","ig");
+var arr = reg.exec(s1);
+var mt = "''";
+if(!IsSpace(arr))
+{
+	mt = unescape(RegExp.$1);
+}
+
+//取image的src
+reg = new RegExp("%3Cimgsrc%3E(.*)%3C/imgsrc%3E","ig");
+arr = reg.exec(s1);
+var img_src = "img";
+if(!IsSpace(arr))
+{
+	img_src = unescape(RegExp.$1);
+}
+oTd.innerHTML="<img  onclick="+mt+" src="+img_src+">";
+}
+}
+///////////////////
+
+function initFormatCol(oXmlFormat,iRow) {
+var s="";
+try {
+s += "<readonly>"+oXmlFormat.documentElement.childNodes(iRow).childNodes(4).text+"</readonly>";
+s += "<visible></visible>"+"<u></u><v></v><s></s><r></r>"+"<columnwidth>"+oXmlFormat.documentElement.childNodes(iRow).childNodes(10).text+"</columnwidth>"+"<align>"+oXmlFormat.documentElement.childNodes(iRow).childNodes(11).text+"</align>";
+} catch(e) {} ;
+if(s=="") s = "<readonly>是</readonly>";
+return s ;
+}
+}
+function GridAddHref(ogrid) {
+var oList = oDataField.selectNodes("//field[link='是']");
+for(var iList=0;iList<oList.length;iList++){
+var sFieldName=oList.item(iList).childNodes(0).text;
+var colno=FieldNameToColNo(ogrid,sFieldName);
+var totalrows=ogrid.Rows;
+for(var iirow=ogrid.FixRows; iirow<totalrows; iirow++) {
+var s1=trim(oList.item(iList).childNodes(14).text);
+var s2=s1;
+s1=s1.toUpperCase();
+if(s1 == "HTTP"){
+s2="http://"+trim(ogrid.tab.rows(iirow).cells(colno).innerText);
+}else if(s1 == "MAILTO"){
+s2="mailto:"+trim(ogrid.tab.rows(iirow).cells(colno).innerText);
+}
+ogrid.tab.rows(iirow).cells(colno).innerHTML="<a target='" +oList.item(iList).childNodes(13).text
++"' href="+s2+" >"+ogrid.tab.rows(iirow).cells(colno).innerText
++"</a>";
+}
+}
+}
+function dset_grid(){
+var o=window.document.all.tags("object");
+for(var ii=0;ii<o.length;ii++){
+if(o[ii].type=="grid"){
+if(mbTagCol)
+var tmpj=1;
+else
+var tmpj=0;
+for (var i=0;i<oData.documentElement.childNodes.length-1;i++){
+for(j=0;j<o[ii].ColumnCount-1;j++){
+if (i<oData.documentElement.childNodes.length-1){
+o[ii].Text(i+1,j+tmpj)=oData.documentElement.childNodes(i).childNodes(j).text ;
+} else {
+o[ii].Text(i+1,j+tmpj)="";
+}
+}
+}
+}
+}
+}
+function InitColField(){
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].hide();
+if(mbTagCol)
+var tmpj=1;
+else
+var tmpj=0;
+if(isSpace(o[ii].format)==false){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (o[ii].format);
+var ll =oXml.documentElement.childNodes.length;
+for(var i=0;i<ll;i++){
+var sFname=oXml.documentElement.childNodes(i).childNodes(0).text.toUpperCase();
+for(var j=0;j<oDataField.childNodes.length;j++){
+var sFname1=oDataField.childNodes(j).childNodes(0).text;
+if(sFname1.toUpperCase()==sFname){
+o[ii].tab.children[0].children[tmpj+i].setAttribute("dsfield",j);
+break;
+}
+}
+}
+}
+}
+}
+}
+function dset_cont(){
+var o=window.document.all.tags("webgrid");
+for(var ii=0;ii<o.length;ii++){
+if (o[ii].dataset==eval(uniqueID+".id")){
+o[ii].hide();
+if(mbTagCol)
+var tmpj=1;
+else
+var tmpj=0;
+if(isSpace(o[ii].format)==false){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (o[ii].format);
+for(var i=0;i<oXml.documentElement.childNodes.length;i++){
+var sFname=oXml.documentElement.childNodes(i).childNodes(0).text.toUpperCase();
+for(var j=0;j<oDataField.childNodes.length;j++){
+var sFname1=oDataField.childNodes(j).childNodes(0).text;
+if(sFname1.toUpperCase()==sFname){
+o[ii].tab.childNodes(0).childNodes(tmpj+i).setAttribute("dsfield",j);
+break;
+}
+}
+}
+var tmpii=0;
+for (var i=0;i<o[ii].tab.rows.length-o[ii].FixRows;i++){
+tmpii=i+o[ii].FixRows;
+for(var j=0;j<o[ii].tab.childNodes(0).childNodes.length;j++){
+var sT=o[ii].tab.childNodes(0).childNodes(j).getAttribute("dsfield");
+if(sT!=null){
+	sT=parseInt(sT);
+	if (i<oData.documentElement.childNodes.length-1){	
+    var tdobj=o[ii].tab.rows(tmpii).cells(j).childNodes[0];	
+    //grid 中 图片列不排序
+	if(typeof(tdobj)!='undefined' && tdobj.tagName=="IMG" || typeof(tdobj)!='undefined'  && typeof(tdobj.childNodes[0])!='undefined' && tdobj.childNodes[0].tagName=="IMG"){
+	  if(tdobj.innerHTML!=''){
+		  o[ii].tab.rows(tmpii).cells(j).innerHTML=tdobj.innerHTML;
+	  }
+	  continue;
+	}else if(o[ii].tab.rows(tmpii).cells(j).style.backgroundImage == ""){
+	o[ii].tab.rows(tmpii).cells(j).innerText=fset_contall(oFields.Field[sT],oData.documentElement.childNodes(i).childNodes(sT).text );
+    }else{
+	o[ii].tab.rows(tmpii).cells(j).innerText="";
+	var v1=oData.documentElement.childNodes(i).childNodes(sT).text;
+		if(IsTrue(v1))
+		o[ii].tab.rows(tmpii).cells(j).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_checked.gif)"
+		else
+		o[ii].tab.rows(tmpii).cells(j).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_uncheck.gif)"
+	}
+} else {
+o[ii].tab.rows(tmpii).cells(j).innerText="";
+}
+}
+}
+}
+}else{
+for (var i=0;i<o[ii].Rows-o[ii].FixRows;i++){
+tmpii=i+o[ii].FixRows;
+for(j=0;j<o[ii].Cols-1;j++){
+if (i<oData.documentElement.childNodes.length-1){
+if(o[ii].tab.rows(tmpii).cells(j+tmpj).style.backgroundImage == ""){
+o[ii].tab.rows(tmpii).cells(j+tmpj).innerText=fset_contall(oFields.Field[j],oData.documentElement.childNodes.item(i).childNodes.item(j).text );
+}else{
+o[ii].tab.rows(tmpii).cells(j+tmpj).innerText="";
+var v1=oData.documentElement.childNodes(tmpii).childNodes(j).text;
+if(IsTrue(v1))
+o[ii].tab.rows(tmpii).cells(j+tmpj).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_checked.gif)"
+else
+o[ii].tab.rows(tmpii).cells(j+tmpj).style.backgroundImage = "url("+fcpubdata.Path+"/fceform/images/ef_run_grid_uncheck.gif)"
+}
+} else {
+o[ii].tab.rows(tmpii).cells(j+tmpj).innerText="";
+}
+}
+}
+}
+}
+}
+}
+function cont_dset(){
+}
+function initRowSet(){
+var hidecols = 0;
+oFields=new fnFields();
+for(var i=0;i<mFieldCount;i++){
+if(oDataField.childNodes(i).childNodes.length>15){
+if(oDataField.childNodes(i).childNodes(15).text == "否") hidecols++ ;
+}
+var f=fnField(oDataField.childNodes(i));
+f.index=i	;
+f.colno = i-hidecols + 1 ;
+oFields.Add(f);
+}
+}
+function fnFields()
+{
+this.Field=new Array();
+this.Add=FS_addfield;
+this.Clear=function(){this.Count=0;this.Field=new Array();};
+this.Count=0;
+this.Auto=true;
+this.State;
+}
+function FS_addfield(field,idx)
+{
+var n=field.FieldName;
+if(n!=""){
+this.Field[n]=field;
+this.Field[n.toLowerCase()]=field;
+this.Field[this.Count]=field;
+field.Index=this.Count;
+this.Count++;
+}
+}
+
+//zzy
+function Field(index,FieldName,DataType,DisplayLabel,Value,valid,Length,DotLength,Empty,Type,DefaultValue,isKey,DisplayFormat,fieldvalid,tag,colno,showType,columnHeight1,columnWidth1)
+{
+this.index=index;
+this.FieldName=FieldName;
+this.DataType=DataType;
+this.DisplayLabel=DisplayLabel;
+this.Value=Value  ;
+this.valid=valid  ;
+this.Length=Length  ;
+this.DotLength=DotLength  ;
+this.Empty=Empty;
+this.Type=Type  ;
+this.DefaultValue=DefaultValue;
+this.isKey=isKey ;
+this.DisplayFormat=DisplayFormat;
+this.fieldvalid = fieldvalid;
+this.tag = tag ;
+this.colno = colno ;
+
+
+//zzy
+this.showType = showType ;
+this.columnHeight1 = columnHeight1 ;
+this.columnWidth1 = columnWidth1 ;
+
+}
+function fnField(oNode)
+{
+var obj=new Field();
+obj.FieldName=oNode.childNodes(0).text ;
+var s1=oNode.childNodes(1).text ;
+obj.DataType=oNode.childNodes(1).text ;
+if(isSpace(mformat)){
+var ss1="";
+ss1=SqlToField("select chnname from FC_FLDLIST where fdname='"+obj.FieldName+"'");
+if(isSpace(ss1)==false ){
+obj.DisplayLabel=ss1;
+}else{
+obj.DisplayLabel=oNode.childNodes(2).text ;
+}
+obj.Length=SqlToField("select fdsize from FC_FLDLIST where fdname='"+obj.FieldName+"'");
+obj.DotLength=SqlToField("select fddec from FC_FLDLIST where fdname='"+obj.FieldName+"'");
+}else{
+obj.DisplayLabel=oNode.childNodes(2).text ;
+obj.Length=oNode.childNodes(3).text;
+obj.DotLength=oNode.childNodes(4).text ;
+}
+if(obj.DisplayLabel=="undefined")
+obj.DisplayLabel="";
+obj.Empty=oNode.childNodes(8).text;
+obj.isKey=oNode.childNodes(9).text;
+obj.valid=oNode.childNodes(10).text;
+obj.Type=oNode.childNodes(5).text;
+obj.DefaultValue=oNode.childNodes(6).text ;
+obj.DisplayFormat=oNode.childNodes(7).text;
+if(oNode.childNodes.length > 17){
+obj.fieldvalid = oNode.childNodes(17).text ;
+obj.tag = oNode.childNodes(18).text ;
+}
+
+
+//zzy
+obj.showType = oNode.childNodes(oNode.childNodes.length-3).text;
+obj.columnHeight1 = oNode.childNodes(oNode.childNodes.length-2).text;
+obj.columnWidth1 = oNode.childNodes(oNode.childNodes.length-1).text;
+
+
+return obj;
+}
+function RunValidError(sMsg,iTag){
+if(eval(uniqueID+".id")!=fcpubvar.DsMain)
+sMsg="第"+(mRecNo+1)+"行"+sMsg;
+if(iTag==3) {
+try {
+var objfocus=event.srcElement;
+if(objfocus.tagName.toUpperCase()!="WEBGRID"){
+alert(sMsg);
+}
+}catch(E){}
+}
+return sMsg;
+}
+function fnPutRecNo(vValue){
+mRecNo=vValue;
+RecNoID.fireChange();
+}
+function fnGetRecNo(){
+return mRecNo;
+}
+function fnPutPageSize(vValue){
+mPageSize=parseInt(vValue);
+if(isNaN(mPageSize))mPageSize=0;
+PageSizeID.fireChange();
+}
+function fnGetPageSize(){
+return mPageSize;
+}
+function fnGetdatasetID(){
+return mDatasetID;
+}
+function fnPutdatasetID(value){
+mDatasetID = value;
+datasetID.fireChange();
+}
+function fnGetdatastoreID(){
+return mDatastore;
+}
+function fnPutdatastoreID(value){
+mDatastore = value;
+datastoreID.fireChange();
+}
+function fnGetPageCount(){
+return mPageCount;
+}
+function fnPutPageNo(vValue){
+mPageNo=vValue;
+PageNoID.fireChange();
+}
+function fnGetPageNo(){
+return mPageNo;
+}
+function fnPutbAdd(vValue){
+mbAdd=vValue;
+bAddID.fireChange();
+}
+function fnGetbAdd(){
+return mbAdd;
+}
+function fnPutopensql(vValue){
+mopensql=vValue;
+opensqlID.fireChange();
+}
+function fnGetopensql(){
+return mopensql;
+}
+function fnPutformat(vValue){
+mformat=vValue;
+formatID.fireChange();
+}
+function fnGetformat(){
+return mformat;
+}
+
+/*  sxb */
+function fnPutButtonname(vValue)
+{
+	buttonnameID.fireChange;
+}
+function fnGetButtonname()
+{
+	return buttonname;
+}
+function fnPutRunclass(vValue)
+{
+	runclass = vValue;
+	runclassID.fireChange;
+}
+function fnGetRunclass()
+{
+	return runclass;
+}
+function fnPutFcOnclick(vValue)
+{
+	fc_onclickID.fireChange;
+}
+function fnGutFcOnclick()
+{
+	return fc_onclick;
+}
+
+function fnPutImageSrc(vValue)
+{
+	imageSrcID.fireChange;
+}
+function fnGutImageSrc()
+{
+	return imageSrc;
+}
+////////////////////
+function fnPutEmpty(vValue){
+mEmpty=vValue;
+EmptyID.fireChange();
+}
+function fnGetEmpty(){
+return mEmpty;
+}
+function fnGetRecordCountAll(){
+return mRecordCountAll;
+}
+function fnGetFieldCount(){
+return mFieldCount;
+}
+function fnPutbEdit(vValue){
+mbEdit=vValue;
+bEditID.fireChange();
+}
+function fnGetbEdit(){
+return mbEdit;
+}
+function fnPutFields(vValue){
+}
+function fnGetFields(){
+return oFields;
+}
+function fnGetxml(){
+return oData.documentElement.xml;
+}
+function fnGetoDom(){
+return oData;
+}
+function fnGetoDataField(){
+return oDataField;
+}
+function fnGetRecordCount()
+{
+return oData.documentElement.childNodes.length-1;
+}
+var mvisible=false;
+function fnGetvisible(){
+return mvisible;
+}
+function fnPutvisible(vValue){
+mvisible=isTrue(vValue);
+fnInit();
+visibleID.fireChange();
+}
+var mHideField="";
+function fnGetHideField(){
+return mHideField;
+}
+function fnPutHideField(vValue){
+mHideField=vValue;
+HideFieldID.fireChange();
+}
+function fnGetleft(){
+return mleft;
+}
+function fnPutleft(vValue){
+mleft=vValue;
+leftID.fireChange();
+fnInit();
+}
+function fnGettop()
+{
+return mtop;
+}
+function fnPuttop(vValue)
+{
+mtop=vValue;
+topID.fireChange();
+fnInit();
+}
+function fnGetheight()
+{
+return mheight;
+}
+function fnPutheight(vValue)
+{
+mheight=vValue;
+heightID.fireChange();
+fnInit();
+}
+function fnGetwidth()
+{
+return mwidth;
+}
+function fnPutwidth(vValue)
+{
+mwidth=vValue;
+widthID.fireChange();
+fnInit();
+}
+function fnGetRecordData(){
+var ss = oData.documentElement.xml ;
+var mRecordData = "";
+var istart = ss.indexOf("<root>");
+var iend = ss.lastIndexOf("<set><pages>");
+if(istart >= 0 && iend > istart){
+mRecordData = ss.substring(istart+6,iend);
+}
+return mRecordData ;
+}
+function dataset_fields1(sSql,PageNo,PageSize,sField,callback,context) {
+var sXml="<No>"+RepXml(sSql)+"</No>"+"<No1>"+PageNo+"</No1>"+"<No2>"+PageSize+"</No2>"+"<No3>"+sField+"</No3>"+"<No4>"+multiResult+"</No4>";
+var retX=""
+//creator_pt_actionUrl 定义了的话就向定义的URL发送数据
+//add by zuojian.xiang 2009-4-21 
+var tmp="";
+if(typeof(creator_pt_dbname)!='undefined'&&!IsSpace(creator_pt_dbname)){
+	tmp ="&key=dataset_fields1&dbName="+creator_pt_dbname;
+}
+if(!IsSpace(runclass)){
+	var classInfo = runclass.split('$$');
+	creator_pt_actionUrl = 'CreatorPTServlet?key=RunJava&className='+classInfo[0]+'&funcName='+classInfo[1]+'&args='+classInfo[2];
+}
+if(typeof creator_pt_actionUrl == "undefined"){
+	//alert(location.protocol+"//"+location.host + fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?dataset_fields1");
+	retX = SendHttp(location.protocol+"//"+location.host + fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?dataset_fields1"+tmp,sXml,callback,context);
+}else{
+	//alert(location.protocol+"//"+location.host + "/"+creator_pt_actionUrl);
+	//var regex = new RegExp("(^/+)(.*)");
+	//alert(sXml);
+	retX = SendHttp(location.protocol+"//"+location.host + "/"+fcpubdata.servletPath+"/"+creator_pt_actionUrl,sXml,callback,context);
+	//alert(location.protocol+"//"+location.host + fcpubdata.servletPath+"/"+creator_pt_actionUrl);
+}
+return retX;
+}
+function isNum(sNum,sType){
+sNum=trim(sNum+"");
+if(sType=="整数")
+var s1=parseInt(sNum);
+else
+var s1=parseFloat(sNum);
+if(isNaN(s1))return false;
+if(sNum.length>0 ){
+var s2=sNum.substring(sNum.length-1,sNum.length);
+if(isNaN(parseInt(s2))) return false;
+return true;
+} else { return true; }
+}
+function XmlRepGrid(ogrid,sBigXml){
+if(typeof ogrid.tab == "undefined" ){
+ogrid.Init();
+}
+var sTab=ogrid.tab.outerHTML;
+var sTab1="";
+var sTab2="";
+var sColgroup="<colgroup>";
+var sTD="";
+if(isSpace(sBigXml)){
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML ("<root><td></td></root>");
+var oData1=oData.documentElement.cloneNode(true);
+oData1.removeChild(oData1.childNodes(oData1.childNodes.length-1));
+var oList=oDataField.selectNodes("field[visible='否']");
+var arrList =new Array();
+for(var j=0;j<oList.length;j++){
+for(var jj=0;jj<oDataField.childNodes.length;jj++){
+if(oList.item(j).childNodes(0).text == oDataField.childNodes(jj).childNodes(0).text){
+arrList[j]=jj +1;
+break;
+}
+}
+}
+for(var i=0;i<oData1.childNodes.length ;i++){
+var oClone=oData1.childNodes(i).childNodes(0).cloneNode(false);
+oClone.text="";
+oData1.childNodes(i).insertBefore(oClone,oData1.childNodes(i).childNodes(0));
+var l1=arrList.length-1;
+for(var j=l1;j>=0;j--){
+if(oData1.childNodes(i).childNodes.length-1>=arrList[j]) {
+oData1.childNodes(i).removeChild(oData1.childNodes(i).childNodes(arrList[j]));
+}
+}
+}
+var sumcols=mFieldCount+1-oList.length;
+for(var i=0;i<sumcols;i++){
+sColgroup+="<col>";
+sTD+="<TD></TD>";
+}
+}else {
+var oXml=new ActiveXObject("Microsoft.XMLDOM");
+oXml.async=false;
+oXml.loadXML (sBigXml);
+var sumcols=oXml.documentElement.childNodes(0).childNodes.length;
+sColgroup+="<col style='width:80;'  >";
+sTD+="<TD></TD>";
+for(var i=1;i<sumcols;i++){
+sColgroup+="<col style='width:80;' align=right >";
+sTD+="<TD align=center >"+oXml.documentElement.childNodes(oXml.documentElement.childNodes.length-1).childNodes(1).childNodes(i).childNodes(2).text+"</TD>";
+}
+oXml.documentElement.removeChild(oXml.documentElement.childNodes(oXml.documentElement.childNodes.length-1));
+}
+sColgroup+="</colgroup>";
+var iPos=sTab.indexOf(">");
+if(iPos>0){
+sTab1=sTab.substring(0,iPos+1);
+}
+if(isSpace(ogrid.multihead)) {
+var iPos1=sTab.indexOf("<TR");
+var iPos=sTab.indexOf(">",iPos1);
+if(iPos>0){
+sTab2=sTab.substring(iPos1,iPos+1);
+}
+sTab=sTab1+sColgroup+sTab2+sTD+"</tr> ";
+}else{
+ogrid.FixRows=parseInt(ogrid.headrows);
+sTab=sTab1+sColgroup+ogrid.multihead;
+}
+if(isSpace(sBigXml)){
+var s1=RemoveRoot(oData1.xml);
+}else{
+var s1=RemoveRoot(oXml.documentElement.xml);
+}
+ogrid.LoadXml(sTab+s1+"</table>");
+}
+function Refresh() {
+alert(oData.documentElement.xml);
+}
+function fnInit0() {
+fnInit();
+}
+function fnInit() {
+}
+</SCRIPT>

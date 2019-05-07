@@ -1,0 +1,1 @@
+alter table OA_KBM_DOC_OPERATE_LOG modify k_title VARCHAR2(200);

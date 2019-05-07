@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="Untitled_report_1q"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="117"
+						y="9"
+						width="298"
+						height="26"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+				<text><![CDATA[你到底是怎么回事啊   建立中直领导体系]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="57"
+						y="14"
+						width="298"
+						height="26"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+				<text><![CDATA[你到底是怎么回事啊   建立中直领导体系]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="154"
+						y="52"
+						width="298"
+						height="26"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+				<text><![CDATA[你到底是怎么回事啊   建立中直领导体系]]></text>
+				</staticText>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="68"
+						y="10"
+						width="298"
+						height="26"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+				<text><![CDATA[你到底是怎么回事啊   建立中直领导体系]]></text>
+				</staticText>
+			</band>
+		</summary>
+</jasperReport>

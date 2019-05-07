@@ -1,0 +1,48 @@
+DROP TABLE OA_ARCHIVE_ADDR CASCADE CONSTRAINTS;
+
+/*==============================================================*/
+/* Table: OA_ARCHIVE_ADDR                                       */
+/*==============================================================*/
+CREATE TABLE OA_ARCHIVE_ADDR 
+(
+   INS_ID               VARCHAR2(50)         NOT NULL,
+   RECEIVERADDR         VARCHAR2(50)         NOT NULL,
+   RECEIVERNAME         VARCHAR2(500),
+   PRINT_NUM            VARCHAR2(50),
+   NUM                  VARCHAR2(50),
+   ATT_PATH             VARCHAR2(500),
+   SEND_TYPE            VARCHAR2(50),
+   IS_SEND              CHAR(1),
+   SEND_COUNT           NUMBER,
+   CONSTRAINT PK_OA_ARCHIVE_ADDR PRIMARY KEY (INS_ID, RECEIVERADDR)
+);
+
+COMMENT ON TABLE OA_ARCHIVE_ADDR IS
+'公文发送地址表';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.INS_ID IS
+'流程实例ID';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.RECEIVERADDR IS
+'公文传输机构地址码';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.RECEIVERNAME IS
+'公文传输机构名称';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.PRINT_NUM IS
+'份数';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.NUM IS
+'份号';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.ATT_PATH IS
+'附件名称';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.SEND_TYPE IS
+'该单位是主送还是抄送';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.IS_SEND IS
+'是否发送成功';
+
+COMMENT ON COLUMN OA_ARCHIVE_ADDR.SEND_COUNT IS
+'发送次数';

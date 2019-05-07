@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache>
+<diskStore path="java.io.tmpdir"/>
+    <defaultCache maxElementsInMemory="600" eternal="false" timeToIdleSeconds="660" timeToLiveSeconds="660" overflowToDisk="true" />
+        <cache name="com.chinacreator.reportcache" maxElementsInMemory="2000" eternal="false" timeToIdleSeconds="2000" timeToLiveSeconds="2000" overflowToDisk="true" />
+ 	<cache name="com.chinacreator.reportcache.db" maxElementsInMemory="1000" eternal="false" timeToIdleSeconds="3000" timeToLiveSeconds="3000" overflowToDisk="true" />
+</ehcache>

@@ -1,0 +1,16 @@
+animation=1
+caption=test_MSColumn2D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+showAlternateHGridColor=1
+alternateHGridAlpha=5
+alternateHGridColor='CC3300'
+
+dataset.filed=filed^filed^filed
+dataset.seriesName=aa^bb^cc^
+dataset.color=AFD8F8^F6BD0F^8BBA00
+
+trendLines.startValue=70000
+trendLines.color=009933
+trendLines.displayValue=Target

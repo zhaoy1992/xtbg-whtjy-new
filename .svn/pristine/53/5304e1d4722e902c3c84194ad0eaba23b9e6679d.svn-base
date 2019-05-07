@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>var oPubTables = new Array() ; //增加表的对象
+
+function uf_open() {
+	document.execCommand("2D-Position", true, true);	
+	
+	//onmousedown="tab_mouse_down()" onmousemove="tab_mouse_move()" onmouseup="tab_mouse_up()" ondblclick="tab_dblclick()"
+	divMain.onmousedown=tab_mouse_down;
+	divMain.onmousemove=tab_mouse_move;
+	divMain.onmouseup=tab_mouse_up;
+	divMain.ondblclick=tab_dblclick;
+	SendHttp(location.protocol+"//"+location.host + fcpubdata.servletPath + "/WebBill"+fcpubdata.dotnetVersion+"?GetAllTables","",
+		function (result){
+			var retX = result.value;
+			var obj = result.context;
+			obj.outerHTML = SelectAddOption(obj,retX);
+		}
+	,lstTables);
+	
+	grid1.DeleteRow();
+	grid1.dataset="";
+
+
+	e_PropWinOnload();
+	
+}
+function uf_ok(){
+	var sRet = Trim(txtSql.value);
+	if(sRet == "" || divSql.style.display=="none"){
+		var s = _PreCheck();
+		if(s!=""){
+			alert(s);
+			return;
+		}
+		txtSql.value = _GenSql();
+	}
+	sRet = Trim(txtSql.value);
+	if(sRet == ""){
+		alert("生成的SQL语句为空!");
+		return;
+	}
+	window.returnValue = sRet;
+	CloseBill();
+}
+
+function uf_addTable() {
+	if(lstTables.selectedIndex<0) return;
+	var tableName = lstTables.options(lstTables.selectedIndex).text;
+	_addOneTable(tableName);
+	
+}
+//页签控件的点击事件
+function PubClickPageControl(index) {
+	if(index == 0){
+		//alert();
+		grid1.ParentPos = "相对" ;
+		grid1.hideVscroll = false ;
+		grid1.hideHscroll = false ;
+		grid1.HScroll();  //重算滚动条
+		grid1.VScroll();
+		grid1.SetFocus();
+	}else	if(index == 1){
+		//alert();
+		grid2.ParentPos = "相对" ;
+		grid2.hideVscroll = false ;
+		grid2.hideHscroll = false ;
+		grid2.HScroll();  //重算滚动条
+		grid2.VScroll();
+		grid2.SetFocus();
+	}
+}
+function uf_showsql() {
+	var msg1 = "查看SQL语句";
+	var msg2 = "返回设计界面";
+	if(cmdShow.value ==msg1){
+		var s = _PreCheck();
+		if(s!=""){
+			alert(s);
+			return;
+		}
+		txtSql.value = _GenSql();
+		divSql.style.display="";
+		divMain.style.display="none";
+		lstTables.style.display="none";
+		cmdShow.value = msg2;
+	}else{
+		divSql.style.display='none';
+		divMain.style.display='';
+		lstTables.style.display='';	
+		cmdShow.value = msg1;
+	}
+}
+function uf_runsql() {
+	grid3.format="";
+	dataset3.format="";
+	var num = ToInt(txtRows.value);
+	dataset3.PageSize=num;
+	dataset3.Open(txtSql.value,"",function (result){});	
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><script src='../js/fcgensql.js'></script><script src='../../fceformext/js/userfunc.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/><script >document.styleSheets[0].addRule("fc\\:webgrid","behavior: url(../htc/webgrid.htc)",0);</script><script src='../js/fcwebgrid.js'></script><script >document.styleSheets[0].addRule("fc\\:fc_code","behavior: url(../htc/fc_code.htc)",0);</script><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;fcgensql.js&#13;&#10;~userfunc.js" BLONopen="uf_open()" toolbar="不带工具栏" dj_sn="eb_gensql" type="ST" caption="sql语句生成器" mkbh codeheader="BBB" keyfield center="居中" window="有模式窗口" entertype="修改" posleft postop poswidth="760" posheight="520" isfile="否" OtherSave="否" idtype="1" billtaborder="<root><taborder>lstTables</taborder><taborder>grid1</taborder><taborder>grid2</taborder><taborder>chkDistinct</taborder><taborder>FCButton10</taborder><taborder>FCButton11</taborder><taborder>cmdShow</taborder><taborder>cmdClose</taborder><taborder>cmdOk</taborder><taborder>txtSql</taborder><taborder>button5</taborder><taborder>txtRows</taborder><taborder>grid3</taborder></root>" controlno="SKButton:0;SKDBedit:0;checkbox:1;label:4;radio:0;listbox:1;textarea:1;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:2;tab:1;div:2;DsMain_field:0;a:0;button:6;text:1;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:3;dataset:3;spin:0;excel:0;tree:0" contxml="<root><checkbox><id>chkDistinct</id></checkbox><label><id>label1</id><id>label2</id><id>label4</id><id>label9</id><id>label3</id></label><listbox><id>lstTables</id></listbox><textarea><id>txtSql</id></textarea><tab><id>tab1</id></tab><div><id>divMain</id><id>divSql</id></div><button><id>FCButton10</id><id>FCButton11</id><id>cmdShow</id><id>cmdClose</id><id>cmdOk</id><id>button5</id></button><text><id>txtRows</id></text><grid><id>grid1</id><id>grid2</id><id>grid3</id></grid><dataset><id>dataset1</id><id>dataset2</id><id>dataset3</id></dataset></root>"><SELECT id=lstTables style="LEFT: 1px; WIDTH: 146px; POSITION: absolute; TOP: 29px; HEIGHT: 464px" onmovestart=moveStart() size=8 ondblclick='bill_ondblclick("uf_addTable()")' sql temptext tempvalue check="1" controltype="listbox" sqltrans></SELECT> 
+<DIV id=divMain style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; OVERFLOW-Y: auto; LEFT: 149px; OVERFLOW-X: auto; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 596px; BORDER-BOTTOM: black 1px solid; POSITION: absolute; TOP: 29px; HEIGHT: 293px; BACKGROUND-COLOR: #ffffff" controltype="div" NotBg="否"></DIV>
+<DIV class=tab-pane id=tab1 style="LEFT: 151px; WIDTH: 594px; POSITION: absolute; TOP: 323px; HEIGHT: 168px" IsHideTitle="undefined" showtype="luna">
+<DIV class=tab-page style="WIDTH: 594px; HEIGHT: 150px">
+<H2 class=tab>字段列表</H2><?xml:namespace prefix = fc /><fc:webgrid id=grid1 onkeydown='bill_ongridkeydown("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' ondblclick='bill_ongriddblclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' onclick='bill_ongridclick("<grid1><col></col><col></col><col></col><col></col><col></col></grid1>")' visible="是" readonly="否" autoappend="否" autowidth="否" autoheight="否" canselect="是" SetRowHeight="是" hideVscroll="否" hideHscroll="否" autosize="否" bodyrowheight="-1" bodyrows="-1" dataset="dataset1" format="<cols><col><fname>fdname</fname><cname>字段名</cname><width>120</width><dtype>字符</dtype><readonly>是</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>180</columnwidth><align>left</align></col><col><fname>sorder</fname><cname>排序</cname><width>15</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u5347%u5E8F%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u964D%u5E8F%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%0D%0A%u5347%u5E8F%0D%0A%u964D%u5E8F%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>42</columnwidth><align>left</align></col><col><fname>sgroup</fname><cname>分组</cname><width>15</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u5206%u7EC4%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%0D%0A%u5206%u7EC4%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>42</columnwidth><align>left</align></col><col><fname>ssum</fname><cname>计算项</cname><width>15</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u6C47%u603B%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u8BA1%u6570%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u5E73%u5747%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u6700%u5C0F%u503C%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u6700%u5927%u503C%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%0D%0A%u6C47%u603B%0D%0A%u8BA1%u6570%0D%0A%u5E73%u5747%0D%0A%u6700%u5C0F%u503C%0D%0A%u6700%u5927%u503C%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>65</columnwidth><align>left</align></col><col><fname>fdother</fname><cname>字段别名</cname><width>120</width><dtype>字符</dtype><readonly>否</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>120</columnwidth><align>left</align></col></cols>" width="492" height="131" top="0" left="-2" ParentPos="相对">
+<TABLE id=t style="TABLE-LAYOUT: fixed; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow>
+<TD></TD></TR></TBODY></TABLE></fc:webgrid>
+<DIV id=chkDistinct style="LEFT: 505px; WIDTH: 80px; POSITION: absolute; TOP: 15px; HEIGHT: 20px" onmovestart=moveStart() noWrap controltype="checkbox" NotBg="否" value="否" falsevalue="否" truevalue="是" divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>取不重复值</SPAN></DIV></DIV>
+<DIV class=tab-page style="WIDTH: 594px; HEIGHT: 150px">
+<H2 class=tab>条件</H2><fc:webgrid id=grid2 onkeydown='bill_ongridkeydown("<grid2><col></col><col></col><col></col><col></col><col></col><col></col></grid2>")' ondblclick='bill_ongriddblclick("<grid2><col></col><col></col><col></col><col></col><col></col><col></col></grid2>")' onclick='bill_ongridclick("<grid2><col></col><col></col><col></col><col></col><col></col><col></col></grid2>")' visible="是" readonly="否" autoappend="否" autowidth="否" autoheight="否" canselect="是" SetRowHeight="是" hideVscroll="否" hideHscroll="否" autosize="否" bodyrowheight="-1" bodyrows="-1" dataset="dataset2" format="<cols><col><fname>sign1</fname><cname>(</cname><width>10</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%28%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%28%28%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%28%28%28%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%28%28%28%28%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%28%28%28%28%28%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u662F%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%0D%0A%28%0D%0A%28%28%0D%0A%28%28%28%0D%0A%28%28%28%28%0D%0A%28%28%28%28%28%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>32</columnwidth><align>left</align></col><col><fname>fdname</fname><cname>字段</cname><width>30</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>160</columnwidth><align>left</align></col><col><fname>swhere1</fname><cname>条件</cname><width>20</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF1D%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF1E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF1C%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF1E%uFF1D%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF1C%uFF1D%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%uFF01%uFF1D%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u5F00%u59CB%u4E8E%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%uFF1D%0D%0A%uFF1E%0D%0A%uFF1C%0D%0A%uFF1E%uFF1D%0D%0A%uFF1C%uFF1D%0D%0A%uFF01%uFF1D%0D%0A%u5F00%u59CB%u4E8E%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>60</columnwidth><align>left</align></col><col><fname>svalue</fname><cname>字段或值</cname><width>20</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>160</columnwidth><align>left</align></col><col><fname>sign2</fname><cname>)</cname><width>10</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%29%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%29%29%20%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%29%29%29%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%29%29%29%29%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%29%29%29%29%29%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u662F%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%0D%0A%29%0D%0A%29%29%20%0D%0A%29%29%29%0D%0A%29%29%29%29%0D%0A%29%29%29%29%29%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>32</columnwidth><align>left</align></col><col><fname>swhere2</fname><cname>或与</cname><width>10</width><dtype>字符</dtype><readonly>选%3Ccode%3E%3Cxml%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u4E0E%3C/td%3E%3C/tr%3E%3Ctr%20height%3D%2716px%27%20%3E%3Ctd%3E%u6216%u8005%3C/td%3E%3C/tr%3E%3C/xml%3E%3Cformat%3E%3C/format%3E%3Cblninput%3E%u5426%3C/blninput%3E%3Cblnempty%3E%u5426%3C/blnempty%3E%3Ccheck%3E1%3C/check%3E%3Ctemptext%3E%u4E0E%0D%0A%u6216%u8005%3C/temptext%3E%3C/code%3E</readonly><visible>是</visible><u></u><v></v><s></s><r></r><columnwidth>40</columnwidth><align>left</align></col></cols>" width="506" height="128" top="1" left="-1" ParentPos="相对">
+<TABLE id=t style="TABLE-LAYOUT: fixed; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow>
+<TD></TD></TR></TBODY></TABLE></fc:webgrid><BUTTON id=FCButton10 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 528px; WIDTH: 58px; FONT-FAMILY: ; POSITION: absolute; TOP: 8px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("dataset2.Append()")' dropstyle="否">新增行</BUTTON><BUTTON id=FCButton11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 528px; WIDTH: 58px; FONT-FAMILY: ; POSITION: absolute; TOP: 40px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" onclick='bill_onclick("dataset2.Delete()")' dropstyle="否">删除行</BUTTON></DIV></DIV>
+<SCRIPT>var tab1 = new WebFXTabPane( document.getElementById( "tab1" ) );</SCRIPT>
+<fc:dataset id=dataset1 temptable="TMP_TTGRID3" opensortno="3" format="<fields><field><fieldname>fdname</fieldname><datatype>字符</datatype><displaylabel>字段名</displaylabel><size>120</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>否</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>sorder</fieldname><datatype>字符</datatype><displaylabel>排序</displaylabel><size>15</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>sgroup</fieldname><datatype>字符</datatype><displaylabel>分组</displaylabel><size>15</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>ssum</fieldname><datatype>字符</datatype><displaylabel>计算项</displaylabel><size>15</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>fdother</fieldname><datatype>字符</datatype><displaylabel>字段别名</displaylabel><size>120</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><fdname></fdname><sorder></sorder><sgroup></sgroup><ssum></ssum><fdother></fdother></dsid>")' onGetText='bill_ondatasetgettext("<dsid><fdname></fdname><sorder></sorder><sgroup></sgroup><ssum></ssum><fdother></fdother></dsid>")' onSetText='bill_ondatasetsettext("<dsid><fdname></fdname><sorder></sorder><sgroup></sgroup><ssum></ssum><fdother></fdother></dsid>")'></fc:dataset><fc:dataset id=dataset2 temptable="TMP_TTGRID4" opensortno="4" format="<fields><field><fieldname>sign1</fieldname><datatype>字符</datatype><displaylabel>(</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>fdname</fieldname><datatype>字符</datatype><displaylabel>字段</displaylabel><size>30</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>swhere1</fieldname><datatype>字符</datatype><displaylabel>条件</displaylabel><size>20</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>svalue</fieldname><datatype>字符</datatype><displaylabel>字段或值</displaylabel><size>20</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>sign2</fieldname><datatype>字符</datatype><displaylabel>)</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field><field><fieldname>swhere2</fieldname><datatype>字符</datatype><displaylabel>或与</displaylabel><size>10</size><precision>0</precision><fieldkind>数据项</fieldkind><defaultvalue></defaultvalue><displayformat></displayformat><isnull>否</isnull><iskey>否</iskey><valid>是</valid><procvalid>否</procvalid><link>否</link><target></target><href></href><visible>是</visible><primarykey>否</primarykey><fieldvalid></fieldvalid><tag></tag></field></fields>" onValid='bill_ondatasetvalid("<dsid><sign1></sign1><fdname></fdname><swhere1></swhere1><svalue></svalue><sign2></sign2><swhere2></swhere2></dsid>")' onGetText='bill_ondatasetgettext("<dsid><sign1></sign1><fdname></fdname><swhere1></swhere1><svalue></svalue><sign2></sign2><swhere2></swhere2></dsid>")' onSetText='bill_ondatasetsettext("<dsid><sign1></sign1><fdname></fdname><swhere1></swhere1><svalue></svalue><sign2></sign2><swhere2></swhere2></dsid>")'></fc:dataset><BUTTON id=cmdShow style="LEFT: 500px; WIDTH: 88px; POSITION: absolute; TOP: 2px; HEIGHT: 24px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_showsql()")' dropstyle="否">查看SQL语句</BUTTON> 
+<DIV id=label1 style="LEFT: 8px; WIDTH: 65px; POSITION: absolute; TOP: 11px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">所有表名:</DIV><BUTTON id=cmdClose style="LEFT: 662px; WIDTH: 55px; POSITION: absolute; TOP: 1px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("CloseBill()")' dropstyle="否"></BUTTON><BUTTON id=cmdOk style="LEFT: 599px; WIDTH: 55px; POSITION: absolute; TOP: 1px; HEIGHT: 26px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_ok()")' dropstyle="否"></BUTTON> 
+<DIV id=divSql style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; DISPLAY: none; LEFT: 5px; OVERFLOW: auto; BORDER-LEFT: black 1px solid; WIDTH: 740px; BORDER-BOTTOM: black 1px solid; POSITION: absolute; TOP: 29px; HEIGHT: 464px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否"><TEXTAREA id=txtSql style="LEFT: 0px; WIDTH: 731px; POSITION: absolute; TOP: 0px; HEIGHT: 142px" onmovestart=moveStart() rows=3 cols=82 controltype="textarea" value="textarea1" induce="否"></TEXTAREA><BUTTON id=button5 style="LEFT: 1px; WIDTH: 94px; POSITION: absolute; TOP: 144px; HEIGHT: 25px" onmovestart=moveStart() controltype="button" onclick='bill_onclick("uf_runsql()")' dropstyle="否">运行SQL语句</BUTTON> 
+<DIV id=label2 style="LEFT: 148px; WIDTH: 38px; POSITION: absolute; TOP: 149px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">行数:</DIV><INPUT id=txtRows style="LEFT: 186px; WIDTH: 44px; POSITION: absolute; TOP: 146px; HEIGHT: 20px" onmovestart=moveStart() size=7 value=50 controltype="text"><fc:webgrid id=grid3 onkeydown='bill_ongridkeydown("<grid3></grid3>")' ondblclick='bill_ongriddblclick("<grid3></grid3>")' onclick='bill_ongridclick("<grid3></grid3>")' visible="是" readonly="否" autoappend="否" autowidth="否" autoheight="否" canselect="是" SetRowHeight="是" hideVscroll="否" hideHscroll="否" autosize="否" bodyrowheight="-1" bodyrows="-1" dataset="dataset3" format="<cols></cols>" width="708" height="263" top="172" left="2" ParentPos="相对">
+<TABLE id=t style="TABLE-LAYOUT: fixed; LEFT: 0px; POSITION: absolute; TOP: 0px; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=1 frame=box>
+<TBODY>
+<TR class=fcGridFirstRow>
+<TD></TD></TR></TBODY></TABLE></fc:webgrid><SPAN id=label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 236px; WIDTH: 133px; COLOR: #b2b2b2; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 151px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" align="Left">为-1表示取出所有行。</SPAN></DIV><fc:dataset id=dataset3 opensortno="1" format="<fields></fields>" onValid='bill_ondatasetvalid("<dsid></dsid>")' onGetText='bill_ondatasetgettext("<dsid></dsid>")' onSetText='bill_ondatasetsettext("<dsid></dsid>")'></fc:dataset><SPAN id=label9 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 196px; WIDTH: 225px; COLOR: #b2b2b2; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 2px; HEIGHT: 28px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" align="Left">在联接线上双击则进入编辑联接信息界面,在表名标题上双击进入编辑表信息界面</SPAN><SPAN id=label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 67px; WIDTH: 72px; COLOR: #b2b2b2; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 3px; HEIGHT: 42px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" align="Left">在下面双击则增加表。</SPAN></DIV><p id=splitaddhtml /><link type='text/css' rel='stylesheet' href='../css/shape.css'  /></body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">		
+		<STYLE> .userData{behavior:url(#default#userData);}
+	</STYLE>		
+		<script src="../../fceform/js/fcpub.js"></script>
+		<script src="../../fceform/js/fcrundj.js"></script>
+		<script src="../../fceform/js/tabpane.js"></script>
+		<script src="../../fceform/js/ccpub.js" defer></script>
+		<script src="../../fceform/js/ccapp_pub.js" defer></script>
+	</HEAD>
+	<body background="../../fceform/images/ef_run_background.gif" onLoad="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<iframe id="_newframe" name="_newframe" height="0" width="0"></iframe>
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+		<script type="text/javascript">
+		function selectOn(obj){
+			if(obj.checked){
+				document.getElementById("lm_327").style.display = "block";
+				document.getElementById("lm_325").style.display = "block";
+				document.getElementById("lm_324").style.display = "block";
+				document.getElementById("txt_width").style.display = "block";
+				document.getElementById("txt_height").style.display = "block";
+				document.getElementById("txt_div").style.display = "block";
+			}else{
+				document.getElementById("lm_327").style.display = "none";
+				document.getElementById("lm_325").style.display = "none";
+				document.getElementById("lm_324").style.display = "none";
+				document.getElementById("txt_width").style.display = "none";
+				document.getElementById("txt_height").style.display = "none";
+				document.getElementById("txt_div").style.display = "none";
+			}
+		}
+		function initGridCombox(){
+			try{
+				var varwindow=window.top.dialogArguments[11];
+				var dataset = varwindow.document.getElementById(SKDBcombobox8.value);
+				var xdom = SetDom(dataset.formatxml).documentElement;
+				var groupops = groupField.options;
+				var sortops = sortField.options;
+				groupops.length=0;
+				sortops.length=0;
+				for(var i=0,arr = xdom.childNodes,len = arr.length;i<len;++i){
+					var temp = arr[i].firstChild.text;
+					groupops.add(new Option(temp,temp));
+					sortops.add(new Option(temp,temp));
+				}
+			}catch(e){
+			}
+		}
+		function uf_open() {			
+			var obj=pubDataSet[0] ;
+			SetTextValue(obj.GridTitle,GridTitle);
+			if(obj.usercode)
+				SetTextValue(obj.usercode,usercode);
+			if(obj.txt_height)
+				SetTextValue(obj.txt_height,txt_height);
+			if(obj.txt_width)
+				SetTextValue(obj.txt_width,txt_width);
+			if(obj.txt_div)
+				SetTextValue(obj.txt_div,txt_div);
+			if(obj.pagesize)
+				SetTextValue(obj.pagesize,pageSize);
+			SetCheckBoxValue(isGroup,eval(obj.isGroup)?"是":"否");
+			SetCheckBoxValue(isPage,eval(obj.isPage)?"是":"否");
+			SetCheckBoxValue(isEdit,eval(obj.isEdit)?"是":"否");
+			if(obj.isChecked=='yes'){
+    			isChecked.checked = true;
+   			 }else{
+    			isChecked.checked = false;
+    		}
+    		selectOn(isChecked);
+			isShowGroup();
+			isShowPage();
+			PropWinOnload();
+
+			//列数据集
+			var sOption = pubDataSet[1][0];
+			SKDBcombobox8.outerHTML = SelectAddOption(SKDBcombobox8,sOption) ;	
+			SetTextValue(obj.dataset,SKDBcombobox8);
+			initGridCombox();
+			if(obj.groupField){
+				//alert(obj.groupField);
+				groupField.value= obj.groupField.toUpperCase();
+				sortField.value = obj.sortField.toUpperCase();
+			}
+		}
+		function uf_ok() {
+			var obj=pubDataSet[0] ;
+			obj.pagesize=pageSize.value;
+			obj.GridTitle=GridTitle.value;
+			obj.usercode=usercode.value;
+			obj.txt_width = txt_width.value;
+			obj.txt_height = txt_height.value;
+			obj.txt_div = txt_div.value;
+			obj.isGroup=isGroup.value=="是"?true:false;
+			obj.isPage=isPage.value=="是"?true:false;
+			obj.isEdit=isEdit.value=="是"?true:false;
+			if(isChecked.checked){
+		    	obj.isChecked = 'yes';
+		    }else{
+		    	obj.isChecked = 'no';
+		    }
+			
+			obj.groupField=groupField.value.toLowerCase();
+			obj.dataset=SKDBcombobox8.value;
+			obj.sortField=sortField.value.toLowerCase();
+			if(PropWinClickOk()){
+				return;
+			}
+			
+			var GridTitle1 = document.getElementById('GridTitle').value;
+			var txtId1 = document.getElementById('txtId').value;
+			var SKDBcombobox81 = document.getElementById('SKDBcombobox8').value;
+			if(GridTitle1==''||txtId1==''||SKDBcombobox81==''){
+				alert('控件ID，grid标题，数据集不能为空！');
+				return ;
+			}
+			window.close();
+		}
+		function isShowGroup(){
+			if(isGroup.value=='是'){
+				document.getElementById('div3').style.display="block";
+			}else{
+				document.getElementById('div3').style.display="none";
+			}
+		}
+		function isShowPage(){
+			if(isPage.value=='是'){
+				document.getElementById('pageSize').style.display="block";
+				document.getElementById('label5').style.display="block";
+			}else{
+				document.getElementById('pageSize').style.display="none";
+				document.getElementById('label5').style.display="none";
+			}
+		}
+		</script>
+<script src='../../fceform/js/fcopendj.js'></script><script defer src='../../fceform/js/fcsavedj.js'></script><script src='../../fceform/js/fcselfuse.js'></script><script src='../../fceform/js/fcbasecont.js'></script><script defer src='../../fceform/js/fcother.js'></script><script defer src='../../fceform/js/selectdate.js'></script><script src='../../fceform/../fceformext/js/userfunc.js'></script><script src='../../fceform/js/fcdate.js'></script><link href=../../fceform/css/tabstyle.css type=text/css rel=stylesheet><script src='../../fceform/js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../../fceform/css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../../fceform/css/Button.css'/><link type='text/css' rel='stylesheet' href='../../fceform/css/TextStyle.css'/>
+<script></script><DIV id=SKbillsheet BLONopen="uf_open()" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;~userfunc.js&#13;&#10;fcdate.js" creatorType="20090211174050109672" type="ZW" contxml="
+<root>
+	<checkbox><id>isPage</id><id>isChecked</id>
+	<id>isEdit</id><id>isGroup</id>
+	</checkbox>
+	<textarea><id>usercode</id></textarea>
+	<label><id>label1</id><id>label2</id><id>label3</id><id>label4</id>
+	<id>Label5</id><id>Label6</id><id>Label7</id><id>Label8</id>
+	<id>Label23</id></label>
+<combobox><id>cboPosition</id></combobox>
+<tab><id>tab1</id></tab>
+<div><id>div1</id></div>
+<button><id>cmdOk</id><id>cmdClose</id></button>
+<text>
+	<id>sortField</id>
+	<id>txtId</id>
+	<id>pageSize</id>
+	<id>txtLeft</id>
+	<id>txtTop</id>
+	<id>txtWidth</id>
+	<id>txtHeight</id>
+	<id>txt_width</id>
+	<id>txt_height</id>
+	<id>txt_div</id>
+	<id>groupField</id>
+</text></root>" 
+controlno="SKButton:0;SKDBedit:0;checkbox:2;label:5;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:1;div:1;DsMain_field:0;a:0;button:2;text:3;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:2;dataset:0;spin:0;excel:0;tree:0;ebshow:0;creatorSubForm:0;creator_div:0" billtaborder="
+<root>
+<taborder>SKDBcombobox3</taborder>
+<taborder>cmdOk</taborder>
+<taborder>cmdClose</taborder>
+<taborder>text1</taborder>
+<taborder>text2</taborder>
+<taborder>text3</taborder>
+<taborder>txtLeft</taborder>
+<taborder>txtTop</taborder>
+<taborder>txtWidth</taborder>
+<taborder>txtHeight</taborder>
+<taborder>txt_div</taborder>
+	<taborder>txt_width</taborder>
+	<taborder>txt_height</taborder>
+</root>" creator_pagination version="1.0" idtype="1" creator_csslib OtherSave="否" isfile="否" posheight poswidth postop posleft isprotect="是" islog="否" creator_office_isBindForm="否" creator_showAlert="是" creator_elementAuthoritySwitch="否" hasWorkflowButton="否" creator_remark entertype="修改" window="当前窗口" BLONclose="UnLoadWebOffice();" BLONopen="setAuthority();" keyfield codeheader="BBB" creatorStyle="creatorBlue" mkbh caption="ExtGrid属性" dj_sn="20090413152825671960" toolbar="不带工具栏" creator_allTab="<tabs><tab><id>tab1</id><content><index>0</index><gridid></gridid><iframeid></iframeid></content></tab></tabs>">&nbsp;&nbsp;&nbsp;</INPUT></INPUT></INPUT></INPUT> 
+<DIV class=tab-pane id=tab1 style="LEFT: 0px; WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 99%" IsHideTitle="undefined" showtype="luna">
+<DIV class=tab-page style="margin:5px;WIDTH: 490px; HEIGHT: 340px">
+<H2 class=tab>属性</H2>
+<DIV id=div1 style="BORDER:none; LEFT: 0px; OVERFLOW: auto;  WIDTH: 100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=label1 style="LEFT: 23px; WIDTH: 65px; POSITION: absolute; TOP: 53px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label1">控件ID：</DIV>
+<INPUT id=txtId style="LEFT: 99px; WIDTH: 95px; POSITION: absolute; TOP: 52px; HEIGHT: 20px" onmovestart=moveStart() size=17 controltype="text"> 
+<DIV id=label2 style="LEFT: 219px; WIDTH: 55px; POSITION: absolute; TOP: 54px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label2">数据集：</DIV>
+<SELECT onchange="initGridCombox()" id=SKDBcombobox8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 274px; WIDTH: 120px; FONT-FAMILY: ; POSITION: absolute; TOP: 52px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff" controltype="combobox" china check="1" tempvalue temptext sql backheight="25" backwidth="120" sqltrans></SELECT>
+<DIV style="LEFT: 399px; WIDTH: 20px; POSITION: absolute; TOP: 55px; HEIGHT: 15px"><font color="#FF0000" title="不能为空">*</font></DIV>
+<DIV style="LEFT: 200px; WIDTH: 20px; POSITION: absolute; TOP: 95px; HEIGHT: 15px"><font color="#FF0000" title="不能为空">*</font></DIV><DIV style="LEFT: 200px; WIDTH: 20px; POSITION: absolute; TOP: 55px; HEIGHT: 15px"><font color="#FF0000" title="不能为空">*</font></DIV>
+<DIV id=label3 style="LEFT: 204px; WIDTH: 65px; POSITION: absolute; TOP: 95px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">分页：</DIV><DIV id=isPage style="LEFT: 276px; WIDTH: 80px; POSITION: absolute; TOP: 90px; HEIGHT: 20px" onmovestart=moveStart() noWrap value="否" controltype="checkbox" NotBg="否" falsevalue="否" truevalue="是" onclick='isShowPage()' divtype="checkbox">
+<INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN></SPAN></DIV> 
+<DIV id=label5 style="LEFT: 203px; WIDTH: 65px; POSITION: absolute; TOP: 135px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">每页行数：</DIV><INPUT id=pageSize style="LEFT: 273px; WIDTH: 96px; POSITION: absolute; TOP: 132px; HEIGHT: 20px" onmovestart=moveStart() size=16 value=20 controltype="text"> 
+<DIV id=label23 style="LEFT: 13px; WIDTH: 75px; POSITION: absolute; TOP: 95px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label23">GRID标题：</DIV><INPUT id=GridTitle style="LEFT: 100px; WIDTH: 96px; POSITION: absolute; TOP: 93px; HEIGHT: 20px" onmovestart=moveStart() value=""  controltype="text">
+<DIV id=label4 style="LEFT: 22px; WIDTH: 65px; POSITION: absolute; TOP: 132px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label4">定位类型：</DIV>
+<SELECT id=cboPosition style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 98px; WIDTH: 81px; FONT-FAMILY: ; POSITION: absolute; TOP: 130px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("PropWinChangePosition()")' controltype="combobox" china sqltrans backwidth="81" backheight="25" sql temptext="静态&#13;&#10;绝对" tempvalue="static&#13;&#10;absolute" check="1"><OPTION value=static selected>静态</OPTION><OPTION value=absolute>绝对</OPTION></SELECT>
+<SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 29px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 166px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" value="Label5">左：</SPAN>
+<INPUT id=txtLeft style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 58px; BORDER-LEFT: dimgray 2px solid; WIDTH: 51px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 162px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtLeft)")' controltype="text" CanSelect="false">
+<SPAN id=Label6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 119px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 166px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" value="Label6">上：</SPAN>
+<INPUT id=txtTop style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 151px; BORDER-LEFT: dimgray 2px solid; WIDTH: 51px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 162px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtTop)")' controltype="text" CanSelect="false">
+<SPAN id=Label7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 209px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 166px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" value="Label7">宽：</SPAN>
+<INPUT id=txtWidth style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 236px; BORDER-LEFT: dimgray 2px solid; WIDTH: 51px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 162px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtWidth)")' controltype="text" CanSelect="false">
+<SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 296px; WIDTH: 12px; FONT-FAMILY: ; POSITION: absolute; TOP: 166px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" controltype="label" NotBg="否" value="Label8">高：</SPAN>
+<INPUT id=txtHeight style="BORDER-RIGHT: silver 1px solid; BORDER-TOP: dimgray 2px solid; DISPLAY: block; FONT-SIZE: 12px; LEFT: 329px; BORDER-LEFT: dimgray 2px solid; WIDTH: 51px; BORDER-BOTTOM: silver 1px solid; FONT-FAMILY: ; POSITION: absolute; TOP: 162px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtHeight)")' controltype="text" CanSelect="false"></DIV>
+
+<SPAN id=lm_326 style="LEFT: 31px; WIDTH: 77px; POSITION: absolute; TOP: 205px; HEIGHT: 21px; TEXT-ALIGN: left"
+onmovestart=moveStart() noWrap controltype="label" value="label13" NotBg="否">
+按百分比：</SPAN>
+<input id=isChecked type=checkbox onclick="selectOn(this)" controltype="checkbox" style="LEFT: 97px; WIDTH: 20px; POSITION: absolute; TOP: 205px; HEIGHT: 19px"/>
+<SPAN id=lm_324 style="LEFT: 129px; WIDTH: 27px; POSITION: absolute; TOP: 205px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+onmovestart=moveStart() noWrap controltype="label" value="label13" NotBg="否">
+宽：</SPAN>
+<INPUT id=txt_width style="LEFT: 169px; WIDTH: 35px; POSITION: absolute; TOP: 205px; HEIGHT: 19px;display:none;"
+onmovestart=moveStart() size=6 controltype="text">
+<SPAN id=lm_325 style="LEFT: 219px; WIDTH: 27px; POSITION: absolute; TOP: 205px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+onmovestart=moveStart() noWrap controltype="label" value="label13" NotBg="否">
+高： </SPAN>
+<INPUT id=txt_height style="LEFT: 249px; WIDTH: 35px; POSITION: absolute; TOP: 205px; HEIGHT: 19px;display:none;"
+onmovestart=moveStart() size=6 controltype="text">
+
+<SPAN id=lm_327 style="LEFT: 319px; WIDTH: 87px; POSITION: absolute; TOP: 205px; HEIGHT: 21px; TEXT-ALIGN: left;display:none;"
+onmovestart=moveStart() noWrap controltype="label" value="label13" NotBg="否">
+参照元素ID： </SPAN>
+<INPUT id=txt_div style="LEFT: 389px; WIDTH: 35px; POSITION: absolute; TOP: 205px; HEIGHT: 19px;display:none;"
+onmovestart=moveStart() size=6 controltype="text">
+
+<DIV id=label6 style="LEFT: 26px; WIDTH: 65px; POSITION: absolute; TOP: 245px; HEIGHT: 15px; TEXT-ALIGN: right" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">编辑：</DIV><DIV id=isEdit style="LEFT: 88px; WIDTH: 80px; POSITION: absolute; TOP: 242px; HEIGHT: 20px" onmovestart=moveStart() noWrap value="否" controltype="checkbox" NotBg="否" falsevalue="否" truevalue="是" onclick='isShowPage()' divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN></SPAN></DIV>
+</DIV>
+<DIV class=tab-page style="margin:5px;WIDTH: 490px; HEIGHT: 340px; display:none">
+<H2 class=tab>分组Grid</H2>
+<DIV id=div2 style="BORDER:none; LEFT: 0px; OVERFLOW: auto;  WIDTH:100%; POSITION: absolute; TOP: 0px; HEIGHT: 100%; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=label21 style="LEFT: 38px; WIDTH: 65px; POSITION: absolute; TOP: 23px; HEIGHT: 15px" onmovestart=moveStart() noWrap value="label1" controltype="label" NotBg="否">分组：</DIV>
+<DIV id=isGroup style="LEFT: 82px; WIDTH: 80px; POSITION: absolute; TOP: 19px; HEIGHT: 20px" onmovestart=moveStart() noWrap value="否" controltype="checkbox" NotBg="否" falsevalue="否" truevalue="是" onclick='isShowGroup()' divtype="checkbox"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN></SPAN></DIV>
+<DIV id=div3 style="display:none;BORDER-RIGHT: 0px; BORDER-TOP: 0px; LEFT: 11px; OVERFLOW: auto; BORDER-LEFT: 0px; WIDTH: 350px; BORDER-BOTTOM: 0px; POSITION: absolute; TOP: 53px; HEIGHT: 200px; BACKGROUND-COLOR: #ffffff" onmovestart=moveStart() controltype="div" NotBg="否">
+<DIV id=labe23 style="LEFT: 26px; WIDTH: 65px; POSITION: absolute; TOP: 25px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">分组字段：</DIV>
+<SELECT id=groupField style="LEFT: 105px; WIDTH: 110px; POSITION: absolute; TOP: 22px; HEIGHT: 20px"  controltype="combobox" china check="1" tempvalue temptext sql backheight="25" backwidth="120" sqltrans></SELECT>
+<DIV id=labe24 style="LEFT: 26px; WIDTH: 65px; POSITION: absolute; TOP: 55px; HEIGHT: 15px" onmovestart=moveStart() noWrap controltype="label" NotBg="否" value="label3">排序字段：</DIV>
+<SELECT id=sortField style="LEFT: 105px; WIDTH: 110px; POSITION: absolute; TOP: 52px; HEIGHT: 20px"  controltype="combobox" china check="1" tempvalue temptext sql backheight="25" backwidth="120" sqltrans></SELECT>
+</DIV>
+</DIV></DIV>
+<DIV class=tab-page style="margin:5px;WIDTH: 490px; HEIGHT: 340px; display:none">
+<H2 class=tab>自定义代码</H2>
+<textarea id="usercode" rows="20" cols="62">
+/**
+使用说明                      
+1.注释不要用 //。
+2.可以操作当前Grid的sm、cm、store对象。
+3.这里的代码用于一些个性化的需求，如某列的某些特定工作。
+**/
+</textarea>
+</DIV>
+</DIV>
+<SCRIPT>var tab1 = new WebFXTabPane( document.getElementById( "tab1" ) );</SCRIPT>
+<BUTTON id=cmdOk style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 203px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 408px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onclick='bill_onclick("uf_ok()")' controltype="button" dropstyle="否"></BUTTON><BUTTON id=cmdClose style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 284px; WIDTH: 79px; FONT-FAMILY: ; POSITION: absolute; TOP: 408px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onclick='bill_onclick("CloseBill()")' controltype="button" dropstyle="否"></BUTTON>
+</DIV></body></html>

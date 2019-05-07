@@ -1,0 +1,18 @@
+
+Modified: eform\creatorepp\eformsys\fceform\js\fcselfuse.js  【onchange事件函数名保存删除前字母】
+
+getSysElement(type)方法去除ajax请求。
+Modified: eform\creatorepp\eformsys\fceform\common\dj.htm  
+Adding: eform\creatorepp\eformsys\fceformext\public  
+Adding: eform\creatorepp\eformsys\fceformext\public\public.jsp
+Modified: eform\creatorepp\eformsys\fceform\form_home.jsp  
+Modified: eform\creatorepp\eformsys\fceform\js\fcpub.js  
+Modified: eform\creatorepp\eformsys\fceformext\public\public.jsp  
+Modified: eform\creatorepp\eformsys\fceform\WebOffice_content.jsp  
+Modified: eform\creatorepp\eformsys\fceform\WebOffice_content_taoHong.jsp  
+Modified: eform\creatorepp\eformsys\fceform\eformTree\templateForm_list.jsp  
+Modified: eform\creatorepp\eformsys\fceform\eformTree\useTemplateForm.jsp  
+Modified: eform\creatorepp\eformsys\fceform\form_list.jsp  
+Modified: eform\creatorepp\iWebOffice2006\js\iWebOffice2006Event.jsp  
+
+

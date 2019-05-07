@@ -1,0 +1,104 @@
+    
+	<script type="text/javascript">
+		var old_menu___;
+		$(function(){
+			
+			//绑定菜单
+			$(document).bind('contextmenu',function(e){
+				var tt = e.srcElement || e.target ;
+				if(old_menu___)
+				{
+					
+					var old = "#" + old_menu___;
+					$(old).menu('hide');
+				}
+				if(tt.id)
+				{
+					var menu = getMenu(tt.id);
+					
+					if(menu != null)
+					{
+						old_menu___ = menu; 
+						menu = "#" + menu;
+						$(menu).menu('show', {
+							left: (e.pageX+$(menu).outerWidth()+20)>($(document).width())?$(document).width()-$(menu).outerWidth()-20:e.pageX,
+							top: (e.pageY+$(menu).outerHeight()+10)>($(document).height())?$(document).height()-$(menu).outerHeight()-10:e.pageY							
+						});
+						return false;
+					}
+				}
+			});
+			
+			// 当鼠标离开当前页面，隐藏右键菜单
+			$(document).bind('mouseleave',function(){
+				if(typeof old_menu___ != "undefined"){
+					$("#"+old_menu___).menu('hide');
+				}
+			});
+		});
+		
+		
+		function convertValue(object,needconvert)
+	      {
+	      	
+	      	if(needconvert)
+	      	{
+	      	
+		      	var ret = object.replace(/:/g,"\\:");
+		      	ret = ret.replace(/\./g,"\\.");
+		      	ret = ret.replace(/\//g,"\\/");
+		      	ret = ret.replace(/\$/g,"\\$");
+		      	ret = ret.replace(/\[/g,"\\[");
+		      	ret = ret.replace(/\]/g,"\\]");
+		      	ret = ret.replace(/#/g,"\\#");
+		      	ret = ret.replace(/;/g,"\\;");
+		      	ret = ret.replace(/&/g,"\\&");
+		      	ret = ret.replace(/,/g,"\\,");
+		      	ret = ret.replace(/\+/g,"\\+");
+		      	ret = ret.replace(/\*/g,"\\*");
+		      	ret = ret.replace(/~/g,"\\~");
+		      	ret = ret.replace(/'/g,"\\'");
+		      	//ret = ret.replace(/"/g,"\\"");
+		      	ret = ret.replace(/!/g,"\\!");
+		      	ret = ret.replace(/\^/g,"\\^");
+		      	ret = ret.replace(/\(/g,"\\(");
+		      	ret = ret.replace(/\)/g,"\\)");
+		      	ret = ret.replace(/=/g,"\\=");
+		      	ret = ret.replace(/>/g,"\\>");
+		      	ret = ret.replace(/\|/g,"\\|");
+		      	ret = ret.replace(/ /g,"\\ ");
+			     return ret;
+			    
+			 }
+			 else
+			 {
+			 	return object;
+			 }
+	      }
+		
+		var __menus = new Array();
+		//添加右键菜单和菜单宿主之间的关系
+		function addMenu(menuid,elementid)
+		{
+			__menus[elementid] = convertValue(menuid,true);
+		}
+		//展开/折叠函数
+		function expandNode(node)
+		{
+			doclickevt(document.getElementById(node));
+		}
+		
+		//展开/折叠函数
+		function openUrl(url,target)
+		{
+			window.open(url,target);
+		}
+		//根据菜单宿主id获取右键菜单，如果存在返回菜单id，否则返回空
+		function getMenu(elementid)
+		{
+			return __menus[elementid];
+		}
+		
+		
+		
+	</script>

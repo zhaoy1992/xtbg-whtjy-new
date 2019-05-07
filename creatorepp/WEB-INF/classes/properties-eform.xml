@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding='gb2312'?>
+<properties>
+	
+	<!--
+		获取方法：
+		String approot = ConfigManager.getInstance().getConfigValue("approot");
+	-->
+	
+	<!--
+		上传文件存取模式：1-数据库存取模式，2-本地磁盘文件存取模式，3-FTP远程服务器文件存取模式。默认取模式1。
+	-->
+	<property name="file.upload.mode" value="3" />
+	
+	<!--
+		上传文件存取模式为 2-本地磁盘、3-FTP远程服务器 时，取file.upload.root为文件根目录设置
+	-->
+	<property name="file.upload.root" value="/ccapp/upload/" />
+	
+	<!--
+		上传文件存取模式为 3-FTP远程服务器 时，需配置FTP服务器IP地址、端口号、重试次数、用户名、密码
+	-->
+	<property name="file.upload.ftpmode.remotehost" value="172.16.25.156" />
+	<property name="file.upload.ftpmode.remoteport" value="21" />
+	<property name="file.upload.ftpmode.remoteretrycount" value="2" />
+	<property name="file.upload.ftpmode.remoteuser" value="admin" />
+	<property name="file.upload.ftpmode.remotepassword" value="123456" />
+
+	<!--
+		上传文件是否要建全文索引 1-要建全文检索 0-不需要建全文检索
+	-->
+	<property name="file.upload.index" value="1" />
+		<!-- 是否启用自定义文件目录;
+	true  上传的文件保存路径为 user.defined.root 定义的路径;
+	false 上传的文件保存路径为 file.upload.root 定义的路径;
+	-->
+	<property name="isuserdefined" value="false" />
+	<!-- 自定义文件上传目录 -->
+	<property name="user.defined.root" value="d:/ccapp/upload/" />
+<!-- iweboffice是否使用自定义路径 -->
+	<property name="iweboffice.userdefined" value="false" />
+	<!-- iweboffice自定义路径 -->
+	<property name="iweboffice.defined.root" value="d:/ccapp/upload/" />
+	<!--
+		设置iWebOffice当前版本,如果设定的版本低于最新版本，控件会自动更新到最新的版本
+	-->
+<property name="iWebOfficeVersion" value="9,2,0,0"/>
+
+	<!--
+		控制文档模板管理与文档模板权限管理是否需要根据除超级管理员外的其它所有用户，只能查看自己创建的文档模板
+		1-要根据用户ID过滤 0-不需要根据ID过滤
+	-->
+	<property name="office.templet.manager.selftemplet" value="1" />
+	<!--
+		控制文档模板管理与文档模板权限管理是否需要根据除超级管理员外的其它所有用户，只能查看自己授权的组织机构树
+		1-需要根据权限授权显示树 0-不需要根据权限授权显示树
+	-->
+	<property name="office.templet.manager.orgtree" value="1" />
+	<!--
+		报表自身引入的js程序文件是否使用缓存模式加载 0-使用优化加速的缓存模式  1-使用script元素引入模式
+		缺省配置（无配置或者配置值不能识别）值为0，（也就是说在开发模式下，将该值设置为1方便调试）
+	-->
+	<property name="file.upload.jsdgmode" value="1" />
+</properties>

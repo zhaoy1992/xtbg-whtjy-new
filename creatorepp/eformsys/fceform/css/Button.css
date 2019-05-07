@@ -1,0 +1,100 @@
+
+/* 刘浩弄的 */
+.cmd_style
+{
+	BORDER-RIGHT: #2c59aa 1px solid; 
+	PADDING-RIGHT: 2px; 
+	BORDER-TOP: #2c59aa 1px solid; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#D7E7FA);
+	BORDER-LEFT: #2c59aa 1px solid;
+	COLOR: black; 
+	PADDING-TOP: 2px; 
+	BORDER-BOTTOM: #2c59aa 1px solid 
+}
+
+
+.btn3_mouseout 
+{
+	BORDER-RIGHT: #2c59aa 1px solid; 
+	PADDING-RIGHT: 2px; 
+	BORDER-TOP: #2c59aa 1px solid;
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); 
+	BORDER-LEFT: #2c59aa 1px solid; 
+	CURSOR: hand; 
+	COLOR: black; 
+	PADDING-TOP: 2px; 
+	BORDER-BOTTOM: #2c59aa 1px solid 
+}
+.btn3_mouseover 
+{ 
+	BORDER-RIGHT: #2c59aa 1px solid; 
+	PADDING-RIGHT: 2px; 
+	BORDER-TOP: #2c59aa 1px solid; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	BACKGROUND-COLOR:gold;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#D7E7FA); 
+	BORDER-LEFT: #2c59aa 1px solid; 
+	CURSOR: hand; 
+	COLOR: black; 
+	PADDING-TOP: 2px; 
+	BORDER-BOTTOM: #2c59aa 1px solid 
+}
+/* 网上整理的 */
+.fcbtn1 {
+             BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 
+            #7b9ebd 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: 
+            progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+            StartColorStr=#ffffff, EndColorStr=#cecfde); BORDER-LEFT: #7b9ebd 
+            1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+            BORDER-BOTTOM: #7b9ebd 1px solid
+            }
+            .fcbtn1_mouseout {
+             BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 
+            #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: 
+            progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+            StartColorStr=#ffffff, EndColorStr=#C3DAF5); BORDER-LEFT: #2C59AA 
+            1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+            BORDER-BOTTOM: #2C59AA 1px solid
+            } 
+            .fcbtn1_mouseover {
+             BORDER-RIGHT: #2C59AA 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 
+            #2C59AA 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: 
+            progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+            StartColorStr=#ffffff, EndColorStr=#D7E7FA); BORDER-LEFT: #2C59AA 
+            1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+            BORDER-BOTTOM: #2C59AA 1px solid
+            }
+            
+.fcbtn2_mouseout {
+    BORDER-RIGHT: #7EBF4F 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 
+#7EBF4F 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: 
+progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+StartColorStr=#ffffff, EndColorStr=#B3D997); BORDER-LEFT: #7EBF4F 
+1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+BORDER-BOTTOM: #7EBF4F 1px solid
+} 
+.fcbtn2_mouseover {
+    BORDER-RIGHT: #7EBF4F 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 
+#7EBF4F 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px; FILTER: 
+progid:DXImageTransform.Microsoft.Gradient(GradientType=0, 
+StartColorStr=#ffffff, EndColorStr=#CAE4B6); BORDER-LEFT: #7EBF4F 
+1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; 
+BORDER-BOTTOM: #7EBF4F 1px solid
+} 
+.fcbtn3 {
+	background:transparent;border-width:0px;
+}
+.fcbtn4 {
+	background:transparent;border-width:1px;border-style:dashed;
+}
+.fcbtn5 {
+	border:inset 2px #000000;
+}
+.fcbtn6 {
+	background:transparent;border-width:1px;border-style:dashed;color:Red;
+}

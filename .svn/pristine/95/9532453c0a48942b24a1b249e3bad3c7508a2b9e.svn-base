@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_open(){
+	var oPrint = pubDataSet[4] ;
+	var arr = oPrint.datasets ;
+	var l= arr.length ;
+	var sMain = "<option></option>"
+	for(var i=0;i<l;i++){
+		sMain += "<option value='"+arr[i].id+"'>"+arr[i].chnname+"</option>"
+	}
+	lstMain.outerHTML = SelectAddOption(lstMain,sMain) ;
+	var obj = pubDataSet[0];
+	SetTextValue(obj.id,SKDBedit1)
+	SetTextValue(obj.rowsperpage,SKDBedit0)
+	SetTextValue(obj.style.pixelWidth,txtWidth)
+	SetTextValue(obj.style.pixelHeight,txtHeight)
+	SetTextValue(obj.style.pixelTop,txtTop)
+	SetTextValue(obj.style.pixelLeft,txtLeft)
+	BillEventHeadOpen(obj.onAfterPrint,SKDBedit10);
+	BillEventHeadOpen(obj.onBeforePrint,SKDBedit11);
+	if(obj.needblankrow == "1"){
+		SetCheckBoxValue(chkAddRow,"1") ;
+	}else{
+		SetCheckBoxValue(chkAddRow,"0") ;
+	}
+	if(obj.innerText == ""){
+		SetCheckBoxValue(chkShowTag,"否") ;
+	}else{
+		SetCheckBoxValue(chkShowTag,"是") ;
+	}
+	
+	var sOption = pubDataSet[1][0];
+	lstMain.outerHTML = SelectAddOption(lstMain,sOption) ;
+	SetTextValue(obj.dataset,lstMain)
+	var s = obj.type;
+	if(obj.type == s){
+		SKDBcombobox1.value = s;	
+	}
+	SKDBedit1.onchange = function uf_id_onchange() {
+							var sR = CheckContSameName(pubDataSet[3],SKDBedit1.value,obj,pubDataSet[2]) ;
+							if(sR != ""){
+								alert(sR);
+								event.returnValue = false ;
+							}
+					 }	
+
+}
+function uf_ok(){
+	if(SKDBcombobox1.value == "mainlist" || SKDBcombobox1.value == "detaillist") {
+		if(lstMain.value == "") {
+			alert("数据集名称不能为空,请选择一个数据集名称后再保存表单！")
+			return;	
+		}	
+	}else{
+		if(lstMain.value != "") {
+			alert("数据集名称必须为空！")
+			return;
+		}		
+	}
+	if(IsSpace(SKDBedit0.value) == false && IsInt(SKDBedit0.value) == false ){
+		alert("行数必须为整数")
+		return
+	}
+	if(IsSpace(SKDBedit0.value)  && chkAddRow.value == 1 ){
+		alert("选中了补足空白行时行数必须填写!")
+		return
+	}
+		
+	var obj=pubDataSet[0];	
+	var s="";
+	obj.id=SKDBedit1.value;
+	obj.rowsperpage=SKDBedit0.value;
+	obj.style.pixelWidth=txtWidth.value;
+	obj.style.pixelHeight=txtHeight.value;
+	obj.style.pixelTop=txtTop.value;
+	obj.style.pixelLeft=txtLeft.value;
+	obj.type=SKDBcombobox1.value;
+	obj.dataset = lstMain.value;
+	obj.needblankrow = chkAddRow.value;
+	if(chkShowTag.value == "是"){
+		obj.innerText = obj.id+" 类型:"+obj.type
+		if(obj.type == "mainlist"){
+			obj.innerText += " 数据集:"+obj.dataset
+		}
+	}else{
+		obj.innerText = "";
+	}
+	s=Trim(SKDBedit10.value)
+	if(s==""){
+		obj.removeAttribute('onAfterPrint')
+	}else{
+		obj.onAfterPrint="bill_onclick(\""+s+"\")";
+	}
+	s=Trim(SKDBedit11.value)
+	if(s==""){
+		obj.removeAttribute('onBeforePrint')
+	}else{
+		obj.onBeforePrint="bill_ondblclick(\""+s+"\")";
+	}
+	window.close();	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><SKDBedit><id>SKDBedit1</id><id>SKDBedit0</id><id>SKDBedit11</id><id>SKDBedit10</id></SKDBedit><checkbox><id>chkAddRow</id><id>chkShowTag</id></checkbox><label><id>Label19</id><id>Label6</id><id>Label7</id><id>Label18</id><id>Label2</id><id>Label3</id></label><combobox><id>SKDBcombobox1</id><id>lstMain</id></combobox><tab><id>PageControl1</id></tab><button><id>FCButton19</id><id>FCButton18</id></button><text><id>txtLeft</id><id>txtTop</id><id>txtWidth</id><id>txtHeight</id></text></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>SKDBedit1</taborder><taborder>SKDBcombobox1</taborder><taborder>txtLeft</taborder><taborder>txtTop</taborder><taborder>txtWidth</taborder><taborder>txtHeight</taborder><taborder>SKDBedit11</taborder><taborder>SKDBedit10</taborder><taborder>FCButton19</taborder><taborder>FCButton18</taborder><taborder>lstMain</taborder><taborder>SKDBedit0</taborder><taborder>chkAddRow</taborder><taborder>chkShowTag</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="210" poswidth="370" postop posleft entertype="修改" window="当前窗口" keyfield codeheader="BBB" mkbh caption="band类型" type="PR" dj_sn="ep_band" BLONopen="uf_open()" center="居中"><div class="tab-pane" showtype="luna" IsHideTitle=undefined id=PageControl1 style="position:absolute;left:7px;top:2px;width:338px;Height:144px"><div class="tab-page" style="width:338px;height:126" ><h2 class="tab">属性</h2><SPAN id=Label19 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 7px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 97px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">左</SPAN><INPUT type=text id=txtLeft style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 22px; WIDTH: 51px; FONT-FAMILY: ; POSITION: absolute; TOP: 91px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtLeft)")' CanSelect="false"></INPUT><SPAN id=Label6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 83px; WIDTH: 13px; FONT-FAMILY: ; POSITION: absolute; TOP: 97px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label6" controltype="label">上</SPAN><INPUT type=text id=txtTop style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 95px; WIDTH: 57px; FONT-FAMILY: ; POSITION: absolute; TOP: 92px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtTop)")' CanSelect="false"></INPUT><SPAN id=Label7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 172px; WIDTH: 16px; FONT-FAMILY: ; POSITION: absolute; TOP: 97px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label7" controltype="label">宽</SPAN><INPUT type=text id=txtWidth style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 185px; WIDTH: 55px; FONT-FAMILY: ; POSITION: absolute; TOP: 92px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtWidth)")' CanSelect="false"></INPUT><SPAN id=Label18 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 247px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 97px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label8" controltype="label">高</SPAN><INPUT type=text id=txtHeight style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 260px; WIDTH: 60px; FONT-FAMILY: ; POSITION: absolute; TOP: 92px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value controltype="text" china onchange='bill_onclick("SetPosOnChange(pubDataSet[0],txtHeight)")' CanSelect="false"></INPUT><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 6px; WIDTH: 62px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 15px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" align="Left">名&nbsp; 称</SPAN><INPUT id=SKDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 47px; WIDTH: 119px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 11px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" size=17 controltype="SKDBedit" china><SELECT id=SKDBcombobox1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 228px; WIDTH: 95px; FONT-FAMILY: ; POSITION: absolute; TOP: 9px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" controltype="combobox" temptext="报表标题&#13;&#10;页头&#13;&#10;主数据&#13;&#10;明细头&#13;&#10;明细数据&#13;&#10;明细脚&#13;&#10;页脚" tempvalue="title&#13;&#10;mainheader&#13;&#10;mainlist&#13;&#10;detailheader&#13;&#10;detaillist&#13;&#10;detailfooter&#13;&#10;mainfooter" sql check="1" china backwidth="95" backheight="25"><OPTION value=title selected>报表标题</OPTION><OPTION value=mainheader>页头</OPTION><OPTION value=mainlist>主数据</OPTION><OPTION value=detailheader>明细头</OPTION><OPTION value=detaillist>明细数据</OPTION><OPTION value=detailfooter>明细脚</OPTION><OPTION value=mainfooter>页脚</OPTION></SELECT><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 186px; WIDTH: 38px; FONT-FAMILY: ; POSITION: absolute; TOP: 14px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2" controltype="label">类&nbsp; 型</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 38px; FONT-FAMILY: ; POSITION: absolute; TOP: 68px; HEIGHT: 9px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label3" controltype="label">数据集</SPAN><SELECT id=lstMain style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 46px; WIDTH: 120px; FONT-FAMILY: ; POSITION: absolute; TOP: 63px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" controltype="combobox" temptext tempvalue sql check="1" china backwidth="120" backheight="25"></SELECT><INPUT id=SKDBedit0 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 46px; WIDTH: 39px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 37px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" size=5 controltype="SKDBedit" china><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 6px; WIDTH: 39px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 40px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" align="Left">行&nbsp; 数</SPAN> 
+<DIV id=chkAddRow style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 185px; WIDTH: 80px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 36px; HEIGHT: 20px; TEXT-ALIGN: left; backgroundColor1: #ffffff" onmovestart=moveStart() noWrap value="是" controltype="checkbox" china divtype="checkbox" truevalue="1" falsevalue="0"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>补足空白行</SPAN></DIV>
+<DIV id=chkShowTag style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 185px; WIDTH: 80px; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 62px; HEIGHT: 20px; TEXT-ALIGN: left; backgroundColor1: #ffffff" onmovestart=moveStart() noWrap value="是" controltype="checkbox" china divtype="checkbox" truevalue="是" falsevalue="否"><INPUT oncontrolselect=controlselectcancel() type=checkbox><SPAN>显示band标签</SPAN></DIV></div><div class="tab-page" style="width:338px;height:126" ><h2 class="tab">事件</h2><INPUT id=SKDBedit11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 58px; WIDTH: 274px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 50px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" size=22 controltype="SKDBedit" china ondblclick='bill_ondblclick("SelFunction()")'><SPAN id=Label11 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 5px; WIDTH: 58px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 53px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" align="Left">打印之后</SPAN><SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 5px; WIDTH: 54px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 30px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" align="Left">打印之前</SPAN><INPUT id=SKDBedit10 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 58px; WIDTH: 274px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 27px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" size=22 controltype="SKDBedit" china ondblclick='bill_ondblclick("SelFunction()")'><SPAN id=Label17 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 24px; WIDTH: 242px; FONT-FAMILY: ; POSITION: absolute; TOP: 9px; HEIGHT: 16px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label17">事件代码(不支持双引号,双击鼠标选择函数)</SPAN></div></div><script>var PageControl1 = new WebFXTabPane( document.getElementById( "PageControl1" ) );</script><BUTTON id=FCButton19 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 264px; WIDTH: 69px; FONT-FAMILY: ; POSITION: absolute; TOP: 155px; HEIGHT: 23px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取消</BUTTON><BUTTON id=FCButton18 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 189px; WIDTH: 69px; FONT-FAMILY: ; POSITION: absolute; TOP: 155px; HEIGHT: 23px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON></DIV></body></html>

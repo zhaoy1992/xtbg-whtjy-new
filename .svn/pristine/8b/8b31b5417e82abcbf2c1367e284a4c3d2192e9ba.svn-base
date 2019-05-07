@@ -1,0 +1,10 @@
+add by jiao.chen 2016-03-02
+流程管理->数据库管理
+在 办公用品申购计划表(TA_OA_OSAPPLAN)与 易耗品申领登记表(TA_OA_OSAPPREGYHP)中都添加
+	UNIT_ID(所属单位ID varchar2(50)) 和 UNIT_NAME(所属单位名称 varchar2(100)).
+	
+在 检测耗材用品申购计划表(TA_OA_DETOSAPPLAN)与 检测耗材易耗品申领登记表(TA_OA_DETOSAPPREGYHP)中都添加
+	UNIT_ID(所属单位ID varchar2(50)) 和 UNIT_NAME(所属单位名称 varchar2(100)).
+	
+在 食堂物品申购计划表(TA_OA_CANOSAPPLAN)与 食堂物品易耗品申领登记表(TA_OA_CANOSAPPREGYHP)中都添加
+	UNIT_ID(所属单位ID varchar2(50)) 和 UNIT_NAME(所属单位名称 varchar2(100)).

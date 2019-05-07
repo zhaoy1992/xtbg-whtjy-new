@@ -1,0 +1,4 @@
+<iReportPlugin 	name="模板管理" class="it.businesslogic.ireport.plugin.templatemanager.TemplateManagerOptionPlugin">
+	<IconFile>/it/businesslogic/ireport/plugin/template.png</IconFile>
+	<Description>template manager</Description>
+</iReportPlugin>

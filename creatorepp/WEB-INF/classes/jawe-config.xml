@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<JaWEConfigures>
+	<ParticipantMappingPanels>
+		<Panel allowUse="true" name="Institute" displayName="机构"></Panel>
+		<Panel allowUse="true" name="User" displayName="用户"></Panel>
+		<Panel allowUse="true" name="Role" displayName="角色"></Panel>
+		<Panel allowUse="true" name="DynamicSpecify" displayName="动态指定">
+			<options>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.ProcessCreator">
+					流程发起人
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.ProcessCreatorPreManager">
+					流程发起人上级领导
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.ProcessCreatorPre2Manager">
+					流程发起人上上级领导
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.ProcessCreatorPre3Manager">
+					流程发起人上三级领导
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.PreActExcutorManager">
+					上个活动执行人上级领导
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.Pre2ActExcutorManager">
+					上个活动执行人上上级领导
+				</option>
+				<option name="AssignmentPlugin"
+					class="com.chinacreator.workflow.shark.assignment.plugins.Pre3ActExcutorManager">
+					上个活动执行人上三级领导
+				</option>
+			</options>
+		</Panel>
+	</ParticipantMappingPanels>
+	<activityForm>
+		<eForm name="eForm" displayName="绑定eForm表单" allowUse="true"></eForm>
+		<otherForm name="otherForm" displayName="绑定其他表单" allowUse="true"></otherForm>
+	</activityForm>
+</JaWEConfigures>

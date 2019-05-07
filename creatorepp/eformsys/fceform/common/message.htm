@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>提示</title>
+<script>
+/*! 传三个Caption,  */
+//var arr =window.dialogArguments
+function window_onload(){
+	//main.innerText=arr[0]
+	/*
+	button1[0].value=arr[1]
+	button1[1].value=arr[2]
+	button1[2].value=arr[3]
+	*/
+}
+/**
+*返回哪个按钮点击了
+**/
+function ok_onclick(sIndex) {
+	window.returnValue=sIndex
+	self.close()
+} 
+function toRed(){
+	event.srcElement.style.color="red"
+}
+function toBlack(){
+	event.srcElement.style.color="black"
+}
+
+</script>
+</head>
+<body background="../images/ef_run_background.gif"  topmargin=3 leftmargin=3 onload=window_onload()>
+<br>
+<center>&nbsp;
+<!--<span onclick=ok_onclick(1) onmouseover=toRed()  onmouseout=toBlack() ><img src="../image/print.gif">&nbsp;打印单据 &nbsp;&nbsp;&nbsp;&nbsp;</span>
+-->
+<span onclick=ok_onclick(2) onmouseover=toRed()  onmouseout=toBlack() ><img src="../images/ef_design_new.gif">&nbsp;新开单据&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span onclick=ok_onclick(3) onmouseover=toRed()  onmouseout=toBlack() ><img src="../images/ef_design_undo.gif" >&nbsp;退出单据&nbsp;&nbsp;&nbsp;&nbsp;</span>
+&nbsp;</center>
+
+</body>
+</html>

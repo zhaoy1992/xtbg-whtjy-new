@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+ </HEAD>
+ <script type="text/javascript">
+	function getname(){
+		window.returnValue = document.getElementById("filename").value;
+		window.close();
+	}
+	function load(){
+		if(window.dialogArguments)
+			document.getElementById("filename").value= window.dialogArguments;
+	}
+ </script>
+ <BODY onload="load()">
+	<p align="center">保存的文件名:<input type="text" name="filename" ></p>
+	<p align="center"><input type="button" value="确 定" style="width:50px;" onclick="getname()"/></p>
+ </BODY>
+</HTML>

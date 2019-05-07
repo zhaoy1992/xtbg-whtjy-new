@@ -1,0 +1,5 @@
+insert into OA_MD_COLUMNS (COLUMN_ID, TABLE_ID, COLUMN_CODE, COLUMN_NAME, COLUMN_SN, ISVIEW)
+values ('0f24a507-c7c4-452c-ab07-52ce7942a6c6', 'fb518938-39e6-47b6-bd57-09d72353f24c', 'F_ORDER', '排序', 35, '0');
+
+
+commit;

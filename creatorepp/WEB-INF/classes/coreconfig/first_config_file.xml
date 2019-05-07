@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frist-config>
+	<!-- 显示信息区域块 -->
+	<item>
+		<!-- dynamicUrlColumns 为动态查询出的链接地址  值为字段名 -->
+		<!-- showColumns为真实值  realShowColumns为加样式或标签的值 -->
+		<show-item id="file_xzwd" name="新增文档" showColumnsTitle="标题,类型,上传时间" showColumnsTileLocation="left,left,right" showColumns="name,f_type_name,time" columnsWidth="40%,40%,20%" realShowColumns="name,f_type_name,time" dynamicUrlColumns="url"
+			urlParamColumns="id,busi_id,f_files_state,f_type_id" >
+			<clickurl>/ccapp/oa/file/jsp/filefilesaddmain.jsp?busiTypeCode=file_002</clickurl>
+			<moreUrl>/ccapp/oa/file/jsp/filedocmain.jsp</moreUrl>
+			<sql paramCount="2" maxRownum="5">
+				<![CDATA[
+	  select id as busi_id,
+       id,
+       name,
+       username,
+       f_type_id,
+       f_type_name,
+       f_typeno,
+       to_char(time, 'yyyy-mm-dd') as time,
+       state,
+       url,
+       state as f_files_state,
+	   type
+       from (select a.f_doc_id as id,
+               a.f_doc_name as name,
+               a.f_user_name as username,
+               a.f_type_id,
+               a.f_type_name,
+               a.f_typeno,
+               a.f_file_formtime as time,
+               a.f_doc_state as state,
+               'doc' as type,
+               '/ccapp/oa/file/jsp/' ||
+               (select m.F_FILE_DETAIL
+                  from oa_file_program_page m
+                 where exists (select 1
+                          from oa_file_type n
+                         where m.f_program_id = n.F_PROGRAM_ID
+                           and n.f_type_id = a.f_type_id)) || '?busi_id=' ||
+               a.f_doc_id || '&' || 'busiTypeCode=wj-001' || '&'           
+               || 'isview=isview'||
+			   '&'||'f_files_id='||r.f_files_id as url
+          from oa_file_doc a left join oa_file_docfiles r on r.f_doc_id = a.f_doc_id,
+               (select OA_USERPROPERTY(b.org_id, '2') as org_id
+                  from td_sm_orguser b
+                 where b.user_id = ?) c
+         where a.f_org_id = c.org_id
+           and a.f_doc_state = '2'
+           and not exists
+         (select 1
+                  from oa_file_docfiles o, oa_file_files_acc p
+                 where o.f_files_id = p.f_files_id
+                   and o.f_doc_id = a.f_doc_id)
+        union all
+        select d.f_files_id as id,
+               d.f_files_title as name,
+               d.f_file_username as username,
+               d.f_type_id,
+               d.f_type_name,
+               d.f_typeno,
+               d.f_file_time as time,
+               d.f_files_state as state,
+               'file' as type,
+               '/ccapp/oa/file/jsp/filefilesaddmain.jsp?id=' || d.f_files_id || '&' || 'f_files_state=' ||
+               d.f_files_state || '&' || 'busiTypeCode=file_002' || '&' ||
+               'f_type_id=' || d.f_type_id ||'&'|| 'f_type_name=' ||
+               d.f_type_name||'&'             
+               || 'isview=isview' as url
+          from oa_file_files d ,
+               (select OA_USERPROPERTY(f.org_id, '2') as org_id
+                  from td_sm_orguser f
+                 where f.user_id =?) f
+         where d.f_org_id = f.org_id
+           and exists (select 1
+                  from oa_file_files_acc e
+                 where d.f_files_id = e.f_files_id
+                   and d.f_files_state = '1')) g
+         where g.time is not null
+         order by g.time desc
+
+	 			]]>
+			</sql>
+		</show-item>	
+		
+		<show-item id="file_rdwd"
+			name="热点文档"
+			showColumnsTitle="标题,类型,阅读次数"
+			showColumnsTileLocation="left,left,right"
+			showColumns="F_DOC_NAME,f_type_parentname,a"
+			columnsWidth="40%,40%,20%"
+			realShowColumns="F_DOC_NAME,f_type_parentname,a"
+			dynamicUrlColumns="url"
+			urlParamColumns="id,busi_id,f_files_state,f_type_id" >
+			<clickurl>/ccapp/oa/file/jsp/filefilesaddmain.jsp?busiTypeCode=file_002</clickurl>
+			<moreUrl>/ccapp/oa/file/jsp/filetjlist2.jsp</moreUrl>
+			<sql paramCount="2" maxRownum="5">
+				<![CDATA[
+select OFD.F_DOC_ID,
+       OFD.F_DOC_NAME,
+       OFD.F_TYPE_ID,
+       ofd.a,
+       ofd.b,
+       ofd.c,
+       oft.f_type_parentname,
+       '/ccapp/oa/file/jsp/'||ofpp.f_file_detail||'?busiTypeCode=wj-001'|| '&' ||'isview=1'|| '&' ||'isgd=yes'||'&'||'busi_id='||OFD.F_DOC_ID url
+  from (SELECT OFD.F_DOC_ID,
+               OFD.F_DOC_NAME,
+               OFD.F_TYPE_ID,
+               SUM(阅读次数) a,
+               SUM(借阅次数) b,
+               SUM(部门外借阅次数) c
+          FROM (
+          	SELECT OFD.F_DOC_ID,
+                       OFD.F_DOC_NAME,
+                       OFD.F_TYPE_ID,
+                       OFD.f_Type_Name,
+                       OFR.F_USER_ID,
+                       OFR.F_DATE,
+                       null F_LENDING_USERNAME,
+                       null F_LENDING_USERID,
+                       DECODE(OFR.F_USER_ID, NULL, 0, 1) 阅读次数,
+                       0 借阅次数,0 部门外借阅次数
+                  FROM OA_FILE_DOC OFD
+                  LEFT JOIN OA_FILE_READ_RECODE_INFO OFR
+                    ON OFD.F_DOC_ID = OFR.F_DOC_ID
+                 WHERE OFD.F_ORG_ID IN (
+                       select OA_USERPROPERTY(b.org_id, '2') as org_id
+                        from td_sm_orguser b
+                       where b.user_id =?)
+				union all
+				SELECT OFD.F_DOC_ID,
+                       OFD.F_DOC_NAME,
+                       OFD.F_TYPE_ID,
+                       OFD.f_Type_Name,
+                       null F_USER_ID,
+                       null F_DATE,
+                       OFL.F_LENDING_USERNAME,
+                       OFL.F_LENDING_USERID,
+                       0 阅读次数,
+                       DECODE(OFL.F_LENDING_USERNAME, NULL, 0, 1) 借阅次数,
+                       DECODE(OFL.F_LENDING_USERNAME, NULL, 0, 1) *
+                       DECODE(OFL.F_LENDING_USERID, NULL, 1, 0) 部门外借阅次数
+                  FROM OA_FILE_DOC OFD
+                  LEFT JOIN OA_FILE_LENDING_DETAIL OFLD
+                    ON OFD.F_DOC_ID = OFLD.F_DOC_ID
+                  LEFT JOIN OA_FILE_LENDING OFL
+                    ON OFLD.F_LENDING_ID = OFL.F_LENDING_ID
+                 WHERE OFD.F_ORG_ID IN (
+                       select OA_USERPROPERTY(b.org_id, '2') as org_id
+                        from td_sm_orguser b
+                       where b.user_id =?)
+               ) OFD
+         GROUP BY OFD.F_DOC_ID, OFD.F_DOC_NAME, OFD.F_TYPE_ID) ofd,
+       oa_file_type oft,
+       oa_file_program_page ofpp
+ where ofd.F_TYPE_ID = oft.F_TYPE_ID
+   and oft.F_PROGRAM_ID = ofpp.F_PROGRAM_ID
+ order by a desc,OFD.F_DOC_NAME
+	 			]]>
+			</sql>
+		</show-item>
+		
+		<!-- <show-item id="file_jywd"    特检院OA 2014-05-23 start 【档案管理】的【借阅】功能，所以【档案管理】首页也就不要展示相关的数据了。 
+			name="借阅中文档"
+			showColumnsTitle="标题,借阅日期,应归还日期"
+			showColumnsTileLocation="left,left,right"
+			showColumns="f_doc_name_yuan,f_lending_time,f_reback_time"
+			columnsWidth="60%,20%,20%"
+			realShowColumns="f_doc_name,f_lending_time,f_reback_time"
+			dynamicUrlColumns="url"
+			urlParamColumns="" >
+			<clickurl>/ccapp/oa/file/jsp/filefilesaddmain.jsp?busiTypeCode=file_002</clickurl>
+			<moreUrl>/ccapp/oa/file/jsp/myfilelendingflowtabs.jsp?pagefrom=tabs-2</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+select case when sysdate>ofl.F_REBACK_TIME 
+            then '<font style=''color:red;''>'||ofd.f_doc_name||'</font>' 
+            else ofd.f_doc_name end f_doc_name,
+       ofd.f_doc_name f_doc_name_yuan
+     , to_char(ofl.f_lending_time,'yyyy-MM-dd') f_lending_time
+     , to_char(ofl.f_reback_time,'yyyy-MM-dd') f_reback_time
+     , '/ccapp/oa/file/jsp/'||pageMap.f_file_detail||'?busiTypeCode=wj-001'|| '&' ||'isview=1'|| '&' ||'isgd=yes'||'&'||'busi_id='||OFD.F_DOC_ID||'&'||'f_files_id='||r.f_files_id url
+  from oa_file_lending_detail ofl
+  inner join oa_file_doc ofd
+  on ofl.f_doc_id = ofd.f_doc_id
+  left join oa_file_docfiles r on r.f_doc_id = ofd.f_doc_id
+  inner join (
+  		select oft.f_type_id,ofp.f_file_detail
+		  from oa_file_type oft
+		     , oa_file_program_page ofp
+		 where oft.f_program_id = ofp.f_program_id
+  ) pageMap
+  on ofd.f_type_id = pageMap.f_type_id
+where ofl.F_ISAGREE = '1'
+  and ofl.F_ISLENDING = '1'
+  and ofl.F_ISBACK = '0'
+  and ofl.f_lending_userid = ?
+  order by ofl.F_REBACK_TIME asc
+	 			]]>
+	 		特检院OA 2014-05-23 end 
+			</sql>
+		</show-item> -->
+		
+		<show-item id="file_gwdgd"
+			name="公文待归档"
+			showColumnsTitle="标题,部门,提交日期"
+			showColumnsTileLocation="left,left,right"
+			showColumns="f_title,f_dept_name,f_create_date"
+			columnsWidth="60%,20%,20%"
+			realShowColumns="f_title,f_dept_name,f_create_date"
+			dynamicUrlColumns="url"
+			urlParamColumns="id,busi_id,f_files_state,f_type_id" >
+			<clickurl>/ccapp/oa/file/jsp/filedocdetailforarchive.jsp?windowId=updateFileDocDetailWindow</clickurl>
+			<moreUrl>/ccapp/oa/file/jsp/filedocbeforearchivelist.jsp</moreUrl>
+			<sql paramCount="3" maxRownum="5">
+				<![CDATA[
+				select ofd.f_doc_id as f_id,
+				       ofd.f_doc_name as f_title,
+				       ofd.f_doc_fontsize as f_file_no,
+				       '1' as f_archive_type,
+				       ofd.f_org_id as f_org_id,
+				       ofd.f_org_name as f_org_name,
+				       ofd.f_dept_id as f_dept_id,
+				       ofd.f_dept_name as f_dept_name,
+				       ofd.f_attach_id as f_attach_id,
+				       ofd.f_submit_user_id as f_create_user_id,
+				       ofd.f_submit_user_name as f_create_user_name,
+				       to_char(ofd.f_creator_time, 'yyyy-MM-dd') as f_create_date,
+				       ofd.f_user_id as f_archive_user_name,
+				       to_char(ofd.f_submit_time, 'yyyy-MM-dd') as f_archive_date,
+				       '1' as f_is_archived,
+				       '1' as datahome,
+				       ofd.f_attach_id as fj,
+				       ofd.f_gongwen_id as gongwen_id,
+				       ofd.f_flow_state as f_flow_state,
+				       ofd.f_zihao_type_name as f_zihao_type_name,
+       					'/ccapp/oa/file/jsp/filedocdetailforarchivetwo.jsp?' || 'id=' || ofd.f_doc_id url
+				  from oa_file_doc ofd
+				 where (ofd.f_flow_state = '1' or ofd.f_flow_state = '0')
+				   and ofd.f_submit_user_id = ?
+				   and ofd.f_org_id in (select OA_USERPROPERTY(b.org_id, '2') as org_id  from td_sm_orguser b where b.user_id =?)
+				   and ofd.f_dept_id in (select org_id   from td_sm_orguser b where b.user_id =?)
+				 order by ofd.f_creator_time desc
+				 ]]>
+			</sql>
+		</show-item>
+		
+		<show-item id="file_scwd"
+			name="收藏文档"
+			showColumnsTitle="标题,类型,收藏时间"
+			showColumnsTileLocation="left,left,right"
+			showColumns="F_DOC_NAME,F_TYPE_NAME,F_FAVORITES_TIME"
+			columnsWidth="40%,40%,20%"
+			realShowColumns="F_DOC_NAME,F_TYPE_NAME,F_FAVORITES_TIME"
+			dynamicUrlColumns="url"
+			urlParamColumns="" >
+			<clickurl>/ccapp/oa/file/jsp/filedocdetailforarchive.jsp?windowId=updateFileDocDetailWindow</clickurl>
+			<moreUrl>/ccapp/oa/file/jsp/filefilescollectindex.jsp</moreUrl>
+			<sql paramCount="1" maxRownum="5">
+				<![CDATA[
+SELECT OFD.F_DOC_ID busi_id,OFD.F_DOC_NAME,OFD.F_TYPE_NAME,TO_CHAR(OFFF.F_FAVORITES_TIME,'yyyy-MM-dd') F_FAVORITES_TIME,
+       '/ccapp/oa/file/jsp/'||ofpp.f_file_detail||'?busiTypeCode=wj-001'|| '&' ||'isview=1'|| '&' ||'isgd=yes'||'&'||'busi_id='||OFD.F_DOC_ID url
+  FROM OA_FILE_FAVORITES OFFF
+ INNER JOIN OA_FILE_DOC OFD
+    ON OFFF.F_DOC_ID = OFD.F_DOC_ID
+  LEFT JOIN OA_FILE_TYPE OFT
+    ON OFD.F_TYPE_ID = OFT.F_TYPE_ID
+  LEFT JOIN OA_FILE_PROGRAM_PAGE OFPP
+    ON OFT.F_PROGRAM_ID = OFPP.F_PROGRAM_ID
+ WHERE OFFF.F_USER_ID = ?
+ ORDER BY OFFF.F_FAVORITES_TIME DESC,OFD.F_FILE_FORMTIME DESC
+	 			]]>
+			</sql>
+		</show-item>
+	</item>
+</frist-config>

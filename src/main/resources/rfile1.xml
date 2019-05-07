@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding='gb2312'?>
+<resources>
+   <operations>
+	
+	      <!--角色全局资源操作组 -->
+		<group id="globalroleoperation111" name="角色全局资源操作组">
+			     <!-- <operation id="add" priority="20" name="添加" />
+			<operation id="cmsdelete" priority="20" name="内容管理角色批量删除" />-->
+			<operation id="rolemanager" priority="20" name="角色管理">
+				<description>
+					<![CDATA[
+						新增角色，删除角色只能删除自己创建的角色，角色修改，角色类型添加，角色类型删除，角色查询，角色信息查看，用户只能对自己创建的角色进行角色管理
+					]]>
+				</description>
+			</operation>
+	
+	    </group>
+               
+	
+		     
+	<!--应用管理权限操作定义    结束-->
+	</operations>
+
+	<resource id="1111" name="机构资源111" class="resOrgTree11.jsp" default="true" allowIfNoRequiredRole="false" auto="true">
+		<!--定义非未受保护的特殊资源-->	
+		<!--<exclude resourceid="*"/>
+		<operation id="userorgset"/>
+		</exclude>-->
+			
+                <!--
+		定义资源操作组
+		name:指定资源操作组的名称，具体的操作定义在操作组中
+                -->
+                <operationgroup groupid="1111"/>                
+                <!-- 机构资源全局操作
+                globalresourceid:全局操作对应的资源标识id
+                groupid:全局操作对应的操作组
+                 -->
+                <globaloperationgroup globalresourceid="orgunit11" groupid="globalroleoperation111"/>
+	</resource>
+</resources>

@@ -1,0 +1,74 @@
+lian.qiu 974 2014年05月30日 openfile 内外网访问服务器 修改访问访问服务器IP地址
+creatorepp/ccapp/xtbg/public/main/jsp/openfire.jsp
+lian.qiu 978 2014年06月03日 修改在线人数显示的问题
+creatorepp/ccapp/oa/common/main/loginviewlist.jsp
+lian.qiu 980 2014年06月03日 人员持证管理的【查看人员信息】页面顶部，【基本资料】旁边增加【综合打印】按钮。点击该按钮弹出excel下载对话框，生成的excel文件内容头部跟持证信息一致，下方的详细列表为从上至下依次排列持证信息和培训信息。培训详细列表，将【培训主题】与【培训内容】合并，标题为【培训主题】，内容为【培训主题】加“;”加【培训内容】。详细效果见批注。
+com/chinacreator/xtbg/core/personholder/data/HolderDaoExcelImpl.java
+lian.qiu 981 2014年06月03日 人员持证管理的【查看人员信息】页面顶部，【基本资料】旁边增加【综合打印】按钮。点击该按钮弹出excel下载对话框，生成的excel文件内容头部跟持证信息一致，下方的详细列表为从上至下依次排列持证信息和培训信息。培训详细列表，将【培训主题】与【培训内容】合并，标题为【培训主题】，内容为【培训主题】加“;”加【培训内容】。详细效果见批注。
+com/chinacreator/xtbg/pub/excel/POIExcelUtil.java
+lian.qiu 982 2014年06月03日 【人员基础信息】的【在岗状态】字段增加【岳阳事业部编内】选项。同时更新导入导出模板。
+creatorepp/ccapp/oa/directory/jsp/updateview4directory.jsp
+lian.qiu 983 2014年06月03日 【人员基础信息】的【在岗状态】字段增加【岳阳事业部编内】选项。同时更新导入导出模板。
+creatorepp/ccapp/oa/directory/jsp/view4directory.jsp
+lian.qiu 984 2014年06月03日 【人员基础信息】的【在岗状态】字段增加【岳阳事业部编内】选项。同时更新导入导出模板。
+creatorepp/ccapp/oa/personholder/jsp/holderseelist.jsp
+lian.qiu 985 2014年06月03日 人员持证管理的【查看人员信息】页面顶部，【基本资料】旁边增加【综合打印】按钮。点击该按钮弹出excel下载对话框，生成的excel文件内容头部跟持证信息一致，下方的详细列表为从上至下依次排列持证信息和培训信息。培训详细列表，将【培训主题】与【培训内容】合并，标题为【培训主题】，内容为【培训主题】加“;”加【培训内容】。详细效果见批注。
+creatorepp/ccapp/oa/personholder/jsp/updatedirectoryinfo.jsp
+lian.qiu 986 2014年06月03日 IE8\9\11都可以按任意顺序填写请假流程的各必填项。但是IE10则必须先填写请假时间才能填写在前面的请假事由，客户使用起来有歧义。
+creatorepp/ccapp/xtbg/tjy/attendancemanage/jsp/attendanceleave.jsp
+lian.qiu 987 2014年06月03日 【考勤查询】的是否办公IP的判断不正确，当没有打下班卡时，不应当判定为非办公IP。
+com/chinacreator/xtbg/suxian/electroniccheck/dao/imploracle/ElectViewDaoImpl.java
+lian.qiu 988 2014年06月03日 【人员基础信息】的【在岗状态】字段增加【岳阳事业部编内】选项。同时更新导入导出模板。
+com/chinacreator/xtbg/core/directory/constant/DirectoryConstant.java
+lian.qiu 989 2014年06月03日 人员持证管理的【查看人员信息】页面顶部，【基本资料】旁边增加【综合打印】按钮。点击该按钮弹出excel下载对话框，生成的excel文件内容头部跟持证信息一致，下方的详细列表为从上至下依次排列持证信息和培训信息。培训详细列表，将【培训主题】与【培训内容】合并，标题为【培训主题】，内容为【培训主题】加“;”加【培训内容】。详细效果见批注。
+lian.qiu 996 2014年06月03日 暂存列表追加删除按钮功能
+creatorepp/ccapp/oa/process/flowprocessing/jsp/tobeworklist.jsp
+lian.qiu 997 2014年06月03日 待办任务追加  事务待办table页
+creatorepp/ccapp/xtbg/tjy/waitDoWork/jsp/doprocesslist.jsp
+lian.qiu 998 2014年06月03日 待办任务追加  事务待办table页
+creatorepp/ccapp/xtbg/tjy/waitDoWork/jsp/todoworktabs.jsp
+lian.qiu 999 2014年06月03日 待办任务追加  事务待办table页
+lian.qiu 1008 2014年06月04日 【已办列表】的【处理环节】列改为展示【当前环节】，因为【处理环节】展示的是上环节的信息有歧义。应当展示为当前待处理的环节，展示效果参考后台管理。
+creatorepp/ccapp/oa/process/flowprocessing/jsp/doneworklist.jsp
+lian.qiu 1009 2014年06月04日 【已办列表】的【处理环节】列改为展示【当前环节】，因为【处理环节】展示的是上环节的信息有歧义。应当展示为当前待处理的环节，展示效果参考后台管理。
+com/chinacreator/xtbg/core/process/flowprocessing/dao/impl/FlowBusiSearchDaoImpl.java
+lian.qiu 1044 2014年06月04日 【易耗品申购审批】流程的新建页面，需要支持查看已汇总的常用物品的明细，即当某个常用物品是汇总自多个计划表时，点击【申购部门】列名称连接时弹出对话框，展示【申购部门】、【申购数量】两列，展示该物品的汇总明细。对话框摆放不下的，显示滚动条。
+creatorepp/ccapp/xtbg/tjy/officesupplies/jsp/osexamination.jsp
+lian.qiu 1045 2014年06月04日 修改样式
+creatorepp/ccapp/xtbg/tjy/officesupplies/jsp/osapplyplan.jsp
+lian.qiu 1046 2014年06月04日 【易耗品申购审批】流程的新建页面，需要支持查看已汇总的常用物品的明细，即当某个常用物品是汇总自多个计划表时，点击【申购部门】列名称连接时弹出对话框，展示【申购部门】、【申购数量】两列，展示该物品的汇总明细。对话框摆放不下的，显示滚动条。
+creatorepp/ccapp/xtbg/tjy/officesupplies/jsp/showosorglist.jsp
+lian.qiu 1047 2014年06月04日 【易耗品申购审批】流程的新建页面，需要支持查看已汇总的常用物品的明细，即当某个常用物品是汇总自多个计划表时，点击【申购部门】列名称连接时弹出对话框，展示【申购部门】、【申购数量】两列，展示该物品的汇总明细。对话框摆放不下的，显示滚动条。
+com/chinacreator/xtbg/tjy/officesupplies/list/OSExaShowOrgList.java
+lian.qiu 1048 2014年06月04日 【易耗品申购审批】流程的新建页面，需要支持查看已汇总的常用物品的明细，即当某个常用物品是汇总自多个计划表时，点击【申购部门】列名称连接时弹出对话框，展示【申购部门】、【申购数量】两列，展示该物品的汇总明细。对话框摆放不下的，显示滚动条。
+com/chinacreator/xtbg/tjy/officesupplies/dao/OsExaminationObjectDao.java
+lian.qiu 1049 2014年06月04日 【易耗品申购审批】流程的新建页面，需要支持查看已汇总的常用物品的明细，即当某个常用物品是汇总自多个计划表时，点击【申购部门】列名称连接时弹出对话框，展示【申购部门】、【申购数量】两列，展示该物品的汇总明细。对话框摆放不下的，显示滚动条。
+com/chinacreator/xtbg/tjy/officesupplies/dao/impl/OsExaminationObjectDaoImpl.java
+lian.qiu 1071 2014年06月04日 增加【申购计划查询】子菜单，展示所有已经提交到系统的（无论是否属于当前用户已办流程）【易耗品申购计划表】。展示字段类似【我的事务】的【已办列表】，但【办件历史】列不展示【追回】按钮。且将【业务类别】、【业务类型】分别更改为【申购部室】、【申请人】。流程查看页面各控件同公文的已办件的查看效果，禁用所有控件。
+com/chinacreator/xtbg/tjy/officesupplies/list/PlandoneDeWorkList.java
+lian.qiu 1089 2014年06月05日 解决内部分发乱码的问题
+creatorepp/ccapp/oa/process/flowprocessing/js/flowcommonalert.js
+lian.qiu 1090 2014年06月05日 解决内部分发乱码的问题
+creatorepp/ccapp/oa/archive/circularize.jsp
+lian.qiu 1093 2014年06月05日 传阅性公文查看 只显示正文和附件列表
+creatorepp/ccapp/oa/archive/showWordConext.jsp
+lian.qiu 1094 2014年06月05日 传阅性公文查看 只显示正文和附件列表
+creatorepp/ccapp/oa/archive/circularizelist.jsp
+lian.qiu 1095 2014年06月05日 传阅性公文查看 只显示正文和附件列表
+creatorepp/ccapp/oa/archive/FWGZ2.jsp
+lian.qiu 1099 2014年06月05日 增加【申购计划查询】子菜单，展示所有已经提交到系统的（无论是否属于当前用户已办流程）【易耗品申购计划表】。展示字段类似【我的事务】的【已办列表】，但【办件历史】列不展示【追回】按钮。且将【业务类别】、【业务类型】分别更改为【申购部室】、【申请人】。流程查看页面各控件同公文的已办件的查看效果，禁用所有控件。
+com/chinacreator/xtbg/tjy/processing/dao/Impl/ProFlowBusiSearchDaoImpl.java
+lian.qiu 1100 2014年06月05日 增加【申购计划查询】子菜单，展示所有已经提交到系统的（无论是否属于当前用户已办流程）【易耗品申购计划表】。展示字段类似【我的事务】的【已办列表】，但【办件历史】列不展示【追回】按钮。且将【业务类别】、【业务类型】分别更改为【申购部室】、【申请人】。流程查看页面各控件同公文的已办件的查看效果，禁用所有控件。
+com/chinacreator/xtbg/tjy/processing/dao/ProFlowBusiSearchDao.java
+lian.qiu 1101 2014年06月05日 传阅性公文查看 只显示正文和附件列表
+com/chinacreator/xtbg/pub/iweboffice/dao/impl/ManageIWebOfficeDataInDocumentFile.java
+lian.qiu 1102 2014年06月05日 传阅性公文查看 只显示正文和附件列表
+creatorepp/ccapp/xtbg/public/util/jsp/iwebOffice2009.jsp
+lian.qiu 1103 2014年06月05日 增加【申购计划查询】子菜单，展示所有已经提交到系统的（无论是否属于当前用户已办流程）【易耗品申购计划表】。展示字段类似【我的事务】的【已办列表】，但【办件历史】列不展示【追回】按钮。且将【业务类别】、【业务类型】分别更改为【申购部室】、【申请人】。流程查看页面各控件同公文的已办件的查看效果，禁用所有控件。
+creatorepp/ccapp/xtbg/tjy/officesupplies/jsp/showpersonosplan.jsp
+lian.qiu 1104 2014年06月05日 登录界面加载图片太大，导致登录失败
+creatorepp/ccapp/oa/resources/plug/ifrom/blue/img/left_img.jpg
+lian.qiu 1105 2014年06月05日 登录界面加载图片太大，导致登录失败
+creatorepp/ccapp/oa/resources/plug/ifrom/red/img/left_img.jpg
+lian.qiu 1106 2014年06月05日 增加【申购计划查询】子菜单，展示所有已经提交到系统的（无论是否属于当前用户已办流程）【易耗品申购计划表】。展示字段类似【我的事务】的【已办列表】，但【办件历史】列不展示【追回】按钮。且将【业务类别】、【业务类型】分别更改为【申购部室】、【申请人】。流程查看页面各控件同公文的已办件的查看效果，禁用所有控件。
+creatorepp/WEB-INF/menuconfig/module.xml

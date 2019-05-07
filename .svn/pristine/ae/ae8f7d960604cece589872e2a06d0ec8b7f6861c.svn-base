@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				">
+	<description>公文处理</description>
+	
+	<!-- 公文分发实现类 -->
+	<bean name="circularizeDaoImpl" class="com.chinacreator.xtbg.core.archive.dao.impl.CircularizeDaoImpl"></bean>
+	<bean name="wordArchiveDaoImpl" class="com.chinacreator.xtbg.core.archive.dao.impl.WordArchiveDaoImpl"></bean>
+	<bean name="receiveDaoImpl" class="com.chinacreator.xtbg.core.archive.gwcs.dao.impl.ReceiveGwDAOImpl"></bean>
+	<bean name="agencyDaoImpl" class="com.chinacreator.xtbg.core.agency.dao.imploracle.AgencyDaoImploracle"></bean>
+	<bean id="hnsbgt_lwdj" name="hnsbgt_lwdj" class="com.chinacreator.xtbg.core.archive.gwcs.dao.impl.ReceiveGwWithFlowDaoImpl"></bean>
+	<bean id="hnsbgt_gwbl" name="hnsbgt_gwbl" class="com.chinacreator.xtbg.core.archive.gwcs.dao.impl.GwDoWithFlowImpl"></bean>
+
+	<!-- 扩展实现类。需要实现ArchiveExtService接口 -->
+	<bean name="wordsfw" class="com.chinacreator.xtbg.core.archive.service.impl.ArchiveExtServiceImpl"></bean>
+	
+	<!-- 公文操作实现类。 -->
+	<bean name="flowOperExtDaoImpl" class="com.chinacreator.xtbg.core.archive.dao.impl.FlowOperExtDaoImpl"></bean>
+	
+	<!-- 联合盖章监控 -->
+	<bean id="unionArchiveFeedBackThread" class="com.chinacreator.xtbg.core.archive.cache.UnionArchiveFeedBackThread" >
+		<!-- 是否启用联合盖章监控  -->
+		<property name="unionused" value="false"></property>
+		<!-- 联合盖章注入实现类 -->
+		<property name="wordArchiveDaoImpl" ref="wordArchiveDaoImpl"></property>
+		<property name="oaSendArchiveServiceImpl" ref="oaSendArchiveServiceImpl"></property>
+	</bean>
+	<bean id="methodInvokingFeedBack" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="unionArchiveFeedBackThread" />
+       </property>
+       <property name="targetMethod">
+           <value>feedback</value>
+       </property>
+    </bean>
+    <bean id="feedBackcronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+       <property name="jobDetail">
+           <ref bean="methodInvokingFeedBack" />
+       </property>
+       <!-- 每天的8点到21点每隔1分钟触发，具体说明见附录 -->
+       <property name="cronExpression">
+           <value> 1 0/30 * * * ?</value>
+       </property>
+    </bean>
+   
+   <!-- 联合盖章发送 -->
+	<bean id="unionArchiveSendCronTrigger" class="com.chinacreator.xtbg.core.archive.cache.UnionArchiveSendCronTrigger" >
+		<!-- 是否启用联合盖章监控  -->
+		<property name="sendused" value="false"></property>
+		<!-- 联合盖章注入实现类 -->
+		<property name="wordArchiveDaoImpl" ref="wordArchiveDaoImpl"></property>
+		<property name="oaSendArchiveServiceImpl" ref="oaSendArchiveServiceImpl"></property>
+	</bean>
+	<bean id="methodInvokingArchiveSend" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="unionArchiveSendCronTrigger" />
+       </property>
+       <property name="targetMethod">
+           <value>sendAllArchive</value>
+       </property>
+    </bean>
+     <bean id="archiveSendCronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <!-- 这里不可以直接在属性jobDetail中引用taskJob，因为他要求的是一个jobDetail类型的对象，所以我们得通过MethodInvokingJobDetailFactoryBean来转一下 -->
+      <property name="jobDetail">
+          <ref bean="methodInvokingArchiveSend" />
+      </property>
+      <!-- 每天的8点到21点每隔1分钟触发，具体说明见附录 -->
+      <property name="cronExpression">
+          <value> 1 0/30 * * * ?</value>
+      </property>
+   </bean>
+   
+    <!-- 添加触发器 -->
+   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+      <property name="triggers">
+          <list>
+             <ref local="feedBackcronTrigger" />
+             <ref bean="archiveSendCronTrigger1" />
+          </list>
+      </property>
+   </bean> 
+</beans>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>
+function uf_open(){
+	//alert("aa");
+	ChangeWinTitle("起始页");
+	var arr=new Array(4);
+	var arr1=new Array(3);
+	var arr2=new Array(3);
+	var arr3=new Array(3);
+	var arr4=new Array(3);
+	var str="";
+
+	var tmpErr = true ;
+	var kk = 0 ;
+	while (kk<100 && tmpErr) {
+		try{
+			var oo = pubDataSet.menu.oForm.oInput
+			tmpErr=false;
+		}catch(e){
+			Pause(100);
+			kk++;
+		}
+	}
+	var oo = pubDataSet.menu.oForm.oInput ;
+	str=LoadPubData("origPage",oo);
+	//alert(str)
+	if(str!=""){
+		arr=str.split(";");
+		if(IsSpace(arr[0])==false){
+			
+			arr1=arr[0].split(",");
+
+			link1.href="javascript:pubDataSet.topic.execScript('DesignDjOpen("+arr1[0]+")');CloseBill()";
+			link1.innerText=arr1[1]+"("+arr1[2]+")";
+			link1.style.display="";
+		}else{
+			link1.href="";
+			link1.innerText="";
+		}
+
+		if(IsSpace(arr[1])==false){
+			arr2=arr[1].split(",");
+
+			link2.href="javascript:pubDataSet.topic.execScript('DesignDjOpen("+arr2[0]+")');CloseBill()";
+			link2.innerText=arr2[1]+"("+arr2[2]+")";
+			link2.style.display="";
+		}else{
+			link2.href="";
+			link2.innerText="";
+		}
+		if(IsSpace(arr[2])==false){
+			arr3=arr[2].split(",");
+			link3.href="javascript:pubDataSet.topic.execScript('DesignDjOpen("+arr3[0]+")');CloseBill()";
+			link3.innerText=arr3[1]+"("+arr3[2]+")";
+			link3.style.display="";
+		}else{
+			link3.href="";
+			link3.innerText="";
+		}
+		if(IsSpace(arr[3])==false){
+			arr4=arr[3].split(",");
+			link4.href="javascript:pubDataSet.topic.execScript('DesignDjOpen("+arr4[0]+")');CloseBill()";
+			link4.innerText=arr4[1]+"("+arr4[2]+")";
+			link4.style.display="";
+		}else{
+			link4.href="";
+			link4.innerText="";
+		}
+	}
+	
+}
+//打开表单
+function uf_openBill(){
+	CloseBill();
+	pubDataSet.topic.execScript("Addobj('opendj')");
+}
+//使用向导新建表单
+function uf_newBill(){
+	CloseBill();
+	pubDataSet.topic.execScript("DesignDjNew('是')");
+		
+}</script><script src='../js/fcopendj.js'></script><script src='../js/design.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet jslib="fcopendj.js&#13;&#10;design.js&#13;&#10;" toolbar="不带工具栏" idtype="1" isfile="否" postop posleft window="当前窗口" keyfield controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" posheight="210" poswidth="300" entertype="修改" codeheader="BBB" mkbh caption="起始页" type="LR" dj_sn="fcs_origPage" billtaborder="<root><taborder>cmdOpen</taborder><taborder>FCButton3</taborder><taborder>cmdNew</taborder></root>" contxml="<root><label><id>Label2</id></label><shape><id>Shape1</id><id>Shape2</id><id>Shape3</id><id>Shape4</id><id>Shape5</id><id>Shape6</id></shape><a><id>link1</id><id>link2</id><id>link3</id><id>link4</id></a><button><id>cmdNew</id><id>cmdOpen</id><id>FCButton3</id></button></root>" BLONopen="uf_open()" center="居中"><A id=link1 style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 18px; WIDTH: 257px; FONT-FAMILY: ; POSITION: absolute; TOP: 43px; HEIGHT: 15px; backgroundColor1: #ffffff" onmovestart=moveStart() href="" target=_self controltype="a" href1 NotBg="否"></A><A id=link2 style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 18px; WIDTH: 257px; FONT-FAMILY: ; POSITION: absolute; TOP: 68px; HEIGHT: 15px; backgroundColor1: #ffffff" onmovestart=moveStart() href="" target=_self controltype="a" href1 NotBg="否"></A><A id=link3 style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 17px; WIDTH: 258px; FONT-FAMILY: ; POSITION: absolute; TOP: 93px; HEIGHT: 15px; backgroundColor1: #ffffff" onmovestart=moveStart() href="" target=_self controltype="a" href1 NotBg="否"></A><A id=link4 style="DISPLAY: none; FONT-SIZE: 12px; LEFT: 17px; WIDTH: 259px; FONT-FAMILY: ; POSITION: absolute; TOP: 117px; HEIGHT: 15px; backgroundColor1: #ffffff" onmovestart=moveStart() href="" target=_self controltype="a" href1 NotBg="否"></A><BUTTON id=cmdNew style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 101px; WIDTH: 96px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_newBill()")'>用向导新建表单</BUTTON><BUTTON id=cmdOpen style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 200px; WIDTH: 75px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("uf_openBill()")'>打开表单</BUTTON><BUTTON id=FCButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 6px; WIDTH: 93px; FONT-FAMILY: ; POSITION: absolute; TOP: 144px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>新建空白表单</BUTTON> 
+<DIV id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; VERTICAL-ALIGN: middle; WIDTH: 267px; FONT-FAMILY: ; POSITION: absolute; TOP: 10px; HEIGHT: 22px; BACKGROUND-COLOR: #d4d0c8; TEXT-ALIGN: center; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() noWrap controltype="label" value="Label2"><BR>最近打开的表单名称</DIV><?xml:namespace prefix = v /><v:line id=Shape1 onresize="" style="DISPLAY: block; LEFT: 8px; WIDTH: 266px; POSITION: absolute; TOP: 62px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "199.5pt,0" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line><v:line id=Shape2 onresize="" style="DISPLAY: block; LEFT: 9px; WIDTH: 265px; POSITION: absolute; TOP: 87px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "198.75pt,0" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line><v:line id=Shape3 onresize="" style="DISPLAY: block; LEFT: 9px; WIDTH: 265px; POSITION: absolute; TOP: 110px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "198.75pt,0" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line><v:line id=Shape4 onresize="" style="DISPLAY: block; LEFT: 8px; WIDTH: 266px; POSITION: absolute; TOP: 136px; HEIGHT: 18px" controltype="shape" id1="3" from = "0,0" to = "199.5pt,0" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line><v:line id=Shape5 onresize="" style="DISPLAY: block; LEFT: 8px; WIDTH: 100px; POSITION: absolute; TOP: 38px; HEIGHT: 98px" controltype="shape" id1="2" from = "0,0" to = "0,73.5pt" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line><v:line id=Shape6 onresize="" style="DISPLAY: block; LEFT: 274px; WIDTH: 100px; POSITION: absolute; TOP: 37px; HEIGHT: 98px" controltype="shape" id1="2" from = "0,0" to = "0,73.5pt" fillcolor = "white" strokecolor = "silver" strokeweight = ".75pt"><v:stroke></v:stroke></v:line></DIV></body></html>

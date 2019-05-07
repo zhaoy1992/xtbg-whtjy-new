@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo;
+var pubEdit=false;   			
+var pubDataSet=null;
+var pubRequest=parent.oRequest;
+var pubEformEnterStatus="OK"; 
+pub_djhtm();
+		</script>
+<script>function uf_open() {
+	//"82645151@sina.com"
+  SKDBedit1.value="82645151@sina.com";
+  SKDBedit2.title="多个收件人地址可用,分隔!" ;
+  ChangeWinTitle("写邮件")
+}
+/*
+//自动发送email
+//to:对方email地址,title:标题,body:内容
+//sip 邮局的IP地址
+//sfrom 发送方的Email地址
+//susername 验证用的用户名
+//spassword 验证用的密码
+//copyto 抄送
+//sData 为要发送的HTML文件的内容
+//sFileName 为sData 内容的指定的文件名,不要加上.htm 到时会自动加上.
+//sBcc 为暗送的EMAIL地址
+*/
+function uf_sendemail(){
+  if(Valid.checkValue("Email",SKDBedit2.value)==false){
+     alert("收件人EMAIL地址非法!") ;
+     SKDBedit2.focus() ;
+     return ;
+  }
+  if(isSpace(SKDBedit3.value)==false){
+  if(Valid.checkValue("Email",SKDBedit3.value)==false){
+     alert("抄送EMAIL地址非法!") ;
+     SKDBedit3.focus() ;
+     return ;
+  }
+  }
+  if(isSpace(SKDBedit4.value)==false){
+  if(Valid.checkValue("Email",SKDBedit4.value)==false){
+     alert("暗送EMAIL地址非法!") ;
+     SKDBedit4.focus() ;
+     return ;
+  }
+  }
+  if(isSpace(SKDBedit5.value)){
+    var ret = window.confirm("确定这个主题为空的邮件吗？");
+    if (ret==false) {
+      SKDBedit5.focus() ;
+      return
+    }
+  }
+  //smtp.sina.com.cn  "82645151" "8264"
+  var sR=SendEmail(SKDBedit2.value,SKDBedit5.value,SKDBMemo1.value,"smtp.sina.com.cn",SKDBedit1.value,"82645151","8264",SKDBedit3.value,pubdjbh,"report",SKDBedit4.value);
+  if(sR=="发送成功!"){
+     alert(sR);
+     LoadMod("exitbill");
+  }else {
+     alert("发送失败");
+  }
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule(".fcmask","behavior: url(../htc/fcmask.htc)",0);</script><script language='vbscript' src='../js/fcmask.vbs'></script>
+<DIV class=dj id=SKbillsheet onkeydown="" ondblclick="" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;" BLONopen="uf_open()" printid="" helpid="" BLONclose runsave="" toolbar="不带工具栏" blmode="其它" contxml="<root><SKButton><id>SKButton1</id><id>SKButton2</id></SKButton><SKDBedit><id>SKDBedit1</id><id>SKDBedit2</id><id>SKDBedit3</id><id>SKDBedit4</id><id>SKDBedit5</id></SKDBedit><label><id>Label1</id><id>Label2</id><id>Label3</id><id>Label4</id><id>Label5</id><id>Label6</id><id>Label7</id></label><textarea><id>SKDBMemo1</id></textarea></root>" billtaborder="<root><taborder>SKButton1</taborder><taborder>SKButton2</taborder><taborder>SKDBedit1</taborder><taborder>SKDBedit2</taborder><taborder>SKDBedit3</taborder><taborder>SKDBedit4</taborder><taborder>SKDBedit5</taborder><taborder>SKDBMemo1</taborder></root>" dj_sn="TTsendemail" type="ST" caption="发邮件" mkbh="E5" codeheader="" entertype="新增" poswidth="429" posheight="306" controlno="SKButton:2;SKDBedit:5;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;DsMain_field:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" keyfield="" center="居中" dj_id="122" mastertable="" para="<r></r>"><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 37px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 38px; HEIGHT: 12px" controltype="label" align="Left">发件人</SPAN><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 37px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 59px; HEIGHT: 12px" controltype="label" align="Left">收件人</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 20px; WIDTH: 25px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 78px; HEIGHT: 12px" controltype="label" align="Left">抄送</SPAN><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 20px; WIDTH: 25px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 101px; HEIGHT: 12px" controltype="label" align="Left">暗送</SPAN><SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 20px; WIDTH: 25px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 123px; HEIGHT: 12px" controltype="label" align="Left">主题</SPAN><SPAN id=Label6 style="DISPLAY: block; FONT-WEIGHT: bold; FONT-SIZE: 16px; LEFT: 178px; WIDTH: 69px; COLOR: #0000ff; FONT-FAMILY: 楷体_GB2312; POSITION: absolute; TOP: 7px; HEIGHT: 16px; TEXT-DECORATION: underline" controltype="label" align="Left">发送邮件</SPAN><SPAN id=Label7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 20px; WIDTH: 25px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 144px; HEIGHT: 12px" controltype="label" align="Left">内容</SPAN><INPUT id=SKDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 368px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 34px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" disabled controltype="SKDBedit" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' ; onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' dataset=""><INPUT id=SKDBedit2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 368px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 55px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' dataset=""><INPUT id=SKDBedit3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 368px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 76px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' dataset=""><INPUT id=SKDBedit4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 368px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 98px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' dataset=""><INPUT id=SKDBedit5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 368px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 120px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' dataset=""><TEXTAREA id=SKDBMemo1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 50px; WIDTH: 367px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 142px; HEIGHT: 100px; BACKGROUND-COLOR: #ffffff" controltype="textarea" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")' onclick='bill_onclick("")' field="" dataset=""></TEXTAREA><INPUT id=SKButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 232px; WIDTH: 75px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 248px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" type=button value="发 送" controltype="SKButton" onclick='bill_onclick("uf_sendemail()")' dropstyle="否"><INPUT id=SKButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 320px; WIDTH: 75px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 248px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" type=button value="取 消" controltype="SKButton" onclick='bill_onclick("exitbill")' dropstyle="否"></DIV></body></html>

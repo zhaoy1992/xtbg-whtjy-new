@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>var o  ;
+function uf_open() {
+	o = pubDataSet ;
+	txtWidth.value = o.width
+	txtHeight.value = o.height
+	txtTop.value = o.top
+	txtBottom.value = o.bottom
+	txtLeft.value = o.left
+	txtRight.value = o.right	
+	SetRadioValue(rdo, o.orientation)
+	txtHeader.value = o.header ;
+	txtFooter.value = o.footer ;
+	cboPaper.value = o.size ;
+	txtPaper.value = o.size ;
+}
+function uf_ok() {
+
+	o.width=Trim(txtWidth.value);
+	o.height=Trim(txtHeight.value);
+	o.top=Trim(txtTop.value);
+	o.bottom=Trim(txtBottom.value);
+	o.left=Trim(txtLeft.value);
+	o.right=Trim(txtRight.value);
+	o.orientation = rdo.value 
+	o.header = txtHeader.value ;
+	o.footer = txtFooter.value ;
+	
+	if(IsSpace(txtPaper.value)){
+		o.size = cboPaper.value ;
+	}else{
+		o.size = txtPaper.value ;
+	}
+
+	window.returnValue = o ;
+	CloseBill()
+
+}
+function uf_selheader(obj) {
+	var sRet = DjOpen("ep_pagestr","","展现","有模式窗口");
+	if(IsSpace(sRet) == false ){
+		obj.value += sRet ;
+	}	
+}
+function uf_onchange() {
+	txtPaper.value = cboPaper.value ;
+  switch (cboPaper.value) {
+     case 'Custom':
+      	   txtWidth.value=215.9 
+           txtHeight.value=355.6
+           break; 
+     case 'Letter':
+      	   txtWidth.value=215.9 
+           txtHeight.value=279.4
+           break;
+     case 'Letter Small':
+      	   txtWidth.value=215.9
+           txtHeight.value=279.4
+           break;
+     case 'Tabloid':
+      	   txtWidth.value=279.4
+           txtHeight.value=431.8
+           break;
+     case 'Ledger':
+      	   txtWidth.value=279.4 
+           txtHeight.value=431.8
+           break;
+     case 'Legal':
+      	   txtWidth.value=215.9
+           txtHeight.value=355.6
+           break;
+     case 'Statement':
+      	   txtWidth.value=139.7
+           txtHeight.value=215.9
+           break;
+     case 'Executive':
+      	   txtWidth.value=184.2
+           txtHeight.value=266.7
+           break;
+     case 'A3':
+      	   txtWidth.value=297.0
+           txtHeight.value=420.0   
+           break;
+     case 'A4':
+      	   txtWidth.value=210.0
+           txtHeight.value=297.0   
+           break;
+     case 'A4 Small':
+      	   txtWidth.value=210.0
+           txtHeight.value=297.0    
+           break;
+     case 'A5':
+      	   txtWidth.value=148.0
+           txtHeight.value=210.0   
+           break;
+     case 'B4(JIS)':
+      	   txtWidth.value=257.0
+           txtHeight.value=364.0       
+           break;
+     case 'B5(JIS)':
+      	   txtWidth.value=182.0
+           txtHeight.value=257.0  
+           break;
+     case 'Folio':
+      	   txtWidth.value=215.9
+           txtHeight.value=330.2  
+           break;
+     case 'Quarto':
+      	   txtWidth.value=215.0
+           txtHeight.value=275.0                
+           break;
+     case '10x14':
+      	   txtWidth.value=254.0
+           txtHeight.value=355.6       
+           break;
+     case '10x17':
+      	   txtWidth.value=279.4
+           txtHeight.value=431.8  
+           break;
+     case 'Note':
+      	   txtWidth.value=215.9
+           txtHeight.value=279.4  
+           break;
+     case 'Envelope #9':
+      	   txtWidth.value=98.4
+           txtHeight.value=225.4   
+           break;
+     case 'Envelope #10':
+      	   txtWidth.value=104.8
+           txtHeight.value=241.3
+           break;   
+     case 'Envelope #11':
+      	   txtWidth.value=114.3
+           txtHeight.value=263.5     
+           break;
+     case 'Envelope #12':
+      	   txtWidth.value=120.7
+           txtHeight.value=279.4   
+           break;
+     case 'Envelope #14':
+      	   txtWidth.value=127.0
+           txtHeight.value=292.1  
+           break;
+     case 'C size sheet':
+      	   txtWidth.value=431.8
+           txtHeight.value=558.8     
+           break;
+     case 'D size sheet':
+      	   txtWidth.value=558.8
+           txtHeight.value=863.6
+           break;   
+     case 'E size sheet':
+      	   txtWidth.value=863.6
+           txtHeight.value=1117.6   
+           break;
+     case 'Envelope DL':
+      	   txtWidth.value=110.0
+           txtHeight.value=220.0   
+           break;
+     case 'Envelope C5':
+      	   txtWidth.value=162.0
+           txtHeight.value=229.0
+           break;
+  	 case 'Envelope C3':
+      	   txtWidth.value=324.0
+           txtHeight.value=458.0   
+           break;
+  	 case 'Envelope C4':
+      	   txtWidth.value=229.0
+           txtHeight.value=324.0   
+           break;
+     case 'Envelope C6':
+      	   txtWidth.value=114.0
+           txtHeight.value=162.0 
+           break;
+     case 'Envelope C65':
+      	   txtWidth.value=114.0
+           txtHeight.value=229.0 
+           break;
+     case 'Envelope B4':
+      	   txtWidth.value=250.0
+           txtHeight.value=353.0 
+           break;
+     case 'Envelope B5':
+      	   txtWidth.value=176.0
+           txtHeight.value=250.0              
+           break;
+     case 'Envelope B6':
+      	   txtWidth.value=125.0
+           txtHeight.value=176.0   
+           break;
+     case 'Envelope':
+      	   txtWidth.value=110.0
+           txtHeight.value=230.0 
+           break;
+     case 'Envelope Monarch':
+      	   txtWidth.value=98.4
+           txtHeight.value=190.5 
+           break;
+     case '6 3/4 Envelope':
+      	   txtWidth.value=92.1
+           txtHeight.value=165.1      
+           break;
+     case 'US Std Fanfold':
+      	   txtWidth.value=279.4
+           txtHeight.value=377.8     
+           break;
+     case 'German Std Fanfold':
+      	   txtWidth.value=215.9
+           txtHeight.value=304.8             
+           break;
+     case 'German Legal Fanfold':
+      	   txtWidth.value=215.9
+           txtHeight.value=330.2
+           break;            
+     case 'Ledger 11 x 17 in':
+      	   txtWidth.value=279.4
+           txtHeight.value=431.8    
+           break;
+     case '8 x 6 in':
+      	   txtWidth.value=152.4
+           txtHeight.value=203.2                                          
+           break;
+     case 'A2 420.0 x 594.0 mm':
+      	   txtWidth.value=420.0
+           txtHeight.value=594.0
+           break; 
+     case 'B3 364.0 x 515.0 mm':
+      	   txtWidth.value=364.0
+           txtHeight.value=515.0 
+           break;
+     case 'Foolscap 13.50 x 17.00 in':
+      	   txtWidth.value=342.9
+           txtHeight.value=431.8
+           break; 
+     case '#10 Env. 9.50 x 4.12 in':
+      	   txtWidth.value=104.8
+           txtHeight.value=241.3
+           break;
+     case 'DL Env. 220.0 x 110.0 mm':
+      	   txtWidth.value=110.0
+           txtHeight.value=220.0
+           break;
+     case 'Fanfold 9.50 x 11.00 in':
+     	   txtWidth.value=241.3
+           txtHeight.value=279.4
+           break;
+     case 'Fanfold 12.00 x 8.50 in':
+      	   txtWidth.value=215.9
+           txtHeight.value=304.8    
+           break;
+     case 'Fanfold 14.50 x 11.00 in':
+      	   txtWidth.value=279.4
+           txtHeight.value=368.3  
+           break;
+     case 'Letter+ 9.00 x 13.30 in':
+      	   txtWidth.value=228.6
+           txtHeight.value=337.8
+           break;
+     case 'A4+ 223.5 x 355.6 mm':
+      	   txtWidth.value=222.7
+           txtHeight.value=355.6
+           break;
+     case 'Japanese Dbl.Postcard':
+      	   txtWidth.value=148.1
+           txtHeight.value=200.2             
+           break;
+     case 'Maximum 11.7 x 17.7':
+      	   txtWidth.value=297.2
+           txtHeight.value=449.6   
+           break;
+     case 'copy of Letter':
+      	   txtWidth.value=215.9
+           txtHeight.value=279.4   
+ 			break;
+ 	}         
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><link type='text/css' rel='stylesheet' href='../css/shape.css'  /><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/><link type='text/css' rel='stylesheet' href='../css/TextStyle.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><label><id>Label2</id><id>Label3</id><id>Label4</id><id>Label12</id><id>Label8</id><id>Label6</id><id>Label7</id><id>Label5</id><id>Label13</id><id>Label14</id><id>Label21</id><id>Label22</id></label><radio><id>rdo</id></radio><combobox><id>cboPaper</id></combobox><shape><id>Shape6</id></shape><tab><id>PageControl1</id></tab><button><id>FCButton5</id><id>FCButton6</id><id>FCButton3</id><id>FCButton4</id></button><text><id>txtWidth</id><id>txtHeight</id><id>txtBottom</id><id>txtRight</id><id>txtLeft</id><id>txtTop</id><id>txtHeader</id><id>txtFooter</id><id>txtPaper</id></text></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>cboPaper</taborder><taborder>txtWidth</taborder><taborder>txtHeight</taborder><taborder>txtBottom</taborder><taborder>txtRight</taborder><taborder>txtLeft</taborder><taborder>txtTop</taborder><taborder>rdo</taborder><taborder>FCButton3</taborder><taborder>FCButton4</taborder><taborder>txtHeader</taborder><taborder>txtFooter</taborder><taborder>FCButton5</taborder><taborder>FCButton6</taborder><taborder>txtPaper</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="320" poswidth="300" postop posleft entertype="修改" window="有模式窗口" keyfield codeheader="BBB" mkbh caption="页面设置" type="PR" dj_sn="ep_pagesetold" BLONopen="uf_open()" center="居中"><div class="tab-pane" showtype="luna" IsHideTitle=undefined id=PageControl1 style="position:absolute;left:8px;top:4px;width:265px;Height:247px"><div class="tab-page" style="width:265px;height:229" ><h2 class="tab">页面设置</h2><?xml:namespace prefix = v /><v:Rect id=Shape6 style="DISPLAY: block; LEFT: 78px; WIDTH: 176px; POSITION: absolute; TOP: 110px; HEIGHT: 48px" controltype="shape" coordsize = "21600,21600" fillcolor = "white" strokecolor = "gray"><v:stroke></v:stroke></v:Rect><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 11px; WIDTH: 53px; FONT-STYLE: normal; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 15px; HEIGHT: 17px; TEXT-ALIGN: left; backgroundColor1: #ffffff; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label2" controltype="label">纸张大小</SPAN><SELECT id=cboPaper style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 62px; WIDTH: 191px; FONT-FAMILY: ; POSITION: absolute; TOP: 11px; HEIGHT: 25px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_onchange()")' controltype="combobox" temptext="Custom&#13;&#10;Letter&#13;&#10;Letter Small&#13;&#10;Tabloid&#13;&#10;Ledger&#13;&#10;Legal&#13;&#10;Statement&#13;&#10;Executive&#13;&#10;A3&#13;&#10;A4&#13;&#10;A4 Small&#13;&#10;A5&#13;&#10;B4 (JIS)&#13;&#10;B5 (JIS)&#13;&#10;Folio&#13;&#10;Quarto&#13;&#10;10×14&#13;&#10;11×17&#13;&#10;Note&#13;&#10;Envelope #9&#13;&#10;Envelope #10&#13;&#10;Envelope #11&#13;&#10;Envelope #12&#13;&#10;Envelope #14&#13;&#10;C size sheet&#13;&#10;D size sheet&#13;&#10;E size sheet&#13;&#10;Envelope DL&#13;&#10;Envelope C5&#13;&#10;Envelope C3&#13;&#10;Envelope C4&#13;&#10;Envelope C6&#13;&#10;Envelope C65&#13;&#10;Envelope B4&#13;&#10;Envelope B5&#13;&#10;Envelope B6&#13;&#10;Envelope&#13;&#10;Envelope Monarch&#13;&#10;6 3/4 Envelope&#13;&#10;US Std Fanfold&#13;&#10;German Std Fanfold&#13;&#10;German Legal Fanfold&#13;&#10;Ledger 11 x 17 in&#13;&#10;8 x 6 in&#13;&#10;A2 420.0 x 594.0 mm&#13;&#10;B3 364.0 x 515.0 mm&#13;&#10;Foolscap 13.50 x 17.00 in&#13;&#10;#10 Env. 9.50 x 4.12 in&#13;&#10;DL Env. 220.0 x 110.0 mm&#13;&#10;Fanfold 9.50 x 11.00 in&#13;&#10;Fanfold 12.00 x 8.50 in&#13;&#10;Fanfold 14.50 x 11.00 in&#13;&#10;Letter+ 9.00 x 13.30 in&#13;&#10;A4+ 223.5 x 355.6 mm&#13;&#10;Japanese Dbl.&#13;&#10;Postcard&#13;&#10;Maximum 11.7 x 17.7&#13;&#10;copy of Letter" tempvalue="Custom&#13;&#10;Letter&#13;&#10;Letter Small&#13;&#10;Tabloid&#13;&#10;Ledger&#13;&#10;Legal&#13;&#10;Statement&#13;&#10;Executive&#13;&#10;A3&#13;&#10;A4&#13;&#10;A4 Small&#13;&#10;A5&#13;&#10;B4 (JIS)&#13;&#10;B5 (JIS)&#13;&#10;Folio&#13;&#10;Quarto&#13;&#10;10×14&#13;&#10;11×17&#13;&#10;Note&#13;&#10;Envelope #9&#13;&#10;Envelope #10&#13;&#10;Envelope #11&#13;&#10;Envelope #12&#13;&#10;Envelope #14&#13;&#10;C size sheet&#13;&#10;D size sheet&#13;&#10;E size sheet&#13;&#10;Envelope DL&#13;&#10;Envelope C5&#13;&#10;Envelope C3&#13;&#10;Envelope C4&#13;&#10;Envelope C6&#13;&#10;Envelope C65&#13;&#10;Envelope B4&#13;&#10;Envelope B5&#13;&#10;Envelope B6&#13;&#10;Envelope&#13;&#10;Envelope Monarch&#13;&#10;6 3/4 Envelope&#13;&#10;US Std Fanfold&#13;&#10;German Std Fanfold&#13;&#10;German Legal Fanfold&#13;&#10;Ledger 11 x 17 in&#13;&#10;8 x 6 in&#13;&#10;A2 420.0 x 594.0 mm&#13;&#10;B3 364.0 x 515.0 mm&#13;&#10;Foolscap 13.50 x 17.00 in&#13;&#10;#10 Env. 9.50 x 4.12 in&#13;&#10;DL Env. 220.0 x 110.0 mm&#13;&#10;Fanfold 9.50 x 11.00 in&#13;&#10;Fanfold 12.00 x 8.50 in&#13;&#10;Fanfold 14.50 x 11.00 in&#13;&#10;Letter+ 9.00 x 13.30 in&#13;&#10;A4+ 223.5 x 355.6 mm&#13;&#10;Japanese Dbl.&#13;&#10;Postcard&#13;&#10;Maximum 11.7 x 17.7&#13;&#10;copy of Letter" sql check="1" china backwidth="191" backheight="25"><OPTION value=Custom selected>Custom</OPTION><OPTION value=Letter>Letter</OPTION><OPTION value="Letter Small">Letter Small</OPTION><OPTION value=Tabloid>Tabloid</OPTION><OPTION value=Ledger>Ledger</OPTION><OPTION value=Legal>Legal</OPTION><OPTION value=Statement>Statement</OPTION><OPTION value=Executive>Executive</OPTION><OPTION value=A3>A3</OPTION><OPTION value=A4>A4</OPTION><OPTION value="A4 Small">A4 Small</OPTION><OPTION value=A5>A5</OPTION><OPTION value="B4 (JIS)">B4 (JIS)</OPTION><OPTION value="B5 (JIS)">B5 (JIS)</OPTION><OPTION value=Folio>Folio</OPTION><OPTION value=Quarto>Quarto</OPTION><OPTION value=10×14>10×14</OPTION><OPTION value=11×17>11×17</OPTION><OPTION value=Note>Note</OPTION><OPTION value="Envelope #9">Envelope #9</OPTION><OPTION value="Envelope #10">Envelope #10</OPTION><OPTION value="Envelope #11">Envelope #11</OPTION><OPTION value="Envelope #12">Envelope #12</OPTION><OPTION value="Envelope #14">Envelope #14</OPTION><OPTION value="C size sheet">C size sheet</OPTION><OPTION value="D size sheet">D size sheet</OPTION><OPTION value="E size sheet">E size sheet</OPTION><OPTION value="Envelope DL">Envelope DL</OPTION><OPTION value="Envelope C5">Envelope C5</OPTION><OPTION value="Envelope C3">Envelope C3</OPTION><OPTION value="Envelope C4">Envelope C4</OPTION><OPTION value="Envelope C6">Envelope C6</OPTION><OPTION value="Envelope C65">Envelope C65</OPTION><OPTION value="Envelope B4">Envelope B4</OPTION><OPTION value="Envelope B5">Envelope B5</OPTION><OPTION value="Envelope B6">Envelope B6</OPTION><OPTION value=Envelope>Envelope</OPTION><OPTION value="Envelope Monarch">Envelope Monarch</OPTION><OPTION value="6 3/4 Envelope">6 3/4 Envelope</OPTION><OPTION value="US Std Fanfold">US Std Fanfold</OPTION><OPTION value="German Std Fanfold">German Std Fanfold</OPTION><OPTION value="German Legal Fanfold">German Legal Fanfold</OPTION><OPTION value="Ledger 11 x 17 in">Ledger 11 x 17 in</OPTION><OPTION value="8 x 6 in">8 x 6 in</OPTION><OPTION value="A2 420.0 x 594.0 mm">A2 420.0 x 594.0 mm</OPTION><OPTION value="B3 364.0 x 515.0 mm">B3 364.0 x 515.0 mm</OPTION><OPTION value="Foolscap 13.50 x 17.00 in">Foolscap 13.50 x 17.00 in</OPTION><OPTION value="#10 Env. 9.50 x 4.12 in">#10 Env. 9.50 x 4.12 in</OPTION><OPTION value="DL Env. 220.0 x 110.0 mm">DL Env. 220.0 x 110.0 mm</OPTION><OPTION value="Fanfold 9.50 x 11.00 in">Fanfold 9.50 x 11.00 in</OPTION><OPTION value="Fanfold 12.00 x 8.50 in">Fanfold 12.00 x 8.50 in</OPTION><OPTION value="Fanfold 14.50 x 11.00 in">Fanfold 14.50 x 11.00 in</OPTION><OPTION value="Letter+ 9.00 x 13.30 in">Letter+ 9.00 x 13.30 in</OPTION><OPTION value="A4+ 223.5 x 355.6 mm">A4+ 223.5 x 355.6 mm</OPTION><OPTION value="Japanese Dbl.">Japanese Dbl.</OPTION><OPTION value=Postcard>Postcard</OPTION><OPTION value="Maximum 11.7 x 17.7">Maximum 11.7 x 17.7</OPTION><OPTION value="copy of Letter">copy of Letter</OPTION></SELECT><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 11px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 59px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label3" controltype="label">宽&nbsp;&nbsp;&nbsp; 度</SPAN><SPAN id=Label4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 11px; WIDTH: 65px; FONT-FAMILY: ; POSITION: absolute; TOP: 77px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label4" controltype="label">高&nbsp;&nbsp;&nbsp; 度</SPAN><INPUT type=text id=txtWidth style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 62px; WIDTH: 48px; FONT-FAMILY: ; POSITION: absolute; TOP: 56px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="210" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=txtHeight style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 62px; WIDTH: 48px; FONT-FAMILY: ; POSITION: absolute; TOP: 75px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="297" controltype="text" china CanSelect="false"></INPUT> 
+<FIELDSET id=rdo contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 5px; WIDTH: 69px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 104px; HEIGHT: 56px; backgroundColor1: #ffffff" value="横向" controltype="radio" temptext="纵向&#13;&#10;横向" tempvalue="1&#13;&#10;2" china aspect="纵向" readOnly="false" legend="方向"><LEGEND>方向</LEGEND><INPUT type=radio value=1 name=RGSKDBRadioGroup text="纵向"><SPAN onclick=RGSKDBRadioGroup[0].checked=true;rdo.value=RGSKDBRadioGroup[0].value;RGSKDBRadioGroup[0].focus();>纵向</SPAN><BR><INPUT type=radio value=2 name=RGSKDBRadioGroup text="横向"><SPAN onclick=RGSKDBRadioGroup[1].checked=true;rdo.value=RGSKDBRadioGroup[1].value;RGSKDBRadioGroup[1].focus();>横向</SPAN></FIELDSET> <SPAN id=Label12 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 82px; WIDTH: 85px; FONT-FAMILY: ; POSITION: absolute; TOP: 102px; HEIGHT: 16px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: center; backgroundColor1: #ffffff; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label12" controltype="label">页边距（毫米）</SPAN><SPAN id=Label8 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 168px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 123px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">下</SPAN><SPAN id=Label6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 170px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 140px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">右</SPAN><INPUT type=text id=txtBottom style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 187px; WIDTH: 56px; FONT-FAMILY: ; POSITION: absolute; TOP: 119px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="8" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=txtRight style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 187px; WIDTH: 56px; FONT-FAMILY: ; POSITION: absolute; TOP: 138px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="8" controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=txtLeft style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 107px; WIDTH: 57px; FONT-FAMILY: ; POSITION: absolute; TOP: 138px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="8" controltype="text" china CanSelect="false"></INPUT><SPAN id=Label7 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 90px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 140px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">左</SPAN><SPAN id=Label5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 90px; WIDTH: 14px; FONT-FAMILY: ; POSITION: absolute; TOP: 123px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label5" controltype="label">上</SPAN><INPUT type=text id=txtTop style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 107px; WIDTH: 57px; FONT-FAMILY: ; POSITION: absolute; TOP: 119px; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " value="8" controltype="text" china CanSelect="false"></INPUT><SPAN id=Label13 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 112px; WIDTH: 32px; FONT-FAMILY: ; POSITION: absolute; TOP: 58px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label13" controltype="label">毫米</SPAN><SPAN id=Label14 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 112px; WIDTH: 32px; FONT-FAMILY: ; POSITION: absolute; TOP: 76px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" value="Label14" controltype="label">毫米</SPAN><SPAN id=Label21 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 10px; WIDTH: 35px; FONT-FAMILY: ; POSITION: absolute; TOP: 176px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label21" controltype="label">页头:</SPAN><SPAN id=Label22 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 9px; WIDTH: 42px; FONT-FAMILY: ; POSITION: absolute; TOP: 199px; HEIGHT: 15px; TEXT-ALIGN: left; backgroundColor1: #c0c0c0; textLeft: undefined; textRight: undefined; textCenter: undefined" onmovestart=moveStart() value="Label22" controltype="label">页脚:</SPAN><INPUT type=text id=txtHeader style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 42px; WIDTH: 190px; FONT-FAMILY: ; POSITION: absolute; TOP: 170px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() value controltype="text" china CanSelect="false"></INPUT><INPUT type=text id=txtFooter style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 43px; WIDTH: 189px; FONT-FAMILY: ; POSITION: absolute; TOP: 194px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() value controltype="text" china CanSelect="false"></INPUT><BUTTON id=FCButton5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 232px; WIDTH: 17px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 172px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="是" onclick='bill_onclick("uf_selheader(txtHeader)")'></BUTTON><BUTTON id=FCButton6 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 233px; WIDTH: 17px; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: ; POSITION: absolute; TOP: 196px; HEIGHT: 18px; BACKGROUND-COLOR: #d4d0c8" onmovestart=moveStart() controltype="button" dropstyle="是" onclick='bill_onclick("uf_selheader(txtFooter)")'></BUTTON><INPUT type=text id=txtPaper style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 61px; WIDTH: 190px; FONT-FAMILY: ; POSITION: absolute; TOP: 33px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left; medium: " onmovestart=moveStart() value controltype="text" china CanSelect="false"></INPUT></div></div><script>var PageControl1 = new WebFXTabPane( document.getElementById( "PageControl1" ) );</script><BUTTON id=FCButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 153px; WIDTH: 55px; FONT-FAMILY: ; POSITION: absolute; TOP: 256px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=FCButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 210px; WIDTH: 55px; FONT-FAMILY: ; POSITION: absolute; TOP: 256px; HEIGHT: 25px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON></DIV></body></html>

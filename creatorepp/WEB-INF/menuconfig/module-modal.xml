@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312"?>
+<sysmenu name="spplatform" left_width="15%" showhidden="true" showhidden_width="10" top_height="96px">
+	<description>长沙市综合业务办公系统平台</description>
+	<publicitem name="应用首页" id="indexpage" main="true">
+		<mouseupimg>sysmanager/bbs/images/bbs_enabled.gif</mouseupimg>
+		<mouseclickimg>sysmanager/bbs/images/bbs_highlighted.gif</mouseclickimg>
+		<mouseoverimg>sysmanager/bbs/images/bbs_highlighted.gif</mouseoverimg>
+		<mouseoutimg>sysmanager/bbs/images/bbs_enabled.gif</mouseoutimg>
+		<headimg>sysmanager/bbs/images/bbs_enabled.gif</headimg>
+		<top>perspective_toolbar.jsp</top>
+		<left>perspective_outlookbar.jsp</left>	
+		<workspace>
+			<content>appExample.jsp</content>
+		</workspace>
+	</publicitem>
+</sysmenu>

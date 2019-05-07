@@ -1,0 +1,39 @@
+@charset utf-8;/*!@author:刘双双. @update:2013-09-24 公用的样式代码的定义*/ 
+/* 基本配置 */
+html{color:#5c5c5c; overflow:hidden; -webkit-text-size-adjust:none;}
+body,h1,h2,h3,h4,h5,h6,hr,p,img,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,textarea,th,td{margin:0; padding:0; border:0;}
+body,button,input,select,textarea,td,tr,th{font:12px/1.5 '\5b8b\4f53',arial,tahoma;}
+/*table{border-collapse:collapse; border-spacing:0;}*/
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%; padding:0px; margin:0px; font-weight:normal;}
+ul,li,ol{list-style:none;}
+.clear{clear: both; font-size:1px; width:1px; height:0; visibility: hidden; }
+img{border:0; vertical-align:middle;}
+
+/* 链接颜色 */
+a:link {text-decoration:none; color:#5c5c5c;}
+a:visited {text-decoration:none; color:#5c5c5c;}
+a:active {text-decoration:none; color:#3c86db;}
+a:hover {text-decoration:none; color:#3c86db;}
+
+/* 新建会议 */
+.font1{ color:#bbbbbb;}
+.font2{ color:#3d9c27;}
+.font3{ color:#0000ff; font-size:14px;}
+
+.biao_an1{background:url(../images/box_bj.png) no-repeat 0px -181px; width:92px; height:36px; line-height:36px; border:0; vertical-align:middle; color:#fff; text-align:center; font-size:14px; font-family:"microsoft yahei";}
+.biao_an2{background:url(../images/box_bj.png) no-repeat -102px -181px; width:92px; height:36px; line-height:36px; border:0; vertical-align:middle; color:#999 text-align:center;font-size:14px; font-family:"microsoft yahei";}
+.biao_kuang1{ width:358px; height:28px; line-height:28px; float:left; vertical-align:middle; border:solid 1px #d6d6d6;}
+.biao_kuang2{ width:276px; height:28px; line-height:28px; float:left; vertical-align:middle; border:solid 1px #d6d6d6;}
+.biao_kuang3{ width:76px; height:28px; line-height:28px; vertical-align:middle; border:solid 1px #d6d6d6; }
+.biao_kuang4{width:166px; height:28px; line-height:28px; vertical-align:middle; border:solid 1px #d6d6d6; background:url(../images/btn.png) no-repeat -113px 6px;}
+.biao_kuang5{ width:428px; height:60px; line-height:28px; float:left; vertical-align:middle; border:solid 1px #d6d6d6;}
+.biao_kuang6{width:166px; height:28px; line-height:28px; vertical-align:middle; border:solid 1px #d6d6d6;}
+.biao_kuang7{width:166px; height:28px; line-height:28px; vertical-align:middle; border:solid 1px #d6d6d6; background:url(../images/btn.png) no-repeat -109px -17px;}
+.biao_kuang8{ width:76px; height:28px; line-height:28px; vertical-align:middle; border:solid 1px #d6d6d6; background:url(../images/btn.png) no-repeat -198px -17px; }
+.biao_xuan1{ vertical-align:middle;}
+
+.news_tianjia{ width:428px; height:60px; border:solid 1px #e4e4e4; float:left; margin:20px 40px 0px 30px; display:inline; }
+.news_tianjia p{ width:25px; height:25px; margin-left:195px; margin-top:10px; background:url(../images/box_bj.png) no-repeat -6px -80px; vertical-align:middle;}  
+.news_tianjia h3{ width:428px; text-align:center; display:inline; float:left; color:#999;}
+.news_fujian_tianjia{ width:44px; height:44px; float:left; background:url(../images/box_bj.png) no-repeat 0px -79px; margin-left:10px; margin-top:8px; display:inline;  }
+.news_fujian_tianjia a{width:44px; height:44px; float:left;}

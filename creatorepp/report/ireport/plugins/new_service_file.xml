@@ -1,0 +1,4 @@
+<iReportPlugin 	name="新建报表文件到服务器" class="it.businesslogic.ireport.plugin.newserverfile.NewServerFileOptionsPlugin">
+	<IconFile>/it/businesslogic/ireport/plugin/service.png</IconFile>
+	<Description>new server report</Description>
+</iReportPlugin>

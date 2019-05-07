@@ -1,0 +1,23 @@
+<HTML >
+	<HEAD>
+	 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<title>打开表单</title>
+		<script src="../js/fcpub.js"></script>
+	
+	
+		<SCRIPT ID="clientEventHandlersJS" LANGUAGE="javascript">
+//<!--
+	
+function window_onload() {
+	DjOpen(parent.topdjsn,"","","当前窗口","直接","",parent.Request)
+	
+}
+
+//-->.
+		</SCRIPT>
+	</HEAD>
+	<BODY onload="return window_onload()" >
+
+
+	</BODY>
+</HTML>

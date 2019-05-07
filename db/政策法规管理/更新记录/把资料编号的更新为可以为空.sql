@@ -1,0 +1,1 @@
+alter table OA_DATA_DATA modify d_data_code null;

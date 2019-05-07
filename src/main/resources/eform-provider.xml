@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding='gb2312'?>
+<manager-config>
+	<manager id="EformManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.spi.impl.local.EformManagerImpl" />
+	</manager>
+	<manager id="FormManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.eform.formmanage.dbmanager.FormManager" />
+	</manager>
+</manager-config>

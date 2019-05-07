@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- 字典多数据库字段类型配置(以","号分隔,不区分大小写) -->
+<root>
+	<!-- oracle数据库字段类型配置 -->
+	<dictfieldtype dbtype="oracle">
+		<!-- 字符类型 -->
+		<character>char,varchar,varchar2</character>
+		<!-- 数值类型 -->
+		<number>number</number>
+		<!-- 时间类型 -->
+		<time>date</time>
+	</dictfieldtype>
+
+	<!-- db2数据库字段类型配置 -->
+	<dictfieldtype dbtype="db2net,db2app">
+		<!-- 字符类型 -->
+		<character>char,varchar</character>
+		<!-- 数值类型 -->
+		<number>numeric,int,integer,smallint,decimal</number>
+		<!-- 时间类型 -->
+		<time>date,time,timestamp</time>
+	</dictfieldtype>
+</root>

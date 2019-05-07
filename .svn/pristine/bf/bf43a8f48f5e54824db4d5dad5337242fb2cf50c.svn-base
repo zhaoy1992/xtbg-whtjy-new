@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>¥Ú”°Õº–Œ</title>
+<script>
+
+function window_onload(){
+	div1.innerHTML=window.dialogArguments
+	window.setTimeout("run()",500) 
+}
+function run() {
+	window.print()
+	self.close()
+} 
+</script>
+</head>
+<body   onload=window_onload()>
+<!--
+<input type=button value="print" onclick=window.print()  >
+-->
+<div id=div1 ></div>
+</body>
+</html>

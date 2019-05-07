@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding='gb2312'?>
+<manager-config>
+	<properties>
+		<!-- 必须写绝对路径，如：d:\indexs，为空时，系统将在应用所在目录；
+			同时系统会在index.dir目录创建luceneIndexs目录，
+			然后在luceneIndexs目录下建立各应用的索引目录 -->
+		<property label="索引存放目录" name="index.dir" value="" />
+		
+		<property label="索引最大可查询数量" name="index.number" value="500" />
+		<!-- 
+			索引最开始是创建在内存中，只有缓存满了之后才会写入到文件系统中，此参数如果太大，可能会影响索引的及时性，但设置过小当并发较大时对性能有些影响
+		-->
+		<property label="索引缓存大小 " name="index.cache.size" value="1" />
+
+		<property label="索引请求线程池的初始化大小" name="requestPool.size"
+			value="5" />
+
+		<property label="索引请求线程池的最大线程数" name="requestPool.maxsize"
+			value="30" />
+		<property label="索引请求线程池中空闲线程的保持时间(秒)"
+			name="requestPool.keepAliveTime" value="30" />
+		<property label="是否启动远程搜索服务" name="enableRemoteSearchService"
+			value="true" class="boolean" />
+		<property label="远程搜索服务绑定IP" name="remoteSearchServiceIP"
+			value="172.16.25.147" />
+		<property label="远程搜索服务绑定端口" name="remoteSearchServicePort"
+			value="20099" />
+
+		<!-- 索引创建者事件监听器 -->
+		<property name="indexCreatorEventListeneres">
+			<list>
+				<property name="iWebOfficeEventListener"
+					class="com.chinacreator.lucene.iweboffice.WebOfficeListener"
+					singlable="true" />
+				<property name="attachEventListener"
+					class="com.chinacreator.lucene.attach.AttachListener"
+					singlable="true" />
+
+			</list>
+		</property>
+
+		<!-- 索引服务事件监听器 -->
+		<property name="searchEngineEventListener"
+			class="com.chinacreator.lucene.search.SearchEngineListener"
+			singlable="true" />
+
+
+		<!-- 索引创建者实现类 -->
+		<property name="indexCreatores">
+			<list>
+				<property name="iWebOfficeIndexCreator"
+					class="com.chinacreator.lucene.iweboffice.WebOfficeIndexCreator"
+					singlable="true" />
+				<property name="attachIndexCreator"
+					class="com.chinacreator.lucene.attach.AttachIndexCreator"
+					singlable="true" />
+			</list>
+		</property>
+		<!-- 策略  
+			属性根据表单配置文件properties-eform.xml 中的"file.upload.mode"来配置
+			value = "1"则policyTarget="DataBase"		f:attachDownloader="attr:dbDownloader"
+			value = "2"则policyTarget="LocalDisk"	f:attachDownloader="attr:fileDownloader"
+			value = "3"则policyTarget="FTP"			f:attachDownloader="attr:ftpDownloader"
+		-->
+		<property name="file.download.mode" policyTarget="FTP"
+			class="com.chinacreator.lucene.attach.AttachIndexCreator"
+			f:attachDownloader="attr:ftpDownloader" singeable="true" />
+
+
+		<!--  附件下载实现类
+			name:	ploy 文件策略
+			对应接口createIndex(String appId, String dbName, String attachId,String ploy);中的"String ploy"参数 
+			class: 	IAttachDownloader 接口实现类
+		-->
+		<property name="fileDownloader"
+			class="com.chinacreator.lucene.attach.business.downloader.FileAttachDownloader"
+			singlable="true" />
+
+		<property name="dbDownloader"
+			class="com.chinacreator.lucene.attach.business.downloader.DBAttachDownloader"
+			singlable="true" />
+
+		<property name="ftpDownloader"
+			class="com.chinacreator.lucene.attach.business.downloader.FTPAttachDownloader"
+			singlable="true">
+			<property name="remoteHost" refid="attr:ftp.server.ip" />
+			<property name="remotePort" refid="attr:ftp.server.port" />
+			<property name="retryCount" refid="attr:ftp.server.count" />
+			<property name="userName" refid="attr:ftp.server.username" />
+			<property name="userPassword"
+				refid="attr:ftp.server.password" />
+		</property>
+
+		<!-- ftp配置 -->
+
+		<property name="ftp.server.ip" value="172.16.25.156" />
+		<property name="ftp.server.port" value="21" />
+		<property name="ftp.server.count" value="2" />
+		<property name="ftp.server.username" value="admin" />
+		<property name="ftp.server.password" value="123456" />
+
+		<!-- 允许的文件类型 -->
+		<!-- 忽略大小写 -->
+		<property name="allowtype">
+			<list>
+				<property value="doc" />
+				<property value="docx" />
+				<property value="pdf" />
+				<property value="html" />
+				<property value="htm" />
+				<property value="ppt" />
+				<property value="txt" />
+				<property value="xls" />
+				<property value="xlsx" />
+				<property value="xml" />
+				<property value="RTF" />
+				<property value="PPTX" />
+			</list>
+		</property>
+
+
+		<!-- 搜索配置  开始-->
+
+		<!-- 
+			远程搜索位置（格式：//IP地址:端口/名称[一般是应用ID，搜索所有应用可以直接设置为all]），多个之间用；隔开 
+			如果不使用远程搜索，则不用配置此项
+		-->
+		<property name="remoteNames" value="//172.16.25.147:20099/all" />
+		<property name="remoteSearch"
+			class="com.chinacreator.lucene.search.remote.RemoteSearch"
+			singlable="false" f:remoteNames="attr:remoteNames" />
+
+		<property name="localSearch"
+			class="com.chinacreator.lucene.search.LocalSearch" singlable="false" />
+		<!-- 远程搜索方式：
+			如果使用远程搜索则配置远程搜索的bean名称：remoteSearch
+			如果使用本地搜索则配置本地搜索的bean名称：localSearch 
+		-->
+		<property label="搜索方式" name="searchMode" value="remoteSearch" />
+
+		<!-- 搜索配置  结束-->
+	</properties>
+</manager-config>

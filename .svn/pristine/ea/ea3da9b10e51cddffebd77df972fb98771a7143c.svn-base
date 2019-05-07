@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>var oPrint = pubDataSet[4] ;
+var arr = oPrint.datasets ;
+function uf_open() {
+	var l= arr.length ;
+	var sMain = ""
+	for(var i=0;i<l;i++){
+		sMain += "<option value='"+arr[i].chnname+"'>"+arr[i].chnname+"</option>"
+	}
+	lstMain.outerHTML = SelectAddOption(lstMain,sMain) ;
+}
+function uf_selected(){
+	lstSub.options.length=0;
+	if(lstMain.selectedIndex >= 0){
+		var oXml = SetDom(arr[lstMain.selectedIndex].xml) ;
+		if(oXml.documentElement == null) return
+		var oField = oXml.documentElement.childNodes(oXml.documentElement.childNodes.length-1).childNodes(1) ;
+		var l = oField.childNodes.length ;
+		var sSub="";
+		for(var i=0;i<l;i++){
+			//var sfieldname = oField.childNodes(i).childNodes(0).text ;
+			var schnname = oField.childNodes(i).childNodes(2).text ;
+			sSub += "<option value='"+schnname+"'>"+schnname+"</option>"
+			
+		}
+		
+		lstSub.outerHTML = SelectAddOption(lstSub,sSub) ;
+		
+	}	
+}
+function uf_ok() {
+	if(lstMain.selectedIndex<0 || lstSub.selectedIndex<0){
+		alert("请选择一个数据集的某个字段后再试.")
+		return
+	}
+	window.returnValue = "<"+lstMain.value+"."+lstSub.value+">" ;
+	CloseBill() ;	
+}</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script src='../js/webfxlayout.js'></script><link id='luna-tab-style-sheet' type='text/css' rel='stylesheet' href='../css/luna/tab.css'  /><link type='text/css' rel='stylesheet' href='../css/Button.css'/>
+<DIV id=SKbillsheet toolbar="不带工具栏" contxml="<root><listbox><id>lstMain</id><id>lstSub</id></listbox><tab><id>PageControl1</id></tab><button><id>FCButton1</id><id>FCButton2</id></button></root>" controlno="SKButton:0;SKDBedit:0;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" billtaborder="<root><taborder>lstMain</taborder><taborder>lstSub</taborder><taborder>FCButton1</taborder><taborder>FCButton2</taborder></root>" idtype="1" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js" isfile="否" posheight="290" poswidth="285" postop posleft entertype="修改" window="当前窗口" keyfield codeheader="BBB" mkbh caption="插入数据字段" type="PR" dj_sn="ep_selfield" BLONopen="uf_open()" center="居中"><div class="tab-pane" showtype="luna" IsHideTitle=undefined id=PageControl1 style="position:absolute;left:6px;top:7px;width:259px;Height:218px"><div class="tab-page" style="width:259px;height:200" ><h2 class="tab">插入数据字段</h2><SELECT id=lstMain style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 1px; WIDTH: 110px; FONT-FAMILY: ; POSITION: absolute; TOP: 4px; HEIGHT: 188px; BACKGROUND-COLOR: #ffffff" onchange='bill_onclick("uf_selected()")' size=8 controltype="listbox" temptext tempvalue sql check="1" china></SELECT><SELECT id=lstSub style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 112px; WIDTH: 141px; FONT-FAMILY: ; POSITION: absolute; TOP: 5px; HEIGHT: 191px; BACKGROUND-COLOR: #ffffff" size=8 controltype="listbox" temptext tempvalue sql check="1" china ondblclick='bill_ondblclick("uf_ok()")'></SELECT></div></div><script>var PageControl1 = new WebFXTabPane( document.getElementById( "PageControl1" ) );</script><BUTTON id=FCButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 136px; WIDTH: 62px; FONT-FAMILY: ; POSITION: absolute; TOP: 233px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("uf_ok()")'>确 定</BUTTON><BUTTON id=FCButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 200px; WIDTH: 62px; FONT-FAMILY: ; POSITION: absolute; TOP: 233px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" controltype="button" dropstyle="否" onclick='bill_onclick("CloseBill()")'>取 消</BUTTON></DIV></body></html>

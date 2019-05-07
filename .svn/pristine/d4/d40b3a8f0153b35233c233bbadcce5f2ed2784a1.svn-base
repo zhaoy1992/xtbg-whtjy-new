@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<title>上传文件</title>
+		<script src="../js/fcpub.js"></script>
+		<script language="javascript">
+function check_file() 
+{
+  var strFileName=upload.pic.value;
+  if (strFileName=="")
+  {
+    alert("请选择要上传的文件");
+    return false;
+  }
+  if(IsSpace(parent.pubextfiles) == false){ // jpg|js|htm
+	var sExt = parent.pubextfiles.toLowerCase();
+	var arr = sExt.split("|");
+	var l = arr.length ;
+	var curExt="";
+	var ipos = strFileName.lastIndexOf(".");
+	if(ipos>=0){
+		curExt = strFileName.substring(ipos+1,strFileName.length).toLowerCase();
+	}
+	var bFind = false;
+	for(var i=0;i<l;i++){
+		if(arr[i] == curExt){
+			bFind = true;
+			break;
+		}
+	}
+	if(bFind == false){
+		alert("只能上传扩展名为" + parent.pubextfiles + "的文件")
+		return false;
+	}	
+  }
+  return true;
+}
+function window_onload() {
+	upload.action = location.protocol+"//"+location.host+ fcpubdata.servletPath + "/Upload"+fcpubdata.dotnetVersion+"?path="+escape(fcpubdata.Path)+"&setpath="+escape(parent.pubsetpath)+"&djbh="+escape(parent.djbh)+"&djsn="+escape(parent.djsn);
+}
+function cmd_ok(){
+    //alert(upload.pic.value);
+    var thisFileName = upload.pic.value;
+    try{
+	    var image=new Image();        
+	    image.dynsrc=thisFileName;
+	
+	    if(image.fileSize/1024/1024> 32){
+	       alert("上传的文件不能大于32M！");
+	       image=null;
+	       CollectGarbage();
+	       return;
+	    }
+    }catch(e){}
+    
+    thisFileName = thisFileName.substring(thisFileName.lastIndexOf("\\")+1,thisFileName.length);
+    //alert("thisFileName:"+thisFileName);
+    //alert("parent.fileNames:"+parent.fileNames);
+    if(parent.fileNames!=""){
+        if(parent.fileNames.indexOf("|")>0){
+    		var fileNamesArr = new Array();
+    		fileNamesArr = parent.fileNames.split("|");    		
+    		for(var i = 0; i < fileNamesArr.length; i++){    	
+    			if(thisFileName==fileNamesArr[i]){
+    				alert("您已上传了此附件，请勿重复添加相同的附件！");
+    				return;
+    			}
+    		}
+    	}else if(thisFileName==parent.fileNames){
+    			alert("您已上传了此附件，请勿重复添加相同的附件！");
+    			return;    		
+    	}
+    }    
+    if(check_file()){ 
+    	 /*修改前代码
+    	  upload.submit();
+	      upload.Submit1.disabled = true;
+    	*/
+    	if(exec_onsubmit())
+    	{
+	      parent.document.all.divProcessing.style.display = "block";
+	      upload.submit();
+	      upload.Submit1.disabled = true;
+    	}
+    	
+    }
+}
+
+/*说明文字中包含引号时出错,添加此函数在页面中将引号过滤掉*/
+function exec_onsubmit()
+{
+  var pubBz=upload.txtBz.value;
+  if(pubBz.indexOf("'") != -1) 
+  { //var str = pubBz.substring(0,pubBz.indexOf("'"))+';'+pubBz.substring(pubBz.indexOf("'")+1,pubBz.length);
+    //alert(str);
+    alert("说明文字中不能含有特殊符号[ ’ ]"); 
+    return false;
+  }
+  else
+  { parent.pubBz=upload.txtBz.value;
+    parent.pubFileName=upload.pic.value;
+    return true;
+  }
+}
+</script>
+	</head>
+	<body bgcolor="#d4d0c8" onload=window_onload() >
+		<form name="upload" action="" method="post" 
+			enctype="multipart/form-data">
+			<table width=310 border="0" cellpadding="2" cellspacing="0" style="FONT-SIZE:12px">
+				<tr height=30 >
+				</tr>
+				<tr height=20 >
+					<td colspan="1">&nbsp;&nbsp;说明:</td>
+				</tr>
+				<tr height=30 >
+					<td align="right">
+					<input type="text" id="txtBz" name="txtBz" maxlength="250" style="width:300" >
+					<!--<input type="text" id="txtBz" name="txtBz" maxlength="250" style="width:300" onblur="parent.pubBz=upload.txtBz.value;" >-->
+					</td>
+				</tr>
+				<tr height=20 >
+					<td colspan="1">&nbsp;&nbsp;请选择或输入要上传的文件的位置:</td>
+				</tr>
+				<tr height=30 >
+					<td align="right">
+					<!-- modified by zhou.luo 2008-11-03 添加一个ondragstart事件 -->
+					<input name="pic" type="file"  ID="pic" style="width:300" ondragstart="return false;" onkeydown="alert('请点击[ 浏览 ]按钮进行选择!');return false;" oncontextmenu="return false">
+					<!--<input name="pic" type="file"  ID="pic" style="width:300" onblur="parent.pubFileName=upload.pic.value;">-->
+					</td>
+				</tr>
+				<tr height=50>
+				</tr>
+				<tr height=30 >
+					<td align="right"><input type="button" name="Submit1" value="上 传" ID="Submit1" onclick="cmd_ok()"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

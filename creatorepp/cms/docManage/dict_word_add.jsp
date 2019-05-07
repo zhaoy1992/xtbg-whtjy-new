@@ -1,0 +1,130 @@
+<%@ page contentType="text/html;charset=GBK" language="java"%>
+<%@page import="com.chinacreator.cms.sitemanager.*"%>
+<%@page import="com.chinacreator.security.AccessControl"%>
+<%@page import="com.chinacreator.cms.customform.*"%>
+<%@ page import="java.util.*"%>
+<%@ taglib uri="/WEB-INF/pager-taglib.tld" prefix="pg"%>
+
+<%
+	AccessControl accesscontroler = AccessControl.getInstance();
+    accesscontroler.checkAccess(request, response);
+	
+	String action = request.getParameter("action");
+	String wordId = request.getParameter("wordId");
+	
+	String word="";
+	String description="";
+	String siteId="";
+	
+	if("edit".equals(action)){
+		word = request.getParameter("word");
+		description = request.getParameter("description");
+		siteId = request.getParameter("siteId");
+	}		
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link href="../inc/css/cms.css" rel="stylesheet" type="text/css">
+<script src="../inc/js/func.js"></script>
+<tab:tabConfig/>
+<script language="javascript" src="../inc/js/selectTime.js"></script>
+<style type="text/css">
+<!--
+.STYLE7 {color:#003398; font-size: 12px;}
+#Layer1 {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:113px;
+	height:127px;
+	z-index:1;
+}
+.STYLE8 {color: #0000FF}
+
+-->
+</style>
+<SCRIPT LANGUAGE="JavaScript">
+	//
+	function subform()
+	{   
+	    var word = dictWordForm.word.value;
+		if(word.replace(/\s/ig,"")=="")
+		{
+			alert("«ÎÃÓ–¥¥ ª„£°");
+			dictWordForm.word.focus();
+			return false;
+		}
+		dictWordForm.action="dictWordHandle.jsp?action=<%=action%>";
+		dictWordForm.submit();
+	}
+</SCRIPT>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>◊÷µ‰¥ ª„–≈œ¢</title>
+</head>
+
+<body background="../images/grayline_bg.jpg">
+<form  method="post"  name="dictWordForm" target="dictWordFrame" id="dictWordForm">
+	<input type="hidden" name="wordId" value="<%=wordId%>"/>		
+	<table width="98%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" align="center">
+		<tr >
+			<td width="4%" height="20" align="right">
+				<img src="../images/ico_point.gif" width="25" height="25">
+			</td>
+			<td height="20" class="cms_title_blue">
+				◊÷µ‰¥ ª„–≈œ¢
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="height:9px; background-color:#3266B1"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#f0f0f0">
+					<tr>
+						<td width="100" height="24" align="right" nowrap>¥ ª„√˚≥∆:</td>
+						<td height="24">
+							<input type="text" id="word" name="word" class="cms_text" style="width:180px"  maxlength="20" value="<%=word%>"/>
+							<span style="color: #FF0000">*</span>
+						</td>
+					</tr>
+					<tr>
+						<td width="100" height="24" align="right" nowrap>À˘ Ù’æµ„:</td>
+						<td height='30' align="left">
+							<select name="siteId" class="cms_select">
+								<option value="0">Õ®”√</option>
+								<%
+									SiteManagerImpl dmi = new SiteManagerImpl();
+									List allSiteList = null;
+									allSiteList = dmi.getSiteList();
+									request.setAttribute("allSiteList",allSiteList);
+								%>
+								<pg:list requestKey="allSiteList">
+								<option value="<pg:cell colName="siteId"/>">
+								<pg:cell colName="name"/>
+								</pg:list>
+							</select>		
+							<span style="color: #FF0000">*</span>
+						</td>
+					</tr>
+					
+					<tr>
+						<td width="100" height="24" align="right" nowrap>¥ ª„√Ë ˆ:</td>
+						<td height="24">
+							<textarea name="description" cols="28" rows="5" class="cms_textarea"><%=description%></textarea>	
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<div style="text-align:center">
+		<INPUT name="button" type="button" class="cms_button" onClick="subform()"  value="±£¥Ê">
+		&nbsp;&nbsp;&nbsp;
+		<INPUT name="button" type="button" class="cms_button" onClick="window.close()"  value="πÿ±’">
+	</div>
+</form>
+<iframe name="dictWordFrame" width="0" height="0" style="display:none"></iframe>
+
+</body>
+</html>

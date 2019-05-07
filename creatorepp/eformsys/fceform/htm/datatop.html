@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.5726" name=GENERATOR>
+<SCRIPT type=text/javascript>
+var dom = null;
+var root = null;
+var filename = "";
+var SKbillsheet = null;
+var fileselect = null;
+function init(){
+    dom = new ActiveXObject("Microsoft.XMLDOM");
+    SKbillsheet = subframe.document.getElementById("SKbillsheet");
+    fileselect = document.getElementById('fileselect'); 
+}
+function exportData(){
+	root = dom.createNode(1,"form","");
+	var djid = dom.createAttribute("djid");
+	djid.value = SKbillsheet.dj_sn;
+    root.setAttributeNode(djid);
+    dom.appendChild(root);
+	if(createXMLFile()){
+		var arr = new Array();
+		//处理INPUT控件
+        arr = subframe.document.getElementsByTagName("input");		
+		//dom.load(filename);
+		for(var i =0;i<arr.length;++i){
+			if(!isButton(arr[i])){
+				addInputXMLElement(arr[i]);
+			}
+		}
+		//处理SELECT控件
+		arr = subframe.document.getElementsByTagName("select");
+		for(var i =0;i<arr.length;++i){
+            addSelectXMLElement(arr[i]);
+		}
+		//处理TEXTAREA控件
+		arr = subframe.document.getElementsByTagName("textarea");
+		for(var i =0;i<arr.length;++i){
+            addTextareaXMLElement(arr[i]);
+		}
+		saveGrid();
+		dom.save("c:\\"+filename);		
+		init();
+		alert('导出成功!');
+	}else{
+	    dom=null;
+    }
+}
+
+function importData(xmlpath){
+    if(!xmlpath){
+        fileselect.style.visibility="";
+        return;
+    }
+   	try{
+		var fso=new ActiveXObject("Scripting.FileSystemObject");
+		if(!fso.FileExists(xmlpath)){
+            alert("文件不存在!");
+            fileselect.style.visibility="hidden";
+            return;
+        }
+	}catch(e){
+		alert("权限不够,若要使用此功能,请将IE安全设置中的'对没有标记为安全的 ActiveX 控件进行初始化和脚本运行'改为启用!");
+		fileselect.style.visibility="hidden";
+        return;
+	}
+    dom.load(xmlpath);
+    var nodes = dom.documentElement.childNodes
+    var checkboxArr = new Array();
+    var radioArr = new Array();
+    var tempObj = subframe.document.getElementsByTagName("input");
+    
+    //把checkbox对象整理成一个数组
+    var j =0;
+    var k =0;
+    for(var i=0;i<tempObj.length;++i){
+        if(tempObj[i].type=="checkbox"){
+            checkboxArr[j] = tempObj[i];
+            ++j;
+        }
+    }
+    j=0;
+    for(var i=0;i<tempObj.length;++i){
+        if(tempObj[i].type=="radio"){
+            radioArr[k] = tempObj[i];
+            ++k;
+        }
+    }
+    k=0;
+    for(var i=0;i<nodes.length;++i){
+        //处理CHECKBOX
+        if(nodes[i].nodeName=="checkbox"){
+            if(nodes[i].getAttribute("checked") == "0")
+                checkboxArr[j].checked = false;
+            else
+                checkboxArr[j].checked = true;
+            ++j;
+        }
+        //处理RADIO
+        if(nodes[i].nodeName=="radio"){
+            if(nodes[i].getAttribute("checked") == "0")
+                radioArr[k].checked = false;
+            else
+                radioArr[k].checked = true;
+            ++k;
+        }
+        try{
+	        if(nodes[i].nodeName=="grid"){
+	        	alert(nodes[i].getAttribute("id"));
+	        	alert(subframe.document.getElementById(nodes[i].getAttribute("id")).innerHTML);
+	        	subframe.document.getElementById(nodes[i].getAttribute("id")).innerHTML = nodes[i].text;
+	        }else if(nodes[i].getAttribute("id")!=""){
+	           // alert(nodes[i].getAttribute("id"));
+	            subframe.document.getElementById(nodes[i].getAttribute("id")).value = nodes[i].text;
+	        }else if(nodes[i].getAttribute("name")!=""){
+	            //alert(nodes[i].getAttribute("name"));
+	            subframe.document.getElementsByName(nodes[i].getAttribute("name"))[0].value = nodes[i].text;
+	        }
+        }catch(e){
+        }
+    }
+	fileselect.style.visibility='hidden';
+	init();
+}
+
+function addTextareaXMLElement(obj){
+    var node = dom.createNode(1,obj.type,"");
+    node.text = obj.value;
+	var id = dom.createAttribute("id");
+	id.value=obj.id;
+	node.setAttributeNode(id);
+	var name = dom.createAttribute("name");
+	name.value = obj.name;
+	node.setAttributeNode(name);
+	root.appendChild(node);
+}
+
+function addSelectXMLElement(obj){
+	if(obj.selected==""){
+		return;
+	}
+	var node = dom.createNode(1,obj.type,"");
+    node.text = obj.value;
+	var id = dom.createAttribute("id");
+	id.value=obj.id;
+	node.setAttributeNode(id);
+	var name = dom.createAttribute("name");
+	name.value = obj.name;
+	node.setAttributeNode(name);
+	root.appendChild(node);
+}
+function addInputXMLElement(obj){
+	if(obj.type==""){
+		obj.type = "text";
+	}
+	var node = dom.createNode(1,obj.type,"");
+	if(obj.type=="checkbox"||obj.type=="radio"){
+		node.setAttribute("checked",obj.checked);
+	}
+	node.text = obj.value;
+	var id = dom.createAttribute("id");
+	id.value=obj.id;
+	node.setAttributeNode(id);
+	var name = dom.createAttribute("name");
+	name.value = obj.name;
+	node.setAttributeNode(name);
+	root.appendChild(node);
+}
+function isButton(obj){
+	if(obj.type=="button"||obj.type=="submit"||obj.type=="reset")
+		return true;
+	return false;
+}
+function createXMLFile(){
+	try{
+		filename = prompt("请输入文件名","");
+		if(filename==""||filename==null){
+			alert("您没有输入文件名!");
+			return false;
+		}
+		filename = filename.replace(/\..*/ig,"")+".xml";
+		var fso=new ActiveXObject("Scripting.FileSystemObject");
+		var file=fso.CreateTextFile(filename,true);
+		file.WriteLine('<?xml version="1.0" encoding="UTF-8"?>'); 
+		file.close();
+		return true;
+	}catch(e){
+		alert("权限不够,若要使用此功能,请将IE安全设置中的'对没有标记为安全的 ActiveX 控件进行初始化和脚本运行'改为启用!");
+		return false;
+	}
+}
+function saveGrid(){
+	if(subframe.SKbillsheet.creator_pagination!=""){
+		var grid = subframe.document.getElementById(subframe.SKbillsheet.creator_pagination.split(",")[0]);
+		var node = dom.createNode(1,"grid","");
+		node.text = grid.innerHTML;
+		var id = dom.createAttribute("id");
+		id.value = grid.id;
+		node.setAttributeNode(id);
+		root.appendChild(node);
+	}
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<P align=center><INPUT onclick=exportData() type=button value=数据导出><INPUT onclick=importData() type=button value=数据导入><INPUT type=button value=在线提交数据><INPUT type=button value=数据源配置> 
+</P>
+<HR style="COLOR: skyblue">
+</HR>
+<DIV 
+style="BORDER-RIGHT: skyblue 1px solid; BORDER-TOP: skyblue 1px solid; BORDER-LEFT: skyblue 1px solid; WIDTH: 100%; BORDER-BOTTOM: skyblue 1px solid; HEIGHT: 90%"><IFRAME 
+name=subframe src="$instead" frameBorder=0 width="100%" 
+onload=init(); height="100%" ></IFRAME>
+<DIV id=fileselect 
+style="BORDER-RIGHT: skyblue 1px solid; BORDER-TOP: skyblue 1px solid; LEFT: 35%; VISIBILITY: hidden; BORDER-LEFT: skyblue 1px solid; WIDTH: 300px; BORDER-BOTTOM: skyblue 1px solid; POSITION: absolute; TOP: 7%; HEIGHT: 100px; BACKGROUND-COLOR: #d5f3f4">
+<P></P>
+<P>选择路径:<INPUT type=file size=100px name=xmlpath></P>
+<P align=center><INPUT onclick=importData(xmlpath.value) type=button value=确定><INPUT onclick="fileselect.style.visibility='hidden'" type=button value=取消></P></DIV></DIV></BODY></HTML>

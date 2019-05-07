@@ -1,0 +1,233 @@
+/*
+        作者:梅勇 2003.03.20
+*/
+
+<ATTACH EVENT="ondocumentready" HANDLER="fnInit0" />
+<PUBLIC:PROPERTY ID="divID" NAME="div" GET="fnGetdiv"  />
+
+<PUBLIC:PROPERTY ID="leftID" NAME="left" PUT="fnPutleft" GET="fnGetleft"  />
+<PUBLIC:PROPERTY ID="topID" NAME="top" PUT="fnPuttop" GET="fnGettop"  />
+<PUBLIC:PROPERTY ID="heightID" NAME="height" PUT="fnPutheight" GET="fnGetheight"  />
+<PUBLIC:PROPERTY ID="widthID" NAME="width" PUT="fnPutwidth" GET="fnGetwidth"  />
+<PUBLIC:PROPERTY ID="displayID" NAME="display" PUT="fnPutdisplay" GET="fnGetdisplay"  />
+
+
+<PUBLIC:PROPERTY ID="CaptionID" NAME="Caption" PUT="fnPutCaption" GET="fnGetCaption"  />
+<PUBLIC:PROPERTY ID="valueID" NAME="value" PUT="fnPutvalue" GET="fnGetvalue"  />
+<PUBLIC:PROPERTY ID="truevalueID" NAME="truevalue" PUT="fnPuttruevalue" GET="fnGettruevalue"  />
+<PUBLIC:PROPERTY ID="falsevalueID" NAME="falsevalue" PUT="fnPutfalsevalue" GET="fnGetfalsevalue"  />
+
+<PUBLIC:PROPERTY ID="style1ID" NAME="style1" PUT="fnPutstyle1" GET="fnGetstyle1"  />
+
+<PUBLIC:METHOD NAME="focus"/>
+
+<PUBLIC:METHOD NAME="RunVbscript"/>
+<PUBLIC:EVENT NAME="onRun" ID="onRunID">
+
+<SCRIPT LANGUAGE=javascript>
+<!--
+
+function divCheckBox_onclick() {
+   
+}
+function focus(){
+   chk.focus();
+}
+function RunVbscript(){
+        onRunID.fire();
+}
+
+/*-------------------------------------------
+属性处理 begin
+--------------------------------------------*/
+var mstyle1="";
+function fnGetstyle1(){
+        return mstyle1;
+}
+function fnPutstyle1(vValue){
+    mstyle1=vValue;
+    style1ID.fireChange();
+}
+
+
+var mvalue="否";
+function fnGetvalue(){
+    if(chk.checked==0)
+        return mfalsevalue;
+    else
+        return mtruevalue;
+}
+function fnPutvalue(vValue){
+    try{
+       if(mtruevalue==vValue)
+          chk.checked=1;
+       if(mfalsevalue==vValue)
+          chk.checked=0  ; 
+    } catch (e) {}
+    mvalue=vValue;
+    valueID.fireChange();
+}
+
+var mtruevalue="是";
+function fnGettruevalue(){
+        return mtruevalue  ;
+}
+function fnPuttruevalue(vValue){
+    mtruevalue=vValue;
+    truevalueID.fireChange();
+}
+var mfalsevalue="否";
+function fnGetfalsevalue(){
+        return mfalsevalue;  
+}
+function fnPutfalsevalue(vValue){
+    mfalsevalue=vValue;
+    falsevalueID.fireChange();
+}
+
+
+var mCaption="";
+function fnGetCaption(){
+        return mCaption;  
+}
+function fnPutCaption(vValue){
+    try {
+        lbl.innerText=vValue;
+
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    mCaption=vValue;
+    CaptionID.fireChange();
+}
+	
+
+var mdisplay="block";
+function fnGetdisplay(){
+        return mdisplay ; 
+}
+function fnPutdisplay(vValue){
+    try {
+        divCheckBox.style.display=vValue;
+        onResize();
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    mdisplay=vValue;
+    displayID.fireChange();
+}
+
+function fnGetdiv(){
+		fnInit();
+        return divCheckBox;  
+}
+
+var mleft;
+function fnGetleft(){
+        return mleft;  //divCheckBox.style.pixelLeft
+}
+function fnPutleft(vValue){
+    try {
+        divCheckBox.style.position="absolute";
+        divCheckBox.style.left=vValue;
+        onResize();
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    mleft=vValue;
+    leftID.fireChange();
+}
+var mtop;
+function fnGettop(){
+        return mtop;   //divCheckBox.style.pixelTop
+}
+function fnPuttop(vValue){
+   try{
+        divCheckBox.style.position="absolute";
+        divCheckBox.style.top=vValue;
+        onResize();
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    mtop=vValue;
+    topID.fireChange();
+   
+}
+var mheight;
+function fnGetheight(){
+        return mheight;   //divCheckBox.style.pixelHeight
+}
+function fnPutheight(vValue){
+    try{
+        divCheckBox.style.height=vValue;
+        onResize();
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    mheight=vValue;
+    heightID.fireChange();
+   
+}
+var mwidth;
+function fnGetwidth(){
+        return mwidth;  //divCheckBox.style.pixelWidth
+}
+function fnPutwidth(vValue){
+    try{
+        divCheckBox.style.pixelWidth=vValue;
+        onResize();
+    } catch (e) {} //当left属性写在控件上时会出错,需要强行关闭
+    
+    mwidth=vValue;
+    widthID.fireChange();
+}
+/*-------------------------------------------
+属性处理 end
+--------------------------------------------*/
+function lbl_onclick(){
+    if(chk.checked==0)
+	chk.checked=1;
+    else
+	chk.checked=0;
+}
+function chk_onfocus(){
+    //onfocusID.fire()
+}
+function onResize(){
+}
+function fnInit0() {
+   fnInit();
+}
+var chk;
+var lbl;
+var divCheckBox=null;
+function fnInit() {
+  if(element.innerHTML!="")return;
+  //if(element.isContentEditable )return	
+  //id=divCheckBox
+  var s1='';
+  s1=s1+'<div id=divCheckBox style="cursor:default;LEFT: '+mleft+';  TOP: '+mtop+';width:'+mwidth+';height:'+mheight
+     +';display:';
+
+  s1=s1+mdisplay;
+  if(mleft!=0 || mtop!=0)
+     s1=s1+';POSITION: absolute;' ;  
+//alert(mstyle1)
+  s1=s1+mstyle1;
+  
+  s1=s1+'"  >';
+  s1=s1+'<INPUT type=checkbox id=chk ';
+  if(mvalue!=mfalsevalue) s1=s1+"checked=1";
+  s1=s1+' ><span id=lbl ';
+
+  //s1=s1+'style="'+mstyle1+'"'
+
+  s1=s1+' >'+mCaption+'</span>';
+  s1=s1+'</div>';
+  //alert(s1)
+  element.innerHTML=s1;
+  divCheckBox=element.children[0];
+ //alert(divCheckBox.innerHTML);
+  chk=element.children[0].children[0];
+  lbl=element.children[0].children[1];
+  
+  lbl.attachEvent("onclick", lbl_onclick);
+  chk.attachEvent("onfocus", chk_onfocus);
+
+  var tabTr=element.children[0].children[0].children[0];
+//  divCheckBox.attachEvent("onclick", divCheckBox_onclick);
+        
+}
+
+//-->
+</SCRIPT>

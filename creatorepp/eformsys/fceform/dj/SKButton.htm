@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:fc xmlns:v="urn:schemas-microsoft-com:vml">
+	<HEAD>
+		<STYLE> .userData{behavior:url(#default#userData);}
+	@import url(../css/dj.css); 
+	</STYLE>
+		<script src="../js/fcpub.js"></script>
+		<script src="../js/fcrundj.js"></script>
+		<script src="../js/tabpane.js"></script>		
+	</HEAD>
+	<body bgcolor="#d4d0c8" background="../images/ef_run_background.gif" onload="pub_window_onload()"
+		onkeydown="RunTabindex()" onbeforeunload="pub_window_onbeforeunload()" onkeypress="pub_window_onkeypress()"
+		onresize="pub_window_onresize()">
+		<script>
+var pubdjbh=parent.sOpenDjNo   
+var pubEdit=false   			
+var pubDataSet=null      
+var pubRequest=parent.oRequest
+pub_djhtm()
+		</script>
+<script>function uf_open() {
+    var obj=pubDataSet[0] ;
+    var obj1=displayfont ;
+    obj1.style.color=obj.style.color ;
+    obj1.style.fontStyle=obj.style.fontStyle;
+    obj1.style.textDecoration=obj.style.textDecoration;
+    obj1.style.fontFamily=obj.style.fontFamily;
+    obj1.style.fontSize=obj.style.fontSize;
+    obj1.style.fontWeight=obj.style.fontWeight;
+    SKDBedit1.value=obj.id;
+    SKDBedit2.value=obj.value;
+
+    BillEventHeadOpen(obj.fc_onclick,SKDBedit3)
+    SetButtonImage(SKButton2,"../images/ef_run_button_color.gif");
+    SetButtonImage(SKButton3,"../images/ef_run_button_font.gif");
+    //alert(obj.dropstyle)
+   if(obj.dropstyle=='是'){
+       SKDBcheckbox1.value="是";
+   }else{
+       SKDBcheckbox1.value="否"
+   }
+   //alert(SKDBcheckbox1.value)
+    displayfont.style.backgroundColor=obj.style.backgroundColor;
+    if(obj.style.borderLeft=="0px"){
+       SKDBcheckbox4.value="否";
+    }else{
+       SKDBcheckbox4.value="是";
+    }
+    if(obj.style.borderTop=="0px"){
+       SKDBcheckbox5.value="否";
+    }else{
+       SKDBcheckbox5.value="是";
+    }
+    if(obj.style.borderBottom=="0px"){
+       SKDBcheckbox6.value="否";
+    }else{
+       SKDBcheckbox6.value="是";
+    }
+    if(obj.style.borderRight=="0px"){
+       SKDBcheckbox7.value="否";
+    }else{
+       SKDBcheckbox7.value="是";
+    }
+    if(obj.disabled==false){
+      SKDBcheckbox3.value='是';
+    }
+    if(obj.style.display=='none'){
+      SKDBcheckbox2.value='否';
+    }else{
+      SKDBcheckbox2.value="是" ;
+    }
+}
+function uf_ok() {
+    var s="";
+    var obj=pubDataSet[0] ;
+    obj.value=SKDBedit2.value;
+    obj.style.backgroundColor=displayfont.style.backgroundColor;
+    obj.style.color=displayfont.style.color ;
+    obj.style.fontStyle=displayfont.style.fontStyle;
+    obj.style.textDecoration=displayfont.style.textDecoration;
+    obj.style.fontFamily=displayfont.style.fontFamily;
+    obj.style.fontSize=displayfont.style.fontSize;
+    obj.style.fontWeight=displayfont.style.fontWeight;
+
+    s=Trim(SKDBedit3.value)
+     if(s==""){
+          obj.removeAttribute('fc_onclick')
+     }else{
+         obj.fc_onclick="bill_onclick(\""+s+"\")";
+     }
+
+    if(SKDBcheckbox1.value=='是'){
+         obj.dropstyle="是";
+         obj.style.width="21"
+         obj.style.height="21"
+    }else{
+          obj.dropstyle="否"
+    }
+    if(SKDBcheckbox3.value=='否'){
+       obj.disabled=true;
+    }else{
+       obj.disabled=false;
+    }
+   if(SKDBcheckbox2.value=='否'){
+       obj.style.display="none";
+    }else{
+       obj.style.display="block" ;
+    }
+
+           if(SKDBcheckbox4.value=='否'){
+               obj.style.borderLeft="0px";
+            }else{
+              obj.style.cssText=RepStr(obj.style.cssText,"BORDER-LEFT: 0px;","")
+               //obj.style.borderLeft="inset";
+            }
+             if(SKDBcheckbox5.value=='否'){
+               obj.style.borderTop="0px";
+            }else{
+                obj.style.cssText=RepStr(obj.style.cssText,"BORDER-TOP: 0px;","")
+               //obj.style.borderTop="inset";
+            }
+             if(SKDBcheckbox6.value=='否'){
+               obj.style.borderBottom="0px";
+            }else{
+                obj.style.cssText=RepStr(obj.style.cssText,"BORDER-BOTTOM: 0px;","")
+               //obj.style.borderBottom="inset";
+            }
+             if(SKDBcheckbox7.value=='否'){
+               obj.style.borderRight="0px";
+            }else{
+                obj.style.cssText=RepStr(obj.style.cssText,"BORDER-RIGHT: 0px;","")
+            //   obj.style.borderRight="inset";
+            }
+    //alert(obj.outerHTML);
+  obj.id = Trim(SKDBedit1.value);
+
+    window.close();
+}
+function uf_M(){
+        DjOpen('fontlist',displayfont,'展现','有模式窗口','直接','字体属性')
+}
+</script><script src='../js/fcopendj.js'></script><script defer src='../js/fcsavedj.js'></script><script src='../js/fcstring.js'></script><script src='../js/fcnumdate.js'></script><script src='../js/fcselfuse.js'></script><script src='../js/fcbasecont.js'></script><script defer src='../js/fcother.js'></script><script defer src='../js/selectdate.js'></script><link href=../css/tabstyle.css type=text/css rel=stylesheet><script >document.styleSheets[0].addRule("fc\\:dataset","behavior: url(../htc/dataset.htc)",0);</script><script src='../js/fcdataset.js'></script>
+<DIV class=dj id=SKbillsheet onkeydown="" ondblclick="" toolbar="不带工具栏" BLONopen="uf_open()" blmode="其它" contxml="<root><SKButton><id>SKButton2</id><id>SKButton3</id><id>SKButton1</id><id>SKButton4</id><id>SKButton5</id></SKButton><SKDBedit><id>SKDBedit1</id><id>SKDBedit2</id><id>SKDBedit3</id></SKDBedit><dataset><id>DsMain</id></dataset></root>" jslib="fcopendj.js&#13;&#10;fcsavedj.js&#13;&#10;fcstring.js&#13;&#10;fcnumdate.js&#13;&#10;fcselfuse.js&#13;&#10;fcbasecont.js&#13;&#10;fcother.js&#13;&#10;selectdate.js&#13;&#10;" billtaborder="<root><taborder>SKButton1</taborder><taborder>SKButton2</taborder><taborder>SKButton3</taborder><taborder>SKButton4</taborder><taborder>SKButton5</taborder><taborder>SKDBedit1</taborder><taborder>SKDBedit2</taborder><taborder>SKDBedit3</taborder></root>" dj_sn="SKButton" type="LR" caption="button按扭" mkbh="E5" codeheader="" entertype="修改" poswidth="381" posheight="256" controlno="SKButton:5;SKDBedit:3;checkbox:0;label:0;radio:0;listbox:0;textarea:0;combobox:0;password:0;upload:0;SKDBtext:0;chart:0;dbimg:0;img:0;SKBILLgrid:0;shape:0;tab:0;div:0;SKDBTreeView:0;a:0;button:0;text:0;hr:0;checkboxlist:0;radiolist:0;dropdownlist:0;grid:0;dataset:0;spin:0;excel:0;tree:0" keyfield="" center="居中" dj_id="255" printid="" helpid="" mastertable="" BLONclose runsave="" para="<r></r>"><SPAN id=Label1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 12px; WIDTH: 37px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 10px; HEIGHT: 12px" align="Left">名&nbsp;&nbsp;称</SPAN><SPAN id=Label2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 12px; WIDTH: 37px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 34px; HEIGHT: 12px" align="Left">标&nbsp;&nbsp;题</SPAN><SPAN id=Label3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 12px; WIDTH: 37px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 60px; HEIGHT: 12px" align="Left">事&nbsp;&nbsp;件</SPAN>&nbsp; 
+<FIELDSET id=SKDBRadioGroup1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 8px; WIDTH: 352px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 152px; HEIGHT: 40px" value="-1" dataset="" onclick='bill_onclick("")' field="" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><LEGEND>组件边界风格</LEGEND></FIELDSET><INPUT id=SKDBedit1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 63px; WIDTH: 121px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 9px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" china><INPUT id=SKDBedit2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 63px; WIDTH: 121px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 33px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" dataset="" onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("")' onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT id=SKDBedit3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 63px; WIDTH: 304px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 57px; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left" controltype="SKDBedit" dataset="" onclick='bill_onclick("")' field="" ondblclick='bill_ondblclick("SelFunction()")' onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'> 
+<DIV id=SKDBcheckbox1 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 197px; WIDTH: 97px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 7px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>下拉按扭</SPAN></DIV>
+<DIV id=SKDBcheckbox2 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 269px; WIDTH: 67px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 31px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>可见</SPAN></DIV>
+<DIV id=SKDBcheckbox3 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 197px; WIDTH: 56px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 31px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>活动</SPAN></DIV>
+<DIV id=SKDBcheckbox4 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 21px; WIDTH: 97px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 169px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>左边线</SPAN></DIV>
+<DIV id=SKDBcheckbox5 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 101px; WIDTH: 96px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 169px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>上边线</SPAN></DIV>
+<DIV id=SKDBcheckbox6 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 173px; WIDTH: 97px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 169px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>下边线</SPAN></DIV>
+<DIV id=SKDBcheckbox7 contentEditable=false style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 261px; WIDTH: 97px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 169px; HEIGHT: 17px" onclick='bill_onclick("")' falsevalue="否" truevalue="是" divtype="checkbox" onfocus='bill_onenter("")' onblur='bill_onexit("")' onkeydown='bill_onkeydown("")'><INPUT type=checkbox><SPAN>右边线</SPAN></DIV><INPUT id=SKButton2 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 341px; WIDTH: 22px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 92px; HEIGHT: 22px; BACKGROUND-COLOR: #d4d0c8" type=button controltype="SKButton" dropstyle="否" onclick='bill_onclick("SelColor()")'><INPUT id=SKButton3 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 341px; WIDTH: 22px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 124px; HEIGHT: 21px; BACKGROUND-COLOR: #d4d0c8" type=button controltype="SKButton" dropstyle="否" onclick='bill_onclick("uf_M()")'><INPUT id=SKButton1 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 224px; WIDTH: 64px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 198px; HEIGHT: 24px; BACKGROUND-COLOR: #c0c0c0" type=button value=确定 controltype="SKButton" dropstyle="否" onclick='bill_onclick("uf_ok()")'><INPUT id=SKButton4 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 294px; WIDTH: 64px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 198px; HEIGHT: 24px; BACKGROUND-COLOR: #d4d0c8" type=button value=取消 controltype="SKButton" dropstyle="否" onclick='bill_onclick("exitbill()")'><INPUT id=SKButton5 style="DISPLAY: block; FONT-SIZE: 12px; LEFT: 11px; WIDTH: 356px; COLOR: #000000; FONT-FAMILY: 宋体; POSITION: absolute; TOP: 84px; HEIGHT: 3px; BACKGROUND-COLOR: #d4d0c8" disabled type=button controltype="SKButton" dropstyle="否" onclick='bill_onclick("")' ;><fc:dataset id=DsMain opensortno='0' format="<fields></fields>" onSetText='bill_ondatasetsettext("<dsid></dsid>")'  onGetText='bill_ondatasetgettext("<dsid></dsid>")'  onValid='bill_ondatasetvalid("<dsid></dsid>")'  ></fc:dataset></DIV><p id=splitaddhtml /><OBJECT id="dlgHelper" CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px" VIEWASTEXT></OBJECT>
+<table border=1 style="table-layout:fixed; LEFT: 45px; POSITION: absolute; TOP: 92px; BORDER-COLLAPSE: collapse; " 
+bgcolor =#ffffff><tr><td valign=center align=middle  width="281" height="55" >
+<span id=displayfont style="FONT-SIZE: 12px; OVERFLOW: hidden; "><div nowrap=false>字体颜色</div></span>
+</td></tr></table></body></html>

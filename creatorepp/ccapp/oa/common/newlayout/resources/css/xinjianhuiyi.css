@@ -1,0 +1,27 @@
+@charset utf-8;/*!@author:刘双双. @update:2013-10-28 新建会议CSS*/ 
+
+/* 新建会议 */
+.content_news{width:100%; margin:0px auto;}
+.lay_1_news{float:left; width:500px; border-right:solid 1px #e4e4e4; display:inline; height:630px; overflow-x:hidden; overflow-y:scroll; scrollbar-arrow-color:#ffffff; /*三角箭头的颜色*/scrollbar-face-color:#e7e7e7; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+scrollbar-3dlight-color:#ffffff ;  /*立体滚动条亮边的颜色*/scrollbar-highlight-color:#cbcbcb; /*滚动条的高亮颜色（左阴影？）*/scrollbar-shadow-color:#ffffff; /*立体滚动条阴影的颜色*/scrollbar-darkshadow-color:#cbcbcb; /*立体滚动条外阴影的颜色*/}
+
+.news_biao{float:left; width:500px; height:30px; line-height:30px; margin-top:10px;}
+.news_biao .wenzi{float:left; width:90px;margin-right:10px;display:inline; text-align:right; font-size:14px; color:#333333; height:30px; line-height:30px;}
+.news_biao .biaodan{ float:left; width:360px; height:30px; line-height:30px; }
+.news_biao_link{border-bottom:solid 1px #e4e4e4; width:500px; }
+.news_renyuan{width:428px; float:left; margin-left:30px; display:inline; }
+.news_renyuan h3{ font-size:14px; height:35px; line-height:35px; float:left; width:428px; border-bottom:solid 1px #e4e4e4; }
+.news_qita{width:428px; float:left; margin-left:30px; display:inline;}
+.news_qita h3{width:428px; float:left; height:35px; line-height:35px; font-size:14px;}
+.news_qita span{ margin-top:10px; margin-bottom:10px; float:left; width:428px; }
+.news_renyuan_ming{background:#f8f8f8;float:left; width:80px; height:30px; line-height:30px; padding-left:10px; position:relative; margin-top:10px; margin-right:10px;}
+.news_yiti{width:400px; float:left; margin:20px 40px 0px 30px; display:inline; background:#f8f8f8; line-height:24px; padding:15px; font-size:14px; position:relative;}
+.huiyishi{ background:#f8f8f8;float:left; width:350px; height:30px; line-height:30px; padding-left:10px; position:relative; }
+.huiyishi_guanbi{ width:9px; height:9px; float:left; background:url(../images/pic.png) no-repeat -91px -209px; position:absolute; top:10px; right:10px;}
+.huiyishi_guanbi a{width:9px; height:9px; float:left;}
+
+.lay_1_news_bottom{ width:501px; height:60px; line-height:60px; float:left; background:#fbfbfb; position:fixed; z-index:100000; bottom:0; left:0; text-align:center;}
+
+.lay_2_news{overflow:hidden; zoom:1; height:697px; position:relative;}
+.lay_2_news_bottom{ width:100%; overflow:hidden; zoom:1; height:60px; float:left; position:absolute; z-index:100001; bottom:0; right:0;}
+.news_fujian{ width:170px; height:37px; float:left; background:url(../images/box_bj.png) no-repeat -54px -79px; margin-left:10px; margin-top:8px; display:inline; padding-left:41px; padding-top:7px; position:relative; line-height:16px;}

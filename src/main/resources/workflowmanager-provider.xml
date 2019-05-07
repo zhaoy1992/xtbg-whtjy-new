@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding='gb2312'?>
+<manager-config>
+	<manager id="commonWorkflowDao" singlable="false">
+		<provider type="DB" default="true"
+			class="com.chinacreator.commonworkflow.dao.CommonWorkflowDao" />
+		<reference fieldname="userManager" refid="UserManagement"/> 
+	</manager>
+	
+	<manager id="workflowLogger" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.commonworkflow.logger.impl.WorkflowLogger" />
+		<reference fieldname="logManager" refid="LogManagement"/> 
+	</manager>
+
+	<manager id="workflowManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.spi.impl.local.WorkflowManagerImpl" />
+	</manager>
+	
+	<manager id="workflowTools" singlable="false">
+		<provider type="DB" default="true"
+			class="com.chinacreator.commonworkflow.WorkflowTools" />
+	</manager>
+	
+	<manager id="workflowOperation" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.commonworkflow.WorkflowOperation" />
+	</manager>
+	
+	<manager id="jaweManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.spi.impl.local.JaweManagerImpl" />
+	</manager>
+	<manager id="processConfigManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.workflow.shark.procconfig.ProcessConfigManager" />
+	</manager>
+	<manager id="messageManager" singlable="true">
+		<provider type="DB" default="true"
+			class="com.chinacreator.message.impl.MessageManagerImpl" />
+	</manager>
+</manager-config>

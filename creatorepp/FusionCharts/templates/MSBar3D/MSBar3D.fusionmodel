@@ -1,0 +1,15 @@
+caption=test_MSBar3D
+xAxisName=Month
+yAxisName=Revenue
+numberPrefix=$
+numberSuffix=M
+showValues=0
+decimals=0
+
+dataset.filed=filed^filed
+dataset.seriesName=aa^bb^
+dataset.color=AFD8F8^F6BD0F
+
+trendLines.startValue=70000
+trendLines.color=009933
+trendLines.displayValue=Target

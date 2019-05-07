@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<reportstyle>
+	<style funcBarLocation="top"
+	separator=" "
+	funcBarFontFace="宋体"
+	funcBarFontSize="20px"
+	funcBarFontColor="red"
+	functionBarColor="#FFFFCC"
+	excelPageStyle="1"
+	needScroll="no"
+	/>
+</reportstyle>   

@@ -1,0 +1,1 @@
+alter table oa_meeting_room add M_DEPT_NAME varchar(100);

@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="综合统计报表"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="leftTime" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="rightTime" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="zfztId" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="hyflId" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[--不同案件类别的案件数和应缴罚款金额
+select a.ic_name,
+       nvl(a.allcase, 0),
+       nvl(b.jinggao, 0),
+       nvl(c.moshou, 0),
+       nvl(d.tingchan, 0),
+       nvl(e.diaoxiao, 0),
+       nvl(f.juliu, 0),
+       nvl(g.qita, 0),
+       nvl(a.summoney, 0),
+       nvl(a.sumpay, 0),
+       nvl(q.zidong, 0),
+       nvl(m.qiangzhi, 0),
+       nvl(i.jianyi, 0),
+       nvl(h.yiban, 0),
+       nvl(j.tingzheng, 0)
+  from (select t3.ic_name,
+               c.yy1 as allcase,
+               c.yy2 as summoney,
+               c.yy3 as sumpay,
+               c.ic_id as a_ic_id
+          from TA_ITEM_CATEGORY t3
+          left join (select count(b.tt) as yy1,
+                           sum(b.tt2) as yy2,
+                           sum(b.tt3) as yy3,
+                           t2.ic_id
+                      from TA_ITEM_CATEGORY_ITEM t2,
+                           (select t.wft_id as tt,
+                                   t.pi_id,
+                                   t.WFT_PENALTY_SUM as tt2,
+                                   t.WFT_PENALTY_PAIDED_SUM as tt3
+                              from TA_WORKFLOW_TICKET t, TA_BUSINESS_UNIT ta
+                             where t.bu_id in $P!{zfztId}
+                               and t.bu_id = ta.bu_id
+                               and ta.vc_id in $P!{hyflId}
+                               and t.WFT_DATE_RETURN_RECEIVE >=
+                                   to_date($P{leftTime}, 'yyyy-mm-dd')
+                               and t.WFT_DATE_RETURN_RECEIVE <=
+                                   to_date($P{rightTime}, 'yyyy-mm-dd')
+                               and t.ndp_id in (4, 5)) b
+                     where t2.pi_id = b.pi_id
+                     group by t2.ic_id) c on c.ic_id = t3.ic_id) a
+  left join (select count(distinct(t9.wft_id)) as jinggao,
+                    t8.ic_id as b_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '警告'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) b on a.a_ic_id = b.b_ic_id
+  left join (select count(distinct(t9.wft_id)) as fakuan,
+                    t8.ic_id as k_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '罚款'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) k on a.a_ic_id = k.k_ic_id
+  left join (select count(distinct(t9.wft_id)) as moshou,
+                    t8.ic_id as c_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '没收违法所得'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) c on a.a_ic_id = c.c_ic_id
+  left join (select count(distinct(t9.wft_id)) as tingchan,
+                    t8.ic_id as d_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '责令停业停产'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) d on a.a_ic_id = d.d_ic_id
+  left join (select count(distinct(t9.wft_id)) as diaoxiao,
+                    t8.ic_id as e_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '暂扣或吊销许可证、执照'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) e on a.a_ic_id = e.e_ic_id
+  left join (select count(distinct(t9.wft_id)) as juliu, t8.ic_id as f_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '行政拘留'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) f on a.a_ic_id = f.f_ic_id
+  left join (select count(distinct(t9.wft_id)) as qita, t8.ic_id as g_ic_id
+               from TA_PENALTY_MEASURE t5 --处罚措施
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t4.pm_id = t5.pm_id
+             and t5.pm_name = '其他'
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t9.wft_id = t4.wft_id
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+              where t9.bu_id in $P!{zfztId}
+                and t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              group by t8.ic_id) g on a.a_ic_id = g.g_ic_id
+  left join (select count(b.tt) as yiban, t2.ic_id as h_ic_id
+               from TA_ITEM_CATEGORY_ITEM t2,
+                    (select t.wft_id as tt, t.pi_id
+                       from TA_WORKFLOW_TICKET t, TA_BUSINESS_UNIT ta
+                      where t.bu_id in $P!{zfztId}
+                        and t.bu_id = ta.bu_id
+                        and ta.vc_id in $P!{hyflId}
+                        and t.ndp_id in (4, 5)
+                        and t.WFT_DATE_RETURN_RECEIVE >=
+                            to_date($P{leftTime}, 'yyyy-mm-dd')
+                        and t.WFT_DATE_RETURN_RECEIVE <=
+                            to_date($P{rightTime}, 'yyyy-mm-dd')) b
+              where t2.pi_id = b.pi_id
+              group by t2.ic_id) h on a.a_ic_id = h.h_ic_id
+  left join (select count(b.tt) as jianyi, t2.ic_id as i_ic_id
+               from TA_ITEM_CATEGORY_ITEM t2,
+                    (select t.wft_id as tt, t.pi_id
+                       from TA_WORKFLOW_TICKET t
+                      where t.wft_id in
+                            (select t1.wft_id
+                               from TA_WORKFLOW_TICKET t1, TA_BUSINESS_UNIT ta
+                              where t1.WFT_CASE_TYPE = 2
+                                and t1.bu_id in $P!{zfztId}
+                                and t1.bu_id = ta.bu_id
+                                and ta.vc_id in $P!{hyflId}
+                                and t1.WFT_DATE_RETURN_RECEIVE >=
+                                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                                and t1.WFT_DATE_RETURN_RECEIVE <=
+                                    to_date($P{rightTime}, 'yyyy-mm-dd'))) b
+              where t2.pi_id = b.pi_id
+              group by t2.ic_id) i on a.a_ic_id = i.i_ic_id
+  left join (select count(b.tt) as tingzheng, t2.ic_id as j_ic_id
+               from TA_ITEM_CATEGORY_ITEM t2,
+                    (select t.wft_id as tt, t.pi_id
+                       from TA_WORKFLOW_TICKET t,
+                            TA_BUSINESS_UNIT   ta,
+                            TA_TASK_POSTIL     t3
+                      where t.bu_id in $P!{zfztId}
+                        and t.bu_id = ta.bu_id
+                        and ta.vc_id in $P!{hyflId}
+                        and t.wft_id = t3.wft_id
+                        and t3.WORKFLOW_NAME = '听证'
+                        and t.WFT_DATE_RETURN_RECEIVE >=
+                            to_date($P{leftTime}, 'yyyy-mm-dd')
+                        and t.WFT_DATE_RETURN_RECEIVE <=
+                            to_date($P{rightTime}, 'yyyy-mm-dd')
+                        and t.ndp_id in (4, 5)) b
+              where t2.pi_id = b.pi_id
+              group by t2.ic_id) j on a.a_ic_id = j.j_ic_id
+  left join (select count(distinct(t9.wft_id)) as qiangzhi,
+                    t8.ic_id as m_ic_id
+               from TA_EXECUTIVE_MODE t5 --执行方式
+               left join TA_PENALTY_MEASU_JUDGE_DETAIL t4 --违法行为与处罚措施与裁量细则实例
+             on t5.em_id = t4.em_id
+             and t5.em_id = 3
+               left join ta_workflow_ticket t9 --处罚事项实例表
+             on t4.wft_id = t9.wft_id
+              and t9.bu_id in $P!{zfztId}
+                and t9.ndp_id in (4, 5)
+                and t9.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t9.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              right join TA_ITEM_CATEGORY_ITEM t8 --事项类别与事项
+             on t9.pi_id = t8.pi_id, TA_BUSINESS_UNIT ta
+             where t9.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+              group by t8.ic_id) m on a.a_ic_id = m.m_ic_id
+  left join (select count(distinct(k.w)) as zidong, t2.ic_id as q_ic_id
+               from (select w, count(*) m
+                       from (select t4.wft_id w, t4.em_id e, count(*)
+                               from TA_PENALTY_MEASU_JUDGE_DETAIL t4
+                              group by t4.wft_id, t4.em_id)
+                      group by w
+                     having count(*) = 1) k
+              right join TA_PENALTY_MEASU_JUDGE_DETAIL g on k.w = g.wft_id
+                                                        and g.em_id = 1
+              right join TA_WORKFLOW_TICKET t12 on t12.wft_id = g.wft_id
+              and t12.bu_id in $P!{zfztId} 
+                and t12.ndp_id in (4, 5)
+                and t12.WFT_DATE_RETURN_RECEIVE >=
+                    to_date($P{leftTime}, 'yyyy-mm-dd')
+                and t12.WFT_DATE_RETURN_RECEIVE <=
+                    to_date($P{rightTime}, 'yyyy-mm-dd')
+              right join TA_ITEM_CATEGORY_ITEM t2 on t12.pi_id = t2.pi_id,TA_BUSINESS_UNIT ta
+              where t12.bu_id = ta.bu_id
+                and ta.vc_id in $P!{hyflId}
+              group by t2.ic_id) q on a.a_ic_id = q.q_ic_id]]></queryString>
+
+	<field name="IC_NAME" class="java.lang.String"/>
+	<field name="NVL(A.ALLCASE,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(B.JINGGAO,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(C.MOSHOU,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(D.TINGCHAN,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(E.DIAOXIAO,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(F.JULIU,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(G.QITA,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(A.SUMMONEY,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(A.SUMPAY,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(Q.ZIDONG,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(M.QIANGZHI,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(I.JIANYI,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(H.YIBAN,0)" class="java.math.BigDecimal"/>
+	<field name="NVL(J.TINGZHENG,0)" class="java.math.BigDecimal"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="535"
+						height="50"
+						key="staticText-19"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[综合统计报表]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="70"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="100"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-3"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[警告]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="140"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-4"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[没收违法所得]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="180"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-5"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[责令停产停业]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="220"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-6"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[吊销许可证或资格证]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="260"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-7"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[行政罚款(万元)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="380"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-8"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[申请法院强制执行]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="420"
+						y="20"
+						width="38"
+						height="50"
+						key="staticText-9"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[简易程序]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="458"
+						y="20"
+						width="38"
+						height="50"
+						key="staticText-10"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[一般程序]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="496"
+						y="20"
+						width="39"
+						height="50"
+						key="staticText-11"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[听证程序]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="60"
+						height="70"
+						key="staticText-12"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[案件类别]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="60"
+						y="0"
+						width="40"
+						height="70"
+						key="staticText-13"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[行政处罚案件数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="300"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-14"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[ 行政罚款实际执行金额(万元)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="340"
+						y="20"
+						width="40"
+						height="50"
+						key="staticText-15"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[自动履行]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="100"
+						y="0"
+						width="200"
+						height="20"
+						key="staticText-16"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[处罚执行情况]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="300"
+						y="0"
+						width="120"
+						height="20"
+						key="staticText-17"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[执行情况]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="420"
+						y="0"
+						width="115"
+						height="20"
+						key="staticText-18"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="8" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[适用程序情况]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="20"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="60"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{IC_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="60"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(A.ALLCASE,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="100"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(B.JINGGAO,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="140"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(C.MOSHOU,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="180"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(D.TINGCHAN,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="220"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(E.DIAOXIAO,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="260"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(A.SUMMONEY,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"
+						isPrintWhenDetailOverflows="true"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(A.SUMPAY,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="340"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(Q.ZIDONG,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="380"
+						y="0"
+						width="40"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(M.QIANGZHI,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="420"
+						y="0"
+						width="38"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(I.JIANYI,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="458"
+						y="0"
+						width="38"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(H.YIBAN,0)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="###0" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="496"
+						y="0"
+						width="39"
+						height="20"
+						key="textField"
+						stretchType="RelativeToTallestObject"/>
+					<box>					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{NVL(J.TINGZHENG,0)}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,50 @@
+/*!@author:Helen. @update:2012-11-27*/ 
+/* 基本配置 */
+html{ overflow-y:scroll; -webkit-text-size-adjust:none; color:#333;text-align:left;}
+body,h1,h2,h3,h4,h5,h6,hr,p,img,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,textarea,th,td{margin:0; padding:0; border:0;}
+body,button,input,select,textarea,td,tr,th{font:12px/1.5 '\5b8b\4f53',arial,tahoma;}
+/*table{border-collapse:collapse; border-spacing:0;}*/
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%; padding:0px; margin:0px; font-weight:normal;}
+ul,li,ol{list-style:none;}
+.clear{clear: both; font-size:1px; width:1px; height:0; visibility: hidden; }
+img{border:0; vertical-align:middle;}
+
+/* 链接颜色 */
+a:link {text-decoration:none; color:#333;}
+a:visited {text-decoration:none; color:#333;}
+a:active {text-decoration:none; color:#f00;}
+a:hover {text-decoration:none; color:#f00;}
+
+/* 文件 */
+.gongwen{ margin-top:20px;}
+.gwlink{ border-bottom:solid 1px #cccccc; font-weight:bold; font-size:14px;}
+.font999{ color:#999; font-size:14px;}
+
+.x_an1{ background:url(an1.gif) no-repeat; width:102px; height:30px; text-align:center; line-height:30px; color:#ffffff; font-weight:bold; font-size:14px; border:0; vertical-align:middle; }
+.x_an2{ background:url(an2.gif) no-repeat; width:67px; height:30px; text-align:center; line-height:30px; color:#333333; font-size:14px; border:0; vertical-align:middle; }
+
+.faleft{ background:url(bj3.gif) no-repeat; width:9px;}
+.facenter{ background:url(bj2.gif) repeat-x; font-size:14px; line-height:35px;}
+.faright{ background:url(bj4.gif) no-repeat; width:9px; }
+.facenter a b{ width:99px; height:35px; text-align:center; background:url(bj1.gif) no-repeat; float:left;}
+.facenter a{ float:left; width:99px; margin-left:10px; text-align:center;}
+
+.font2{ font-weight:bold; font-size:18px; font-family:"microsoft yahei";}
+
+table.f_main,table.l_main{background:#ff0000;}
+table.f_main td{ border:1px solid #fff; background:#ffffff; padding:0px 10px; line-height:30px; vertical-align:top; }
+table.l_main td{ background:#fff; height:30px; text-align:center;}
+.f_main .f_td1{ background:#FFF;}
+.l_main .f_td2{ background:url(bj5.gif) repeat-x; height:30px; line-height:30px; font-size:14px;}
+.f_k1{border:solid 1px #7f9db9; width:25%; height:20px; line-height:20px; color:#333333; vertical-align:middle;}
+.f_k2{border:solid 1px #7f9db9; width:12%; height:20px; line-height:20px; color:#333333; vertical-align:middle;}
+.f_k3{border:#c2c2c2 1px solid; background:#f9f9f9; width:50px; height:20px; line-height:20px; color:#333333; vertical-align:middle;}
+.f_k4{border:#c2c2c2 1px solid; background:#f9f9f9; width:90%; height:20px; line-height:20px; color:#333333; vertical-align:middle;}
+.f_k5{ vertical-align:middle;}
+.f_k6{border:#c2c2c2 1px solid; background:#f9f9f9; width:90%; height:60px; line-height:20px; color:#333333; vertical-align:middle;}
+
+table.s_main{ background:#d9d9d9; margin-bottom:10px;}
+table.s_main td{ border:1px solid #fff; background:#ffffff; padding:5px 10px; line-height:30px; vertical-align:top; text-align:right;}
+.s_main .s_td1{ background:#FFF; text-align:left;}
+
+.xx_main{ background:#fff6f6;}

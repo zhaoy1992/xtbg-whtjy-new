@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ include file="../../sysmanager/base/scripts/panes.jsp"%>
+<%@ taglib uri="/WEB-INF/pager-taglib.tld" prefix="pg" %>
+<%@ taglib uri="/WEB-INF/treetag.tld" prefix="tree" %>
+<%
+	String resTypeId = request.getParameter("resTypeId");
+	
+%>
+<html>
+<head>    
+  <title> Ù–‘»›∆˜</title>
+  <script language="JavaScript" src="changeView.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="../../sysmanager/css/windows.css">
+  <link rel="stylesheet" type="text/css" href="../../sysmanager/css/treeview.css"> 
+<body class="contentbodymargin" scroll="no">
+<div id="contentborder">
+
+
+<table class="table" width="80%" border="0" cellpadding="0" cellspacing="1">
+  
+  
+  <tr class="tr" >
+     <td  class="td">
+     
+    <tree:tree tree="role_org_tree"
+    	           node="role_org_tree.node"
+    	           imageFolder="../../sysmanager/images/tree_images/"
+    	           collapse="true"
+    			   includeRootNode="true"
+    			   href="/cms/userManage/sitePurview.jsp"
+    			   target="operList"
+    			   mode="static-dynamic"
+    			   >                         
+                   <tree:param name="resTypeId"/>
+
+    			   <tree:treedata treetype="SitePurviewTree"
+    	                   scope="request"
+    	                   rootid="0"  
+    	                   rootName="’æµ„ ˜"
+    	                   expandLevel="1"
+    	                   showRootHref="false"
+    	                   needObserver="false"
+    	                   refreshNode="true"
+    	                   />
+    	</tree:tree>
+	</td>				  
+  </tr>  
+</table>
+
+
+</div>
+</body>
+</html>

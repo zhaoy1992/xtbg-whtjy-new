@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<root>
+	<!-- 默认样式 -->
+	<style id="default">
+		<!-- 左侧菜单 -->
+		<leftpath>perspective_outlookbar.jsp</leftpath>
+	</style>
+
+	<!-- 树形样式 -->
+	<style id="tree">
+		<!-- 左侧菜单 -->
+		<leftpath>perspective_lefttree.jsp</leftpath>
+	</style>
+	
+	<!-- 多级样式 -->
+	<style id="class">
+		<!-- 左侧菜单 -->
+		<leftpath>perspective_leftthirdclass.jsp</leftpath>
+	</style>
+</root>

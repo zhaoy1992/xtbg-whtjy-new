@@ -1,0 +1,103 @@
+.add {/*添加按扭*/
+	background: url(../images/add.png) no-repeat center left; 
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.del {/*删除按扭*/
+	background: url(../images/del.gif) no-repeat center left; 
+	background-color : #E4F1FC;
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.show {/*添加按扭*/
+	background: url(../images/grid.png) no-repeat center left; 
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	cursor:pointer;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.edit {/*添加按扭*/
+	background: url(../images/edit.png) no-repeat center left;
+	background-color : #E4F1FC;
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.query {/*添加按扭*/
+	background: url(../images/magnifier.png) no-repeat center left;
+	background-color : #E4F1FC;
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.reset {/*添加按扭*/
+	background: url(../images/exp.gif) no-repeat center left;
+	background-color : #E4F1FC;
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}
+.change{/*状态修改按钮（机构类型）*/
+	background: url(../images/change.gif) no-repeat center left;
+	background-color : #E4F1FC;
+	padding-left: 20px; 
+	height: 20px;width: 60px;
+	border: none;
+	cursor:pointer;
+	font-family: "宋体";
+	font-size: 13px;
+	color: #142B5E;
+	text-decoration: none;	
+	line-height: 18px;	
+	margin-bottom: 0px; margin-top: 0px;border: 1px solid #6D95C6; 
+	margin-right: 5px;
+}

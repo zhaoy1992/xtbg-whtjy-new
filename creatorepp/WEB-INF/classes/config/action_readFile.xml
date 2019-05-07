@@ -1,0 +1,10 @@
+<config-list>
+  <ActionList> 
+    <action classID="resouceConfig">
+      <className>com.chinacreator.xtbg.pub.tree.dao.impl.ResouceConfigDaoImpl</className>
+    </action>
+    <action classID="schedule">
+      <className>com.chinacreator.xtbg.pub.myschedule.dao.ScheduleManageDao</className>
+    </action>
+  </ActionList>
+</config-list>
